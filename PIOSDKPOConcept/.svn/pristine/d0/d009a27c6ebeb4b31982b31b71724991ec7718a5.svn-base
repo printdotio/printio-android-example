@@ -1,0 +1,130 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/text_view_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_margin="5dip"
+                android:text="Company Name:"
+                android:textSize="16dp" />
+
+            <EditText
+                android:id="@+id/editTextName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_view_name"
+                android:layout_margin="5dip"
+                android:text="Breakout commerce"
+                android:ems="10" />
+
+            <TextView
+                android:id="@+id/textViewCountry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editTextName"
+                android:layout_margin="5dip"
+                android:text="Country code 2 chars, leave empty to let user select it"
+                android:textSize="16dip" />
+
+            <EditText
+                android:id="@+id/editCountry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewCountry"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:text="US" />
+
+            <TextView
+                android:id="@+id/textViewColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editCountry"
+                android:layout_margin="5dip"
+                android:text="Color hex 8 digit hex code for Header bar, MUST BE HEX 6 or 8 digit. Example FF00FF00 for green or 00FF00" />
+
+            <EditText
+                android:id="@+id/editColorHex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewColor"
+                android:layout_margin="5dp"
+                android:ems="10"
+                android:maxLength="8" >
+            </EditText>
+
+            <CheckBox
+                android:id="@+id/checkImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/editColorHex"
+                android:checked="true"
+                android:text="Enable other image sources" />
+            
+            <CheckBox
+                android:id="@+id/sidemenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/checkImage"
+                android:checked="false"
+                android:text="Enable SideMenu" />
+
+            <Button
+                android:id="@+id/buttonAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignRight="@+id/editColorHex"
+                android:layout_below="@+id/sidemenu"
+                android:layout_margin="5dip"
+                android:onClick="clickAdd"
+                android:text="Add image to SDK"
+                android:textSize="16dip" />
+
+            <ToggleButton
+                android:id="@+id/toggleButtonProduction"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignRight="@+id/editColorHex"
+                android:layout_below="@+id/buttonAdd"
+                android:layout_margin="5dip"
+                android:textOff="Staging Mode."
+                android:textOn="Production Mode"
+                android:textSize="16dip" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignRight="@+id/editColorHex"
+                android:layout_below="@+id/toggleButtonProduction"
+                android:layout_margin="5dip"
+                android:onClick="clicked"
+                android:text="Start PrintIO SDK"
+                android:textSize="16dip" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
