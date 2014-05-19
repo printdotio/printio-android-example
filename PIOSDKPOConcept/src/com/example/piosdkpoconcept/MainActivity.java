@@ -3,6 +3,7 @@ package com.example.piosdkpoconcept;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import print.io.Constants;
 import print.io.PIO;
 import print.io.PIO.PhotoSource;
 import print.io.PIOCallback;
@@ -130,7 +131,6 @@ public class MainActivity extends Activity implements
 		}catch (NumberFormatException e) { 
 		}
 		
-		//PIO.setProductIdFromApp(Constants.ProductIds.PHONE_CASES);
 		PIO.setFontPathInAssetsLight("HelveticaNeueLTStd-Lt.otf");
 		PIO.setFontPathInAssetsNormal("HelveticaNeueLTStd-Roman.otf");
 		PIO.setFontPathInAssetsBold("HelveticaNeueLTStd-Bd.otf");
@@ -141,10 +141,30 @@ public class MainActivity extends Activity implements
 		boolean autoArrange = ((CheckBox)findViewById(R.id.auto_arrange)).isChecked();
 		PIO.setAutoArrange(autoArrange);
 		
-		PIO.setSdkDemo(true);
+		PIO.setSdkDemo(true);		
 		PIO.setCountryOnFeaturedProducts(((Switch)findViewById(R.id.switch_country_drop_down)).isChecked());
 		PIO.setPassedImageThumb(((Switch)findViewById(R.id.switch_passed_image_thumb)).isChecked());
 		PIO.setHideCategorySearchBar(((Switch)findViewById(R.id.switch_hide_category_search_bar)).isChecked());
+		
+		boolean coastersDiff = ((Switch)findViewById(R.id.switch_coasters_different)).isChecked();
+		boolean coastersDuplicate = ((Switch)findViewById(R.id.switch_coasters_duplicate)).isChecked();
+		if(coastersDiff != coastersDuplicate)
+			PIO.setCoastersType(coastersDiff?Constants.CaseOptions.COASTERS_4_DIFFERENT:Constants.CaseOptions.COASTERS_1_DUPLICATED);
+		
+		
+		//@milos example of jumping to certain product/sku. sku has priority
+		if(((Switch)findViewById(R.id.switch_jump_to_sku)).isChecked()) {
+			//PIO.setIdAndSku(Constants.ProductIds.COASTERS, Integer.toString(Constants.CaseOptions.COASTERS_4_DIFFERENT));
+			//PIO.setIdAndSku(Constants.ProductIds.FLEECE_BLANKETS, "FleeceBlanket_60x80");
+			PIO.setIdAndSku(Constants.ProductIds.TABLET_CASES, "TabletCase-iPad3/4-Gloss");
+			//PIO.setIdAndSku(Constants.ProductIds.PHONE_CASES, "PhoneCase-GalaxyNote2-Matte");
+		} else if(((Switch)findViewById(R.id.switch_jump_to_phone_cases)).isChecked()) {
+			PIO.setProductIdFromApp(Constants.ProductIds.PHONE_CASES);
+		} else {
+			PIO.setIdAndSku(-1, null);
+		}
+		
+		
 		
 		PIO.setShowHelp(((Switch)findViewById(R.id.switch_hide_help)).isChecked());
 		

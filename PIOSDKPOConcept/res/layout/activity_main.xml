@@ -132,10 +132,58 @@
                 android:text="Hide Categories(Search) bar on Feature Products screen:" />
 
             <Switch
-                android:id="@+id/switch_hide_help"
+                android:id="@+id/switch_coasters_different"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/switch_hide_category_search_bar"
+                android:layout_margin="5dp"
+                android:text="Only coasters with 4 different photos:" />
+
+            <Switch
+                android:id="@+id/switch_coasters_duplicate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/switch_coasters_different"
+                android:layout_margin="5dp"
+                android:text="Only coasters with 1 duplicated photo:" />
+
+            <View
+                android:id="@+id/dummy_examples_1"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#000000"
+                android:layout_below="@+id/switch_coasters_duplicate"
+                android:layout_marginTop="5dp" />
+
+            <Switch
+                android:id="@+id/switch_jump_to_phone_cases"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dummy_examples_1"
+                android:layout_margin="5dp"
+                android:text="Jump to Phone Cases:" />
+
+            <Switch
+                android:id="@+id/switch_jump_to_sku"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/switch_jump_to_phone_cases"
+                android:layout_margin="5dp"
+                android:text="Jump to SKU:" />
+            
+            <View
+                android:id="@+id/dummy_examples_2"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#000000"
+                android:layout_below="@+id/switch_jump_to_sku"
+                android:layout_marginBottom="5dp" />
+
+            <Switch
+                android:id="@+id/switch_hide_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dummy_examples_2"
                 android:layout_margin="5dp"
                 android:checked="true"
                 android:text="Show Help                                          " />
@@ -156,8 +204,8 @@
                 android:layout_below="@+id/switch_photo_sources"
                 android:layout_margin="5dp"
                 android:onClick="onClickaddPhotoSource"
-                android:visibility="gone"
-                android:text="Add photo source" />
+                android:text="Add photo source"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/textView_photo_sources"
