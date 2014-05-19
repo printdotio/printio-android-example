@@ -8,7 +8,6 @@ import print.io.PIO.PhotoSource;
 import print.io.PIOCallback;
 import print.io.PIOException;
 import print.io.beans.CallbackInfo;
-import print.io.beans.cart.ShoppingCart;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
