@@ -189,10 +189,28 @@
                 android:text="Show Help                                          " />
 
             <Switch
-                android:id="@+id/switch_photo_sources"
+                android:id="@+id/switch_show_photos_customize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/switch_hide_help"
+                android:layout_margin="5dp"
+                android:checked="false"
+                android:text="Switch show photos customize                      " />
+
+            <Switch
+                android:id="@+id/switch_show_options_customize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/switch_show_photos_customize"
+                android:layout_margin="5dp"
+                android:checked="false"
+                android:text="Switch show options customize                      " />
+
+            <Switch
+                android:id="@+id/switch_photo_sources"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/switch_show_options_customize"
                 android:layout_margin="5dp"
                 android:checked="false"
                 android:text="Change photo sources                      " />

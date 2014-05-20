@@ -8,7 +8,7 @@ import print.io.PIO;
 import print.io.PIO.PhotoSource;
 import print.io.PIOCallback;
 import print.io.PIOException;
-import print.io.beans.cart.ShoppingCart;
+import print.io.beans.CallbackInfo;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -50,9 +50,8 @@ public class MainActivity extends Activity implements
 		}
 
 		@Override
-		public void onOrderComplete(ShoppingCart shoppingCart) {
-			// TODO Auto-generated method stub
-			Log.d("Shoping cart", shoppingCart.toString());
+		public void onOrderComplete(CallbackInfo callBackInfo) {
+			Log.d("Order Information: ", callBackInfo.toString());
 		}
 	};
 
@@ -141,7 +140,7 @@ public class MainActivity extends Activity implements
 		boolean autoArrange = ((CheckBox)findViewById(R.id.auto_arrange)).isChecked();
 		PIO.setAutoArrange(autoArrange);
 		
-		PIO.setSdkDemo(true);		
+		PIO.setSdkDemo(true);
 		PIO.setCountryOnFeaturedProducts(((Switch)findViewById(R.id.switch_country_drop_down)).isChecked());
 		PIO.setPassedImageThumb(((Switch)findViewById(R.id.switch_passed_image_thumb)).isChecked());
 		PIO.setHideCategorySearchBar(((Switch)findViewById(R.id.switch_hide_category_search_bar)).isChecked());
@@ -171,13 +170,15 @@ public class MainActivity extends Activity implements
 		
 		boolean isLive = ((ToggleButton)findViewById(R.id.toggleButtonProduction)).isChecked();
 		
-		/*
+		PIO.setShowPhotosInCustomize(((Switch)findViewById(R.id.switch_show_photos_customize)).isChecked());
+		PIO.setShowOptionsInCustomize(((Switch)findViewById(R.id.switch_show_options_customize)).isChecked());
+		
 		photoSourcesTest.add(PhotoSource.PHONE);
-		photoSourcesTest.add(PhotoSource.PICASA);
+		photoSourcesTest.add(PhotoSource.PHOTOBUCKET);
 		photoSourcesTest.add(PhotoSource.FACEBOOK);
 		photoSourcesTest.add(PhotoSource.DROPBOX);
 		photoSourcesTest.add(PhotoSource.FLICKR);
-		photoSourcesTest.add(PhotoSource.INSTAGRAM);*/
+		photoSourcesTest.add(PhotoSource.INSTAGRAM);
 		if(photoSourcesTest.size() > 0 ) {
 		PIO.setPhotoSources(photoSourcesTest);
 		}
