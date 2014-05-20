@@ -2,6 +2,7 @@ package com.example.piosdkpoconcept;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 
 import print.io.Constants;
 import print.io.PIO;
@@ -236,8 +237,7 @@ android.app.LoaderManager.LoaderCallbacks<Cursor> {
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == 1 && resultCode == Activity.RESULT_OK){
-			L.d("ADDING:"+getPath(data.getData()));
+		if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
 			imageLists.add(getPath(data.getData()));
 		}
 		super.onActivityResult(requestCode, resultCode, data);
