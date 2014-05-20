@@ -265,6 +265,14 @@
                 android:text="Add image to SDK"
                 android:textSize="16dip" />
 
+            <Switch
+                android:id="@+id/switch_set_passed_image_first_in_photo_sources"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="false"
+                android:text="Set passed in image to be first in row for all photo sources" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"

@@ -9,6 +9,7 @@ import print.io.PIO.PhotoSource;
 import print.io.PIOCallback;
 import print.io.PIOException;
 import print.io.beans.CallbackInfo;
+import print.io.utils.L;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -110,11 +111,12 @@ android.app.LoaderManager.LoaderCallbacks<Cursor> {
 		images = new String[imageLists.size()];
 		images = imageLists.toArray(images);
 		PIO.setSideMenuEnabled(false);
-		PIO.setCanUseUpload( ((CheckBox) findViewById(R.id.checkImage)).isChecked() );
+		PIO.setCanUseUpload(((CheckBox) findViewById(R.id.checkImage)).isChecked());
 		for (String string : images) {
-			Log.d("image array", string);
+			L.d("image array", string);
 		}
 		PIO.setImagesUrls(images);
+		PIO.setPassedImageFirstInPhotoSources(((Switch) findViewById(R.id.switch_set_passed_image_first_in_photo_sources)).isChecked());
 
 		String coutry = ((EditText) findViewById(R.id.editCountry)).getText().toString();
 		if (coutry.length() == 2) {
@@ -235,6 +237,7 @@ android.app.LoaderManager.LoaderCallbacks<Cursor> {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == 1 && resultCode == Activity.RESULT_OK){
+			L.d("ADDING:"+getPath(data.getData()));
 			imageLists.add(getPath(data.getData()));
 		}
 		super.onActivityResult(requestCode, resultCode, data);
