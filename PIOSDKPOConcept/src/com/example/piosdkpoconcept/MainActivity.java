@@ -116,7 +116,7 @@ android.app.LoaderManager.LoaderCallbacks<Cursor> {
 		for (String string : images) {
 			L.d("image array", string);
 		}
-		PIO.setImagesUrls(images);
+		PIO.setImageUrls(images);
 		PIO.setPassedImageFirstInPhotoSources(((Switch) findViewById(R.id.switch_set_passed_image_first_in_photo_sources)).isChecked());
 
 		String coutry = ((EditText) findViewById(R.id.editCountry)).getText().toString();
