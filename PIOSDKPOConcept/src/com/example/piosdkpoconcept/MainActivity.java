@@ -147,6 +147,7 @@ android.app.LoaderManager.LoaderCallbacks<Cursor> {
 		PIO.setCountryOnFeaturedProducts(((Switch) findViewById(R.id.switch_country_drop_down)).isChecked());
 		PIO.setPassedImageThumb(((Switch) findViewById(R.id.switch_passed_image_thumb)).isChecked());
 		PIO.setHideCategorySearchBar(((Switch) findViewById(R.id.switch_hide_category_search_bar)).isChecked());
+		PIO.setStepByStep(((Switch) findViewById(R.id.switch_step_by_step)).isChecked());
 
 		boolean coastersDiff = ((Switch) findViewById(R.id.switch_coasters_different)).isChecked();
 		boolean coastersDuplicate = ((Switch) findViewById(R.id.switch_coasters_duplicate)).isChecked();
