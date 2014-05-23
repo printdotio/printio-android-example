@@ -130,6 +130,14 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="Only coasters with 1 duplicated photo:" />
+            
+            <Switch
+                android:id="@+id/switch_step_by_step"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Step by step:" />
+            
 
             <View
                 android:layout_width="match_parent"
