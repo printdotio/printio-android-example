@@ -181,10 +181,10 @@ android.app.LoaderManager.LoaderCallbacks<Cursor> {
 		photoSourcesTest.add(PhotoSource.PHONE);
 		photoSourcesTest.add(PhotoSource.PICASA);
 		photoSourcesTest.add(PhotoSource.FACEBOOK);
-		photoSourcesTest.add(PhotoSource.DROPBOX);
 		photoSourcesTest.add(PhotoSource.FLICKR);
 		photoSourcesTest.add(PhotoSource.INSTAGRAM);
 		photoSourcesTest.add(PhotoSource.PHOTOBUCKET);
+		//photoSourcesTest.add(PhotoSource.DROPBOX);
 		if (photoSourcesTest.size() > 0 ) {
 			PIO.setPhotoSources(photoSourcesTest);
 		}
