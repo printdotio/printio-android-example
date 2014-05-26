@@ -2,15 +2,12 @@ package com.example.piosdkpoconcept;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Set;
 
-import print.io.Constants;
 import print.io.PIO;
 import print.io.PIO.PhotoSource;
 import print.io.PIOCallback;
 import print.io.PIOException;
 import print.io.beans.CallbackInfo;
-import print.io.utils.L;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -33,8 +30,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-public class MainActivity extends Activity implements
-android.app.LoaderManager.LoaderCallbacks<Cursor> {
+public class MainActivity extends Activity implements android.app.LoaderManager.LoaderCallbacks<Cursor> {
 
 	private String[] images;
 	private ArrayList<String> imageLists = new ArrayList<String>();
@@ -74,9 +70,10 @@ android.app.LoaderManager.LoaderCallbacks<Cursor> {
 		photoSourcesSwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				photoSourcesTest.clear();
 				buttonAddSource.setEnabled(isChecked);
 				if (!isChecked) {
-					photoSourcesTest.clear();
+					addDefaultPhotoSources();
 					((TextView) findViewById(R.id.textView_photo_sources)).setText("");
 				}
 			}
@@ -109,13 +106,15 @@ android.app.LoaderManager.LoaderCallbacks<Cursor> {
 	}
 
 	public void onClickStartSDK(View v) {
+		Log.d("Facebook", "ID:"+getString(R.string.facebook_app_id));
+
 		images = new String[imageLists.size()];
 		images = imageLists.toArray(images);
 		PIO.setSideMenuEnabled(false);
 		PIO.setCanUseUpload(((CheckBox) findViewById(R.id.checkImage)).isChecked());
-		for (String string : images) {
-			L.d("image array", string);
-		}
+		//		for (String string : images) {
+		//			L.d("image array", string);
+		//		}
 		PIO.setImageUrls(images);
 		PIO.setPassedImageFirstInPhotoSources(((Switch) findViewById(R.id.switch_set_passed_image_first_in_photo_sources)).isChecked());
 
@@ -151,21 +150,21 @@ android.app.LoaderManager.LoaderCallbacks<Cursor> {
 
 		boolean coastersDiff = ((Switch) findViewById(R.id.switch_coasters_different)).isChecked();
 		boolean coastersDuplicate = ((Switch) findViewById(R.id.switch_coasters_duplicate)).isChecked();
-		if (coastersDiff != coastersDuplicate) {
-			PIO.setCoastersType(coastersDiff?Constants.CaseOptions.COASTERS_4_DIFFERENT:Constants.CaseOptions.COASTERS_1_DUPLICATED);
-		}
-
-		//@milos example of jumping to certain product/sku. sku has priority
-		if (((Switch) findViewById(R.id.switch_jump_to_sku)).isChecked()) {
-			//PIO.setIdAndSku(Constants.ProductIds.COASTERS, Integer.toString(Constants.CaseOptions.COASTERS_4_DIFFERENT));
-			//PIO.setIdAndSku(Constants.ProductIds.FLEECE_BLANKETS, "FleeceBlanket_60x80");
-			PIO.setIdAndSku(Constants.ProductIds.TABLET_CASES, "TabletCase-iPad3/4-Gloss");
-			//PIO.setIdAndSku(Constants.ProductIds.PHONE_CASES, "PhoneCase-GalaxyNote2-Matte");
-		} else if (((Switch) findViewById(R.id.switch_jump_to_phone_cases)).isChecked()) {
-			PIO.setProductIdFromApp(Constants.ProductIds.PHONE_CASES);
-		} else {
-			PIO.setIdAndSku(-1, null);
-		}
+		//		if (coastersDiff != coastersDuplicate) {
+		//			PIO.setCoastersType(coastersDiff?Constants.CaseOptions.COASTERS_4_DIFFERENT:Constants.CaseOptions.COASTERS_1_DUPLICATED);
+		//		}
+		//
+		//		//@milos example of jumping to certain product/sku. sku has priority
+		//		if (((Switch) findViewById(R.id.switch_jump_to_sku)).isChecked()) {
+		//			//PIO.setIdAndSku(Constants.ProductIds.COASTERS, Integer.toString(Constants.CaseOptions.COASTERS_4_DIFFERENT));
+		//			//PIO.setIdAndSku(Constants.ProductIds.FLEECE_BLANKETS, "FleeceBlanket_60x80");
+		//			PIO.setIdAndSku(Constants.ProductIds.TABLET_CASES, "TabletCase-iPad3/4-Gloss");
+		//			//PIO.setIdAndSku(Constants.ProductIds.PHONE_CASES, "PhoneCase-GalaxyNote2-Matte");
+		//		} else if (((Switch) findViewById(R.id.switch_jump_to_phone_cases)).isChecked()) {
+		//			PIO.setProductIdFromApp(Constants.ProductIds.PHONE_CASES);
+		//		} else {
+		//			PIO.setIdAndSku(-1, null);
+		//		}
 
 		PIO.setShowHelp(((Switch) findViewById(R.id.switch_hide_help)).isChecked());
 
@@ -178,16 +177,10 @@ android.app.LoaderManager.LoaderCallbacks<Cursor> {
 		boolean isEffectsEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_effects_enabled_in_crop_screen)).isChecked();
 		PIO.setUpCropScreen(isRotateEnabledInCropScreen, isTextEnabledInCropScreen, isEffectsEnabledInCropScreen);
 
-		photoSourcesTest.add(PhotoSource.PHONE);
-		photoSourcesTest.add(PhotoSource.PICASA);
-		photoSourcesTest.add(PhotoSource.FACEBOOK);
-		photoSourcesTest.add(PhotoSource.FLICKR);
-		photoSourcesTest.add(PhotoSource.INSTAGRAM);
-		photoSourcesTest.add(PhotoSource.PHOTOBUCKET);
-		//photoSourcesTest.add(PhotoSource.DROPBOX);
-		if (photoSourcesTest.size() > 0 ) {
-			PIO.setPhotoSources(photoSourcesTest);
+		if (photoSourcesTest.size() == 0 ) {
+			addDefaultPhotoSources();
 		}
+		PIO.setPhotoSources(photoSourcesTest);
 		PIO.setLiveApplication(isLive);
 		String recipeId = isLive ? RECIPE_ID_LIVE : RECIPE_ID_STAGING;
 		PIO.setRecipeID(recipeId);
@@ -196,6 +189,17 @@ android.app.LoaderManager.LoaderCallbacks<Cursor> {
 		} catch (PIOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void addDefaultPhotoSources() {
+		// Only up to 6
+		photoSourcesTest.add(PhotoSource.PHONE);
+		photoSourcesTest.add(PhotoSource.PICASA);
+		photoSourcesTest.add(PhotoSource.FACEBOOK);
+		photoSourcesTest.add(PhotoSource.FLICKR);
+		photoSourcesTest.add(PhotoSource.INSTAGRAM);
+		photoSourcesTest.add(PhotoSource.PHOTOBUCKET);
+		//photoSourcesTest.add(PhotoSource.DROPBOX);
 	}
 
 	@Override
