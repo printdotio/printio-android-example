@@ -73,7 +73,7 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 				photoSourcesTest.clear();
 				buttonAddSource.setEnabled(isChecked);
 				if (!isChecked) {
-					addDefaultPhotoSources();
+					//addDefaultPhotoSources();
 					((TextView) findViewById(R.id.textView_photo_sources)).setText("");
 				}
 			}
@@ -178,9 +178,11 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		PIO.setUpCropScreen(isRotateEnabledInCropScreen, isTextEnabledInCropScreen, isEffectsEnabledInCropScreen);
 
 		if (photoSourcesTest.size() == 0 ) {
-			addDefaultPhotoSources();
+			//addDefaultPhotoSources();
 		}
-		PIO.setPhotoSources(photoSourcesTest);
+		if (photoSourcesTest.size() != 0) {
+			PIO.setPhotoSources(photoSourcesTest);
+		}
 		PIO.setLiveApplication(isLive);
 		String recipeId = isLive ? RECIPE_ID_LIVE : RECIPE_ID_STAGING;
 		PIO.setRecipeID(recipeId);
@@ -194,12 +196,12 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 	private void addDefaultPhotoSources() {
 		// Only up to 6
 		photoSourcesTest.add(PhotoSource.PHONE);
-		photoSourcesTest.add(PhotoSource.PICASA);
 		photoSourcesTest.add(PhotoSource.FACEBOOK);
 		photoSourcesTest.add(PhotoSource.FLICKR);
 		photoSourcesTest.add(PhotoSource.INSTAGRAM);
 		photoSourcesTest.add(PhotoSource.PHOTOBUCKET);
-		//photoSourcesTest.add(PhotoSource.DROPBOX);
+		photoSourcesTest.add(PhotoSource.DROPBOX);
+		//photoSourcesTest.add(PhotoSource.PICASA);
 	}
 
 	@Override
