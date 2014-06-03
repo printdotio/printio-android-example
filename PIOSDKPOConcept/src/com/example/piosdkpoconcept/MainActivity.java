@@ -41,7 +41,7 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 
 	ArrayList<PhotoSource> photoSourcesTest = new ArrayList<PIO.PhotoSource>();
 
-	private PIOCallback callback = new PIOCallback() {
+	public static PIOCallback callback = new PIOCallback() {
 		@Override
 		public void onCartChange(int count) {
 
