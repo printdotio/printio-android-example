@@ -18,3 +18,253 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+
+-flattenpackagehierarchy
+-optimizationpasses 2
+-dontusemixedcaseclassnames
+-dontskipnonpubliclibraryclasses
+-dontskipnonpubliclibraryclassmembers
+-dontpreverify
+-verbose
+-dump class_files.txt
+-printseeds seeds.txt
+-printusage unused.txt
+-printmapping mapping.txt
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
+
+-allowaccessmodification
+-keepattributes *Annotation*
+-renamesourcefileattribute SourceFile
+-keepattributes SourceFile,LineNumberTable
+-repackageclasses ''
+
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+-keep public class * extends android.app.backup.BackupAgentHelper
+-keep public class * extends android.preference.Preference
+-keep public class com.android.vending.licensing.ILicensingService
+-dontnote com.android.vending.licensing.ILicensingService
+
+# Explicitly preserve all serialization members. The Serializable interface
+# is only a marker interface, so it wouldn't save them.
+-keepclassmembers class * implements java.io.Serializable {
+    static final long serialVersionUID;
+    private static final java.io.ObjectStreamField[] serialPersistentFields;
+    private void writeObject(java.io.ObjectOutputStream);
+    private void readObject(java.io.ObjectInputStream);
+    java.lang.Object writeReplace();
+    java.lang.Object readResolve();
+}
+
+# Preserve all native method names and the names of their classes.
+-keepclasseswithmembers class * {
+    native <methods>;
+}
+
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+-keepclassmembers class * extends android.app.Activity {
+   public void *(android.view.View);
+}
+
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+#-keep public class * {
+#    public protected *;
+#}
+
+-keep class * implements android.os.Parcelable {
+  public static final android.os.Parcelable$Creator *;
+}
+
+-keep public class * extends android.view.View {
+    public <init>(android.content.Context);
+    public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+    public void set*(...);
+}
+
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+
+-keepclassmembers class * extends android.content.Context {
+   public void *(android.view.View);
+   public void *(android.view.MenuItem);
+}
+
+-keepclassmembers class * implements android.os.Parcelable {
+    static ** CREATOR;
+}
+
+-keepclassmembers class **.R$* {
+    public static <fields>;
+}
+
+#-keep class print.io.R$* { *; }
+
+-keep class ch.boye.httpclientandroidlib.** { *; }
+
+-keep class android.support.** { *; }
+-keep class com.slidingmenu.** { *; }
+-keep class print.io.Constants { *; }
+-keep class print.io.PIO {
+	public <methods>;
+}
+-keep public enum print.io.PIO$** {
+	**[] $VALUES;
+	public *;
+}
+-keepattributes InnerClasses
+-keep class print.io.PIOActivity { *; }
+-keep class print.io.PIOCallback { *; }
+-keep class print.io.PIOException { *; }
+-keep class print.io.beans.** { *; }
+-keep class print.io.network.RestClient { *; }
+#-keep class print.io.network.RestClient {
+#	public <methods>;
+#}
+-keepattributes Exceptions
+
+#AWS
+#-libraryjars libs/aws-android-sdk-1.7.0-core.jar
+#-libraryjars libs/aws-android-sdk-1.7.0-s3.jar
+-keep class com.amazonaws.** { *; }
+-keep interface com.amazonaws.** { *; }
+-dontwarn com.amazonaws.**
+
+-keep class com.amazonaws.** {
+  public protected private *;
+}
+
+-keep class org.apache.commons.logging.**               { *; }
+-keep class com.amazonaws.services.sqs.QueueUrlHandler  { *; }
+-keep class com.amazonaws.javax.xml.transform.sax.*     { public *; }
+-keep class com.amazonaws.javax.xml.stream.**           { *; }
+-keep class com.amazonaws.services.**.model.*Exception* { *; }
+-keep class com.amazonaws.internal.** 					{ *; }
+-keep class org.codehaus.**                             { *; }
+-keepattributes Signature,*Annotation*,EnclosingMethod
+-keepnames class com.fasterxml.jackson.** { *; }
+-keepnames class com.amazonaws.** { *; }
+
+-dontwarn com.fasterxml.jackson.databind.**
+-dontwarn javax.xml.stream.events.**
+-dontwarn org.codehaus.jackson.**
+-dontwarn org.apache.commons.logging.impl.**
+-dontwarn org.apache.http.conn.scheme.**
+-dontwarn org.apache.http.annotation.**
+-dontwarn org.ietf.jgss.**
+-dontwarn org.w3c.dom.bootstrap.**
+
+#BrainTree
+#OK
+
+#BugSense
+-keep class com.bugsense.** { *; }
+-libraryjars libs/bugsense-3.5.jar
+-printmapping out.map
+
+#GSON
+# Gson uses generic type information stored in a class file when working with fields. Proguard
+# removes such information by default, so configure it to keep all of it.
+-keepattributes Signature
+
+# For using GSON @Expose annotation
+-keepattributes *Annotation*
+
+# Gson specific classes
+-keep class sun.misc.Unsafe { *; }
+#-keep class com.google.gson.stream.** { *; }
+
+# Application classes that will be serialized/deserialized over Gson
+-keep class com.google.gson.examples.android.model.** { *; }
+
+#card.io & PayPal
+# card.io is a native lib, so anything crossing JNI must not be changed
+
+# Don't obfuscate DetectionInfo or public fields, since
+# it is used by native methods
+-keep class io.card.payment.DetectionInfo
+-keepclassmembers class io.card.payment.DetectionInfo {
+    public *;
+}
+
+-keep class io.card.payment.CreditCard
+-keep class io.card.payment.CreditCard$1
+-keepclassmembers class io.card.payment.CreditCard {
+	*;
+}
+
+-keepclassmembers class io.card.payment.CardScanner {
+	*** onEdgeUpdate(...);
+}
+
+-keep public class io.card.payment.* {
+    public protected *;
+}
+
+-keep public class com.paypal.android.sdk.payments.* {
+	public *;
+}
+
+-keep public class com.paypal.android.MEP.* {
+	public *;
+}
+
+#Logging
+# Remove all Log.d and Log.v calls
+-assumenosideeffects class android.util.Log {
+    public static *** d(...);
+    public static *** v(...);
+}
+
+#ACRA
+# keep this class so that logging will show 'ACRA' and not a obfuscated name like 'a'.
+# Note: if you are removing log messages elsewhere in this file then this isn't necessary
+-keep class org.acra.ACRA {
+    *;
+}
+
+# keep this around for some enums that ACRA needs
+-keep class org.acra.ReportingInteractionMode {
+    *;
+}
+
+-keepnames class org.acra.sender.HttpSender$** {
+    *;
+}
+
+-keepnames class org.acra.ReportField {
+    *;
+}
+
+# keep this otherwise it is removed by ProGuard
+-keep public class org.acra.ErrorReporter
+{
+    public void addCustomData(java.lang.String,java.lang.String);
+    public void putCustomData(java.lang.String,java.lang.String);
+    public void removeCustomData(java.lang.String);
+}
+
+# keep this otherwise it is removed by ProGuard
+-keep public class org.acra.ErrorReporter
+{
+    public void handleSilentException(java.lang.Throwable);
+}
+
+#Facebook
+-keep class com.facebook.** { *; }
