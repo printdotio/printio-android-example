@@ -187,6 +187,10 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		String recipeId = isLive ? RECIPE_ID_LIVE : RECIPE_ID_STAGING;
 		PIO.setRecipeID(recipeId);
 		try {
+			String photobucketBaseApiUrl = "https://api-phx1.photobucket.com";
+			String photobucketUsername = "boroue";
+			String photobucketAccessToken = "mlLmOXvqDO6UX1Zpqbmyosv8EQjdAY4iMrrYgzV6zVsIjjTjGonJi5kNYVhnF8AHp7JaLUCYlRHuf1AQn871KsQyDyspWl4hfIT3In6YcAC0X9xviAT9WcGSolyCRRCkffeMYhccN6IWMYv7TIEQIJ0lMVmEQk+g";
+			PIO.setPhotobucketCredentials(this, photobucketBaseApiUrl, photobucketUsername, photobucketAccessToken);
 			PIO.start(this, callback);
 		} catch (PIOException e) {
 			e.printStackTrace();
