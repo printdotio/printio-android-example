@@ -187,10 +187,13 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		String recipeId = isLive ? RECIPE_ID_LIVE : RECIPE_ID_STAGING;
 		PIO.setRecipeID(recipeId);
 		try {
-			String photobucketBaseApiUrl = "https://api-phx1.photobucket.com";
-			String photobucketUsername = "boroue";
-			String photobucketAccessToken = "mlLmOXvqDO6UX1Zpqbmyosv8EQjdAY4iMrrYgzV6zVsIjjTjGonJi5kNYVhnF8AHp7JaLUCYlRHuf1AQn871KsQyDyspWl4hfIT3In6YcAC0X9xviAT9WcGSolyCRRCkffeMYhccN6IWMYv7TIEQIJ0lMVmEQk+g";
-			PIO.setPhotobucketCredentials(this, photobucketBaseApiUrl, photobucketUsername, photobucketAccessToken);
+			//			String photobucketBaseApiUrl = "https://api-phx1.photobucket.com";
+			//			String photobucketUsername = "boroue";
+			//			String photobucketAccessToken = "mlLmOXvqDO6UX1Zpqbmyosv8EQjdAY4iMrrYgzV6zVsIjjTjGonJi5kNYVhnF8AHp7JaLUCYlRHuf1AQn871KsQyDyspWl4hfIT3In6YcAC0X9xviAT9WcGSolyCRRCkffeMYhccN6IWMYv7TIEQIJ0lMVmEQk+g";
+			//			PIO.setPhotobucketCredentials(this, photobucketBaseApiUrl, photobucketUsername, photobucketAccessToken);
+			//			String photobucketClientId = "";
+			//			String photobucketClientSecret = "";
+			//			PIO.setPhotobucketClientIdSecret(photobucketClientId, photobucketClientSecret);
 			PIO.start(this, callback);
 		} catch (PIOException e) {
 			e.printStackTrace();
@@ -249,7 +252,7 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+		if (requestCode == 1 && resultCode == RESULT_OK) {
 			imageLists.add(getPath(data.getData()));
 		}
 		super.onActivityResult(requestCode, resultCode, data);
