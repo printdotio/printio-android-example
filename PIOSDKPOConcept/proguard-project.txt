@@ -110,11 +110,12 @@
     static ** CREATOR;
 }
 
--keepclassmembers class **.R$* {
-    public static <fields>;
+-keep public class **.R {
+  public *;
 }
-
-#-keep class print.io.R$* { *; }
+-keep public class **.R$* {
+  public *;
+}
 
 -keep class ch.boye.httpclientandroidlib.** { *; }
 
@@ -128,7 +129,9 @@
 	**[] $VALUES;
 	public *;
 }
+
 -keepattributes InnerClasses
+
 -keep class print.io.PIOActivity { *; }
 -keep class print.io.PIOCallback { *; }
 -keep class print.io.PIOException { *; }
