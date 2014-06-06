@@ -3,6 +3,7 @@ package com.example.piosdkpoconcept;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import print.io.Constants;
 import print.io.PIO;
 import print.io.PIO.PhotoSource;
 import print.io.PIOCallback;
@@ -148,12 +149,14 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		PIO.setHideCategorySearchBar(((Switch) findViewById(R.id.switch_hide_category_search_bar)).isChecked());
 		PIO.setStepByStep(((Switch) findViewById(R.id.switch_step_by_step)).isChecked());
 
+		PIO.setScreenIdFromApp(((Switch) findViewById(R.id.switch_jump_to_shopping_cart)).isChecked()?Constants.ScreenIds.SCREEN_SHOPPING_CART:-1);
+		
 		boolean coastersDiff = ((Switch) findViewById(R.id.switch_coasters_different)).isChecked();
 		boolean coastersDuplicate = ((Switch) findViewById(R.id.switch_coasters_duplicate)).isChecked();
 		//		if (coastersDiff != coastersDuplicate) {
 		//			PIO.setCoastersType(coastersDiff?Constants.CaseOptions.COASTERS_4_DIFFERENT:Constants.CaseOptions.COASTERS_1_DUPLICATED);
 		//		}
-		//
+		
 		//		//@milos example of jumping to certain product/sku. sku has priority
 		//		if (((Switch) findViewById(R.id.switch_jump_to_sku)).isChecked()) {
 		//			//PIO.setIdAndSku(Constants.ProductIds.COASTERS, Integer.toString(Constants.CaseOptions.COASTERS_4_DIFFERENT));
