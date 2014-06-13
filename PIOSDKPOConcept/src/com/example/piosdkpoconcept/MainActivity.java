@@ -3,6 +3,8 @@ package com.example.piosdkpoconcept;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import com.paypal.android.MEP.PayPal;
+
 import print.io.Constants;
 import print.io.PIO;
 import print.io.PIO.PhotoSource;
@@ -39,6 +41,9 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 	private static final int IMAGES_CURSOR_LOADER = 0xA1;
 	private static final String RECIPE_ID_STAGING = "00000000-0000-0000-0000-000000000000";
 	private static final String RECIPE_ID_LIVE = "f255af6f-9614-4fe2-aa8b-1b77b936d9d6";
+
+	private static final String BRAINTREE_ENCR_STAGING = "MIIBCgKCAQEA7Dt20svKjDNsrqu3BWp1hWQah9mpNiIjTeBkxHukMh+nzb40wTOARHpPr4qbEmPRC89oSKuObzwtNjxwvRRiEaRAPJff6dI1ZvF46NWWIqHMWY4zAxEjAvG41eE9+9d8cqyRAkptHVdKl+aawALpcwn8wfdCKeryNvKDH9iCvJIYmpe7tmeonhLz8pksN+iSNYdQQJW8tBrSkpa1crZTWth3SorLjTLOcnUDtDpjpWarjzA/16c1l7TvEzuZbGrSNjSunk2ujZAdZVlZM0xo2nSGjI8WIEpZVIRS4JINVkazD2dIaUAWynzGgwpeh3ymKknZAuqk4SXyBlcUUq2NSwIDAQAB";
+	private static final String BRAINTREE_ENCR_LIVE = "MIIBCgKCAQEAvSJ/AjTz8ybKlkbboXBVbHHW9smRoVjcIgJmNdYcrFg+8aW41DEtYJKEENvlA2UvHDMTA7VG8L41bjjFyGrq6OSudzx/gDGsogOb/oMt+OZukkoKy47AYyVDVRc9+k4lH8POg7YDsgTwZC2RVIJ+z4gvc8juF39GOMuPnhLvbPjj1a3ns+UmGF16SnIOSSlZkSNgQumbWa5+Vw/ewVH4jud8xGcmy4G0EyRZzrw5rO4CtkOOFX/TPBCCAU/ANhY0cEbJelr0fJJhOvgp5FC+udqF4PkOHJ5GHhXUjijcfOOjLtMc7dG3QkXx5AcwtDP4wnKFqRDTyjg+KZXpwH7i2QIDAQAB";
 
 	ArrayList<PhotoSource> photoSourcesTest = new ArrayList<PIO.PhotoSource>();
 
@@ -150,13 +155,13 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		PIO.setStepByStep(((Switch) findViewById(R.id.switch_step_by_step)).isChecked());
 
 		PIO.setScreenIdFromApp(((Switch) findViewById(R.id.switch_jump_to_shopping_cart)).isChecked()?Constants.ScreenIds.SCREEN_SHOPPING_CART:-1);
-		
+
 		boolean coastersDiff = ((Switch) findViewById(R.id.switch_coasters_different)).isChecked();
 		boolean coastersDuplicate = ((Switch) findViewById(R.id.switch_coasters_duplicate)).isChecked();
 		//		if (coastersDiff != coastersDuplicate) {
 		//			PIO.setCoastersType(coastersDiff?Constants.CaseOptions.COASTERS_4_DIFFERENT:Constants.CaseOptions.COASTERS_1_DUPLICATED);
 		//		}
-		
+
 		//		//@milos example of jumping to certain product/sku. sku has priority
 		//		if (((Switch) findViewById(R.id.switch_jump_to_sku)).isChecked()) {
 		//			//PIO.setIdAndSku(Constants.ProductIds.COASTERS, Integer.toString(Constants.CaseOptions.COASTERS_4_DIFFERENT));
@@ -181,22 +186,34 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		PIO.setUpCropScreen(isRotateEnabledInCropScreen, isTextEnabledInCropScreen, isEffectsEnabledInCropScreen);
 
 		if (photoSourcesTest.size() == 0 ) {
-			//addDefaultPhotoSources();
+			addDefaultPhotoSources();
 		}
 		if (photoSourcesTest.size() != 0) {
 			PIO.setPhotoSources(photoSourcesTest);
 		}
 		PIO.setLiveApplication(isLive);
+
 		String recipeId = isLive ? RECIPE_ID_LIVE : RECIPE_ID_STAGING;
 		PIO.setRecipeID(recipeId);
+
+		String photobucketClientId = "149833932";
+		String photobucketClientSecret = "5ab4ba37aa577d1863ead59a1d75dd1f";
+		PIO.setPhotobucketClientIdSecret(photobucketClientId, photobucketClientSecret);
+
+		String braintreeEncryptionKey = isLive ? BRAINTREE_ENCR_LIVE : BRAINTREE_ENCR_STAGING;
+		PIO.setBraintreeEncryptionKey(braintreeEncryptionKey);
+
+		// The ID of your application that you received from PayPal
+		String payPalAppId = "APP-80W284485P519543T";
+		int PAY_PAL_ENVIRONMENT = PayPal.ENV_SANDBOX;
+		int PAY_PAL_FEE_PAYER = PayPal.FEEPAYER_EACHRECEIVER;
+		PIO.setPayPalCredentials(payPalAppId, PAY_PAL_ENVIRONMENT, PAY_PAL_FEE_PAYER);
+
+		String parseApplicationId = "X4Wgk4EVJqLD7VeMfajKWcfjIHNq9UDaDBnXC0iF";
+		String parseClientKey = "up6KceVp9Tkg9wMWuTMAvtCnD0kEwzq42LEUvkuD";
+		PIO.setParseCredentials(parseApplicationId, parseClientKey);
+
 		try {
-			//			String photobucketBaseApiUrl = "https://api-phx1.photobucket.com";
-			//			String photobucketUsername = "boroue";
-			//			String photobucketAccessToken = "mlLmOXvqDO6UX1Zpqbmyosv8EQjdAY4iMrrYgzV6zVsIjjTjGonJi5kNYVhnF8AHp7JaLUCYlRHuf1AQn871KsQyDyspWl4hfIT3In6YcAC0X9xviAT9WcGSolyCRRCkffeMYhccN6IWMYv7TIEQIJ0lMVmEQk+g";
-			//			PIO.setPhotobucketCredentials(this, photobucketBaseApiUrl, photobucketUsername, photobucketAccessToken);
-			//			String photobucketClientId = "";
-			//			String photobucketClientSecret = "";
-			//			PIO.setPhotobucketClientIdSecret(photobucketClientId, photobucketClientSecret);
 			PIO.start(this, callback);
 		} catch (PIOException e) {
 			e.printStackTrace();
@@ -206,9 +223,9 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 	private void addDefaultPhotoSources() {
 		// Only up to 6
 		photoSourcesTest.add(PhotoSource.PHONE);
+		photoSourcesTest.add(PhotoSource.INSTAGRAM);
 		photoSourcesTest.add(PhotoSource.FACEBOOK);
 		photoSourcesTest.add(PhotoSource.FLICKR);
-		photoSourcesTest.add(PhotoSource.INSTAGRAM);
 		photoSourcesTest.add(PhotoSource.PHOTOBUCKET);
 		photoSourcesTest.add(PhotoSource.DROPBOX);
 		//photoSourcesTest.add(PhotoSource.PICASA);

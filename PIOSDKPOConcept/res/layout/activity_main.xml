@@ -80,8 +80,8 @@
                 android:id="@+id/sidemenu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="false"
-                android:text="Enable SideMenu" />
+                android:checked="true"
+                android:text="Enable Side Menu" />
 
             <CheckBox
                 android:id="@+id/full_Screen"
