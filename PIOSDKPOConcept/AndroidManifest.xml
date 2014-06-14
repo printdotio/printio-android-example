@@ -27,7 +27,7 @@
 
     <!--
   IMPORTANT: Change "com.example.piosdkpoconcept.permission.C2D_MESSAGE" in the lines below
-  to match your app's package name + ".permission.C2D_MESSAGE".
+  to match your app's package name + ".permission.C2D_MESSAGE".
     -->
     <permission
         android:name="com.example.piosdkpoconcept.permission.C2D_MESSAGE"
@@ -214,16 +214,18 @@
             android:name="io.card.payment.CardIOActivity"
             android:configChanges="keyboardHidden|orientation" />
         <activity android:name="io.card.payment.DataEntryActivity" />
-        <activity
-            android:name="com.example.piosdkpoconcept.ActivityHandlePush"
-            android:noHistory="true" />
 
         <service android:name="com.parse.PushService" />
 
-        <receiver android:name="com.parse.ParseBroadcastReceiver" >
+        <receiver android:name="print.io.ParseBroadcastReceiverWrapper" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.parse.ParseBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="print.io.action.REGISTER_PARSE_RECEIVER" />
             </intent-filter>
         </receiver>
         <receiver
