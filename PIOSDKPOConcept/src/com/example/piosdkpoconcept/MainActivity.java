@@ -209,10 +209,6 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		int PAY_PAL_FEE_PAYER = PayPal.FEEPAYER_EACHRECEIVER;
 		PIO.setPayPalCredentials(payPalAppId, PAY_PAL_ENVIRONMENT, PAY_PAL_FEE_PAYER);
 
-		String parseApplicationId = "X4Wgk4EVJqLD7VeMfajKWcfjIHNq9UDaDBnXC0iF";
-		String parseClientKey = "up6KceVp9Tkg9wMWuTMAvtCnD0kEwzq42LEUvkuD";
-		PIO.setParseCredentials(parseApplicationId, parseClientKey);
-
 		try {
 			PIO.start(this, callback);
 		} catch (PIOException e) {
