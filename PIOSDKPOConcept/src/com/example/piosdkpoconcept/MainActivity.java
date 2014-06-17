@@ -3,8 +3,6 @@ package com.example.piosdkpoconcept;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import com.paypal.android.MEP.PayPal;
-
 import print.io.Constants;
 import print.io.PIO;
 import print.io.PIO.PhotoSource;
@@ -39,11 +37,6 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 	private ArrayList<String> imageLists = new ArrayList<String>();
 
 	private static final int IMAGES_CURSOR_LOADER = 0xA1;
-	private static final String RECIPE_ID_STAGING = "00000000-0000-0000-0000-000000000000";
-	private static final String RECIPE_ID_LIVE = "f255af6f-9614-4fe2-aa8b-1b77b936d9d6";
-
-	private static final String BRAINTREE_ENCR_STAGING = "MIIBCgKCAQEA7Dt20svKjDNsrqu3BWp1hWQah9mpNiIjTeBkxHukMh+nzb40wTOARHpPr4qbEmPRC89oSKuObzwtNjxwvRRiEaRAPJff6dI1ZvF46NWWIqHMWY4zAxEjAvG41eE9+9d8cqyRAkptHVdKl+aawALpcwn8wfdCKeryNvKDH9iCvJIYmpe7tmeonhLz8pksN+iSNYdQQJW8tBrSkpa1crZTWth3SorLjTLOcnUDtDpjpWarjzA/16c1l7TvEzuZbGrSNjSunk2ujZAdZVlZM0xo2nSGjI8WIEpZVIRS4JINVkazD2dIaUAWynzGgwpeh3ymKknZAuqk4SXyBlcUUq2NSwIDAQAB";
-	private static final String BRAINTREE_ENCR_LIVE = "MIIBCgKCAQEAvSJ/AjTz8ybKlkbboXBVbHHW9smRoVjcIgJmNdYcrFg+8aW41DEtYJKEENvlA2UvHDMTA7VG8L41bjjFyGrq6OSudzx/gDGsogOb/oMt+OZukkoKy47AYyVDVRc9+k4lH8POg7YDsgTwZC2RVIJ+z4gvc8juF39GOMuPnhLvbPjj1a3ns+UmGF16SnIOSSlZkSNgQumbWa5+Vw/ewVH4jud8xGcmy4G0EyRZzrw5rO4CtkOOFX/TPBCCAU/ANhY0cEbJelr0fJJhOvgp5FC+udqF4PkOHJ5GHhXUjijcfOOjLtMc7dG3QkXx5AcwtDP4wnKFqRDTyjg+KZXpwH7i2QIDAQAB";
 
 	ArrayList<PhotoSource> photoSourcesTest = new ArrayList<PIO.PhotoSource>();
 
@@ -109,6 +102,86 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		};
 		builder.setTitle("Pick source").setItems(getNames(PhotoSource.class), onClickListener);
 		builder.show();
+	}
+
+	private void addDefaultPhotoSources() {
+		// Only up to 6
+		photoSourcesTest.add(PhotoSource.PHONE);
+		photoSourcesTest.add(PhotoSource.INSTAGRAM);
+		photoSourcesTest.add(PhotoSource.FACEBOOK);
+		photoSourcesTest.add(PhotoSource.FLICKR);
+		photoSourcesTest.add(PhotoSource.PHOTOBUCKET);
+		photoSourcesTest.add(PhotoSource.DROPBOX);
+		//photoSourcesTest.add(PhotoSource.PICASA);
+	}
+
+	@Override
+	public android.content.Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+		Uri uriPhoneImages = Images.Media.EXTERNAL_CONTENT_URI;
+		String[] projection = {
+				MediaStore.Images.ImageColumns._ID
+				, MediaStore.Images.ImageColumns.DATA
+				, MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME
+		};
+		String sortOrder = MediaStore.Images.ImageColumns.DATE_TAKEN + " DESC";
+		return new android.content.CursorLoader(this, uriPhoneImages, projection, null, null, sortOrder);
+	}
+
+	@Override
+	public void onLoadFinished(android.content.Loader<Cursor> loader, Cursor cursor) {
+		images = new String[3];
+		int index = 0;
+		if (cursor != null) {
+			while (cursor.moveToNext()) {
+				if (index >= images.length) {
+					break;
+				}
+				images[index] = cursor.getString(1);
+				index++;
+			}
+		}
+	}
+
+	@Override
+	public void onLoaderReset(android.content.Loader<Cursor> arg0) {
+	}
+
+	public void onClickAddImageToSDK(View v) {
+		Intent intent = new Intent();
+		intent.setType("image/*");
+		intent.setAction(Intent.ACTION_GET_CONTENT);
+		intent.addCategory(Intent.CATEGORY_OPENABLE);
+		startActivityForResult(intent, 1);
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == 1 && resultCode == RESULT_OK) {
+			imageLists.add(getPath(data.getData()));
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+
+	/**
+	 * helper to retrieve the path of an image URI
+	 */
+	public String getPath(Uri uri) {
+		// just some safety built in 
+		if (uri == null) {
+			// TODO perform some logging or show user feedback
+			return null;
+		}
+		// try to retrieve the image from the media store first
+		// this will only work for images selected from gallery
+		String[] projection = { MediaStore.Images.Media.DATA };
+		Cursor cursor = managedQuery(uri, projection, null, null, null);
+		if (cursor != null) {
+			int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+			cursor.moveToFirst();
+			return cursor.getString(column_index);
+		}
+		// this is our fallback here
+		return uri.getPath();
 	}
 
 	public void onClickStartSDK(View v) {
@@ -193,107 +266,31 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		}
 		PIO.setLiveApplication(isLive);
 
-		String recipeId = isLive ? RECIPE_ID_LIVE : RECIPE_ID_STAGING;
+		String recipeId;
+		String braintreeEncryptionKey;
+		if (isLive) {
+			recipeId = PIOConstants.RECIPE_ID_LIVE;
+			braintreeEncryptionKey = PIOConstants.Braintree.ENCRYPTION_KEY_LIVE;
+		} else {
+			recipeId = PIOConstants.RECIPE_ID_STAGING;
+			braintreeEncryptionKey = PIOConstants.Braintree.ENCRYPTION_KEY_STAGING;
+		}
 		PIO.setRecipeID(recipeId);
-
-		String photobucketClientId = "149833932";
-		String photobucketClientSecret = "5ab4ba37aa577d1863ead59a1d75dd1f";
-		PIO.setPhotobucketClientIdSecret(photobucketClientId, photobucketClientSecret);
-
-		String braintreeEncryptionKey = isLive ? BRAINTREE_ENCR_LIVE : BRAINTREE_ENCR_STAGING;
 		PIO.setBraintreeEncryptionKey(braintreeEncryptionKey);
 
-		// The ID of your application that you received from PayPal
-		String payPalAppId = "APP-80W284485P519543T";
-		int PAY_PAL_ENVIRONMENT = PayPal.ENV_SANDBOX;
-		int PAY_PAL_FEE_PAYER = PayPal.FEEPAYER_EACHRECEIVER;
-		PIO.setPayPalCredentials(payPalAppId, PAY_PAL_ENVIRONMENT, PAY_PAL_FEE_PAYER);
+		String apiUrl;
+		if (PIO.isLiveApplication() || PIO.isLiveTestingApplication()) {
+			apiUrl = PIOConstants.API_URL_LIVE;
+		} else {
+			apiUrl = PIOConstants.API_URL_STAGING;
+		}
+		PIO.setApiUrl(apiUrl);
 
 		try {
 			PIO.start(this, callback);
 		} catch (PIOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	private void addDefaultPhotoSources() {
-		// Only up to 6
-		photoSourcesTest.add(PhotoSource.PHONE);
-		photoSourcesTest.add(PhotoSource.INSTAGRAM);
-		photoSourcesTest.add(PhotoSource.FACEBOOK);
-		photoSourcesTest.add(PhotoSource.FLICKR);
-		photoSourcesTest.add(PhotoSource.PHOTOBUCKET);
-		photoSourcesTest.add(PhotoSource.DROPBOX);
-		//photoSourcesTest.add(PhotoSource.PICASA);
-	}
-
-	@Override
-	public android.content.Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-		Uri uriPhoneImages = Images.Media.EXTERNAL_CONTENT_URI;
-		String[] projection = {
-				MediaStore.Images.ImageColumns._ID
-				, MediaStore.Images.ImageColumns.DATA
-				, MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME
-		};
-		String sortOrder = MediaStore.Images.ImageColumns.DATE_TAKEN + " DESC";
-		return new android.content.CursorLoader(this, uriPhoneImages, projection, null, null, sortOrder);
-	}
-
-	@Override
-	public void onLoadFinished(android.content.Loader<Cursor> loader, Cursor cursor) {
-		images = new String[3];
-		int index = 0;
-		if (cursor != null) {
-			while (cursor.moveToNext()) {
-				if (index >= images.length) {
-					break;
-				}
-				images[index] = cursor.getString(1);
-				index++;
-			}
-		}
-	}
-
-	@Override
-	public void onLoaderReset(android.content.Loader<Cursor> arg0) {
-	}
-
-	public void onClickAddImageToSDK(View v) {
-		Intent intent = new Intent();
-		intent.setType("image/*");
-		intent.setAction(Intent.ACTION_GET_CONTENT);
-		intent.addCategory(Intent.CATEGORY_OPENABLE);
-		startActivityForResult(intent, 1);
-	}
-
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == 1 && resultCode == RESULT_OK) {
-			imageLists.add(getPath(data.getData()));
-		}
-		super.onActivityResult(requestCode, resultCode, data);
-	}
-
-	/**
-	 * helper to retrieve the path of an image URI
-	 */
-	public String getPath(Uri uri) {
-		// just some safety built in 
-		if (uri == null) {
-			// TODO perform some logging or show user feedback
-			return null;
-		}
-		// try to retrieve the image from the media store first
-		// this will only work for images selected from gallery
-		String[] projection = { MediaStore.Images.Media.DATA };
-		Cursor cursor = managedQuery(uri, projection, null, null, null);
-		if (cursor != null) {
-			int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-			cursor.moveToFirst();
-			return cursor.getString(column_index);
-		}
-		// this is our fallback here
-		return uri.getPath();
 	}
 
 }
