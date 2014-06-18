@@ -211,9 +211,6 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		} catch (NumberFormatException e) { 
 		}
 
-		PIO.setFontPathInAssetsLight("HelveticaNeueLTStd-Lt.otf");
-		PIO.setFontPathInAssetsNormal("HelveticaNeueLTStd-Roman.otf");
-		PIO.setFontPathInAssetsBold("HelveticaNeueLTStd-Bd.otf");
 		boolean isSideMenuEnabled = ((CheckBox) findViewById(R.id.sidemenu)).isChecked();
 		PIO.setSideMenuEnabled(isSideMenuEnabled);
 		boolean isFullScreen = ((CheckBox) findViewById(R.id.full_Screen)).isChecked();

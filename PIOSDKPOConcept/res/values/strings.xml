@@ -4,7 +4,13 @@
     <string name="app_name">PIO SDK POConcept</string>
     <string name="facebook_app_id">309503815860008</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+
+    <string name="share_app_text">I\'m using HelloPics! You can download it from http://www.hellopics.com/our-app</string>
+    <string name="upgrade_to">HelloPics has been upgraded to %1$s, we recommend you to update now?</string>
+    <string name="upgrade_to_force_upgrade">HelloPics has been upgraded to %1$s, it is a critical update and you must update in order to continue!</string>
+
+    <string name="about_partner">About HelloPics</string>
+    <string name="hellopics">HelloPics</string>
 
     <string-array name="spinner_country_array">
         <item>None</item>
