@@ -62,11 +62,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="ACTION_EXIT_SDK" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+            
         </activity>
         <activity android:name="com.slidingmenu.lib.SlidingMenuActivity" />
         <activity android:name="com.slidingmenu.lib.SlidingFragmentActivity" />
@@ -218,6 +214,13 @@
             android:name="com.example.piosdkpoconcept.ActivityHandlePush"
             android:noHistory="true" />
 
+        <receiver android:name="com.example.piosdkpoconcept.PrintIOCloseReceiver" >
+            <intent-filter>
+                <action android:name="ACTION_EXIT_PRINT_IO_SDK" />
+                
+            </intent-filter>
+        </receiver>
+        
         <service android:name="com.parse.PushService" />
 
         <receiver android:name="com.parse.ParseBroadcastReceiver" >

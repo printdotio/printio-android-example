@@ -82,6 +82,13 @@
                 android:layout_height="wrap_content"
                 android:checked="false"
                 android:text="Enable SideMenu" />
+            
+             <Switch
+                android:id="@+id/switch_right_side_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Right Side Menu: " />
 
             <CheckBox
                 android:id="@+id/full_Screen"
@@ -151,7 +158,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="Jump to Shopping Cart:" />
-            
+
             <Switch
                 android:id="@+id/switch_jump_to_phone_cases"
                 android:layout_width="match_parent"
@@ -313,5 +320,12 @@
                 android:textSize="16dip" />
         </LinearLayout>
     </ScrollView>
+
+    <include
+        android:id="@+id/dialog_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/dialog_feedback"
+        android:visibility="gone" />
 
 </RelativeLayout>

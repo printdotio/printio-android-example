@@ -13,6 +13,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
@@ -79,6 +82,24 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 				}
 			}
 		});
+		
+		//@milos on resume from print.io sdk
+		ArrayList<String> cartItems = getIntent().getStringArrayListExtra("ShoppingCartItems");
+		if(cartItems != null) {
+			StringBuilder stringBuilder = new StringBuilder("Feedback to host app: ");
+			stringBuilder.append("\nShopping Cart Items Quantity:\n").append(Integer.toString(cartItems.size()));
+
+			if(cartItems.size() > 0) {
+				stringBuilder.append("\n").append("Content of Shopping Cart:");
+				for(String s : cartItems) {
+					stringBuilder.append("\n").append(s);
+				}
+			}
+
+			View feedbackDialog = findViewById(R.id.dialog_feedback);
+			((TextView)feedbackDialog.findViewById(R.id.textview_feedback)).setText(stringBuilder.toString());
+			feedbackDialog.setVisibility(View.VISIBLE);
+		}
 	}
 
 	@Override
@@ -138,6 +159,7 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		PIO.setFontPathInAssetsBold("HelveticaNeueLTStd-Bd.otf");
 		boolean isSideMenuEnabled = ((CheckBox) findViewById(R.id.sidemenu)).isChecked();
 		PIO.setSideMenuEnabled(isSideMenuEnabled);
+		PIO.setRightSideMenu(((Switch) findViewById(R.id.switch_right_side_menu)).isChecked());
 		boolean isFullScreen = ((CheckBox) findViewById(R.id.full_Screen)).isChecked();
 		PIO.setHideStatusBar(isFullScreen);
 		boolean autoArrange = ((CheckBox) findViewById(R.id.auto_arrange)).isChecked();
@@ -148,6 +170,8 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		PIO.setPassedImageThumb(((Switch) findViewById(R.id.switch_passed_image_thumb)).isChecked());
 		PIO.setHideCategorySearchBar(((Switch) findViewById(R.id.switch_hide_category_search_bar)).isChecked());
 		PIO.setStepByStep(((Switch) findViewById(R.id.switch_step_by_step)).isChecked());
+		
+		PIO.setHostAppActivity(getComponentName().getClassName());
 
 		PIO.setScreenIdFromApp(((Switch) findViewById(R.id.switch_jump_to_shopping_cart)).isChecked()?Constants.ScreenIds.SCREEN_SHOPPING_CART:-1);
 		
@@ -283,4 +307,7 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		return uri.getPath();
 	}
 
+	public void onClickOkFeedback(View v) {
+		findViewById(R.id.dialog_feedback).setVisibility(View.GONE);
+	}
 }
