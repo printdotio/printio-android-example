@@ -27,8 +27,8 @@
 
     <!--
   IMPORTANT: Change "com.example.piosdkpoconcept.permission.C2D_MESSAGE" in the lines below
-  to match your app's package name + ".permission.C2D_MESSAGE".
-    -->
+  to match your app's package name + ".permission.C2D_MESSAGE".
+  -->
     <permission
         android:name="com.example.piosdkpoconcept.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
@@ -210,9 +210,6 @@
             android:name="io.card.payment.CardIOActivity"
             android:configChanges="keyboardHidden|orientation" />
         <activity android:name="io.card.payment.DataEntryActivity" />
-        <activity
-            android:name="com.example.piosdkpoconcept.ActivityHandlePush"
-            android:noHistory="true" />
 
         <receiver android:name="com.example.piosdkpoconcept.PrintIOCloseReceiver" >
             <intent-filter>
@@ -238,6 +235,15 @@
 
                 <!-- IMPORTANT: Change "com.example.piosdkpoconcept" to match your app's package name. -->
                 <category android:name="com.example.piosdkpoconcept" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="print.io.PushNotificationsReceiver"
+            android:exported="false" >
+            <intent-filter>
+
+                <!-- IMPORTANT: Change "com.example.piosdkpoconcept" to match your app's package name. -->
+                <action android:name="com.example.piosdkpoconcept.PUSH_NOTIFICATION" />
             </intent-filter>
         </receiver>
     </application>

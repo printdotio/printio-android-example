@@ -1,10 +1,7 @@
 package com.example.piosdkpoconcept;
 
+import print.io.PIO;
 import android.app.Application;
-
-import com.parse.Parse;
-import com.parse.ParseInstallation;
-import com.parse.PushService;
 
 //@ReportsCrashes(
 //		formKey = "",
@@ -19,10 +16,31 @@ public class AppExample extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		PIO.setFacebookAppId(PIOConstants.Facebook.APP_ID);
+
+		PIO.setInstagramClientId(PIOConstants.Instagram.CLIENT_ID);
+
+		PIO.setFlickrConsumerKey(PIOConstants.Flickr.CONSUMER_KEY);
+		PIO.setFlickrConsumerSecret(PIOConstants.Flickr.CONSUMER_SECRET);
+
+		PIO.setDropboxConsumerKey(PIOConstants.Dropbox.CONSUMER_KEY);
+		PIO.setDropboxConsumerSecret(PIOConstants.Dropbox.CONSUMER_SECRET);
+
+		PIO.setPhotobucketClientId(PIOConstants.Photobucket.CLIENT_ID);
+		PIO.setPhotobucketClientSecret(PIOConstants.Photobucket.CLIENT_SECRET);
+
+		PIO.setAmazonAccessKey(PIOConstants.Amazon.ACCESS_KEY);
+		PIO.setAmazonSecretKey(PIOConstants.Amazon.SECRET_KEY);
+
+		PIO.setPayPalAppId(PIOConstants.PayPal.APP_ID);
+		PIO.setPayPalClientId(PIOConstants.PayPal.CLIENT_ID);
+		PIO.setPayPalReceiverEmail(PIOConstants.PayPal.RECEIVERS_MAIL);
+		PIO.setPayPalFeePayer(PIOConstants.PayPal.FEE_PAYER);
+
+		PIO.setParseApplicationId(PIOConstants.Parse.APPLICATION_ID);
+		PIO.setParseClientKey(PIOConstants.Parse.CLIENT_KEY);
+		PIO.initializeParse(this);
 		//ACRA.init(this);
-		Parse.initialize(this, "X4Wgk4EVJqLD7VeMfajKWcfjIHNq9UDaDBnXC0iF", "up6KceVp9Tkg9wMWuTMAvtCnD0kEwzq42LEUvkuD");
-		PushService.setDefaultPushCallback(this, ActivityHandlePush.class);
-		ParseInstallation.getCurrentInstallation().saveInBackground();
 	}
 
 }

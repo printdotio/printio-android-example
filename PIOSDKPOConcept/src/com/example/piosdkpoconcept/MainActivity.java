@@ -40,8 +40,6 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 	private ArrayList<String> imageLists = new ArrayList<String>();
 
 	private static final int IMAGES_CURSOR_LOADER = 0xA1;
-	private static final String RECIPE_ID_STAGING = "00000000-0000-0000-0000-000000000000";
-	private static final String RECIPE_ID_LIVE = "f255af6f-9614-4fe2-aa8b-1b77b936d9d6";
 
 	ArrayList<PhotoSource> photoSourcesTest = new ArrayList<PIO.PhotoSource>();
 
@@ -127,112 +125,12 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		builder.show();
 	}
 
-	public void onClickStartSDK(View v) {
-		Log.d("Facebook", "ID:"+getString(R.string.facebook_app_id));
-
-		images = new String[imageLists.size()];
-		images = imageLists.toArray(images);
-		PIO.setSideMenuEnabled(false);
-		PIO.setCanUseUpload(((CheckBox) findViewById(R.id.checkImage)).isChecked());
-		//		for (String string : images) {
-		//			L.d("image array", string);
-		//		}
-		PIO.setImageUrls(images);
-		PIO.setPassedImageFirstInPhotoSources(((Switch) findViewById(R.id.switch_set_passed_image_first_in_photo_sources)).isChecked());
-
-		String coutry = ((EditText) findViewById(R.id.editCountry)).getText().toString();
-		if (coutry.length() == 2) {
-			PIO.setCountryCode(coutry);
-		}
-		String name = ((EditText) findViewById(R.id.editTextName)).getText().toString();
-		PIO.setPartnerName(name);
-
-		String colorString = ((EditText) findViewById(R.id.editColorHex)).getText().toString();
-		try {
-			int colorHex = Color.parseColor("#"+colorString);
-			PIO.setHeaderColor(colorHex);
-		} catch (NumberFormatException e) { 
-		}
-
-		PIO.setFontPathInAssetsLight("HelveticaNeueLTStd-Lt.otf");
-		PIO.setFontPathInAssetsNormal("HelveticaNeueLTStd-Roman.otf");
-		PIO.setFontPathInAssetsBold("HelveticaNeueLTStd-Bd.otf");
-		boolean isSideMenuEnabled = ((CheckBox) findViewById(R.id.sidemenu)).isChecked();
-		PIO.setSideMenuEnabled(isSideMenuEnabled);
-		PIO.setRightSideMenu(((Switch) findViewById(R.id.switch_right_side_menu)).isChecked());
-		boolean isFullScreen = ((CheckBox) findViewById(R.id.full_Screen)).isChecked();
-		PIO.setHideStatusBar(isFullScreen);
-		boolean autoArrange = ((CheckBox) findViewById(R.id.auto_arrange)).isChecked();
-		PIO.setAutoArrange(autoArrange);
-
-		PIO.setSdkDemo(true);
-		PIO.setCountryOnFeaturedProducts(((Switch) findViewById(R.id.switch_country_drop_down)).isChecked());
-		PIO.setPassedImageThumb(((Switch) findViewById(R.id.switch_passed_image_thumb)).isChecked());
-		PIO.setHideCategorySearchBar(((Switch) findViewById(R.id.switch_hide_category_search_bar)).isChecked());
-		PIO.setStepByStep(((Switch) findViewById(R.id.switch_step_by_step)).isChecked());
-		
-		PIO.setHostAppActivity(getComponentName().getClassName());
-
-		PIO.setScreenIdFromApp(((Switch) findViewById(R.id.switch_jump_to_shopping_cart)).isChecked()?Constants.ScreenIds.SCREEN_SHOPPING_CART:-1);
-		
-		boolean coastersDiff = ((Switch) findViewById(R.id.switch_coasters_different)).isChecked();
-		boolean coastersDuplicate = ((Switch) findViewById(R.id.switch_coasters_duplicate)).isChecked();
-		//		if (coastersDiff != coastersDuplicate) {
-		//			PIO.setCoastersType(coastersDiff?Constants.CaseOptions.COASTERS_4_DIFFERENT:Constants.CaseOptions.COASTERS_1_DUPLICATED);
-		//		}
-		
-		//		//@milos example of jumping to certain product/sku. sku has priority
-		//		if (((Switch) findViewById(R.id.switch_jump_to_sku)).isChecked()) {
-		//			//PIO.setIdAndSku(Constants.ProductIds.COASTERS, Integer.toString(Constants.CaseOptions.COASTERS_4_DIFFERENT));
-		//			//PIO.setIdAndSku(Constants.ProductIds.FLEECE_BLANKETS, "FleeceBlanket_60x80");
-		//			PIO.setIdAndSku(Constants.ProductIds.TABLET_CASES, "TabletCase-iPad3/4-Gloss");
-		//			//PIO.setIdAndSku(Constants.ProductIds.PHONE_CASES, "PhoneCase-GalaxyNote2-Matte");
-		//		} else if (((Switch) findViewById(R.id.switch_jump_to_phone_cases)).isChecked()) {
-		//			PIO.setProductIdFromApp(Constants.ProductIds.PHONE_CASES);
-		//		} else {
-		//			PIO.setIdAndSku(-1, null);
-		//		}
-
-		PIO.setShowHelp(((Switch) findViewById(R.id.switch_hide_help)).isChecked());
-
-		boolean isLive = ((ToggleButton) findViewById(R.id.toggleButtonProduction)).isChecked();
-
-		PIO.setShowPhotosInCustomize(((Switch) findViewById(R.id.switch_show_photos_customize)).isChecked());
-		PIO.setShowOptionsInCustomize(((Switch) findViewById(R.id.switch_show_options_customize)).isChecked());
-		boolean isRotateEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_rotate_enabled_in_crop_screen)).isChecked();
-		boolean isTextEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_text_enabled_in_crop_screen)).isChecked();
-		boolean isEffectsEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_effects_enabled_in_crop_screen)).isChecked();
-		PIO.setUpCropScreen(isRotateEnabledInCropScreen, isTextEnabledInCropScreen, isEffectsEnabledInCropScreen);
-
-		if (photoSourcesTest.size() == 0 ) {
-			//addDefaultPhotoSources();
-		}
-		if (photoSourcesTest.size() != 0) {
-			PIO.setPhotoSources(photoSourcesTest);
-		}
-		PIO.setLiveApplication(isLive);
-		String recipeId = isLive ? RECIPE_ID_LIVE : RECIPE_ID_STAGING;
-		PIO.setRecipeID(recipeId);
-		try {
-			//			String photobucketBaseApiUrl = "https://api-phx1.photobucket.com";
-			//			String photobucketUsername = "boroue";
-			//			String photobucketAccessToken = "mlLmOXvqDO6UX1Zpqbmyosv8EQjdAY4iMrrYgzV6zVsIjjTjGonJi5kNYVhnF8AHp7JaLUCYlRHuf1AQn871KsQyDyspWl4hfIT3In6YcAC0X9xviAT9WcGSolyCRRCkffeMYhccN6IWMYv7TIEQIJ0lMVmEQk+g";
-			//			PIO.setPhotobucketCredentials(this, photobucketBaseApiUrl, photobucketUsername, photobucketAccessToken);
-			//			String photobucketClientId = "";
-			//			String photobucketClientSecret = "";
-			//			PIO.setPhotobucketClientIdSecret(photobucketClientId, photobucketClientSecret);
-			PIO.start(this, callback);
-		} catch (PIOException e) {
-			e.printStackTrace();
-		}
-	}
-
 	private void addDefaultPhotoSources() {
 		// Only up to 6
 		photoSourcesTest.add(PhotoSource.PHONE);
+		photoSourcesTest.add(PhotoSource.INSTAGRAM);
 		photoSourcesTest.add(PhotoSource.FACEBOOK);
 		photoSourcesTest.add(PhotoSource.FLICKR);
-		photoSourcesTest.add(PhotoSource.INSTAGRAM);
 		photoSourcesTest.add(PhotoSource.PHOTOBUCKET);
 		photoSourcesTest.add(PhotoSource.DROPBOX);
 		//photoSourcesTest.add(PhotoSource.PICASA);
@@ -305,6 +203,118 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		}
 		// this is our fallback here
 		return uri.getPath();
+	}
+
+	public void onClickStartSDK(View v) {
+		Log.d("Facebook", "ID:"+getString(R.string.facebook_app_id));
+
+		images = new String[imageLists.size()];
+		images = imageLists.toArray(images);
+		PIO.setSideMenuEnabled(false);
+		PIO.setCanUseUpload(((CheckBox) findViewById(R.id.checkImage)).isChecked());
+		//		for (String string : images) {
+		//			L.d("image array", string);
+		//		}
+		PIO.setImageUrls(images);
+		PIO.setPassedImageFirstInPhotoSources(((Switch) findViewById(R.id.switch_set_passed_image_first_in_photo_sources)).isChecked());
+
+		String coutry = ((EditText) findViewById(R.id.editCountry)).getText().toString();
+		if (coutry.length() == 2) {
+			PIO.setCountryCode(coutry);
+		}
+		String name = ((EditText) findViewById(R.id.editTextName)).getText().toString();
+		PIO.setPartnerName(name);
+
+		String colorString = ((EditText) findViewById(R.id.editColorHex)).getText().toString();
+		try {
+			int colorHex = Color.parseColor("#"+colorString);
+			PIO.setHeaderColor(colorHex);
+		} catch (NumberFormatException e) { 
+		}
+
+		PIO.setFontPathInAssetsLight("HelveticaNeueLTStd-Lt.otf");
+		PIO.setFontPathInAssetsNormal("HelveticaNeueLTStd-Roman.otf");
+		PIO.setFontPathInAssetsBold("HelveticaNeueLTStd-Bd.otf");
+		boolean isSideMenuEnabled = ((CheckBox) findViewById(R.id.sidemenu)).isChecked();
+		PIO.setSideMenuEnabled(isSideMenuEnabled);
+		PIO.setRightSideMenu(((Switch) findViewById(R.id.switch_right_side_menu)).isChecked());
+		boolean isFullScreen = ((CheckBox) findViewById(R.id.full_Screen)).isChecked();
+		PIO.setHideStatusBar(isFullScreen);
+		boolean autoArrange = ((CheckBox) findViewById(R.id.auto_arrange)).isChecked();
+		PIO.setAutoArrange(autoArrange);
+
+		PIO.setSdkDemo(true);
+		PIO.setCountryOnFeaturedProducts(((Switch) findViewById(R.id.switch_country_drop_down)).isChecked());
+		PIO.setPassedImageThumb(((Switch) findViewById(R.id.switch_passed_image_thumb)).isChecked());
+		PIO.setHideCategorySearchBar(((Switch) findViewById(R.id.switch_hide_category_search_bar)).isChecked());
+		PIO.setStepByStep(((Switch) findViewById(R.id.switch_step_by_step)).isChecked());
+		
+		PIO.setHostAppActivity(getComponentName().getClassName());
+
+		PIO.setScreenIdFromApp(((Switch) findViewById(R.id.switch_jump_to_shopping_cart)).isChecked()?Constants.ScreenIds.SCREEN_SHOPPING_CART:-1);
+
+		boolean coastersDiff = ((Switch) findViewById(R.id.switch_coasters_different)).isChecked();
+		boolean coastersDuplicate = ((Switch) findViewById(R.id.switch_coasters_duplicate)).isChecked();
+		//		if (coastersDiff != coastersDuplicate) {
+		//			PIO.setCoastersType(coastersDiff?Constants.CaseOptions.COASTERS_4_DIFFERENT:Constants.CaseOptions.COASTERS_1_DUPLICATED);
+		//		}
+
+		//		//@milos example of jumping to certain product/sku. sku has priority
+		//		if (((Switch) findViewById(R.id.switch_jump_to_sku)).isChecked()) {
+		//			//PIO.setIdAndSku(Constants.ProductIds.COASTERS, Integer.toString(Constants.CaseOptions.COASTERS_4_DIFFERENT));
+		//			//PIO.setIdAndSku(Constants.ProductIds.FLEECE_BLANKETS, "FleeceBlanket_60x80");
+		//			PIO.setIdAndSku(Constants.ProductIds.TABLET_CASES, "TabletCase-iPad3/4-Gloss");
+		//			//PIO.setIdAndSku(Constants.ProductIds.PHONE_CASES, "PhoneCase-GalaxyNote2-Matte");
+		//		} else if (((Switch) findViewById(R.id.switch_jump_to_phone_cases)).isChecked()) {
+		//			PIO.setProductIdFromApp(Constants.ProductIds.PHONE_CASES);
+		//		} else {
+		//			PIO.setIdAndSku(-1, null);
+		//		}
+
+		PIO.setShowHelp(((Switch) findViewById(R.id.switch_hide_help)).isChecked());
+
+		boolean isLive = ((ToggleButton) findViewById(R.id.toggleButtonProduction)).isChecked();
+
+		PIO.setShowPhotosInCustomize(((Switch) findViewById(R.id.switch_show_photos_customize)).isChecked());
+		PIO.setShowOptionsInCustomize(((Switch) findViewById(R.id.switch_show_options_customize)).isChecked());
+		boolean isRotateEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_rotate_enabled_in_crop_screen)).isChecked();
+		boolean isTextEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_text_enabled_in_crop_screen)).isChecked();
+		boolean isEffectsEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_effects_enabled_in_crop_screen)).isChecked();
+		PIO.setUpCropScreen(isRotateEnabledInCropScreen, isTextEnabledInCropScreen, isEffectsEnabledInCropScreen);
+
+		if (photoSourcesTest.size() == 0 ) {
+			addDefaultPhotoSources();
+		}
+		if (photoSourcesTest.size() != 0) {
+			PIO.setPhotoSources(photoSourcesTest);
+		}
+		PIO.setLiveApplication(isLive);
+
+		String recipeId;
+		String braintreeEncryptionKey;
+		if (isLive) {
+			recipeId = PIOConstants.RECIPE_ID_LIVE;
+			braintreeEncryptionKey = PIOConstants.Braintree.ENCRYPTION_KEY_LIVE;
+		} else {
+			recipeId = PIOConstants.RECIPE_ID_STAGING;
+			braintreeEncryptionKey = PIOConstants.Braintree.ENCRYPTION_KEY_STAGING;
+		}
+		PIO.setRecipeID(recipeId);
+		PIO.setBraintreeEncryptionKey(braintreeEncryptionKey);
+
+		String apiUrl;
+		if (PIO.isLiveApplication() || PIO.isLiveTestingApplication()) {
+			apiUrl = PIOConstants.API_URL_LIVE;
+		} else {
+			apiUrl = PIOConstants.API_URL_STAGING;
+		}
+		PIO.setApiUrl(apiUrl);
+
+		try {
+			PIO.start(this, callback);
+		} catch (PIOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void onClickOkFeedback(View v) {
