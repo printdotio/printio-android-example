@@ -16,7 +16,15 @@ public class AppExample extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		PIO.setFacebookAppId(PIOConstants.Facebook.APP_ID);
+		PIO.setFontPathInAssetsLight("HelveticaNeueLTStd-Lt.otf");
+		PIO.setFontPathInAssetsNormal("HelveticaNeueLTStd-Roman.otf");
+		PIO.setFontPathInAssetsBold("HelveticaNeueLTStd-Bd.otf");
+
+		PIO.setPartnerName(getResources().getString(R.string.hellopics));
+		PIO.setGooglePlayRateUrl(PIOConstants.GOOGLE_PLAY_RATE_URL);
+		PIO.setFacebookPageUrl(PIOConstants.FACEBOOK_PAGE_URL);
+
+		PIO.setFacebookAppId(getString(R.string.facebook_app_id));
 
 		PIO.setInstagramClientId(PIOConstants.Instagram.CLIENT_ID);
 

@@ -3,16 +3,14 @@ package com.example.piosdkpoconcept;
 public class PIOConstants {
 
 	public static final String GOOGLE_PLAY_APP_URL = "https://play.google.com/store/apps/details?id=com.hellopics";
+	public static final String GOOGLE_PLAY_RATE_URL = "market://details?id=com.hellopics";
+	public static final String FACEBOOK_PAGE_URL = "http://www.facebook.com/Hellopics";
 
 	public static String RECIPE_ID_STAGING = "00000000-0000-0000-0000-000000000000";
 	public static String RECIPE_ID_LIVE = "f255af6f-9614-4fe2-aa8b-1b77b936d9d6";
 
 	public static final String API_URL_LIVE = "https://api.print.io/api/";
 	public static final String API_URL_STAGING = "http://staging.api.print.io/api/";
-
-	public static class Facebook {
-		public static final String APP_ID = "309503815860008";
-	}
 
 	public static class Instagram {
 		public static final String CLIENT_ID = "0fa104a99b2c434aa376b83474df87a1";
