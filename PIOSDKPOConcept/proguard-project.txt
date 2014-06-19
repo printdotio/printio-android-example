@@ -267,3 +267,6 @@
 
 #Facebook
 -keep class com.facebook.** { *; }
+
+#Parse
+-keep class com.parse.** { *; }
