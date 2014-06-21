@@ -52,7 +52,62 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:text="US" />
+            
+            <Switch
+                android:id="@+id/switch_changeable_country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Changeable country:"
+                android:checked="true" />
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="Currency code 3 chars"
+                android:textSize="16dip" />
 
+            <EditText
+                android:id="@+id/editCurrency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="USD" />
+            
+            <Switch
+                android:id="@+id/switch_changeable_currency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Changeable currency:"
+                android:checked="true" />
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="Language code 2 chars, coming soon!"
+                android:textSize="16dip" />
+
+            <EditText
+                android:id="@+id/editLanguage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="EN"
+                android:enabled="false"
+                android:layout_marginBottom="7dp" />            
+            
+            <Switch
+                android:id="@+id/switch_changeable_country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Changeable language (Comming soon!):"
+                android:enabled="false"
+                android:checked="true" />
+            
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -104,6 +159,20 @@
                 android:checked="false"
                 android:text="Auto arange imagesr" />
 
+            <Switch
+                android:id="@+id/switch_appear_from_right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="SDK appears from right side:" />
+            
+            <Switch
+                android:id="@+id/switch_gear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Set gear as menu icon:" />
+            
             <Switch
                 android:id="@+id/switch_country_drop_down"
                 android:layout_width="match_parent"

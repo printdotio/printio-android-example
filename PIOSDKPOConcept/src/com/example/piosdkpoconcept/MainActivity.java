@@ -210,10 +210,20 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		PIO.setImageUrls(images);
 		PIO.setPassedImageFirstInPhotoSources(((Switch) findViewById(R.id.switch_set_passed_image_first_in_photo_sources)).isChecked());
 
-		String coutry = ((EditText) findViewById(R.id.editCountry)).getText().toString();
-		if (coutry.length() == 2) {
-			PIO.setCountryCode(coutry);
+		String country = ((EditText) findViewById(R.id.editCountry)).getText().toString();
+		if (country.length() == 2) {
+			PIO.setCountryCode(country);
 		}
+		
+		PIO.setChangeableCountry(((Switch) findViewById(R.id.switch_changeable_country)).isChecked());
+		
+		String currency = ((EditText) findViewById(R.id.editCurrency)).getText().toString();
+		if (currency.length() == 3) {
+			PIO.setCurrencyCode(currency);
+		}
+		
+		PIO.setChangeableCurrency(((Switch) findViewById(R.id.switch_changeable_currency)).isChecked());
+		
 		String name = ((EditText) findViewById(R.id.editTextName)).getText().toString();
 		PIO.setPartnerName(name);
 
@@ -233,6 +243,8 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		PIO.setAutoArrange(autoArrange);
 
 		PIO.setSdkDemo(true);
+		PIO.setSdkAppearsFromRight(((Switch) findViewById(R.id.switch_appear_from_right)).isChecked());
+		PIO.setMenuIconGear(((Switch) findViewById(R.id.switch_gear)).isChecked());
 		PIO.setCountryOnFeaturedProducts(((Switch) findViewById(R.id.switch_country_drop_down)).isChecked());
 		PIO.setPassedImageThumb(((Switch) findViewById(R.id.switch_passed_image_thumb)).isChecked());
 		PIO.setHideCategorySearchBar(((Switch) findViewById(R.id.switch_hide_category_search_bar)).isChecked());
