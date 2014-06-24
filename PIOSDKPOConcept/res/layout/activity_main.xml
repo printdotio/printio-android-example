@@ -171,7 +171,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Set gear as menu icon:" />
+                android:text="Set gear as menu icon:"
+                android:visibility="gone" />
             
             <Switch
                 android:id="@+id/switch_country_drop_down"

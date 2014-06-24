@@ -244,7 +244,7 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 
 		PIO.setSdkDemo(true);
 		PIO.setSdkAppearsFromRight(((Switch) findViewById(R.id.switch_appear_from_right)).isChecked());
-		PIO.setMenuIconGear(((Switch) findViewById(R.id.switch_gear)).isChecked());
+		//PIO.setMenuIconGear(((Switch) findViewById(R.id.switch_gear)).isChecked());
 		PIO.setCountryOnFeaturedProducts(((Switch) findViewById(R.id.switch_country_drop_down)).isChecked());
 		PIO.setPassedImageThumb(((Switch) findViewById(R.id.switch_passed_image_thumb)).isChecked());
 		PIO.setHideCategorySearchBar(((Switch) findViewById(R.id.switch_hide_category_search_bar)).isChecked());
