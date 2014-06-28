@@ -250,7 +250,7 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		PIO.setHideCategorySearchBar(((Switch) findViewById(R.id.switch_hide_category_search_bar)).isChecked());
 		PIO.setStepByStep(((Switch) findViewById(R.id.switch_step_by_step)).isChecked());
 		
-		PIO.setHostAppActivity(getComponentName().getClassName());
+		PIO.setHostAppActivity(getComponentName().getClassName());//"com.example.piosdkpoconcept.ActivityTest"
 
 		PIO.setScreenIdFromApp(((Switch) findViewById(R.id.switch_jump_to_shopping_cart)).isChecked()?Constants.ScreenIds.SCREEN_SHOPPING_CART:-1);
 
