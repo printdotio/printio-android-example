@@ -141,13 +141,13 @@
 #AWS
 #-libraryjars libs/aws-android-sdk-1.7.0-core.jar
 #-libraryjars libs/aws-android-sdk-1.7.0-s3.jar
--keep class com.amazonaws.** { *; }
+#-keep class com.amazonaws.** { *; }
 -keep interface com.amazonaws.** { *; }
 -dontwarn com.amazonaws.**
 
--keep class com.amazonaws.** {
-  public protected private *;
-}
+#-keep class com.amazonaws.** {
+#  public protected private *;
+#}
 
 -keep class org.apache.commons.logging.**               { *; }
 -keep class com.amazonaws.services.sqs.QueueUrlHandler  { *; }

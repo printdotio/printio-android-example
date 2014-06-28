@@ -203,7 +203,7 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		images = new String[imageLists.size()];
 		images = imageLists.toArray(images);
 		PIO.setSideMenuEnabled(false);
-		PIO.setCanUseUpload(((CheckBox) findViewById(R.id.checkImage)).isChecked());
+		PIO.setPhotosourcesDisabled(((CheckBox) findViewById(R.id.checkboxDisablePhotosources)).isChecked());
 		//		for (String string : images) {
 		//			L.d("image array", string);
 		//		}
