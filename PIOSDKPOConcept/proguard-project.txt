@@ -19,7 +19,7 @@
 #   public *;
 #}
 
-
+-classobfuscationdictionary classnames.txt
 -flattenpackagehierarchy
 -optimizationpasses 2
 -dontusemixedcaseclassnames
