@@ -118,6 +118,7 @@
 -keep class android.support.** { *; }
 -keep class com.slidingmenu.** { *; }
 -keep class print.io.Constants { *; }
+-keep class print.io.PublicConstants { *; }
 -keep class print.io.PIO {
 	public <methods>;
 }
