@@ -21,19 +21,19 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <!--
   IMPORTANT: Change "com.example.piosdkpoconcept.permission.C2D_MESSAGE" in the lines below
   to match your app's package name + ".permission.C2D_MESSAGE".
-  -->
+    -->
     <permission
         android:name="com.example.piosdkpoconcept.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
     <uses-permission android:name="com.example.piosdkpoconcept.permission.C2D_MESSAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -50,9 +50,9 @@
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@drawable/ic_launcher"
+        android:theme="@style/AppTheme"
         android:label="@string/app_name"
-        android:largeHeap="true"
-        android:theme="@style/AppTheme" >
+        android:largeHeap="true" >
         <activity
             android:name="com.example.piosdkpoconcept.ActivityTest"
             android:screenOrientation="portrait" />
@@ -65,12 +65,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            
         </activity>
-        <activity android:name="com.slidingmenu.lib.SlidingMenuActivity" />
-        <activity android:name="com.slidingmenu.lib.SlidingFragmentActivity" />
-        <activity android:name="com.slidingmenu.lib.SlidingListActivity" />
-        <activity android:name="com.slidingmenu.lib.SlidingPreferenceActivity" />
         <activity
             android:name="print.io.PIOActivity"
             android:screenOrientation="portrait" />
@@ -130,6 +125,9 @@
             android:name="print.io.ActivityStepsListView"
             android:screenOrientation="portrait" />
         <activity
+            android:name="print.io.ActivityStepsListView"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="print.io.ActivityShoppingCart"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
@@ -176,6 +174,7 @@
         <activity
             android:name="com.paypal.android.MEP.PayPalActivity"
             android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="print.io.ActivityAbout"
@@ -203,7 +202,10 @@
         <activity android:name="com.paypal.android.sdk.payments.LoginActivity" />
         <activity android:name="com.paypal.android.sdk.payments.PaymentMethodActivity" />
         <activity android:name="com.paypal.android.sdk.payments.PaymentConfirmActivity" />
-        <activity android:name="com.paypal.android.sdk.payments.PaymentCompletedActivity" />
+        <activity
+            android:name="io.card.payment.CardIOActivity"
+            android:configChanges="keyboardHidden|orientation" />
+        <activity android:name="io.card.payment.DataEntryActivity" />
 
         <meta-data
             android:name="com.crashlytics.ApiKey"
@@ -212,18 +214,6 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity
-            android:name="io.card.payment.CardIOActivity"
-            android:configChanges="keyboardHidden|orientation" />
-        <activity android:name="io.card.payment.DataEntryActivity" />
-
-        <receiver android:name="com.example.piosdkpoconcept.PrintIOCloseReceiver" >
-            <intent-filter>
-                <action android:name="ACTION_EXIT_PRINT_IO_SDK" />
-                
-            </intent-filter>
-        </receiver>
-        
         <service android:name="com.parse.PushService" />
 
         <receiver android:name="com.parse.ParseBroadcastReceiver" >
@@ -250,6 +240,13 @@
 
                 <!-- IMPORTANT: Change "com.example.piosdkpoconcept" to match your app's package name. -->
                 <action android:name="com.example.piosdkpoconcept.PUSH_NOTIFICATION" />
+            </intent-filter>
+        </receiver>
+
+        <!-- IMPORTANT: Change "com.example.piosdkpoconcept" to match your app's package name. -->
+        <receiver android:name="com.example.piosdkpoconcept.PrintIOCloseReceiver" >
+            <intent-filter>
+                <action android:name="ACTION_EXIT_PRINT_IO_SDK" />
             </intent-filter>
         </receiver>
     </application>

@@ -3,19 +3,16 @@ package com.example.piosdkpoconcept;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import print.io.Constants;
 import print.io.PIO;
 import print.io.PIO.PhotoSource;
 import print.io.PIOCallback;
 import print.io.PIOException;
+import print.io.PublicConstants;
 import print.io.beans.CallbackInfo;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
@@ -252,7 +249,7 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		
 		PIO.setHostAppActivity(getComponentName().getClassName());//"com.example.piosdkpoconcept.ActivityTest"
 
-		PIO.setScreenIdFromApp(((Switch) findViewById(R.id.switch_jump_to_shopping_cart)).isChecked()?Constants.ScreenIds.SCREEN_SHOPPING_CART:-1);
+		PIO.setScreenIdFromApp(((Switch) findViewById(R.id.switch_jump_to_shopping_cart)).isChecked()?PublicConstants.ScreenIds.SCREEN_SHOPPING_CART:-1);
 
 		boolean coastersDiff = ((Switch) findViewById(R.id.switch_coasters_different)).isChecked();
 		boolean coastersDuplicate = ((Switch) findViewById(R.id.switch_coasters_duplicate)).isChecked();
@@ -262,12 +259,12 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 
 		//		//@milos example of jumping to certain product/sku. sku has priority
 		//		if (((Switch) findViewById(R.id.switch_jump_to_sku)).isChecked()) {
-		//			//PIO.setIdAndSku(Constants.ProductIds.COASTERS, Integer.toString(Constants.CaseOptions.COASTERS_4_DIFFERENT));
-		//			//PIO.setIdAndSku(Constants.ProductIds.FLEECE_BLANKETS, "FleeceBlanket_60x80");
-		//			PIO.setIdAndSku(Constants.ProductIds.TABLET_CASES, "TabletCase-iPad3/4-Gloss");
-		//			//PIO.setIdAndSku(Constants.ProductIds.PHONE_CASES, "PhoneCase-GalaxyNote2-Matte");
+		//			//PIO.setIdAndSku(PublicConstants.ProductIds.COASTERS, Integer.toString(Constants.CaseOptions.COASTERS_4_DIFFERENT));
+		//			//PIO.setIdAndSku(PublicConstants.ProductIds.FLEECE_BLANKETS, "FleeceBlanket_60x80");
+		//			PIO.setIdAndSku(PublicConstants.ProductIds.TABLET_CASES, "TabletCase-iPad3/4-Gloss");
+		//			//PIO.setIdAndSku(PublicConstants.ProductIds.PHONE_CASES, "PhoneCase-GalaxyNote2-Matte");
 		//		} else if (((Switch) findViewById(R.id.switch_jump_to_phone_cases)).isChecked()) {
-		//			PIO.setProductIdFromApp(Constants.ProductIds.PHONE_CASES);
+		//			PIO.setProductIdFromApp(PublicConstants.ProductIds.PHONE_CASES);
 		//		} else {
 		//			PIO.setIdAndSku(-1, null);
 		//		}
