@@ -2,6 +2,7 @@ package com.example.piosdkpoconcept;
 
 public class PIOConstants {
 
+	public static final String HELP_URL = "http://www.theverge.com";
 	public static final String GOOGLE_PLAY_APP_URL = "https://play.google.com/store/apps/details?id=com.hellopics";
 	public static final String GOOGLE_PLAY_RATE_URL = "market://details?id=com.hellopics";
 	public static final String FACEBOOK_PAGE_URL = "http://www.facebook.com/Hellopics";
