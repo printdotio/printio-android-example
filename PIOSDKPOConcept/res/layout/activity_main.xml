@@ -52,15 +52,15 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:text="US" />
-            
+
             <Switch
                 android:id="@+id/switch_changeable_country"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Changeable country:"
-                android:checked="true" />
-            
+                android:checked="true"
+                android:text="Changeable country:" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -74,15 +74,15 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:text="USD" />
-            
+
             <Switch
                 android:id="@+id/switch_changeable_currency"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Changeable currency:"
-                android:checked="true" />
-            
+                android:checked="true"
+                android:text="Changeable currency:" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -94,20 +94,20 @@
                 android:id="@+id/editLanguage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
                 android:ems="10"
-                android:text="EN"
                 android:enabled="false"
-                android:layout_marginBottom="7dp" />            
-            
+                android:text="EN" />
+
             <Switch
                 android:id="@+id/switch_changeable_country"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Changeable language (Comming soon!):"
+                android:checked="true"
                 android:enabled="false"
-                android:checked="true" />
-            
+                android:text="Changeable language (Coming soon!):" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -137,8 +137,8 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="Enable Side Menu" />
-            
-             <Switch
+
+            <Switch
                 android:id="@+id/switch_right_side_menu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -157,7 +157,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="Auto arange imagesr" />
+                android:text="Auto-arrange photos in editor" />
 
             <Switch
                 android:id="@+id/switch_appear_from_right"
@@ -165,7 +165,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="SDK appears from right side:" />
-            
+
             <Switch
                 android:id="@+id/switch_gear"
                 android:layout_width="match_parent"
@@ -173,7 +173,7 @@
                 android:layout_margin="5dp"
                 android:text="Set gear as menu icon:"
                 android:visibility="gone" />
-            
+
             <Switch
                 android:id="@+id/switch_country_drop_down"
                 android:layout_width="match_parent"
@@ -242,6 +242,19 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="Jump to SKU:" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginBottom="5dp"
+                android:background="#000000" />
+
+            <Switch
+                android:id="@+id/switch_remove_logo_on_payment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Remove logo from payment screens" />
 
             <View
                 android:layout_width="match_parent"

@@ -273,6 +273,8 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 
 		boolean isLive = ((ToggleButton) findViewById(R.id.toggleButtonProduction)).isChecked();
 
+		PIO.removeLogoFromPaymentScreen(((Switch) findViewById(R.id.switch_remove_logo_on_payment)).isChecked());
+
 		PIO.setShowPhotosInCustomize(((Switch) findViewById(R.id.switch_show_photos_customize)).isChecked());
 		PIO.setShowOptionsInCustomize(((Switch) findViewById(R.id.switch_show_options_customize)).isChecked());
 		boolean isRotateEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_rotate_enabled_in_crop_screen)).isChecked();
