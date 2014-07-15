@@ -145,6 +145,13 @@
                 android:layout_margin="5dp"
                 android:text="Right Side Menu" />
 
+            <Switch
+                android:id="@+id/switch_menu_icon_gear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Use gear icon as menu icon:" />
+
             <CheckBox
                 android:id="@+id/full_Screen"
                 android:layout_width="wrap_content"
@@ -165,14 +172,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="SDK appears from right side:" />
-
-            <Switch
-                android:id="@+id/switch_gear"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Set gear as menu icon:"
-                android:visibility="gone" />
 
             <Switch
                 android:id="@+id/switch_country_drop_down"

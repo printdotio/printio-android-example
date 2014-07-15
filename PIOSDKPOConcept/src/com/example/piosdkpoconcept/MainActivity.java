@@ -5,6 +5,8 @@ import java.util.Arrays;
 
 import print.io.PIO;
 import print.io.PIO.PhotoSource;
+import print.io.PIO.SideMenuButton;
+import print.io.PIO.SideMenuInfoButton;
 import print.io.PIOCallback;
 import print.io.PIOException;
 import print.io.PublicConstants;
@@ -37,7 +39,9 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 
 	private static final int IMAGES_CURSOR_LOADER = 0xA1;
 
+	ArrayList<SideMenuButton> sideMenuButtonsTop = new ArrayList<PIO.SideMenuButton>();
 	ArrayList<PhotoSource> photoSourcesTest = new ArrayList<PIO.PhotoSource>();
+	ArrayList<SideMenuInfoButton> sideMenuInfoButtons = new ArrayList<PIO.SideMenuInfoButton>();
 
 	public static PIOCallback callback = new PIOCallback() {
 		@Override
@@ -76,7 +80,7 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 				}
 			}
 		});
-		
+
 		//@milos on resume from print.io sdk
 		ArrayList<String> cartItems = getIntent().getStringArrayListExtra("ShoppingCartItems");
 		if(cartItems != null) {
@@ -114,6 +118,15 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		builder.show();
 	}
 
+	private void addAllSideMenuButtonsTop() {
+		sideMenuButtonsTop.add(SideMenuButton.SEARCH_BAR);
+		sideMenuButtonsTop.add(SideMenuButton.EXIT_BUTTON);
+		sideMenuButtonsTop.add(SideMenuButton.FEATURED_PRODUCTS);
+		sideMenuButtonsTop.add(SideMenuButton.PRODUCTS);
+		sideMenuButtonsTop.add(SideMenuButton.HELP);
+		sideMenuButtonsTop.add(SideMenuButton.VIEW_CART);
+	}
+
 	private void addDefaultPhotoSources() {
 		// Only up to 6
 		photoSourcesTest.add(PhotoSource.PHONE);
@@ -123,6 +136,16 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		photoSourcesTest.add(PhotoSource.PHOTOBUCKET);
 		photoSourcesTest.add(PhotoSource.DROPBOX);
 		//photoSourcesTest.add(PhotoSource.PICASA);
+	}
+
+	private void addAllSideMenuInfoButtons() {
+		sideMenuInfoButtons.add(SideMenuInfoButton.PRICING_CHART);
+		sideMenuInfoButtons.add(SideMenuInfoButton.SHARE_APP);
+		sideMenuInfoButtons.add(SideMenuInfoButton.LIKE_US_FB);
+		sideMenuInfoButtons.add(SideMenuInfoButton.RATE_APP);
+		sideMenuInfoButtons.add(SideMenuInfoButton.ABOUT);
+		sideMenuInfoButtons.add(SideMenuInfoButton.HOW_IT_WORKS);
+		sideMenuInfoButtons.add(SideMenuInfoButton.PAST_ORDERS);
 	}
 
 	@Override
@@ -211,16 +234,16 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		if (country.length() == 2) {
 			PIO.setCountryCode(country);
 		}
-		
+
 		PIO.setChangeableCountry(((Switch) findViewById(R.id.switch_changeable_country)).isChecked());
-		
+
 		String currency = ((EditText) findViewById(R.id.editCurrency)).getText().toString();
 		if (currency.length() == 3) {
 			PIO.setCurrencyCode(currency);
 		}
-		
+
 		PIO.setChangeableCurrency(((Switch) findViewById(R.id.switch_changeable_currency)).isChecked());
-		
+
 		String name = ((EditText) findViewById(R.id.editTextName)).getText().toString();
 		PIO.setPartnerName(name);
 
@@ -234,6 +257,7 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		boolean isSideMenuEnabled = ((CheckBox) findViewById(R.id.sidemenu)).isChecked();
 		PIO.setSideMenuEnabled(isSideMenuEnabled);
 		PIO.setRightSideMenu(((Switch) findViewById(R.id.switch_right_side_menu)).isChecked());
+		PIO.setMenuIconGear(((Switch) findViewById(R.id.switch_menu_icon_gear)).isChecked());
 		boolean isFullScreen = ((CheckBox) findViewById(R.id.full_Screen)).isChecked();
 		PIO.setHideStatusBar(isFullScreen);
 		boolean autoArrange = ((CheckBox) findViewById(R.id.auto_arrange)).isChecked();
@@ -246,7 +270,7 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		PIO.setPassedImageThumb(((Switch) findViewById(R.id.switch_passed_image_thumb)).isChecked());
 		PIO.setHideCategorySearchBar(((Switch) findViewById(R.id.switch_hide_category_search_bar)).isChecked());
 		PIO.setStepByStep(((Switch) findViewById(R.id.switch_step_by_step)).isChecked());
-		
+
 		PIO.setHostAppActivity(getComponentName().getClassName());
 
 		PIO.setScreenIdFromApp(((Switch) findViewById(R.id.switch_jump_to_shopping_cart)).isChecked()?PublicConstants.ScreenIds.SCREEN_SHOPPING_CART:-1);
@@ -282,12 +306,23 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		boolean isEffectsEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_effects_enabled_in_crop_screen)).isChecked();
 		PIO.setUpCropScreen(isRotateEnabledInCropScreen, isTextEnabledInCropScreen, isEffectsEnabledInCropScreen);
 
+		if (sideMenuButtonsTop.size() == 0) {
+			addAllSideMenuButtonsTop();
+		}
+		PIO.setSideMenuButtonsTop(sideMenuButtonsTop);
+
 		if (photoSourcesTest.size() == 0 ) {
 			addDefaultPhotoSources();
 		}
 		if (photoSourcesTest.size() != 0) {
 			PIO.setPhotoSources(photoSourcesTest);
 		}
+
+		if (sideMenuInfoButtons.size() == 0) {
+			addAllSideMenuInfoButtons();
+		}
+		PIO.setSideMenuInfoButtons(sideMenuInfoButtons);
+
 		PIO.setLiveApplication(isLive);
 
 		String recipeId;
