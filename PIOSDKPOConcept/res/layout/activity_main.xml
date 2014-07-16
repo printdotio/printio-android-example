@@ -131,8 +131,15 @@
                 android:checked="false"
                 android:text="Disable Photo Sources" />
 
+            <Switch
+                android:id="@+id/switch_three_buttons_bar_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Enable three buttons bar style" />
+
             <CheckBox
-                android:id="@+id/sidemenu"
+                android:id="@+id/checkbox_enable_side_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"

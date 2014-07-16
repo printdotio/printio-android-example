@@ -254,7 +254,9 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		} catch (NumberFormatException e) { 
 		}
 
-		boolean isSideMenuEnabled = ((CheckBox) findViewById(R.id.sidemenu)).isChecked();
+		PIO.useThreeButtonsBarStyle(((Switch) findViewById(R.id.switch_three_buttons_bar_style)).isChecked());
+
+		boolean isSideMenuEnabled = ((CheckBox) findViewById(R.id.checkbox_enable_side_menu)).isChecked();
 		PIO.setSideMenuEnabled(isSideMenuEnabled);
 		PIO.setRightSideMenu(((Switch) findViewById(R.id.switch_right_side_menu)).isChecked());
 		PIO.setMenuIconGear(((Switch) findViewById(R.id.switch_menu_icon_gear)).isChecked());
@@ -270,7 +272,7 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		PIO.setPassedImageThumb(((Switch) findViewById(R.id.switch_passed_image_thumb)).isChecked());
 		PIO.setHideCategorySearchBar(((Switch) findViewById(R.id.switch_hide_category_search_bar)).isChecked());
 		PIO.setStepByStep(((Switch) findViewById(R.id.switch_step_by_step)).isChecked());
-		
+
 		PIO.setHostAppActivity(getComponentName().getClassName());//"com.example.piosdkpoconcept.ActivityTest"
 
 		PIO.setScreenIdFromApp(((Switch) findViewById(R.id.switch_jump_to_shopping_cart)).isChecked()?PublicConstants.ScreenIds.SCREEN_SHOPPING_CART:-1);
