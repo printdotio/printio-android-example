@@ -299,6 +299,7 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 
 		boolean isLive = ((ToggleButton) findViewById(R.id.toggleButtonProduction)).isChecked();
 
+		PIO.removePlusFromAddMoreProductsButton(((Switch) findViewById(R.id.switch_remove_plus_from_add_more_products)).isChecked());
 		PIO.removeLogoFromPaymentScreen(((Switch) findViewById(R.id.switch_remove_logo_on_payment)).isChecked());
 
 		PIO.setShowPhotosInCustomize(((Switch) findViewById(R.id.switch_show_photos_customize)).isChecked());
