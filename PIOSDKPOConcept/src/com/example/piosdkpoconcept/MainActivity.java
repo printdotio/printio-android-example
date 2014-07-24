@@ -83,7 +83,7 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 
 		//@milos on resume from print.io sdk
 		ArrayList<String> cartItems = getIntent().getStringArrayListExtra("ShoppingCartItems");
-		if(cartItems != null) {
+		if (cartItems != null) {
 			StringBuilder stringBuilder = new StringBuilder("Feedback to host app: ");
 			stringBuilder.append("\nShopping Cart Items Quantity:\n").append(Integer.toString(cartItems.size()));
 
@@ -98,6 +98,9 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 			((TextView)feedbackDialog.findViewById(R.id.textview_feedback)).setText(stringBuilder.toString());
 			feedbackDialog.setVisibility(View.VISIBLE);
 		}
+
+		TextView textViewItemsInCart = (TextView) findViewById(R.id.textview_items_in_cart);
+		textViewItemsInCart.setText("Items in shopping cart: "+PIO.getNumberOfItemsInShoppingCart(MainActivity.this));
 	}
 
 	public static String[] getNames(Class<? extends Enum<?>> e) {
@@ -229,6 +232,7 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		//		}
 		PIO.setImageUrls(images);
 		PIO.setPassedImageFirstInPhotoSources(((Switch) findViewById(R.id.switch_set_passed_image_first_in_photo_sources)).isChecked());
+		PIO.hidePhotoSourcesInSideMenu(((Switch) findViewById(R.id.switch_hide_photo_sources_side_menu)).isChecked());
 
 		String country = ((EditText) findViewById(R.id.editCountry)).getText().toString();
 		if (country.length() == 2) {

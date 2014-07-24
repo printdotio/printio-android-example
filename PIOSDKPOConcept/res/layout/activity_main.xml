@@ -391,6 +391,14 @@
                 android:checked="false"
                 android:text="Set passed in image to be first in row for all photo sources" />
 
+            <Switch
+                android:id="@+id/switch_hide_photo_sources_side_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="false"
+                android:text="Hide photo sources in side menu" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
@@ -405,6 +413,12 @@
                 android:textOff="Staging Mode."
                 android:textOn="Production Mode"
                 android:textSize="16dip" />
+
+            <TextView
+                android:id="@+id/textview_items_in_cart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip" />
 
             <Button
                 android:id="@+id/button_start_sdk"
