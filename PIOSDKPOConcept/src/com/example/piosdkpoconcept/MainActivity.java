@@ -128,6 +128,7 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		sideMenuButtonsTop.add(SideMenuButton.PRODUCTS);
 		sideMenuButtonsTop.add(SideMenuButton.HELP);
 		sideMenuButtonsTop.add(SideMenuButton.VIEW_CART);
+		sideMenuButtonsTop.add(SideMenuButton.EMAIL_SUPPORT);
 	}
 
 	private void addDefaultPhotoSources() {

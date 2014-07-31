@@ -3,11 +3,13 @@ package com.example.piosdkpoconcept;
 public class PIOConstants {
 
 	public static final String HELP_URL = "http://www.theverge.com";
+	public static final String SUPPORT_EMAIL = "support@print.io";
 	public static final String GOOGLE_PLAY_APP_URL = "https://play.google.com/store/apps/details?id=com.hellopics";
 	public static final String GOOGLE_PLAY_RATE_URL = "market://details?id=com.hellopics";
 	public static final String FACEBOOK_PAGE_URL = "http://www.facebook.com/Hellopics";
 
 	public static String RECIPE_ID_STAGING = "00000000-0000-0000-0000-000000000000";
+
 	public static String RECIPE_ID_LIVE = "f255af6f-9614-4fe2-aa8b-1b77b936d9d6";
 
 	public static final String API_URL_LIVE = "https://api.print.io/api/";
@@ -45,9 +47,7 @@ public class PIOConstants {
 	public static class PayPal {
 
 		/**
-		 * For details check:{@link https
-		 * ://developer.paypal.com/webapps/developer
-		 * /docs/integration/mobile/android-integration-guide/}
+		 * For details check:{@link https://developer.paypal.com/webapps/developer/docs/integration/mobile/android-integration-guide/}
 		 */
 		public static final String APP_ID = "APP-80W284485P519543T";
 		public static final String CLIENT_ID = "AQPAfRB3AI9W7IJc12HaLF-5bu5vJUgxV8CAiQB8d_1WxBB89wKM8xWEdsqC";

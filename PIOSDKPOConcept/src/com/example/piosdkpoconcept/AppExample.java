@@ -22,6 +22,7 @@ public class AppExample extends Application {
 
 		PIO.setPartnerName(getResources().getString(R.string.hellopics));
 		PIO.setHelpUrl(PIOConstants.HELP_URL);
+		PIO.setSupportEmail(PIOConstants.SUPPORT_EMAIL);
 		PIO.setGooglePlayRateUrl(PIOConstants.GOOGLE_PLAY_RATE_URL);
 		PIO.setFacebookPageUrl(PIOConstants.FACEBOOK_PAGE_URL);
 
