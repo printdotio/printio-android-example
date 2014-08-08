@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
-                android:text="Country code 2 chars, leave empty to let user select it"
+                android:text="Country code 2 chars, leave empty to let user select it:"
                 android:textSize="16dip" />
 
             <EditText
@@ -65,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
-                android:text="Currency code 3 chars"
+                android:text="Currency code 3 chars:"
                 android:textSize="16dip" />
 
             <EditText
@@ -414,6 +414,19 @@
                 android:textOff="Staging Mode."
                 android:textOn="Production Mode"
                 android:textSize="16dip" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="Set promo coupon code:"
+                android:textSize="16dip" />
+
+            <EditText
+                android:id="@+id/edittext_promo_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10" />
 
             <TextView
                 android:id="@+id/textview_items_in_cart"

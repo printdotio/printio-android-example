@@ -282,8 +282,8 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 
 		PIO.setScreenIdFromApp(((Switch) findViewById(R.id.switch_jump_to_shopping_cart)).isChecked()?PublicConstants.ScreenIds.SCREEN_SHOPPING_CART:-1);
 
-		boolean coastersDiff = ((Switch) findViewById(R.id.switch_coasters_different)).isChecked();
-		boolean coastersDuplicate = ((Switch) findViewById(R.id.switch_coasters_duplicate)).isChecked();
+		//		boolean coastersDiff = ((Switch) findViewById(R.id.switch_coasters_different)).isChecked();
+		//		boolean coastersDuplicate = ((Switch) findViewById(R.id.switch_coasters_duplicate)).isChecked();
 		//		if (coastersDiff != coastersDuplicate) {
 		//			PIO.setCoastersType(coastersDiff?Constants.CaseOptions.COASTERS_4_DIFFERENT:Constants.CaseOptions.COASTERS_1_DUPLICATED);
 		//		}
@@ -353,6 +353,13 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 			apiUrl = PIOConstants.API_URL_STAGING;
 		}
 		PIO.setApiUrl(apiUrl);
+
+		String promoCode = ((EditText) findViewById(R.id.edittext_promo_code)).getText().toString();
+		if (promoCode.equals("")) {
+			PIO.setPromoCode(null);
+		} else {
+			PIO.setPromoCode(promoCode);
+		}
 
 		try {
 			PIO.start(this, callback);
