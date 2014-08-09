@@ -324,7 +324,7 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		}
 		if (photoSourcesTest.size() != 0) {
 			PIO.setPhotoSources(photoSourcesTest);
-			PIO.setDefaultPhotoSource(photoSourcesTest.get(photoSourcesTest.size() - 1));
+			PIO.setDefaultPhotoSource(photoSourcesTest.get(0));
 		}
 
 		if (sideMenuInfoButtons.size() == 0) {
