@@ -222,10 +222,6 @@
 	public *;
 }
 
--keep public class com.paypal.android.MEP.* {
-	public *;
-}
-
 #Logging
 # Remove all Log.d and Log.v calls
 -assumenosideeffects class android.util.Log {
