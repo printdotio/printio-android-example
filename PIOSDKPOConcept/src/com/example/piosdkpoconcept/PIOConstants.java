@@ -9,7 +9,6 @@ public class PIOConstants {
 	public static final String FACEBOOK_PAGE_URL = "http://www.facebook.com/Hellopics";
 
 	public static String RECIPE_ID_STAGING = "00000000-0000-0000-0000-000000000000";
-
 	public static String RECIPE_ID_LIVE = "f255af6f-9614-4fe2-aa8b-1b77b936d9d6";
 
 	public static final String API_URL_LIVE = "https://api.print.io/api/";
@@ -45,14 +44,8 @@ public class PIOConstants {
 	}
 
 	public static class PayPal {
-
-		/**
-		 * For details check:{@link https://developer.paypal.com/webapps/developer/docs/integration/mobile/android-integration-guide/}
-		 */
-		public static final String APP_ID = "APP-80W284485P519543T";
 		public static final String CLIENT_ID = "AQPAfRB3AI9W7IJc12HaLF-5bu5vJUgxV8CAiQB8d_1WxBB89wKM8xWEdsqC";
 		public static final String RECEIVERS_MAIL = "micah-facilitator@breakoutcommerce.com";
-		public static final int FEE_PAYER = com.paypal.android.MEP.PayPal.FEEPAYER_EACHRECEIVER;
 	}
 
 	public static class Parse {

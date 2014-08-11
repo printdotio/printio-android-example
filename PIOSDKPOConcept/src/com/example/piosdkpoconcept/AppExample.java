@@ -42,10 +42,8 @@ public class AppExample extends Application {
 		PIO.setAmazonAccessKey(PIOConstants.Amazon.ACCESS_KEY);
 		PIO.setAmazonSecretKey(PIOConstants.Amazon.SECRET_KEY);
 
-		PIO.setPayPalAppId(PIOConstants.PayPal.APP_ID);
 		PIO.setPayPalClientId(PIOConstants.PayPal.CLIENT_ID);
 		PIO.setPayPalReceiverEmail(PIOConstants.PayPal.RECEIVERS_MAIL);
-		PIO.setPayPalFeePayer(PIOConstants.PayPal.FEE_PAYER);
 
 		PIO.setParseApplicationId(PIOConstants.Parse.APPLICATION_ID);
 		PIO.setParseClientKey(PIOConstants.Parse.CLIENT_KEY);
