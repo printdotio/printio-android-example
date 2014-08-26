@@ -250,6 +250,13 @@
                 android:layout_margin="5dp"
                 android:text="Jump to SKU:" />
 
+            <Switch
+                android:id="@+id/switch_back_goes_to_featured_products"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Back goes to Featured Products:" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
