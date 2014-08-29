@@ -284,13 +284,11 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		if (((Switch) findViewById(R.id.switch_jump_to_shopping_cart)).isChecked()) {
 			jumpToScreenId = PublicConstants.ScreenIds.SCREEN_SHOPPING_CART;
 		}
-		if (jumpToScreenId != -1) {
-			int flags = 0;
-			if (((Switch) findViewById(R.id.switch_back_goes_to_featured_products)).isChecked()) {
-				flags |= PublicConstants.Flags.FLAG_GO_BACK_TO_FEATURED_PRODUCTS;
-			}
-			PIO.setJumpToScreen(jumpToScreenId, flags);
+		int flags = 0;
+		if (((Switch) findViewById(R.id.switch_back_goes_to_featured_products)).isChecked()) {
+			flags |= PublicConstants.Flags.FLAG_GO_BACK_TO_FEATURED_PRODUCTS;
 		}
+		PIO.setJumpToScreen(jumpToScreenId, flags);
 
 		//		boolean coastersDiff = ((Switch) findViewById(R.id.switch_coasters_different)).isChecked();
 		//		boolean coastersDuplicate = ((Switch) findViewById(R.id.switch_coasters_duplicate)).isChecked();
