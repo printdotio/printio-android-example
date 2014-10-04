@@ -28,6 +28,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -39,9 +41,12 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 
 	private static final int IMAGES_CURSOR_LOADER = 0xA1;
 
-	ArrayList<SideMenuButton> sideMenuButtonsTop = new ArrayList<PIO.SideMenuButton>();
-	ArrayList<PhotoSource> photoSourcesTest = new ArrayList<PIO.PhotoSource>();
-	ArrayList<SideMenuInfoButton> sideMenuInfoButtons = new ArrayList<PIO.SideMenuInfoButton>();
+	private ArrayList<SideMenuButton> sideMenuButtonsTop = new ArrayList<PIO.SideMenuButton>();
+	private ArrayList<PhotoSource> photoSourcesTest = new ArrayList<PIO.PhotoSource>();
+	private ArrayList<SideMenuInfoButton> sideMenuInfoButtons = new ArrayList<PIO.SideMenuInfoButton>();
+
+	private Spinner spinnerJumpToProduct;
+	private Switch switchSkipProductDetailsScreen;
 
 	public static PIOCallback callback = new PIOCallback() {
 		@Override
@@ -80,6 +85,11 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 				}
 			}
 		});
+
+		spinnerJumpToProduct = (Spinner) findViewById(R.id.spinner_jump_to_product);
+		spinnerJumpToProduct.setAdapter(new SpinnerAdapterJumpToProduct(MainActivity.this));
+
+		switchSkipProductDetailsScreen = (Switch) findViewById(R.id.switch_skip_product_details_screen);
 
 		//@milos on resume from print.io sdk
 		ArrayList<String> cartItems = getIntent().getStringArrayListExtra("ShoppingCartItems");
@@ -202,6 +212,7 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 	/**
 	 * helper to retrieve the path of an image URI
 	 */
+	@SuppressWarnings("deprecation")
 	public String getPath(Uri uri) {
 		// just some safety built in 
 		if (uri == null) {
@@ -296,18 +307,6 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		//			PIO.setCoastersType(coastersDiff?Constants.CaseOptions.COASTERS_4_DIFFERENT:Constants.CaseOptions.COASTERS_1_DUPLICATED);
 		//		}
 
-		//		//@milos example of jumping to certain product/sku. sku has priority
-		//		if (((Switch) findViewById(R.id.switch_jump_to_sku)).isChecked()) {
-		//			//PIO.setIdAndSku(PublicConstants.ProductIds.COASTERS, Integer.toString(Constants.CaseOptions.COASTERS_4_DIFFERENT));
-		//			//PIO.setIdAndSku(PublicConstants.ProductIds.FLEECE_BLANKETS, "FleeceBlanket_60x80");
-		//			PIO.setIdAndSku(PublicConstants.ProductIds.TABLET_CASES, "TabletCase-iPad3/4-Gloss");
-		//			//PIO.setIdAndSku(PublicConstants.ProductIds.PHONE_CASES, "PhoneCase-GalaxyNote2-Matte");
-		//		} else if (((Switch) findViewById(R.id.switch_jump_to_phone_cases)).isChecked()) {
-		//			PIO.setProductIdFromApp(PublicConstants.ProductIds.PHONE_CASES);
-		//		} else {
-		//			PIO.setIdAndSku(-1, null);
-		//		}
-
 		PIO.setShowHelp(((Switch) findViewById(R.id.switch_hide_help)).isChecked());
 
 		boolean isLive = ((ToggleButton) findViewById(R.id.toggleButtonProduction)).isChecked();
@@ -361,6 +360,15 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 			apiUrl = PIOConstants.API_URL_STAGING;
 		}
 		PIO.setApiUrl(apiUrl);
+
+		int selectedProductId = (int) spinnerJumpToProduct.getSelectedItemId();
+		if (selectedProductId != SpinnerAdapter.NO_SELECTION) {
+			PIO.setProductIdFromApp(selectedProductId);
+		} else {
+			PIO.setProductIdFromApp(-1);
+		}
+
+		PIO.setSkipProductDetails(switchSkipProductDetailsScreen.isChecked());
 
 		String promoCode = ((EditText) findViewById(R.id.edittext_promo_code)).getText().toString();
 		if (promoCode.equals("")) {

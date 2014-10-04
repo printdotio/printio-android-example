@@ -100,7 +100,7 @@
                 android:text="EN" />
 
             <Switch
-                android:id="@+id/switch_changeable_country"
+                android:id="@+id/switch_changeable_language"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -222,40 +222,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="Step by step:" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="5dp"
-                android:background="#000000" />
-
-            <Switch
-                android:id="@+id/switch_jump_to_shopping_cart"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Jump to Shopping Cart:" />
-
-            <Switch
-                android:id="@+id/switch_jump_to_phone_cases"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Jump to Phone Cases:" />
-
-            <Switch
-                android:id="@+id/switch_jump_to_sku"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Jump to SKU:" />
-
-            <Switch
-                android:id="@+id/switch_back_goes_to_featured_products"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Back goes to Featured Products:" />
 
             <View
                 android:layout_width="match_parent"
@@ -406,6 +372,53 @@
                 android:layout_margin="5dp"
                 android:checked="false"
                 android:text="Hide photo sources in side menu" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="Jump to Product:"
+                android:textSize="16dip"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_jump_to_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp" />
+
+            <Switch
+                android:id="@+id/switch_skip_product_details_screen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Skip Product Details screen" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
+            <Switch
+                android:id="@+id/switch_jump_to_shopping_cart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Jump to Shopping Cart" />
+
+            <Switch
+                android:id="@+id/switch_back_goes_to_featured_products"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Back goes to Featured Products:" />
 
             <View
                 android:layout_width="match_parent"
