@@ -33,11 +33,6 @@ public class PIOConstants {
 		public static final String CLIENT_SECRET = "5ab4ba37aa577d1863ead59a1d75dd1f";
 	}
 
-	public static class Amazon {
-		public static final String ACCESS_KEY = "AKIAJM5ARFNLDWJPRMIQ";
-		public static final String SECRET_KEY = "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";
-	}
-
 	public static class Braintree {
 		public static final String ENCRYPTION_KEY_STAGING = "MIIBCgKCAQEA7Dt20svKjDNsrqu3BWp1hWQah9mpNiIjTeBkxHukMh+nzb40wTOARHpPr4qbEmPRC89oSKuObzwtNjxwvRRiEaRAPJff6dI1ZvF46NWWIqHMWY4zAxEjAvG41eE9+9d8cqyRAkptHVdKl+aawALpcwn8wfdCKeryNvKDH9iCvJIYmpe7tmeonhLz8pksN+iSNYdQQJW8tBrSkpa1crZTWth3SorLjTLOcnUDtDpjpWarjzA/16c1l7TvEzuZbGrSNjSunk2ujZAdZVlZM0xo2nSGjI8WIEpZVIRS4JINVkazD2dIaUAWynzGgwpeh3ymKknZAuqk4SXyBlcUUq2NSwIDAQAB";
 		public static final String ENCRYPTION_KEY_LIVE = "MIIBCgKCAQEAvSJ/AjTz8ybKlkbboXBVbHHW9smRoVjcIgJmNdYcrFg+8aW41DEtYJKEENvlA2UvHDMTA7VG8L41bjjFyGrq6OSudzx/gDGsogOb/oMt+OZukkoKy47AYyVDVRc9+k4lH8POg7YDsgTwZC2RVIJ+z4gvc8juF39GOMuPnhLvbPjj1a3ns+UmGF16SnIOSSlZkSNgQumbWa5+Vw/ewVH4jud8xGcmy4G0EyRZzrw5rO4CtkOOFX/TPBCCAU/ANhY0cEbJelr0fJJhOvgp5FC+udqF4PkOHJ5GHhXUjijcfOOjLtMc7dG3QkXx5AcwtDP4wnKFqRDTyjg+KZXpwH7i2QIDAQAB";

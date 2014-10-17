@@ -39,9 +39,6 @@ public class AppExample extends Application {
 		PIO.setPhotobucketClientId(PIOConstants.Photobucket.CLIENT_ID);
 		PIO.setPhotobucketClientSecret(PIOConstants.Photobucket.CLIENT_SECRET);
 
-		PIO.setAmazonAccessKey(PIOConstants.Amazon.ACCESS_KEY);
-		PIO.setAmazonSecretKey(PIOConstants.Amazon.SECRET_KEY);
-
 		PIO.setPayPalClientId(PIOConstants.PayPal.CLIENT_ID);
 		PIO.setPayPalReceiverEmail(PIOConstants.PayPal.RECEIVERS_MAIL);
 
