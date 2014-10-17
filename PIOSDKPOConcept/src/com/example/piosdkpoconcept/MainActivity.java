@@ -48,6 +48,8 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 	private Spinner spinnerJumpToProduct;
 	private Switch switchSkipProductDetailsScreen;
 
+	private Switch switchHideComingSoonProducts;
+
 	public static PIOCallback callback = new PIOCallback() {
 		@Override
 		public void onCartChange(int count) {
@@ -90,6 +92,8 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		spinnerJumpToProduct.setAdapter(new SpinnerAdapterJumpToProduct(MainActivity.this));
 
 		switchSkipProductDetailsScreen = (Switch) findViewById(R.id.switch_skip_product_details_screen);
+
+		switchHideComingSoonProducts = (Switch) findViewById(R.id.switch_hide_coming_soon_products);
 
 		//@milos on resume from print.io sdk
 		ArrayList<String> cartItems = getIntent().getStringArrayListExtra("ShoppingCartItems");
@@ -360,6 +364,8 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 			apiUrl = PIOConstants.API_URL_STAGING;
 		}
 		PIO.setApiUrl(apiUrl);
+
+		PIO.setHideComingSoonProducts(switchHideComingSoonProducts.isChecked());
 
 		int selectedProductId = (int) spinnerJumpToProduct.getSelectedItemId();
 		if (selectedProductId != SpinnerAdapter.NO_SELECTION) {

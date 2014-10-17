@@ -25,9 +25,7 @@
 
     <!--
   IMPORTANT: Change "com.example.piosdkpoconcept.permission.C2D_MESSAGE" in the lines below
-  to match your app's package name + ".permission.C2D_MESSAGE".
-
-
+  to match your app's package name + ".permission.C2D_MESSAGE".
     -->
     <permission
         android:name="com.example.piosdkpoconcept.permission.C2D_MESSAGE"
@@ -88,7 +86,8 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="print.io.ActivityFeaturedProducts"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="print.io.ActivityAllProducts"
             android:screenOrientation="portrait" />
@@ -132,7 +131,7 @@
         <activity
             android:name="print.io.ActivityShoppingCart"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name="print.io.ActivityShoppingMethods"
             android:screenOrientation="portrait" />
@@ -141,7 +140,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="print.io.ActivityPaymentMethod"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="print.io.ActivityChooseShippingAddress"
             android:screenOrientation="portrait" />

@@ -426,6 +426,14 @@
                 android:layout_marginTop="5dp"
                 android:background="#000000" />
 
+            <Switch
+                android:id="@+id/switch_hide_coming_soon_products"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="false"
+                android:text="Hide \'Coming Soon\' Products" />
+
             <ToggleButton
                 android:id="@+id/toggleButtonProduction"
                 android:layout_width="match_parent"
