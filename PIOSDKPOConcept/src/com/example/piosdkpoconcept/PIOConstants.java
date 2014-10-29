@@ -11,9 +11,6 @@ public class PIOConstants {
 	public static String RECIPE_ID_STAGING = "00000000-0000-0000-0000-000000000000";
 	public static String RECIPE_ID_LIVE = "f255af6f-9614-4fe2-aa8b-1b77b936d9d6";
 
-	public static final String API_URL_LIVE = "https://api.print.io/api/";
-	public static final String API_URL_STAGING = "http://staging.api.print.io/api/";
-
 	public static class Instagram {
 		public static final String CLIENT_ID = "0fa104a99b2c434aa376b83474df87a1";
 	}

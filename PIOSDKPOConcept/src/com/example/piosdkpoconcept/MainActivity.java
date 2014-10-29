@@ -11,6 +11,7 @@ import print.io.PIOCallback;
 import print.io.PIOException;
 import print.io.PublicConstants;
 import print.io.beans.CallbackInfo;
+import print.io.utils.L;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -89,11 +90,19 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		});
 
 		spinnerJumpToProduct = (Spinner) findViewById(R.id.spinner_jump_to_product);
-		spinnerJumpToProduct.setAdapter(new SpinnerAdapterJumpToProduct(MainActivity.this));
+		initSdkMode(false);
 
 		switchSkipProductDetailsScreen = (Switch) findViewById(R.id.switch_skip_product_details_screen);
 
 		switchHideComingSoonProducts = (Switch) findViewById(R.id.switch_hide_coming_soon_products);
+
+		((ToggleButton) findViewById(R.id.toggleButtonProduction)).setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				initSdkMode(isChecked);
+			}
+		});
 
 		//@milos on resume from print.io sdk
 		ArrayList<String> cartItems = getIntent().getStringArrayListExtra("ShoppingCartItems");
@@ -115,6 +124,30 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 
 		TextView textViewItemsInCart = (TextView) findViewById(R.id.textview_items_in_cart);
 		textViewItemsInCart.setText("Items in shopping cart: "+PIO.getNumberOfItemsInShoppingCart(MainActivity.this));
+	}
+
+	private void initSdkMode(boolean isLive) {
+		PIO.setLiveApplication(isLive);
+
+		String recipeId;
+		String braintreeEncryptionKey;
+		if (isLive) {
+			recipeId = PIOConstants.RECIPE_ID_LIVE;
+			braintreeEncryptionKey = PIOConstants.Braintree.ENCRYPTION_KEY_LIVE;
+		} else {
+			recipeId = PIOConstants.RECIPE_ID_STAGING;
+			braintreeEncryptionKey = PIOConstants.Braintree.ENCRYPTION_KEY_STAGING;
+		}
+		PIO.setRecipeID(recipeId);
+		PIO.setBraintreeEncryptionKey(braintreeEncryptionKey);
+
+		if (PIO.isLiveApplication() || PIO.isLiveTestingApplication()) {
+			PIO.setApiUrl(PublicConstants.API_URL_LIVE);
+		} else {
+			PIO.setApiUrl(PublicConstants.API_URL_STAGING);
+		}
+
+		spinnerJumpToProduct.setAdapter(new SpinnerAdapterJumpToProduct(MainActivity.this));
 	}
 
 	public static String[] getNames(Class<? extends Enum<?>> e) {
@@ -313,8 +346,6 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 
 		PIO.setShowHelp(((Switch) findViewById(R.id.switch_hide_help)).isChecked());
 
-		boolean isLive = ((ToggleButton) findViewById(R.id.toggleButtonProduction)).isChecked();
-
 		PIO.removePlusFromAddMoreProductsButton(((Switch) findViewById(R.id.switch_remove_plus_from_add_more_products)).isChecked());
 		PIO.removeLogoFromPaymentScreen(((Switch) findViewById(R.id.switch_remove_logo_on_payment)).isChecked());
 
@@ -342,28 +373,6 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 			addAllSideMenuInfoButtons();
 		}
 		PIO.setSideMenuInfoButtons(sideMenuInfoButtons);
-
-		PIO.setLiveApplication(isLive);
-
-		String recipeId;
-		String braintreeEncryptionKey;
-		if (isLive) {
-			recipeId = PIOConstants.RECIPE_ID_LIVE;
-			braintreeEncryptionKey = PIOConstants.Braintree.ENCRYPTION_KEY_LIVE;
-		} else {
-			recipeId = PIOConstants.RECIPE_ID_STAGING;
-			braintreeEncryptionKey = PIOConstants.Braintree.ENCRYPTION_KEY_STAGING;
-		}
-		PIO.setRecipeID(recipeId);
-		PIO.setBraintreeEncryptionKey(braintreeEncryptionKey);
-
-		String apiUrl;
-		if (PIO.isLiveApplication() || PIO.isLiveTestingApplication()) {
-			apiUrl = PIOConstants.API_URL_LIVE;
-		} else {
-			apiUrl = PIOConstants.API_URL_STAGING;
-		}
-		PIO.setApiUrl(apiUrl);
 
 		PIO.setHideComingSoonProducts(switchHideComingSoonProducts.isChecked());
 
