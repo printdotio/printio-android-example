@@ -29,6 +29,7 @@ public class AppExample extends Application {
 		PIO.setFacebookAppId(getString(R.string.facebook_app_id));
 
 		PIO.setInstagramClientId(PIOConstants.Instagram.CLIENT_ID);
+		PIO.setInstagramCallbackUri(PIOConstants.Instagram.CALLBACK_URI);
 
 		PIO.setFlickrConsumerKey(PIOConstants.Flickr.CONSUMER_KEY);
 		PIO.setFlickrConsumerSecret(PIOConstants.Flickr.CONSUMER_SECRET);

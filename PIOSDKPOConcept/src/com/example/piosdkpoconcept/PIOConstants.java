@@ -13,6 +13,7 @@ public class PIOConstants {
 
 	public static class Instagram {
 		public static final String CLIENT_ID = "0fa104a99b2c434aa376b83474df87a1";
+		public static final String CALLBACK_URI = "http://x-oauthflow-instagram";
 	}
 
 	public static class Flickr {
