@@ -344,6 +344,7 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		//		}
 
 		PIO.setShowHelp(((Switch) findViewById(R.id.switch_hide_help)).isChecked());
+		PIO.hideHelpButtonInCustomizeProduct(!((Switch) findViewById(R.id.switch_hide_help_customize_product)).isChecked());
 
 		PIO.removePlusFromAddMoreProductsButton(((Switch) findViewById(R.id.switch_remove_plus_from_add_more_products)).isChecked());
 		PIO.removeLogoFromPaymentScreen(((Switch) findViewById(R.id.switch_remove_logo_on_payment)).isChecked());

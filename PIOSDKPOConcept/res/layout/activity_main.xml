@@ -258,6 +258,14 @@
                 android:text="Show Help" />
 
             <Switch
+                android:id="@+id/switch_hide_help_customize_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="true"
+                android:text="Show Help in customize product" />
+
+            <Switch
                 android:id="@+id/switch_show_photos_customize"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
