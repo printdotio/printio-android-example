@@ -45,6 +45,8 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 	private ArrayList<PhotoSource> photoSourcesTest = new ArrayList<PIO.PhotoSource>();
 	private ArrayList<SideMenuInfoButton> sideMenuInfoButtons = new ArrayList<PIO.SideMenuInfoButton>();
 
+	private Spinner spinnerPaymentOptions;
+
 	private Spinner spinnerJumpToProduct;
 	private Switch switchSkipProductDetailsScreen;
 
@@ -94,6 +96,9 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		switchSkipProductDetailsScreen = (Switch) findViewById(R.id.switch_skip_product_details_screen);
 
 		switchHideComingSoonProducts = (Switch) findViewById(R.id.switch_hide_coming_soon_products);
+
+		spinnerPaymentOptions = (Spinner) findViewById(R.id.spinner_payment_options);
+		spinnerPaymentOptions.setAdapter(new SpinnerAdapterPaymentOptions(MainActivity.this));
 
 		((ToggleButton) findViewById(R.id.toggleButtonProduction)).setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
@@ -355,6 +360,8 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		boolean isEffectsEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_effects_enabled_in_crop_screen)).isChecked();
 		PIO.setUpCropScreen(isRotateEnabledInCropScreen, isTextEnabledInCropScreen, isEffectsEnabledInCropScreen);
 
+		PIO.hideEditButtonInShoppingCart(((Switch) findViewById(R.id.switch_hide_edit_button)).isChecked());
+
 		if (sideMenuButtonsTop.size() == 0) {
 			addAllSideMenuButtonsTop();
 		}
@@ -374,6 +381,9 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		PIO.setSideMenuInfoButtons(sideMenuInfoButtons);
 
 		PIO.setHideComingSoonProducts(switchHideComingSoonProducts.isChecked());
+
+		int selectedPaymentOptions = (int) spinnerPaymentOptions.getSelectedItemId();
+		PIO.setPaymentOptions(selectedPaymentOptions);
 
 		int selectedProductId = (int) spinnerJumpToProduct.getSelectedItemId();
 		if (selectedProductId != SpinnerAdapter.NO_SELECTION) {
