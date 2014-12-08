@@ -246,7 +246,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
                 android:background="#000000" />
 
             <Switch
@@ -280,6 +280,20 @@
                 android:layout_margin="5dp"
                 android:checked="true"
                 android:text="Switch show options customize" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
+            <Switch
+                android:id="@+id/switch_hide_edit_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="false"
+                android:text="Hide Edit Button in Shopping Cart" />
 
             <View
                 android:layout_width="match_parent"
@@ -398,8 +412,7 @@
             <Spinner
                 android:id="@+id/spinner_jump_to_product"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp" />
+                android:layout_height="wrap_content" />
 
             <Switch
                 android:id="@+id/switch_skip_product_details_screen"
@@ -440,7 +453,26 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:checked="false"
-                android:text="Hide \'Coming Soon\' Products" />
+                android:text="Hide \&apos;Coming Soon\&apos; Products" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="Payment options:"
+                android:textSize="16dip"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_payment_options"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <ToggleButton
                 android:id="@+id/toggleButtonProduction"
