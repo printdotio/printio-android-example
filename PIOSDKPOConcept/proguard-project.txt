@@ -222,6 +222,8 @@
 	public *;
 }
 
+-dontwarn com.google.android.gms.**
+
 #Logging
 # Remove all Log.d and Log.v calls
 -assumenosideeffects class android.util.Log {
