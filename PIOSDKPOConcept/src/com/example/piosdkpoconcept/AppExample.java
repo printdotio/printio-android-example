@@ -46,6 +46,8 @@ public class AppExample extends Application {
 		PIO.setParseApplicationId(PIOConstants.Parse.APPLICATION_ID);
 		PIO.setParseClientKey(PIOConstants.Parse.CLIENT_KEY);
 		PIO.initializeParse(this);
+
+		PIO.setGoogleAnalyticsTrackId("UA-28619845-2");
 		//ACRA.init(this);
 	}
 
