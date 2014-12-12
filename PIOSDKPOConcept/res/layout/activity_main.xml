@@ -121,8 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:ems="10"
-                android:maxLength="8" >
-            </EditText>
+                android:maxLength="8" />
 
             <CheckBox
                 android:id="@+id/checkboxDisablePhotosources"
@@ -369,6 +368,13 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:textSize="16dip" />
+
+            <EditText
+                android:id="@+id/edittext_add_image_to_sdk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:hint="Image Uri" />
 
             <Button
                 android:id="@+id/buttonAdd"

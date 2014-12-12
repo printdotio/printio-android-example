@@ -11,6 +11,7 @@ import print.io.PIOCallback;
 import print.io.PIOException;
 import print.io.PublicConstants;
 import print.io.beans.CallbackInfo;
+import print.io.utils.L;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -20,7 +21,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.provider.MediaStore.Images;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -34,16 +34,15 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-public class MainActivity extends Activity implements android.app.LoaderManager.LoaderCallbacks<Cursor> {
+public class MainActivity extends Activity {
 
-	private String[] images;
-	private ArrayList<String> imageLists = new ArrayList<String>();
-
-	private static final int IMAGES_CURSOR_LOADER = 0xA1;
+	private ArrayList<String> imageUris = new ArrayList<String>();
 
 	private ArrayList<SideMenuButton> sideMenuButtonsTop = new ArrayList<PIO.SideMenuButton>();
 	private ArrayList<PhotoSource> photoSourcesTest = new ArrayList<PIO.PhotoSource>();
 	private ArrayList<SideMenuInfoButton> sideMenuInfoButtons = new ArrayList<PIO.SideMenuInfoButton>();
+
+	private EditText editTextAddImageToSdk;
 
 	private Spinner spinnerPaymentOptions;
 
@@ -69,12 +68,6 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		getLoaderManager().initLoader(
-				IMAGES_CURSOR_LOADER
-				, null
-				, (android.app.LoaderManager.LoaderCallbacks<Cursor>) this
-				).forceLoad();
-
 		Switch photoSourcesSwitch = (Switch) findViewById(R.id.switch_photo_sources);
 		final Button buttonAddSource = (Button) findViewById(R.id.button_add_source);
 		buttonAddSource.setEnabled(photoSourcesSwitch.isChecked());
@@ -89,6 +82,8 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 				}
 			}
 		});
+
+		editTextAddImageToSdk = (EditText) findViewById(R.id.edittext_add_image_to_sdk);
 
 		spinnerJumpToProduct = (Spinner) findViewById(R.id.spinner_jump_to_product);
 		initSdkMode(false);
@@ -203,49 +198,26 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 		sideMenuInfoButtons.add(SideMenuInfoButton.PAST_ORDERS);
 	}
 
-	@Override
-	public android.content.Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-		Uri uriPhoneImages = Images.Media.EXTERNAL_CONTENT_URI;
-		String[] projection = {
-				MediaStore.Images.ImageColumns._ID
-				, MediaStore.Images.ImageColumns.DATA
-				, MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME
-		};
-		String sortOrder = MediaStore.Images.ImageColumns.DATE_TAKEN + " DESC";
-		return new android.content.CursorLoader(this, uriPhoneImages, projection, null, null, sortOrder);
-	}
-
-	@Override
-	public void onLoadFinished(android.content.Loader<Cursor> loader, Cursor cursor) {
-		images = new String[3];
-		int index = 0;
-		if (cursor != null) {
-			while (cursor.moveToNext()) {
-				if (index >= images.length) {
-					break;
-				}
-				images[index] = cursor.getString(1);
-				index++;
-			}
-		}
-	}
-
-	@Override
-	public void onLoaderReset(android.content.Loader<Cursor> arg0) {
-	}
-
 	public void onClickAddImageToSDK(View v) {
-		Intent intent = new Intent();
-		intent.setType("image/*");
-		intent.setAction(Intent.ACTION_GET_CONTENT);
-		intent.addCategory(Intent.CATEGORY_OPENABLE);
-		startActivityForResult(intent, 1);
+		if (!editTextAddImageToSdk.getText().toString().isEmpty()) {
+			imageUris.add(editTextAddImageToSdk.getText().toString());
+			editTextAddImageToSdk.setText("");
+		} else {
+			Intent intent = new Intent();
+			intent.setType("image/*");
+			intent.setAction(Intent.ACTION_GET_CONTENT);
+			intent.addCategory(Intent.CATEGORY_OPENABLE);
+			startActivityForResult(intent, 1);
+		}
 	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == 1 && resultCode == RESULT_OK) {
-			imageLists.add(getPath(data.getData()));
+			L.d("BOJAN", "Path added raw :"+data.getData());
+			L.d("BOJAN", "Path added post:"+getPath(data.getData()));
+			//imageLists.add(getPath(data.getData()));
+			imageUris.add(data.getData().toString());
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
@@ -276,15 +248,15 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 	public void onClickStartSDK(View v) {
 		Log.d("Facebook", "ID:"+getString(R.string.facebook_app_id));
 
-		images = new String[imageLists.size()];
-		images = imageLists.toArray(images);
 		PIO.setSideMenuEnabled(false);
 		PIO.setPhotosourcesDisabled(((CheckBox) findViewById(R.id.checkboxDisablePhotosources)).isChecked());
-		//		for (String string : images) {
-		//			L.d("image array", string);
-		//		}
-		PIO.setImageUrls(images);
+
+		for (String string : imageUris) {
+			L.d("BOJAN", "URI:"+string);
+		}
+		PIO.setImageUris(imageUris);
 		PIO.setPassedImageFirstInPhotoSources(((Switch) findViewById(R.id.switch_set_passed_image_first_in_photo_sources)).isChecked());
+
 		PIO.hidePhotoSourcesInSideMenu(((Switch) findViewById(R.id.switch_hide_photo_sources_side_menu)).isChecked());
 
 		String country = ((EditText) findViewById(R.id.editCountry)).getText().toString();
@@ -412,4 +384,5 @@ public class MainActivity extends Activity implements android.app.LoaderManager.
 	public void onClickOkFeedback(View v) {
 		findViewById(R.id.dialog_feedback).setVisibility(View.GONE);
 	}
+
 }
