@@ -32,6 +32,7 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class MainActivity extends Activity {
@@ -202,6 +203,7 @@ public class MainActivity extends Activity {
 		if (!editTextAddImageToSdk.getText().toString().isEmpty()) {
 			imageUris.add(editTextAddImageToSdk.getText().toString());
 			editTextAddImageToSdk.setText("");
+			Toast.makeText(this, "Image URL added", Toast.LENGTH_SHORT).show();
 		} else {
 			Intent intent = new Intent();
 			intent.setType("image/*");
