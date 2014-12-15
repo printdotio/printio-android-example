@@ -11,7 +11,6 @@ import print.io.PIOCallback;
 import print.io.PIOException;
 import print.io.PublicConstants;
 import print.io.beans.CallbackInfo;
-import print.io.utils.L;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -216,8 +215,6 @@ public class MainActivity extends Activity {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == 1 && resultCode == RESULT_OK) {
-			L.d("BOJAN", "Path added raw :"+data.getData());
-			L.d("BOJAN", "Path added post:"+getPath(data.getData()));
 			//imageLists.add(getPath(data.getData()));
 			imageUris.add(data.getData().toString());
 		}
@@ -253,9 +250,6 @@ public class MainActivity extends Activity {
 		PIO.setSideMenuEnabled(false);
 		PIO.setPhotosourcesDisabled(((CheckBox) findViewById(R.id.checkboxDisablePhotosources)).isChecked());
 
-		for (String string : imageUris) {
-			L.d("BOJAN", "URI:"+string);
-		}
 		PIO.setImageUris(imageUris);
 		PIO.setPassedImageFirstInPhotoSources(((Switch) findViewById(R.id.switch_set_passed_image_first_in_photo_sources)).isChecked());
 
