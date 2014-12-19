@@ -36,7 +36,7 @@ public class SpinnerAdapterJumpToProduct extends BaseAdapter implements SpinnerA
 		items.add(new NameIdPair("Beach Bags", PublicConstants.ProductIds.BEACH_BAGS));
 		items.add(new NameIdPair("Calendars", PublicConstants.ProductIds.CALENDARS));
 		items.add(new NameIdPair("Canvas Wraps", PublicConstants.ProductIds.CANVAS_WRAPS));
-//		items.add(new NameIdPair("Coasters", PublicConstants.ProductIds.COASTERS));
+		items.add(new NameIdPair("Coasters", PublicConstants.ProductIds.COASTERS));
 		items.add(new NameIdPair("Cube Decor", PublicConstants.ProductIds.CUBE_DECOR));
 		items.add(new NameIdPair("Duvet Cover", PublicConstants.ProductIds.DUVET_COVER));
 		items.add(new NameIdPair("Flat Cards", PublicConstants.ProductIds.FLAT_CARDS));
@@ -45,10 +45,10 @@ public class SpinnerAdapterJumpToProduct extends BaseAdapter implements SpinnerA
 		items.add(new NameIdPair("Framed Prints", PublicConstants.ProductIds.FRAMED_PRINTS));
 		items.add(new NameIdPair("Laptop Skins", PublicConstants.ProductIds.LAPTOP_SKINS));
 		items.add(new NameIdPair("Magnetgram", PublicConstants.ProductIds.MAGNETGRAM));
-//		items.add(new NameIdPair("Metal Magnets", PublicConstants.ProductIds.METAL_MAGNETS));
+		items.add(new NameIdPair("Metal Magnets", PublicConstants.ProductIds.METAL_MAGNETS));
 		items.add(new NameIdPair("Metal Prints", PublicConstants.ProductIds.METAL_PRINTS));
 		items.add(new NameIdPair("Minibook Deluxe", PublicConstants.ProductIds.MINIBOOK_DELUXE));
-//		items.add(new NameIdPair("Minibooks", PublicConstants.ProductIds.MINIBOOKS));
+		items.add(new NameIdPair("Minibooks", PublicConstants.ProductIds.MINIBOOKS));
 		items.add(new NameIdPair("Mousepads", PublicConstants.ProductIds.MOUSEPADS));
 		items.add(new NameIdPair("Mugs", PublicConstants.ProductIds.MUGS));
 		items.add(new NameIdPair("Playing Cards", PublicConstants.ProductIds.PLAYING_CARDS));
@@ -56,12 +56,12 @@ public class SpinnerAdapterJumpToProduct extends BaseAdapter implements SpinnerA
 		items.add(new NameIdPair("Posters", PublicConstants.ProductIds.POSTERS));
 		items.add(new NameIdPair("Prints", PublicConstants.ProductIds.PRINTS));
 		items.add(new NameIdPair("Shower Curtains", PublicConstants.ProductIds.SHOWER_CURTAINS));
-//		items.add(new NameIdPair("Stickerbooks", PublicConstants.ProductIds.STICKERBOOKS));
+		items.add(new NameIdPair("Stickerbooks", PublicConstants.ProductIds.STICKERBOOKS));
 		items.add(new NameIdPair("T-Shirts", PublicConstants.ProductIds.T_SHIRTS));
 		items.add(new NameIdPair("Tablet Cases", PublicConstants.ProductIds.TABLET_CASES));
 		items.add(new NameIdPair("Thick Prints", PublicConstants.ProductIds.THICK_PRINTS));
 		items.add(new NameIdPair("Throw Pillows", PublicConstants.ProductIds.THROW_PILLOWS));
-//		items.add(new NameIdPair("Tinybooks", PublicConstants.ProductIds.TINYBOOKS));
+		items.add(new NameIdPair("Tinybooks", PublicConstants.ProductIds.TINYBOOKS));
 		items.add(new NameIdPair("Wall Skin", PublicConstants.ProductIds.WALL_SKIN));
 		items.add(new NameIdPair("Wood Prints", PublicConstants.ProductIds.WOOD_PRINTS));
 		items.add(new NameIdPair("Woven Blankets", PublicConstants.ProductIds.WOVEN_BLANKETS));
