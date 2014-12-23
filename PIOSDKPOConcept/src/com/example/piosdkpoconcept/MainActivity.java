@@ -52,6 +52,7 @@ public class MainActivity extends Activity {
 	private Switch switchHideComingSoonProducts;
 
 	public static PIOCallback callback = new PIOCallback() {
+
 		@Override
 		public void onCartChange(int count) {
 
@@ -72,6 +73,7 @@ public class MainActivity extends Activity {
 		final Button buttonAddSource = (Button) findViewById(R.id.button_add_source);
 		buttonAddSource.setEnabled(photoSourcesSwitch.isChecked());
 		photoSourcesSwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				photoSourcesTest.clear();
@@ -109,20 +111,20 @@ public class MainActivity extends Activity {
 			StringBuilder stringBuilder = new StringBuilder("Feedback to host app: ");
 			stringBuilder.append("\nShopping Cart Items Quantity:\n").append(Integer.toString(cartItems.size()));
 
-			if(cartItems.size() > 0) {
+			if (cartItems.size() > 0) {
 				stringBuilder.append("\n").append("Content of Shopping Cart:");
-				for(String s : cartItems) {
+				for (String s : cartItems) {
 					stringBuilder.append("\n").append(s);
 				}
 			}
 
 			View feedbackDialog = findViewById(R.id.dialog_feedback);
-			((TextView)feedbackDialog.findViewById(R.id.textview_feedback)).setText(stringBuilder.toString());
+			((TextView) feedbackDialog.findViewById(R.id.textview_feedback)).setText(stringBuilder.toString());
 			feedbackDialog.setVisibility(View.VISIBLE);
 		}
 
 		TextView textViewItemsInCart = (TextView) findViewById(R.id.textview_items_in_cart);
-		textViewItemsInCart.setText("Items in shopping cart: "+PIO.getNumberOfItemsInShoppingCart(MainActivity.this));
+		textViewItemsInCart.setText("Items in shopping cart: " + PIO.getNumberOfItemsInShoppingCart(MainActivity.this));
 	}
 
 	private void initSdkMode(boolean isLive) {
@@ -158,6 +160,7 @@ public class MainActivity extends Activity {
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
+
 			public void onClick(DialogInterface dialog, int which) {
 				photoSourcesTest.add(PhotoSource.values()[which]);
 				photoSourcesText.setText(photoSourcesText.getText() + "  |  " + PhotoSource.values()[which]);
@@ -233,7 +236,9 @@ public class MainActivity extends Activity {
 		}
 		// try to retrieve the image from the media store first
 		// this will only work for images selected from gallery
-		String[] projection = { MediaStore.Images.Media.DATA };
+		String[] projection = {
+				MediaStore.Images.Media.DATA
+		};
 		Cursor cursor = managedQuery(uri, projection, null, null, null);
 		if (cursor != null) {
 			int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
@@ -245,7 +250,7 @@ public class MainActivity extends Activity {
 	}
 
 	public void onClickStartSDK(View v) {
-		Log.d("Facebook", "ID:"+getString(R.string.facebook_app_id));
+		Log.d("Facebook", "ID:" + getString(R.string.facebook_app_id));
 
 		PIO.setSideMenuEnabled(false);
 		PIO.setPhotosourcesDisabled(((CheckBox) findViewById(R.id.checkboxDisablePhotosources)).isChecked());
@@ -273,10 +278,9 @@ public class MainActivity extends Activity {
 
 		String colorString = ((EditText) findViewById(R.id.editColorHex)).getText().toString();
 		try {
-			int colorHex = Color.parseColor("#"+colorString);
+			int colorHex = Color.parseColor("#" + colorString);
 			PIO.setHeaderColor(colorHex);
-		} catch (NumberFormatException e) { 
-		}
+		} catch (NumberFormatException e) {}
 
 		PIO.useThreeButtonsBarStyle(((Switch) findViewById(R.id.switch_three_buttons_bar_style)).isChecked());
 
@@ -335,7 +339,7 @@ public class MainActivity extends Activity {
 		}
 		PIO.setSideMenuButtonsTop(sideMenuButtonsTop);
 
-		if (photoSourcesTest.size() == 0 ) {
+		if (photoSourcesTest.size() == 0) {
 			addDefaultPhotoSources();
 		}
 		if (photoSourcesTest.size() != 0) {
@@ -361,6 +365,7 @@ public class MainActivity extends Activity {
 		}
 
 		PIO.setSkipProductDetails(switchSkipProductDetailsScreen.isChecked());
+		PIO.setProductSkuFromApp(((EditText) findViewById(R.id.editSKU)).getText().toString());
 
 		String promoCode = ((EditText) findViewById(R.id.edittext_promo_code)).getText().toString();
 		if (promoCode.equals("")) {
