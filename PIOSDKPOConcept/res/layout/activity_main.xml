@@ -123,13 +123,6 @@
                 android:ems="10"
                 android:maxLength="8" />
 
-            <CheckBox
-                android:id="@+id/checkboxDisablePhotosources"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="false"
-                android:text="Disable Photo Sources" />
-
             <Switch
                 android:id="@+id/switch_three_buttons_bar_style"
                 android:layout_width="match_parent"
@@ -369,6 +362,13 @@
                 android:layout_margin="5dp"
                 android:textSize="16dip" />
 
+            <CheckBox
+                android:id="@+id/checkboxDisablePhotosources"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Disable Photo Sources" />
+
             <EditText
                 android:id="@+id/edittext_add_image_to_sdk"
                 android:layout_width="match_parent"
@@ -384,14 +384,6 @@
                 android:onClick="onClickAddImageToSDK"
                 android:text="Add image to SDK"
                 android:textSize="16dip" />
-
-            <Switch
-                android:id="@+id/switch_set_passed_image_first_in_photo_sources"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="false"
-                android:text="Set passed in image to be first in row for all photo sources" />
 
             <Switch
                 android:id="@+id/switch_hide_photo_sources_side_menu"
