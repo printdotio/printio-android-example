@@ -105,7 +105,7 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		//@milos on resume from print.io sdk
+		// on resume from print.io sdk
 		ArrayList<String> cartItems = getIntent().getStringArrayListExtra("ShoppingCartItems");
 		if (cartItems != null) {
 			StringBuilder stringBuilder = new StringBuilder("Feedback to host app: ");
