@@ -189,6 +189,14 @@ public class MainActivity extends Activity {
 		photoSourcesTest.add(PhotoSource.PHOTOBUCKET);
 		photoSourcesTest.add(PhotoSource.DROPBOX);
 		//photoSourcesTest.add(PhotoSource.PICASA);
+		//photoSourcesTest.add(PhotoSource.PRESELECTED);
+	}
+
+	private void addAlternatePhotoSources() {
+		// Only up to 6
+		photoSourcesTest.add(PhotoSource.PHONE);
+		photoSourcesTest.add(PhotoSource.INSTAGRAM);
+		photoSourcesTest.add(PhotoSource.PRESELECTED);
 	}
 
 	private void addAllSideMenuInfoButtons() {
@@ -341,6 +349,7 @@ public class MainActivity extends Activity {
 
 		if (photoSourcesTest.size() == 0) {
 			addDefaultPhotoSources();
+			//addAlternatePhotoSources();
 		}
 		if (photoSourcesTest.size() != 0) {
 			PIO.setPhotoSources(photoSourcesTest);
