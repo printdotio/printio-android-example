@@ -11,7 +11,6 @@ import print.io.PIOCallback;
 import print.io.PIOException;
 import print.io.PublicConstants;
 import print.io.beans.CallbackInfo;
-import print.io.utils.StringUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
