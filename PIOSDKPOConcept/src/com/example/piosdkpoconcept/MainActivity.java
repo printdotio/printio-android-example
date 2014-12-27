@@ -11,6 +11,7 @@ import print.io.PIOCallback;
 import print.io.PIOException;
 import print.io.PublicConstants;
 import print.io.beans.CallbackInfo;
+import print.io.utils.StringUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -43,12 +44,9 @@ public class MainActivity extends Activity {
 	private ArrayList<SideMenuInfoButton> sideMenuInfoButtons = new ArrayList<PIO.SideMenuInfoButton>();
 
 	private EditText editTextAddImageToSdk;
-
 	private Spinner spinnerPaymentOptions;
-
 	private Spinner spinnerJumpToProduct;
 	private Switch switchSkipProductDetailsScreen;
-
 	private Switch switchHideComingSoonProducts;
 
 	public static PIOCallback callback = new PIOCallback() {
@@ -86,14 +84,10 @@ public class MainActivity extends Activity {
 		});
 
 		editTextAddImageToSdk = (EditText) findViewById(R.id.edittext_add_image_to_sdk);
-
 		spinnerJumpToProduct = (Spinner) findViewById(R.id.spinner_jump_to_product);
 		initSdkMode(false);
-
 		switchSkipProductDetailsScreen = (Switch) findViewById(R.id.switch_skip_product_details_screen);
-
 		switchHideComingSoonProducts = (Switch) findViewById(R.id.switch_hide_coming_soon_products);
-
 		spinnerPaymentOptions = (Spinner) findViewById(R.id.spinner_payment_options);
 		spinnerPaymentOptions.setAdapter(new SpinnerAdapterPaymentOptions(MainActivity.this));
 
@@ -105,7 +99,7 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		//@milos on resume from print.io sdk
+		// on resume from print.io sdk
 		ArrayList<String> cartItems = getIntent().getStringArrayListExtra("ShoppingCartItems");
 		if (cartItems != null) {
 			StringBuilder stringBuilder = new StringBuilder("Feedback to host app: ");
@@ -148,7 +142,7 @@ public class MainActivity extends Activity {
 			PIO.setApiUrl(PublicConstants.API_URL_STAGING);
 		}
 
-		spinnerJumpToProduct.setAdapter(new SpinnerAdapterJumpToProduct(MainActivity.this));
+		spinnerJumpToProduct.setAdapter(new SpinnerAdapterJumpToProduct(this));
 	}
 
 	public static String[] getNames(Class<? extends Enum<?>> e) {
@@ -363,18 +357,20 @@ public class MainActivity extends Activity {
 
 		PIO.setHideComingSoonProducts(switchHideComingSoonProducts.isChecked());
 
-		int selectedPaymentOptions = (int) spinnerPaymentOptions.getSelectedItemId();
-		PIO.setPaymentOptions(selectedPaymentOptions);
+		PIO.setPaymentOptions((int) spinnerPaymentOptions.getSelectedItemId());
 
+		// Jump to product
 		int selectedProductId = (int) spinnerJumpToProduct.getSelectedItemId();
-		if (selectedProductId != SpinnerAdapter.NO_SELECTION) {
-			PIO.setProductIdFromApp(selectedProductId);
-		} else {
-			PIO.setProductIdFromApp(-1);
+		if (selectedProductId == SpinnerAdapter.NO_SELECTION) {
+			selectedProductId = -1;
 		}
-
+		PIO.setProductIdFromApp(selectedProductId);
 		PIO.setSkipProductDetails(switchSkipProductDetailsScreen.isChecked());
 		PIO.setProductSkuFromApp(((EditText) findViewById(R.id.editSKU)).getText().toString());
+		if (StringUtils.isNotBlank(PIO.getProductSkuFromApp()) && selectedProductId == -1) {
+			Toast.makeText(this, "Product must be specified when SKU is supplied", Toast.LENGTH_LONG).show();
+			return;
+		}
 
 		String promoCode = ((EditText) findViewById(R.id.edittext_promo_code)).getText().toString();
 		if (promoCode.equals("")) {
