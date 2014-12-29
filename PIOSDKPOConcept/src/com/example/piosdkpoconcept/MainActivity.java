@@ -3,6 +3,7 @@ package com.example.piosdkpoconcept;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import print.io.Constants;
 import print.io.PIO;
 import print.io.PIO.PhotoSource;
 import print.io.PIO.SideMenuButton;
@@ -307,11 +308,11 @@ public class MainActivity extends Activity {
 		}
 		PIO.setJumpToScreen(jumpToScreenId, flags);
 
-		//		boolean coastersDiff = ((Switch) findViewById(R.id.switch_coasters_different)).isChecked();
-		//		boolean coastersDuplicate = ((Switch) findViewById(R.id.switch_coasters_duplicate)).isChecked();
-		//		if (coastersDiff != coastersDuplicate) {
-		//			PIO.setCoastersType(coastersDiff?Constants.CaseOptions.COASTERS_4_DIFFERENT:Constants.CaseOptions.COASTERS_1_DUPLICATED);
-		//		}
+		boolean coastersDiff = ((Switch) findViewById(R.id.switch_coasters_different)).isChecked();
+		boolean coastersDuplicate = ((Switch) findViewById(R.id.switch_coasters_duplicate)).isChecked();
+		if (coastersDiff != coastersDuplicate) {
+			PIO.setCoastersType(coastersDiff ? Constants.CaseOptions.COASTERS_4_DIFFERENT : Constants.CaseOptions.COASTERS_1_DUPLICATED);
+		}
 
 		PIO.setShowHelp(((Switch) findViewById(R.id.switch_hide_help)).isChecked());
 		PIO.hideHelpButtonInCustomizeProduct(!((Switch) findViewById(R.id.switch_hide_help_customize_product)).isChecked());
