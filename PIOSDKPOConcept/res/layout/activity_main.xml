@@ -172,19 +172,19 @@
                 android:layout_margin="5dp"
                 android:text="SDK appears from right side:" />
 
+            <!-- Featured Products screen -->
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginTop="5dp"
                 android:background="#000000" />
 
-            <!-- Featured Products screen -->
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
-                android:text="Featured Products screen:"
+                android:text="Featured Products screen"
                 android:textSize="16dip"
                 android:textStyle="bold" />
 
@@ -210,6 +210,45 @@
                 android:layout_margin="5dp"
                 android:checked="true"
                 android:text="Show featured products by default (switch off for all products):" />
+
+            <!-- Shopping Cart screen -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="Shopping cart screen"
+                android:textSize="16dip"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/switch_show_add_more_products"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="true"
+                android:text="Show &apos;Add More Products&apos; button" />
+
+            <Switch
+                android:id="@+id/switch_remove_plus_from_add_more_products"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Hide plus sign from &apos;Add More Products&apos; button" />
+
+            <Switch
+                android:id="@+id/switch_hide_edit_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="false"
+                android:text="Hide Edit button from cart item" />
 
             <View
                 android:layout_width="match_parent"
@@ -250,13 +289,6 @@
                 android:layout_height="1px"
                 android:layout_marginBottom="5dp"
                 android:background="#000000" />
-
-            <Switch
-                android:id="@+id/switch_remove_plus_from_add_more_products"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Remove plus sign from &apos;Add More Products&apos; button" />
 
             <Switch
                 android:id="@+id/switch_remove_logo_on_payment"
@@ -302,20 +334,6 @@
                 android:layout_margin="5dp"
                 android:checked="true"
                 android:text="Switch show options customize" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="5dp"
-                android:background="#000000" />
-
-            <Switch
-                android:id="@+id/switch_hide_edit_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="false"
-                android:text="Hide Edit Button in Shopping Cart" />
 
             <View
                 android:layout_width="match_parent"

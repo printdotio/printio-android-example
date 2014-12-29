@@ -305,7 +305,11 @@ public class MainActivity extends Activity {
 		PIO.setHideCategorySearchBar(((Switch) findViewById(R.id.switch_hide_category_search_bar)).isChecked());
 		PIO.setShowFeaturedProductsByDefault(((Switch) findViewById(R.id.default_products_screen_featured)).isChecked());
 
-
+		// Shopping cart screen
+		PIO.removePlusFromAddMoreProductsButton(((Switch) findViewById(R.id.switch_remove_plus_from_add_more_products)).isChecked());
+		PIO.setShowAddMoreProductsButton(((Switch) findViewById(R.id.switch_show_add_more_products)).isChecked());
+		PIO.hideEditButtonInShoppingCart(((Switch) findViewById(R.id.switch_hide_edit_button)).isChecked());
+		
 		PIO.setStepByStep(((Switch) findViewById(R.id.switch_step_by_step)).isChecked());
 
 		PIO.setHostAppActivity(getComponentName().getClassName());//"com.example.piosdkpoconcept.ActivityTest"
@@ -329,7 +333,6 @@ public class MainActivity extends Activity {
 		PIO.setShowHelp(((Switch) findViewById(R.id.switch_hide_help)).isChecked());
 		PIO.hideHelpButtonInCustomizeProduct(!((Switch) findViewById(R.id.switch_hide_help_customize_product)).isChecked());
 
-		PIO.removePlusFromAddMoreProductsButton(((Switch) findViewById(R.id.switch_remove_plus_from_add_more_products)).isChecked());
 		PIO.removeLogoFromPaymentScreen(((Switch) findViewById(R.id.switch_remove_logo_on_payment)).isChecked());
 
 		PIO.setShowPhotosInCustomize(((Switch) findViewById(R.id.switch_show_photos_customize)).isChecked());
@@ -338,8 +341,6 @@ public class MainActivity extends Activity {
 		boolean isTextEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_text_enabled_in_crop_screen)).isChecked();
 		boolean isEffectsEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_effects_enabled_in_crop_screen)).isChecked();
 		PIO.setUpCropScreen(isRotateEnabledInCropScreen, isTextEnabledInCropScreen, isEffectsEnabledInCropScreen);
-
-		PIO.hideEditButtonInShoppingCart(((Switch) findViewById(R.id.switch_hide_edit_button)).isChecked());
 
 		if (sideMenuButtonsTop.size() == 0) {
 			addAllSideMenuButtonsTop();
