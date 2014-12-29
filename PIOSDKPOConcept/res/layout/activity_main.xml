@@ -419,23 +419,18 @@
                 android:layout_margin="5dp"
                 android:text="Skip Product Details screen" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="Skip Product Options screen, using SKU"
+                android:textSize="16dip" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dip"
-                    android:text="Skip Product Options screen, using SKU"
-                    android:textSize="16dip" />
-
-                <EditText
-                    android:id="@+id/editSKU"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10" />
-            </LinearLayout>
+            <EditText
+                android:id="@+id/editSKU"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10" />
 
             <View
                 android:layout_width="match_parent"
