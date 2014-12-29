@@ -172,13 +172,50 @@
                 android:layout_margin="5dp"
                 android:text="SDK appears from right side:" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
+            <!-- Featured Products screen -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="Featured Products screen:"
+                android:textSize="16dip"
+                android:textStyle="bold" />
+
             <Switch
                 android:id="@+id/switch_country_drop_down"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:checked="true"
-                android:text="Set country on Featured Products screen:" />
+                android:text="Show country bar:" />
+
+            <Switch
+                android:id="@+id/switch_hide_category_search_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Hide Categories(Search) bar:" />
+
+            <Switch
+                android:id="@+id/default_products_screen_featured"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="true"
+                android:text="Show featured products by default (switch off for all products):" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
 
             <Switch
                 android:id="@+id/switch_passed_image_thumb"
@@ -186,13 +223,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="Use passed image as thumb for one photo template:" />
-
-            <Switch
-                android:id="@+id/switch_hide_category_search_bar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Hide Categories(Search) bar on Feature Products screen:" />
 
             <Switch
                 android:id="@+id/switch_coasters_different"

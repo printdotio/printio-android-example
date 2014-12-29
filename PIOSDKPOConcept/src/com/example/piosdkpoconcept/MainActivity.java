@@ -298,9 +298,14 @@ public class MainActivity extends Activity {
 		PIO.setSdkDemo(true);
 		PIO.setSdkAppearsFromRight(((Switch) findViewById(R.id.switch_appear_from_right)).isChecked());
 		//PIO.setMenuIconGear(((Switch) findViewById(R.id.switch_gear)).isChecked());
-		PIO.setCountryOnFeaturedProducts(((Switch) findViewById(R.id.switch_country_drop_down)).isChecked());
 		PIO.setPassedImageThumb(((Switch) findViewById(R.id.switch_passed_image_thumb)).isChecked());
+
+		// Featured products screen
+		PIO.setCountryOnFeaturedProducts(((Switch) findViewById(R.id.switch_country_drop_down)).isChecked());
 		PIO.setHideCategorySearchBar(((Switch) findViewById(R.id.switch_hide_category_search_bar)).isChecked());
+		PIO.setShowFeaturedProductsByDefault(((Switch) findViewById(R.id.default_products_screen_featured)).isChecked());
+
+
 		PIO.setStepByStep(((Switch) findViewById(R.id.switch_step_by_step)).isChecked());
 
 		PIO.setHostAppActivity(getComponentName().getClassName());//"com.example.piosdkpoconcept.ActivityTest"
