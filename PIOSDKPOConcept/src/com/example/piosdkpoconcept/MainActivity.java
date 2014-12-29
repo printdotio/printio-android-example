@@ -12,7 +12,6 @@ import print.io.PIOCallback;
 import print.io.PIOException;
 import print.io.PublicConstants;
 import print.io.beans.CallbackInfo;
-import print.io.utils.StringUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -184,6 +183,14 @@ public class MainActivity extends Activity {
 		photoSourcesTest.add(PhotoSource.PHOTOBUCKET);
 		photoSourcesTest.add(PhotoSource.DROPBOX);
 		//photoSourcesTest.add(PhotoSource.PICASA);
+		//photoSourcesTest.add(PhotoSource.PRESELECTED);
+	}
+
+	private void addAlternatePhotoSources() {
+		// Only up to 6
+		photoSourcesTest.add(PhotoSource.PHONE);
+		photoSourcesTest.add(PhotoSource.INSTAGRAM);
+		photoSourcesTest.add(PhotoSource.PRESELECTED);
 	}
 
 	private void addAllSideMenuInfoButtons() {
@@ -336,6 +343,7 @@ public class MainActivity extends Activity {
 
 		if (photoSourcesTest.size() == 0) {
 			addDefaultPhotoSources();
+			//addAlternatePhotoSources();
 		}
 		if (photoSourcesTest.size() != 0) {
 			PIO.setPhotoSources(photoSourcesTest);
