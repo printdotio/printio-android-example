@@ -309,7 +309,7 @@ public class MainActivity extends Activity {
 		PIO.removePlusFromAddMoreProductsButton(((Switch) findViewById(R.id.switch_remove_plus_from_add_more_products)).isChecked());
 		PIO.setShowAddMoreProductsButton(((Switch) findViewById(R.id.switch_show_add_more_products)).isChecked());
 		PIO.hideEditButtonInShoppingCart(((Switch) findViewById(R.id.switch_hide_edit_button)).isChecked());
-		
+
 		PIO.setStepByStep(((Switch) findViewById(R.id.switch_step_by_step)).isChecked());
 
 		PIO.setHostAppActivity(getComponentName().getClassName());//"com.example.piosdkpoconcept.ActivityTest"
@@ -326,6 +326,7 @@ public class MainActivity extends Activity {
 
 		boolean coastersDiff = ((Switch) findViewById(R.id.switch_coasters_different)).isChecked();
 		boolean coastersDuplicate = ((Switch) findViewById(R.id.switch_coasters_duplicate)).isChecked();
+		PIO.setCoastersType(-1); // Reset from previous launch
 		if (coastersDiff != coastersDuplicate) {
 			PIO.setCoastersType(coastersDiff ? Constants.CaseOptions.COASTERS_4_DIFFERENT : Constants.CaseOptions.COASTERS_1_DUPLICATED);
 		}
