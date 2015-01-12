@@ -314,6 +314,14 @@
                 android:checked="true"
                 android:text="Show options" />
 
+            <Switch
+                android:id="@+id/switch_show_enable_photosource_when_disabled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:visibility="gone"
+                android:text="Enable adding more photos when photo sources are disabled" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
