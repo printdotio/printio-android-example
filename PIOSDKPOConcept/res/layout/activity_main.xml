@@ -172,6 +172,30 @@
                 android:layout_margin="5dp"
                 android:text="SDK appears from right side:" />
 
+            <!-- All screens -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="All screens"
+                android:textSize="16dip"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/switch_hide_help"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="true"
+                android:text="Show Help" />
+
             <!-- Featured Products screen -->
 
             <View
@@ -250,6 +274,105 @@
                 android:checked="false"
                 android:text="Hide Edit button from cart item" />
 
+            <!-- Customize product screen -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="Customize Product screen"
+                android:textSize="16dip"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/switch_hide_help_customize_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="true"
+                android:text="Show Help" />
+
+            <Switch
+                android:id="@+id/switch_show_photos_customize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="true"
+                android:text="Show photos" />
+
+            <Switch
+                android:id="@+id/switch_show_options_customize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="true"
+                android:text="Show options" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginBottom="5dp"
+                android:background="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="Payment screen"
+                android:textSize="16dip"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/switch_remove_logo_on_payment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Remove logo" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="Edit Image screen"
+                android:textSize="16dip"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/switch_is_rotate_enabled_in_crop_screen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="true"
+                android:text="Rotate enabled" />
+
+            <Switch
+                android:id="@+id/switch_is_text_enabled_in_crop_screen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="true"
+                android:text="Text enabled" />
+
+            <Switch
+                android:id="@+id/switch_is_effects_enabled_in_crop_screen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="true"
+                android:text="Effects enabled" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
@@ -283,95 +406,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="Step by step:" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginBottom="5dp"
-                android:background="#000000" />
-
-            <Switch
-                android:id="@+id/switch_remove_logo_on_payment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Remove logo from payment screens" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="5dp"
-                android:background="#000000" />
-
-            <Switch
-                android:id="@+id/switch_hide_help"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="true"
-                android:text="Show Help" />
-
-            <Switch
-                android:id="@+id/switch_hide_help_customize_product"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="true"
-                android:text="Show Help in customize product" />
-
-            <Switch
-                android:id="@+id/switch_show_photos_customize"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="true"
-                android:text="Switch show photos customize" />
-
-            <Switch
-                android:id="@+id/switch_show_options_customize"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="true"
-                android:text="Switch show options customize" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="5dp"
-                android:background="#000000" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dip"
-                android:text="Crop Screen Options:"
-                android:textSize="16dip"
-                android:textStyle="bold" />
-
-            <Switch
-                android:id="@+id/switch_is_rotate_enabled_in_crop_screen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="true"
-                android:text="Rotate enabled" />
-
-            <Switch
-                android:id="@+id/switch_is_text_enabled_in_crop_screen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="true"
-                android:text="Text enabled" />
-
-            <Switch
-                android:id="@+id/switch_is_effects_enabled_in_crop_screen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="true"
-                android:text="Effects enabled" />
 
             <View
                 android:layout_width="match_parent"
