@@ -307,7 +307,7 @@ public class MainActivity extends Activity {
 
 		// Shopping cart screen
 		PIO.removePlusFromAddMoreProductsButton(((Switch) findViewById(R.id.switch_remove_plus_from_add_more_products)).isChecked());
-		PIO.setShowAddMoreProductsButton(((Switch) findViewById(R.id.switch_show_add_more_products)).isChecked());
+		PIO.setShowAddMoreProductsInShoppingCart(((Switch) findViewById(R.id.switch_show_add_more_products)).isChecked());
 		PIO.hideEditButtonInShoppingCart(((Switch) findViewById(R.id.switch_hide_edit_button)).isChecked());
 
 		PIO.setStepByStep(((Switch) findViewById(R.id.switch_step_by_step)).isChecked());
