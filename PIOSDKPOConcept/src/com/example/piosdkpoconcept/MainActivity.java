@@ -59,8 +59,6 @@ public class MainActivity extends Activity {
 		@Override
 		public void onOrderComplete(CallbackInfo callBackInfo) {
 			Log.d("Order Information: ", callBackInfo.toString());
-			TextView textViewItemsInCart = (TextView) findViewById(R.id.textview_items_in_cart);
-			textViewItemsInCart.setText("Items in shopping cart: " + callBackInfo.getItems().size());
 		}
 	};
 
@@ -119,6 +117,13 @@ public class MainActivity extends Activity {
 			feedbackDialog.setVisibility(View.VISIBLE);
 		}
 
+		TextView textViewItemsInCart = (TextView) findViewById(R.id.textview_items_in_cart);
+		textViewItemsInCart.setText("Items in shopping cart: " + PIO.getNumberOfItemsInShoppingCart(MainActivity.this));
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
 		TextView textViewItemsInCart = (TextView) findViewById(R.id.textview_items_in_cart);
 		textViewItemsInCart.setText("Items in shopping cart: " + PIO.getNumberOfItemsInShoppingCart(MainActivity.this));
 	}
