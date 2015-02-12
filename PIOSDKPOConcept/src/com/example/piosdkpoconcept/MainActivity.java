@@ -288,7 +288,7 @@ public class MainActivity extends Activity {
 		Log.d("Facebook", "ID:" + getString(R.string.facebook_app_id));
 
 		config.setSideMenuEnabled(false);
-		config.setPhotosourcesDisabled(((CheckBox) findViewById(R.id.checkboxDisablePhotosources)).isChecked());
+		config.setPhotoSourcesDisabled(((CheckBox) findViewById(R.id.checkboxDisablePhotosources)).isChecked());
 		config.setImageUris(imageUris);
 		config.hidePhotoSourcesInSideMenu(((Switch) findViewById(R.id.switch_hide_photo_sources_side_menu)).isChecked());
 		config.setCountryCode(((EditText) findViewById(R.id.editCountry)).getText().toString());
