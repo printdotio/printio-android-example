@@ -365,7 +365,6 @@ public class MainActivity extends Activity {
 		}
 		if (photoSourcesTest.size() != 0) {
 			config.setPhotoSources(photoSourcesTest);
-			config.setDefaultPhotoSource(photoSourcesTest.get(0));
 		}
 
 		if (sideMenuInfoButtons.size() == 0) {
