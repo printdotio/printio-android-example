@@ -19,7 +19,7 @@
             android:layout_height="0dp"
             android:layout_weight="1" >
 
-            <print.io.view.TextViewFontLight
+            <TextView
                 android:id="@+id/textview_feedback"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
             android:gravity="center"
             android:orientation="horizontal" >
 
-            <print.io.view.ButtonFontLight
+            <Button
                 android:id="@+id/button_ok"
                 android:layout_width="80dip"
                 android:layout_height="45dip"

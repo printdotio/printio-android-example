@@ -5,10 +5,11 @@ import java.util.Arrays;
 
 import print.io.Constants;
 import print.io.PIO;
-import print.io.PIO.PhotoSource;
-import print.io.PIO.SideMenuButton;
-import print.io.PIO.SideMenuInfoButton;
 import print.io.PIOCallback;
+import print.io.PIOConfig;
+import print.io.PIOConfig.PhotoSource;
+import print.io.PIOConfig.SideMenuButton;
+import print.io.PIOConfig.SideMenuInfoButton;
 import print.io.PIOException;
 import print.io.PublicConstants;
 import print.io.beans.CallbackInfo;
@@ -37,11 +38,13 @@ import android.widget.ToggleButton;
 
 public class MainActivity extends Activity {
 
+	private PIOConfig config = new PIOConfig();
+
 	private ArrayList<String> imageUris = new ArrayList<String>();
 
-	private ArrayList<SideMenuButton> sideMenuButtonsTop = new ArrayList<PIO.SideMenuButton>();
-	private ArrayList<PhotoSource> photoSourcesTest = new ArrayList<PIO.PhotoSource>();
-	private ArrayList<SideMenuInfoButton> sideMenuInfoButtons = new ArrayList<PIO.SideMenuInfoButton>();
+	private ArrayList<SideMenuButton> sideMenuButtonsTop = new ArrayList<SideMenuButton>();
+	private ArrayList<PhotoSource> photoSourcesTest = new ArrayList<PhotoSource>();
+	private ArrayList<SideMenuInfoButton> sideMenuInfoButtons = new ArrayList<SideMenuInfoButton>();
 
 	private EditText editTextAddImageToSdk;
 	private Spinner spinnerPaymentOptions;
@@ -119,6 +122,29 @@ public class MainActivity extends Activity {
 
 		TextView textViewItemsInCart = (TextView) findViewById(R.id.textview_items_in_cart);
 		textViewItemsInCart.setText("Items in shopping cart: " + PIO.getNumberOfItemsInShoppingCart(MainActivity.this));
+
+
+		config.setFontPathInAssetsLight("HelveticaNeueLTStd-Lt.otf");
+		config.setFontPathInAssetsNormal("HelveticaNeueLTStd-Roman.otf");
+		config.setFontPathInAssetsBold("HelveticaNeueLTStd-Bd.otf");
+		config.setPartnerName(getResources().getString(R.string.hellopics));
+		config.setHelpUrl(PIOConstants.HELP_URL);
+		config.setSupportEmail(PIOConstants.SUPPORT_EMAIL);
+		config.setGooglePlayRateUrl(PIOConstants.GOOGLE_PLAY_RATE_URL);
+		config.setFacebookPageUrl(PIOConstants.FACEBOOK_PAGE_URL);
+		config.setFacebookAppId(getString(R.string.facebook_app_id));
+		config.setInstagramClientId(PIOConstants.Instagram.CLIENT_ID);
+		config.setInstagramCallbackUri(PIOConstants.Instagram.CALLBACK_URI);
+		config.setFlickrConsumerKey(PIOConstants.Flickr.CONSUMER_KEY);
+		config.setFlickrConsumerSecret(PIOConstants.Flickr.CONSUMER_SECRET);
+		config.setDropboxConsumerKey(PIOConstants.Dropbox.CONSUMER_KEY);
+		config.setDropboxConsumerSecret(PIOConstants.Dropbox.CONSUMER_SECRET);
+		config.setPhotobucketClientId(PIOConstants.Photobucket.CLIENT_ID);
+		config.setPhotobucketClientSecret(PIOConstants.Photobucket.CLIENT_SECRET);
+		config.setPayPalClientId(PIOConstants.PayPal.CLIENT_ID);
+		config.setPayPalReceiverEmail(PIOConstants.PayPal.RECEIVERS_MAIL);
+		config.setGoogleAnalyticsTrackId("UA-28619845-2");
+		PIO.initializeParse(getApplication(), PIOConstants.Parse.APPLICATION_ID, PIOConstants.PayPal.CLIENT_ID);
 	}
 
 	@Override
@@ -129,7 +155,7 @@ public class MainActivity extends Activity {
 	}
 
 	private void initSdkMode(boolean isLive) {
-		PIO.setLiveApplication(isLive);
+		config.setLiveApplication(isLive);
 
 		String recipeId;
 		String braintreeEncryptionKey;
@@ -140,13 +166,13 @@ public class MainActivity extends Activity {
 			recipeId = PIOConstants.RECIPE_ID_STAGING;
 			braintreeEncryptionKey = PIOConstants.Braintree.ENCRYPTION_KEY_STAGING;
 		}
-		PIO.setRecipeID(recipeId);
-		PIO.setBraintreeEncryptionKey(braintreeEncryptionKey);
+		config.setRecipeID(recipeId);
+		config.setBraintreeEncryptionKey(braintreeEncryptionKey);
 
-		if (PIO.isLiveApplication() || PIO.isLiveTestingApplication()) {
-			PIO.setApiUrl(PublicConstants.API_URL_LIVE);
+		if (config.isLiveApplication() || config.isLiveTestingApplication()) {
+			config.setApiUrl(PublicConstants.API_URL_LIVE);
 		} else {
-			PIO.setApiUrl(PublicConstants.API_URL_STAGING);
+			config.setApiUrl(PublicConstants.API_URL_STAGING);
 		}
 
 		spinnerJumpToProduct.setAdapter(new SpinnerAdapterJumpToProduct(this));
@@ -173,7 +199,7 @@ public class MainActivity extends Activity {
 
 	private void addAllSideMenuButtonsTop() {
 		sideMenuButtonsTop.add(SideMenuButton.SEARCH_BAR);
-		sideMenuButtonsTop.add(SideMenuButton.EXIT_BUTTON);
+		sideMenuButtonsTop.add(SideMenuButton.EXIT);
 		sideMenuButtonsTop.add(SideMenuButton.FEATURED_PRODUCTS);
 		sideMenuButtonsTop.add(SideMenuButton.PRODUCTS);
 		sideMenuButtonsTop.add(SideMenuButton.HELP);
@@ -261,65 +287,42 @@ public class MainActivity extends Activity {
 	public void onClickStartSDK(View v) {
 		Log.d("Facebook", "ID:" + getString(R.string.facebook_app_id));
 
-		PIO.setSideMenuEnabled(false);
-		PIO.setPhotosourcesDisabled(((CheckBox) findViewById(R.id.checkboxDisablePhotosources)).isChecked());
-
-		PIO.setImageUris(imageUris);
-
-		PIO.hidePhotoSourcesInSideMenu(((Switch) findViewById(R.id.switch_hide_photo_sources_side_menu)).isChecked());
-
-		String country = ((EditText) findViewById(R.id.editCountry)).getText().toString();
-		if (country.length() == 2) {
-			PIO.setCountryCode(country);
-		}
-
-		PIO.setChangeableCountry(((Switch) findViewById(R.id.switch_changeable_country)).isChecked());
-
-		String currency = ((EditText) findViewById(R.id.editCurrency)).getText().toString();
-		if (currency.length() == 3) {
-			PIO.setCurrencyCode(currency);
-		}
-
-		PIO.setChangeableCurrency(((Switch) findViewById(R.id.switch_changeable_currency)).isChecked());
-
-		String name = ((EditText) findViewById(R.id.editTextName)).getText().toString();
-		PIO.setPartnerName(name);
-
-		String colorString = ((EditText) findViewById(R.id.editColorHex)).getText().toString();
+		config.setSideMenuEnabled(false);
+		config.setPhotosourcesDisabled(((CheckBox) findViewById(R.id.checkboxDisablePhotosources)).isChecked());
+		config.setImageUris(imageUris);
+		config.hidePhotoSourcesInSideMenu(((Switch) findViewById(R.id.switch_hide_photo_sources_side_menu)).isChecked());
+		config.setCountryCode(((EditText) findViewById(R.id.editCountry)).getText().toString());
+		config.setChangeableCountry(((Switch) findViewById(R.id.switch_changeable_country)).isChecked());
+		config.setCurrencyCode(((EditText) findViewById(R.id.editCurrency)).getText().toString());
+		config.setChangeableCurrency(((Switch) findViewById(R.id.switch_changeable_currency)).isChecked());
+		config.setPartnerName(((EditText) findViewById(R.id.editTextName)).getText().toString());
 		try {
-			int colorHex = Color.parseColor("#" + colorString);
-			PIO.setHeaderColor(colorHex);
+			String colorString = ((EditText) findViewById(R.id.editColorHex)).getText().toString();
+			config.setHeaderColor(Color.parseColor("#" + colorString));
 		} catch (NumberFormatException e) {}
 
-		PIO.useThreeButtonsBarStyle(((Switch) findViewById(R.id.switch_three_buttons_bar_style)).isChecked());
+		config.useThreeButtonsBarStyle(((Switch) findViewById(R.id.switch_three_buttons_bar_style)).isChecked());
 
-		boolean isSideMenuEnabled = ((CheckBox) findViewById(R.id.checkbox_enable_side_menu)).isChecked();
-		PIO.setSideMenuEnabled(isSideMenuEnabled);
-		PIO.setRightSideMenu(((Switch) findViewById(R.id.switch_right_side_menu)).isChecked());
-		PIO.setMenuIconGear(((Switch) findViewById(R.id.switch_menu_icon_gear)).isChecked());
-		boolean isFullScreen = ((CheckBox) findViewById(R.id.full_Screen)).isChecked();
-		PIO.setHideStatusBar(isFullScreen);
-		boolean autoArrange = ((CheckBox) findViewById(R.id.auto_arrange)).isChecked();
-		PIO.setAutoArrange(autoArrange);
-
-		PIO.setSdkDemo(true);
-		PIO.setSdkAppearsFromRight(((Switch) findViewById(R.id.switch_appear_from_right)).isChecked());
+		config.setSideMenuEnabled(((CheckBox) findViewById(R.id.checkbox_enable_side_menu)).isChecked());
+		config.setRightSideMenu(((Switch) findViewById(R.id.switch_right_side_menu)).isChecked());
+		config.setMenuIconGear(((Switch) findViewById(R.id.switch_menu_icon_gear)).isChecked());
+		config.setHideStatusBar(((CheckBox) findViewById(R.id.full_Screen)).isChecked());
+		config.setAutoArrange(((CheckBox) findViewById(R.id.auto_arrange)).isChecked());
+		config.setSdkDemo(true);
+		config.setSdkAppearsFromRight(((Switch) findViewById(R.id.switch_appear_from_right)).isChecked());
 		//PIO.setMenuIconGear(((Switch) findViewById(R.id.switch_gear)).isChecked());
-		PIO.setPassedImageThumb(((Switch) findViewById(R.id.switch_passed_image_thumb)).isChecked());
-
+		config.setPassedImageThumb(((Switch) findViewById(R.id.switch_passed_image_thumb)).isChecked());
 		// Featured products screen
-		PIO.setCountryOnFeaturedProducts(((Switch) findViewById(R.id.switch_country_drop_down)).isChecked());
-		PIO.setHideCategorySearchBar(((Switch) findViewById(R.id.switch_hide_category_search_bar)).isChecked());
-		PIO.setShowFeaturedProductsByDefault(((Switch) findViewById(R.id.default_products_screen_featured)).isChecked());
-
+		config.setCountryOnFeaturedProducts(((Switch) findViewById(R.id.switch_country_drop_down)).isChecked());
+		config.setHideCategorySearchBar(((Switch) findViewById(R.id.switch_hide_category_search_bar)).isChecked());
+		config.setShowFeaturedProductsByDefault(((Switch) findViewById(R.id.default_products_screen_featured)).isChecked());
 		// Shopping cart screen
-		PIO.removePlusFromAddMoreProductsButton(((Switch) findViewById(R.id.switch_remove_plus_from_add_more_products)).isChecked());
-		PIO.setShowAddMoreProductsInShoppingCart(((Switch) findViewById(R.id.switch_show_add_more_products)).isChecked());
-		PIO.hideEditButtonInShoppingCart(((Switch) findViewById(R.id.switch_hide_edit_button)).isChecked());
+		config.removePlusFromAddMoreProductsButton(((Switch) findViewById(R.id.switch_remove_plus_from_add_more_products)).isChecked());
+		config.setShowAddMoreProductsInShoppingCart(((Switch) findViewById(R.id.switch_show_add_more_products)).isChecked());
+		config.hideEditButtonInShoppingCart(((Switch) findViewById(R.id.switch_hide_edit_button)).isChecked());
 
-		PIO.setStepByStep(((Switch) findViewById(R.id.switch_step_by_step)).isChecked());
-
-		PIO.setHostAppActivity(getComponentName().getClassName());//"com.example.piosdkpoconcept.ActivityTest"
+		config.setStepByStep(((Switch) findViewById(R.id.switch_step_by_step)).isChecked());
+		config.setHostAppActivity(getComponentName().getClassName());//"com.example.piosdkpoconcept.ActivityTest"
 
 		int jumpToScreenId = -1;
 		if (((Switch) findViewById(R.id.switch_jump_to_shopping_cart)).isChecked()) {
@@ -329,73 +332,76 @@ public class MainActivity extends Activity {
 		if (((Switch) findViewById(R.id.switch_back_goes_to_featured_products)).isChecked()) {
 			flags |= PublicConstants.Flags.FLAG_GO_BACK_TO_FEATURED_PRODUCTS;
 		}
-		PIO.setJumpToScreen(jumpToScreenId, flags);
+		config.setJumpToScreen(jumpToScreenId, flags);
 
 		boolean coastersDiff = ((Switch) findViewById(R.id.switch_coasters_different)).isChecked();
 		boolean coastersDuplicate = ((Switch) findViewById(R.id.switch_coasters_duplicate)).isChecked();
-		PIO.setCoastersType(-1); // Reset from previous launch
+		config.setCoastersType(-1); // Reset from previous launch
 		if (coastersDiff != coastersDuplicate) {
-			PIO.setCoastersType(coastersDiff ? Constants.CaseOptions.COASTERS_4_DIFFERENT : Constants.CaseOptions.COASTERS_1_DUPLICATED);
+			config.setCoastersType(coastersDiff ? Constants.CaseOptions.COASTERS_4_DIFFERENT : Constants.CaseOptions.COASTERS_1_DUPLICATED);
 		}
 
-		PIO.setShowHelp(((Switch) findViewById(R.id.switch_hide_help)).isChecked());
-		PIO.hideHelpButtonInCustomizeProduct(!((Switch) findViewById(R.id.switch_hide_help_customize_product)).isChecked());
+		config.setShowHelp(((Switch) findViewById(R.id.switch_hide_help)).isChecked());
+		config.hideHelpButtonInCustomizeProduct(!((Switch) findViewById(R.id.switch_hide_help_customize_product)).isChecked());
 
-		PIO.removeLogoFromPaymentScreen(((Switch) findViewById(R.id.switch_remove_logo_on_payment)).isChecked());
+		config.removeLogoFromPaymentScreen(((Switch) findViewById(R.id.switch_remove_logo_on_payment)).isChecked());
 
-		PIO.enablePhotoSourcesInCustomizeProduct(((Switch) findViewById(R.id.switch_show_enable_photosource_when_disabled)).isChecked());
-		PIO.setShowPhotosInCustomize(((Switch) findViewById(R.id.switch_show_photos_customize)).isChecked());
-		PIO.setShowOptionsInCustomize(((Switch) findViewById(R.id.switch_show_options_customize)).isChecked());
+		config.enablePhotoSourcesInCustomizeProduct(((Switch) findViewById(R.id.switch_show_enable_photosource_when_disabled)).isChecked());
+		config.setShowPhotosInCustomize(((Switch) findViewById(R.id.switch_show_photos_customize)).isChecked());
+		config.setShowOptionsInCustomize(((Switch) findViewById(R.id.switch_show_options_customize)).isChecked());
 		boolean isRotateEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_rotate_enabled_in_crop_screen)).isChecked();
 		boolean isTextEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_text_enabled_in_crop_screen)).isChecked();
 		boolean isEffectsEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_effects_enabled_in_crop_screen)).isChecked();
-		PIO.setUpCropScreen(isRotateEnabledInCropScreen, isTextEnabledInCropScreen, isEffectsEnabledInCropScreen);
+		config.setUpCropScreen(isRotateEnabledInCropScreen, isTextEnabledInCropScreen, isEffectsEnabledInCropScreen);
 
 		if (sideMenuButtonsTop.size() == 0) {
 			addAllSideMenuButtonsTop();
 		}
-		PIO.setSideMenuButtonsTop(sideMenuButtonsTop);
+		config.setSideMenuButtonsTop(sideMenuButtonsTop);
 
 		if (photoSourcesTest.size() == 0) {
 			addDefaultPhotoSources();
 			//addAlternatePhotoSources();
 		}
 		if (photoSourcesTest.size() != 0) {
-			PIO.setPhotoSources(photoSourcesTest);
-			PIO.setDefaultPhotoSource(photoSourcesTest.get(0));
+			config.setPhotoSources(photoSourcesTest);
+			config.setDefaultPhotoSource(photoSourcesTest.get(0));
 		}
 
 		if (sideMenuInfoButtons.size() == 0) {
 			addAllSideMenuInfoButtons();
 		}
-		PIO.setSideMenuInfoButtons(sideMenuInfoButtons);
-
-		PIO.setHideComingSoonProducts(switchHideComingSoonProducts.isChecked());
-
-		PIO.setPaymentOptions((int) spinnerPaymentOptions.getSelectedItemId());
+		config.setSideMenuInfoButtons(sideMenuInfoButtons);
+		config.setHideComingSoonProducts(switchHideComingSoonProducts.isChecked());
+		config.setPaymentOptions((int) spinnerPaymentOptions.getSelectedItemId());
 
 		// Jump to product
 		int selectedProductId = (int) spinnerJumpToProduct.getSelectedItemId();
 		if (selectedProductId == SpinnerAdapter.NO_SELECTION) {
 			selectedProductId = -1;
 		}
-		PIO.setProductIdFromApp(selectedProductId);
-		PIO.setSkipProductDetails(switchSkipProductDetailsScreen.isChecked());
-		PIO.setProductSkuFromApp(((EditText) findViewById(R.id.editSKU)).getText().toString());
-		if (StringUtils.isNotBlank(PIO.getProductSkuFromApp()) && selectedProductId == -1) {
+		config.setProductIdFromApp(selectedProductId);
+		config.setSkipProductDetails(switchSkipProductDetailsScreen.isChecked());
+		config.setProductSkuFromApp(((EditText) findViewById(R.id.editSKU)).getText().toString());
+		if (StringUtils.isNotBlank(config.getProductSkuFromApp()) && selectedProductId == -1) {
 			Toast.makeText(this, "Product must be specified when SKU is supplied", Toast.LENGTH_LONG).show();
 			return;
 		}
 
 		String promoCode = ((EditText) findViewById(R.id.edittext_promo_code)).getText().toString();
-		if (promoCode.equals("")) {
-			PIO.setPromoCode(null);
+		if (StringUtils.isBlank(promoCode)) {
+			config.setPromoCode(null);
 		} else {
-			PIO.setPromoCode(promoCode);
+			config.setPromoCode(promoCode);
+		}
+
+		if (config.isPhotosourcesDisabled() && ((config.getImageUris() == null) || (config.getImageUris().isEmpty()))) {
+			Toast.makeText(this, "Photosources are disabled and no images were passed to the SDK", Toast.LENGTH_LONG).show();
+			return;
 		}
 
 		try {
-			PIO.start(this, callback);
+			PIO.start(this, callback, config);
 		} catch (PIOException e) {
 			e.printStackTrace();
 		}
