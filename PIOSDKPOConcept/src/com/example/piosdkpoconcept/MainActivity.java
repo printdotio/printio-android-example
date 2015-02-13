@@ -320,6 +320,7 @@ public class MainActivity extends Activity {
 		config.removePlusFromAddMoreProductsButton(((Switch) findViewById(R.id.switch_remove_plus_from_add_more_products)).isChecked());
 		config.setShowAddMoreProductsInShoppingCart(((Switch) findViewById(R.id.switch_show_add_more_products)).isChecked());
 		config.hideEditButtonInShoppingCart(((Switch) findViewById(R.id.switch_hide_edit_button)).isChecked());
+		config.closeWidgetFromShoppingCart(((Switch) findViewById(R.id.closeWidgetFromShoppingCart)).isChecked());
 
 		config.setStepByStep(((Switch) findViewById(R.id.switch_step_by_step)).isChecked());
 		config.setHostAppActivity(getComponentName().getClassName());//"com.example.piosdkpoconcept.ActivityTest"
