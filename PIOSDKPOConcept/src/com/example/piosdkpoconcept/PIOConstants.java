@@ -37,8 +37,7 @@ public class PIOConstants {
 	}
 
 	public static class PayPal {
-		public static final String CLIENT_ID = "AQPAfRB3AI9W7IJc12HaLF-5bu5vJUgxV8CAiQB8d_1WxBB89wKM8xWEdsqC";
-		public static final String RECEIVERS_MAIL = "micah-facilitator@breakoutcommerce.com";
+		public static final String CLIENT_ID = "Abc28BC9ItxS1v1AEKfLON2VWvmzoKX-ICD6fj1A2DyQS3Y5_DBFPmfHrusQ";
 	}
 
 	public static class Parse {
