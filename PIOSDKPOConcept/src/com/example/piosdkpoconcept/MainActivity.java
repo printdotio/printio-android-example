@@ -143,7 +143,6 @@ public class MainActivity extends Activity {
 		config.setPhotobucketClientSecret(PIOConstants.Photobucket.CLIENT_SECRET);
 		config.setPayPalClientId(PIOConstants.PayPal.CLIENT_ID);
 		config.setGoogleAnalyticsTrackId("UA-28619845-2");
-		PIO.initializeParse(getApplication(), PIOConstants.Parse.APPLICATION_ID, PIOConstants.PayPal.CLIENT_ID);
 	}
 
 	@Override

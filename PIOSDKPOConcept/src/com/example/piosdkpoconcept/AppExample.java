@@ -1,5 +1,6 @@
 package com.example.piosdkpoconcept;
 
+import print.io.PIO;
 import android.app.Application;
 
 //@ReportsCrashes(
@@ -16,6 +17,7 @@ public class AppExample extends Application {
 	public void onCreate() {
 		super.onCreate();
 		//ACRA.init(this);
+		PIO.initializeParse(this, PIOConstants.Parse.APPLICATION_ID, PIOConstants.PayPal.CLIENT_ID);
 	}
 
 }
