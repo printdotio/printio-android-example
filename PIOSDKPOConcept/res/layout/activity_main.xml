@@ -604,12 +604,6 @@
                 android:layout_height="wrap_content"
                 android:ems="10" />
 
-            <TextView
-                android:id="@+id/textview_items_in_cart"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dip" />
-
             <Button
                 android:id="@+id/button_start_sdk"
                 android:layout_width="match_parent"

@@ -120,10 +120,6 @@ public class MainActivity extends Activity {
 			feedbackDialog.setVisibility(View.VISIBLE);
 		}
 
-		TextView textViewItemsInCart = (TextView) findViewById(R.id.textview_items_in_cart);
-		textViewItemsInCart.setText("Items in shopping cart: " + PIO.getNumberOfItemsInShoppingCart(MainActivity.this));
-
-
 		config.setFontPathInAssetsLight("HelveticaNeueLTStd-Lt.otf");
 		config.setFontPathInAssetsNormal("HelveticaNeueLTStd-Roman.otf");
 		config.setFontPathInAssetsBold("HelveticaNeueLTStd-Bd.otf");
@@ -143,13 +139,6 @@ public class MainActivity extends Activity {
 		config.setPhotobucketClientSecret(PIOConstants.Photobucket.CLIENT_SECRET);
 		config.setPayPalClientId(PIOConstants.PayPal.CLIENT_ID);
 		config.setGoogleAnalyticsTrackId("UA-28619845-2");
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		TextView textViewItemsInCart = (TextView) findViewById(R.id.textview_items_in_cart);
-		textViewItemsInCart.setText("Items in shopping cart: " + PIO.getNumberOfItemsInShoppingCart(MainActivity.this));
 	}
 
 	private void initSdkMode(boolean isLive) {
