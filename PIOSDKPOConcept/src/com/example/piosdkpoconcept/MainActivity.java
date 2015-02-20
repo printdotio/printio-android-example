@@ -3,7 +3,6 @@ package com.example.piosdkpoconcept;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import print.io.Constants;
 import print.io.PIO;
 import print.io.PIOCallback;
 import print.io.PIOConfig;
@@ -326,7 +325,7 @@ public class MainActivity extends Activity {
 		boolean coastersDuplicate = ((Switch) findViewById(R.id.switch_coasters_duplicate)).isChecked();
 		config.setCoastersType(-1); // Reset from previous launch
 		if (coastersDiff != coastersDuplicate) {
-			config.setCoastersType(coastersDiff ? Constants.CaseOptions.COASTERS_4_DIFFERENT : Constants.CaseOptions.COASTERS_1_DUPLICATED);
+			config.setCoastersType(coastersDiff ? PublicConstants.CoastersTypes.COASTERS_4_DIFFERENT : PublicConstants.CoastersTypes.COASTERS_1_DUPLICATED);
 		}
 
 		config.setShowHelp(((Switch) findViewById(R.id.switch_hide_help)).isChecked());

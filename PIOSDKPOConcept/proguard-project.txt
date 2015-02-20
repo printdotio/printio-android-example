@@ -123,14 +123,15 @@
 -keep class print.io.PIO {
 	public <methods>;
 }
--keep public enum print.io.PIO$** {
+-keep class print.io.PIOConfig { *; }
+-keep public enum print.io.PIOConfig$** {
 	**[] $VALUES;
 	public *;
 }
 
 -keepattributes InnerClasses
 
--keep class print.io.PIOActivity { *; }
+#-keep class print.io.PIOActivity { *; }
 -keep class print.io.PIOCallback { *; }
 -keep class print.io.PIOException { *; }
 -keep class print.io.beans.** { *; }
