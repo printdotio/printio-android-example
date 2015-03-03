@@ -2,16 +2,16 @@ package com.example.piosdkpoconcept;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import print.io.PIO;
-import print.io.PIOCallback;
 import print.io.PIOConfig;
 import print.io.PIOConfig.PhotoSource;
 import print.io.PIOConfig.SideMenuButton;
 import print.io.PIOConfig.SideMenuInfoButton;
 import print.io.PIOException;
 import print.io.PublicConstants;
-import print.io.beans.CallbackInfo;
+import print.io.beans.OrderInfo;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -37,32 +37,18 @@ import android.widget.ToggleButton;
 
 public class MainActivity extends Activity {
 
-	private PIOConfig config = new PIOConfig();
-
-	private ArrayList<String> imageUris = new ArrayList<String>();
-
-	private ArrayList<SideMenuButton> sideMenuButtonsTop = new ArrayList<SideMenuButton>();
-	private ArrayList<PhotoSource> photoSourcesTest = new ArrayList<PhotoSource>();
-	private ArrayList<SideMenuInfoButton> sideMenuInfoButtons = new ArrayList<SideMenuInfoButton>();
-
 	private EditText editTextAddImageToSdk;
 	private Spinner spinnerPaymentOptions;
 	private Spinner spinnerJumpToProduct;
 	private Switch switchSkipProductDetailsScreen;
 	private Switch switchHideComingSoonProducts;
 
-	public PIOCallback callback = new PIOCallback() {
+	private PIOConfig config = new PIOConfig();
 
-		@Override
-		public void onCartChange(int count) {
-
-		}
-
-		@Override
-		public void onOrderComplete(CallbackInfo callBackInfo) {
-			Log.d("Order Information: ", callBackInfo.toString());
-		}
-	};
+	private List<String> imageUris = new ArrayList<String>();
+	private List<SideMenuButton> sideMenuButtonsTop = new ArrayList<SideMenuButton>();
+	private List<PhotoSource> photoSourcesTest = new ArrayList<PhotoSource>();
+	private List<SideMenuInfoButton> sideMenuInfoButtons = new ArrayList<SideMenuInfoButton>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +65,6 @@ public class MainActivity extends Activity {
 				photoSourcesTest.clear();
 				buttonAddSource.setEnabled(isChecked);
 				if (!isChecked) {
-					//addDefaultPhotoSources();
 					((TextView) findViewById(R.id.textView_photo_sources)).setText("");
 				}
 			}
@@ -101,24 +86,6 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		// on resume from print.io sdk
-		ArrayList<String> cartItems = getIntent().getStringArrayListExtra("ShoppingCartItems");
-		if (cartItems != null) {
-			StringBuilder stringBuilder = new StringBuilder("Feedback to host app: ");
-			stringBuilder.append("\nShopping Cart Items Quantity:\n").append(Integer.toString(cartItems.size()));
-
-			if (cartItems.size() > 0) {
-				stringBuilder.append("\n").append("Content of Shopping Cart:");
-				for (String s : cartItems) {
-					stringBuilder.append("\n").append(s);
-				}
-			}
-
-			View feedbackDialog = findViewById(R.id.dialog_feedback);
-			((TextView) feedbackDialog.findViewById(R.id.textview_feedback)).setText(stringBuilder.toString());
-			feedbackDialog.setVisibility(View.VISIBLE);
-		}
-
 		config.setFontPathInAssetsLight("HelveticaNeueLTStd-Lt.otf");
 		config.setFontPathInAssetsNormal("HelveticaNeueLTStd-Roman.otf");
 		config.setFontPathInAssetsBold("HelveticaNeueLTStd-Bd.otf");
@@ -138,6 +105,18 @@ public class MainActivity extends Activity {
 		config.setPhotobucketClientSecret(PIOConstants.Photobucket.CLIENT_SECRET);
 		config.setPayPalClientId(PIOConstants.PayPal.CLIENT_ID);
 		config.setGoogleAnalyticsTrackId("UA-28619845-2");
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		OrderInfo order = PIO.getLastOrder(this);
+		if (order != null) {
+			View feedbackDialog = findViewById(R.id.dialog_feedback);
+			((TextView) feedbackDialog.findViewById(R.id.textview_feedback)).setText("Last Order\n\n" + Utils.orderToString(order));
+			feedbackDialog.setVisibility(View.VISIBLE);
+		}
 	}
 
 	private void initSdkMode(boolean isLive) {
@@ -164,7 +143,7 @@ public class MainActivity extends Activity {
 		spinnerJumpToProduct.setAdapter(new SpinnerAdapterJumpToProduct(this));
 	}
 
-	public static String[] getNames(Class<? extends Enum<?>> e) {
+	private String[] getNames(Class<? extends Enum<?>> e) {
 		return Arrays.toString(e.getEnumConstants()).replaceAll("^.|.$", "").split(", ");
 	}
 
@@ -239,7 +218,6 @@ public class MainActivity extends Activity {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == 1 && resultCode == RESULT_OK) {
-			//imageLists.add(getPath(data.getData()));
 			imageUris.add(data.getData().toString());
 		}
 		super.onActivityResult(requestCode, resultCode, data);
@@ -387,7 +365,7 @@ public class MainActivity extends Activity {
 		}
 
 		try {
-			PIO.start(this, callback, config);
+			PIO.start(this, config);
 		} catch (PIOException e) {
 			e.printStackTrace();
 		}

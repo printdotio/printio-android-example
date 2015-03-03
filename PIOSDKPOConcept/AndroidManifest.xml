@@ -25,7 +25,7 @@
 
     <!--
   IMPORTANT: Change "com.example.piosdkpoconcept.permission.C2D_MESSAGE" in the lines below
-  to match your app's package name + ".permission.C2D_MESSAGE".
+  to match your app's package name + ".permission.C2D_MESSAGE".
     -->
     <permission
         android:name="com.example.piosdkpoconcept.permission.C2D_MESSAGE"
@@ -238,9 +238,9 @@
         </receiver>
 
         <!-- IMPORTANT: Change "com.example.piosdkpoconcept" to match your app's package name. -->
-        <receiver android:name="com.example.piosdkpoconcept.PrintIOCloseReceiver" >
+        <receiver android:name="com.example.piosdkpoconcept.PIOSDKEvnetListener" >
             <intent-filter>
-                <action android:name="ACTION_EXIT_PRINT_IO_SDK" />
+                <action android:name="PIO_SDK_EVENTS" />
             </intent-filter>
         </receiver>
     </application>
