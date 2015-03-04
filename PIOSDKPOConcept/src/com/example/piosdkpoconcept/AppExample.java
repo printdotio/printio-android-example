@@ -20,7 +20,7 @@ public class AppExample extends Application {
 		super.onCreate();
 		//ACRA.init(this);
 		PIO.initializeParse(this, PIOConstants.Parse.APPLICATION_ID, PIOConstants.PayPal.CLIENT_ID);
-		LocalBroadcastManager.getInstance(this).registerReceiver(new PIOSDKEvnetListener(), new IntentFilter(PIOConstants.PIO_SDK_EVENTS));
+		LocalBroadcastManager.getInstance(this).registerReceiver(new PIOSDKEventListener(), new IntentFilter(PIOConstants.PIO_SDK_EVENTS));
 	}
 
 }
