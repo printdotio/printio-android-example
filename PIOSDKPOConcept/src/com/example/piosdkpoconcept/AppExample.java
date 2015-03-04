@@ -2,6 +2,8 @@ package com.example.piosdkpoconcept;
 
 import print.io.PIO;
 import android.app.Application;
+import android.content.IntentFilter;
+import android.support.v4.content.LocalBroadcastManager;
 
 //@ReportsCrashes(
 //		formKey = "",
@@ -18,6 +20,7 @@ public class AppExample extends Application {
 		super.onCreate();
 		//ACRA.init(this);
 		PIO.initializeParse(this, PIOConstants.Parse.APPLICATION_ID, PIOConstants.PayPal.CLIENT_ID);
+		LocalBroadcastManager.getInstance(this).registerReceiver(new PIOSDKEvnetListener(), new IntentFilter(PIOConstants.PIO_SDK_EVENTS));
 	}
 
 }

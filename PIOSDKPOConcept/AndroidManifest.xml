@@ -236,13 +236,6 @@
                 <action android:name="com.example.piosdkpoconcept.PUSH_NOTIFICATION" />
             </intent-filter>
         </receiver>
-
-        <!-- IMPORTANT: Change "com.example.piosdkpoconcept" to match your app's package name. -->
-        <receiver android:name="com.example.piosdkpoconcept.PIOSDKEvnetListener" >
-            <intent-filter>
-                <action android:name="PIO_SDK_EVENTS" />
-            </intent-filter>
-        </receiver>
     </application>
 
 </manifest>
