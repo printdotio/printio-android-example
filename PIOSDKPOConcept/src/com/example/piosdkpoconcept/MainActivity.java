@@ -50,6 +50,8 @@ public class MainActivity extends Activity {
 	private List<PhotoSource> photoSourcesTest = new ArrayList<PhotoSource>();
 	private List<SideMenuInfoButton> sideMenuInfoButtons = new ArrayList<SideMenuInfoButton>();
 
+	private OrderInfo currentlyShownOrderInfo;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -105,17 +107,21 @@ public class MainActivity extends Activity {
 		config.setPhotobucketClientSecret(PIOConstants.Photobucket.CLIENT_SECRET);
 		config.setPayPalClientId(PIOConstants.PayPal.CLIENT_ID);
 		config.setGoogleAnalyticsTrackId("UA-28619845-2");
+
+		currentlyShownOrderInfo = PIO.getLastOrder(this);
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 
+		// When activity resumes show order information if last order has changed
 		OrderInfo order = PIO.getLastOrder(this);
-		if (order != null) {
+		if (currentlyShownOrderInfo == null || (order != null && !order.getOrderId().equals(currentlyShownOrderInfo.getOrderId()))) {
 			View feedbackDialog = findViewById(R.id.dialog_feedback);
 			((TextView) feedbackDialog.findViewById(R.id.textview_feedback)).setText("Last Order\n\n" + Utils.orderToString(order));
 			feedbackDialog.setVisibility(View.VISIBLE);
+			currentlyShownOrderInfo = order;
 		}
 	}
 
