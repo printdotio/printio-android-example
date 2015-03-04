@@ -117,7 +117,7 @@ public class MainActivity extends Activity {
 
 		// When activity resumes show order information if last order has changed
 		OrderInfo order = PIO.getLastOrder(this);
-		if (currentlyShownOrderInfo == null || (order != null && !order.getOrderId().equals(currentlyShownOrderInfo.getOrderId()))) {
+		if (order != null && (currentlyShownOrderInfo == null || !order.getOrderId().equals(currentlyShownOrderInfo.getOrderId()))) {
 			View feedbackDialog = findViewById(R.id.dialog_feedback);
 			((TextView) feedbackDialog.findViewById(R.id.textview_feedback)).setText("Last Order\n\n" + Utils.orderToString(order));
 			feedbackDialog.setVisibility(View.VISIBLE);
