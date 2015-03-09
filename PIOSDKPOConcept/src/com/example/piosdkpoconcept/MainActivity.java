@@ -352,7 +352,8 @@ public class MainActivity extends Activity {
 		}
 
 		try {
-			PIO.start(this, config);
+			PIO.setConfig(this, config);
+			PIO.start(this);
 		} catch (PIOException e) {
 			e.printStackTrace();
 		}
