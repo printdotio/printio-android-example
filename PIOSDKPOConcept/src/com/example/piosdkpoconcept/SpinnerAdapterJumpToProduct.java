@@ -35,7 +35,7 @@ public class SpinnerAdapterJumpToProduct extends BaseAdapter implements SpinnerA
 		items.add(new NameIdPair("Phone Cases", PublicConstants.ProductIds.PHONE_CASES));
 		items.add(new NameIdPair("Acrylic Blocks", PublicConstants.ProductIds.ACRYLIC_BLOCKS));
 		items.add(new NameIdPair("Acrylic Prints", PublicConstants.ProductIds.ACRYLIC_PRINTS));
-		items.add(new NameIdPair("Beach Bags", PublicConstants.ProductIds.BEACH_BAGS));
+		items.add(new NameIdPair("Everything Bags", PublicConstants.ProductIds.EVERYTHING_BAGS));
 		// items.add(new NameIdPair("Calendars", PublicConstants.ProductIds.CALENDARS)); // NOT AVALIABLE!
 		items.add(new NameIdPair("Canvas Wraps", PublicConstants.ProductIds.CANVAS_WRAPS));
 		items.add(new NameIdPair("Coasters", PublicConstants.ProductIds.COASTERS));
@@ -57,6 +57,7 @@ public class SpinnerAdapterJumpToProduct extends BaseAdapter implements SpinnerA
 		items.add(new NameIdPair("Postcards", PublicConstants.ProductIds.POSTCARDS));
 		// items.add(new NameIdPair("Posters", PublicConstants.ProductIds.POSTERS)); // NOT AVALIABLE!
 		items.add(new NameIdPair("Prints", PublicConstants.ProductIds.PRINTS));
+		items.add(new NameIdPair("Professional prints", PublicConstants.ProductIds.PROFESSIONAL_PRINTS));
 		items.add(new NameIdPair("Shower Curtains", PublicConstants.ProductIds.SHOWER_CURTAINS));
 		items.add(new NameIdPair("Stickerbooks", PublicConstants.ProductIds.STICKERBOOKS));
 		items.add(new NameIdPair("T-Shirts", PublicConstants.ProductIds.T_SHIRTS));
