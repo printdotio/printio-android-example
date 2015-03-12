@@ -36,11 +36,15 @@ public class SpinnerAdapterJumpToProduct extends BaseAdapter implements SpinnerA
 		items.add(new NameIdPair("Acrylic Blocks", PublicConstants.ProductIds.ACRYLIC_BLOCKS));
 		items.add(new NameIdPair("Acrylic Prints", PublicConstants.ProductIds.ACRYLIC_PRINTS));
 		items.add(new NameIdPair("Everything Bags", PublicConstants.ProductIds.EVERYTHING_BAGS));
+		items.add(new NameIdPair("Tote Bags", PublicConstants.ProductIds.TOTE_BAGS));
 		// items.add(new NameIdPair("Calendars", PublicConstants.ProductIds.CALENDARS)); // NOT AVALIABLE!
+		items.add(new NameIdPair("Canvas Minis", PublicConstants.ProductIds.CANVAS_MINIS));
+		items.add(new NameIdPair("Canvas Minis", PublicConstants.ProductIds.CANVAS_POSTERS));
 		items.add(new NameIdPair("Canvas Wraps", PublicConstants.ProductIds.CANVAS_WRAPS));
 		items.add(new NameIdPair("Coasters", PublicConstants.ProductIds.COASTERS));
 		items.add(new NameIdPair("Cube Decor", PublicConstants.ProductIds.CUBE_DECOR));
 		items.add(new NameIdPair("Duvet Cover", PublicConstants.ProductIds.DUVET_COVER));
+		items.add(new NameIdPair("Dog Beds", PublicConstants.ProductIds.DOG_BEDS));
 		items.add(new NameIdPair("Flat Cards", PublicConstants.ProductIds.FLAT_CARDS));
 		items.add(new NameIdPair("Fleece Blankets", PublicConstants.ProductIds.FLEECE_BLANKETS));
 		items.add(new NameIdPair("Folder Cards", PublicConstants.ProductIds.FOLDED_CARDS));
@@ -58,13 +62,13 @@ public class SpinnerAdapterJumpToProduct extends BaseAdapter implements SpinnerA
 		// items.add(new NameIdPair("Posters", PublicConstants.ProductIds.POSTERS)); // NOT AVALIABLE!
 		items.add(new NameIdPair("Prints", PublicConstants.ProductIds.PRINTS));
 		items.add(new NameIdPair("Professional prints", PublicConstants.ProductIds.PROFESSIONAL_PRINTS));
+		items.add(new NameIdPair("Rugs", PublicConstants.ProductIds.RUGS));
 		items.add(new NameIdPair("Shower Curtains", PublicConstants.ProductIds.SHOWER_CURTAINS));
 		items.add(new NameIdPair("Stickerbooks", PublicConstants.ProductIds.STICKERBOOKS));
 		items.add(new NameIdPair("T-Shirts", PublicConstants.ProductIds.T_SHIRTS));
 		items.add(new NameIdPair("Tablet Cases", PublicConstants.ProductIds.TABLET_CASES));
 		items.add(new NameIdPair("Thick Prints", PublicConstants.ProductIds.THICK_PRINTS));
 		items.add(new NameIdPair("Throw Pillows", PublicConstants.ProductIds.THROW_PILLOWS));
-		items.add(new NameIdPair("Dog Beds", PublicConstants.ProductIds.DOG_BEDS));
 		items.add(new NameIdPair("Tinybooks", PublicConstants.ProductIds.TINYBOOKS));
 		items.add(new NameIdPair("Wall Skin", PublicConstants.ProductIds.WALL_SKIN));
 		// items.add(new NameIdPair("Wood Prints", PublicConstants.ProductIds.WOOD_PRINTS)); // NOT AVALIABLE!
