@@ -39,7 +39,7 @@ public class SpinnerAdapterJumpToProduct extends BaseAdapter implements SpinnerA
 		items.add(new NameIdPair("Tote Bags", PublicConstants.ProductIds.TOTE_BAGS));
 		// items.add(new NameIdPair("Calendars", PublicConstants.ProductIds.CALENDARS)); // NOT AVALIABLE!
 		items.add(new NameIdPair("Canvas Minis", PublicConstants.ProductIds.CANVAS_MINIS));
-		items.add(new NameIdPair("Canvas Minis", PublicConstants.ProductIds.CANVAS_POSTERS));
+		items.add(new NameIdPair("Canvas Posters", PublicConstants.ProductIds.CANVAS_POSTERS));
 		items.add(new NameIdPair("Canvas Wraps", PublicConstants.ProductIds.CANVAS_WRAPS));
 		items.add(new NameIdPair("Coasters", PublicConstants.ProductIds.COASTERS));
 		items.add(new NameIdPair("Cube Decor", PublicConstants.ProductIds.CUBE_DECOR));
