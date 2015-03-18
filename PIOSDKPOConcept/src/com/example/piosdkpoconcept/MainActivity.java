@@ -2,16 +2,25 @@ package com.example.piosdkpoconcept;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import print.io.PIO;
 import print.io.PIOConfig;
 import print.io.PIOException;
 import print.io.PublicConstants;
-import print.io.piopublic.PhotoSource;
 import print.io.piopublic.ProductType;
 import print.io.piopublic.SideMenuButton;
 import print.io.piopublic.SideMenuInfoButton;
+import print.io.photosource.PhotoSource;
+import print.io.photosource.impl.dropbox.DropboxPhotoSource;
+import print.io.photosource.impl.facebook.FacebookPhotoSource;
+import print.io.photosource.impl.flickr.FlickrPhotoSource;
+import print.io.photosource.impl.instagram.InstagramPhotoSource;
+import print.io.photosource.impl.phone.PhonePhotoSource;
+import print.io.photosource.impl.photobucket.PhotobucketPhotoSource;
+import print.io.photosource.impl.picasa.PicasaPhotoSource;
+import print.io.photosource.impl.preselected.PreselectedPhotoSource;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -36,6 +45,35 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class MainActivity extends Activity {
+
+	static private final List<PhotoSource> ALL_SOURCES;
+	static {
+		DropboxPhotoSource dropboxPhotoSource = new DropboxPhotoSource();
+		dropboxPhotoSource.setConsumerKey(PIOConstants.Dropbox.CONSUMER_KEY);
+		dropboxPhotoSource.setConsumerSecret(PIOConstants.Dropbox.CONSUMER_SECRET);
+
+		InstagramPhotoSource instagramPhotoSource = new InstagramPhotoSource();
+		instagramPhotoSource.setClientId(PIOConstants.Instagram.CLIENT_ID);
+		instagramPhotoSource.setCallbackUri(PIOConstants.Instagram.CALLBACK_URI);
+
+		FlickrPhotoSource flickrPhotoSource = new FlickrPhotoSource();
+		flickrPhotoSource.setConsumerKey(PIOConstants.Flickr.CONSUMER_KEY);
+		flickrPhotoSource.setConsumerSecret(PIOConstants.Flickr.CONSUMER_SECRET);
+
+		PhotobucketPhotoSource photobucketPhotoSource = new PhotobucketPhotoSource();
+		photobucketPhotoSource.setClientId(PIOConstants.Photobucket.CLIENT_ID);
+		photobucketPhotoSource.setClientSecret(PIOConstants.Photobucket.CLIENT_SECRET);
+
+		ALL_SOURCES = Collections.unmodifiableList(Arrays.asList(
+				dropboxPhotoSource,
+				new FacebookPhotoSource(),
+				flickrPhotoSource,
+				instagramPhotoSource,
+				new PhonePhotoSource(),
+				photobucketPhotoSource,
+				new PicasaPhotoSource(),
+				new PreselectedPhotoSource()));
+	}
 
 	private EditText editTextAddImageToSdk;
 	private Spinner spinnerPaymentOptions;
@@ -95,14 +133,6 @@ public class MainActivity extends Activity {
 		config.setGooglePlayRateUrl(PIOConstants.GOOGLE_PLAY_RATE_URL);
 		config.setFacebookPageUrl(PIOConstants.FACEBOOK_PAGE_URL);
 		config.setFacebookAppId(getString(R.string.facebook_app_id));
-		config.setInstagramClientId(PIOConstants.Instagram.CLIENT_ID);
-		config.setInstagramCallbackUri(PIOConstants.Instagram.CALLBACK_URI);
-		config.setFlickrConsumerKey(PIOConstants.Flickr.CONSUMER_KEY);
-		config.setFlickrConsumerSecret(PIOConstants.Flickr.CONSUMER_SECRET);
-		config.setDropboxConsumerKey(PIOConstants.Dropbox.CONSUMER_KEY);
-		config.setDropboxConsumerSecret(PIOConstants.Dropbox.CONSUMER_SECRET);
-		config.setPhotobucketClientId(PIOConstants.Photobucket.CLIENT_ID);
-		config.setPhotobucketClientSecret(PIOConstants.Photobucket.CLIENT_SECRET);
 		config.setGoogleAnalyticsTrackId("UA-28619845-2");
 	}
 
@@ -134,8 +164,12 @@ public class MainActivity extends Activity {
 		spinnerJumpToProduct.setAdapter(new SpinnerAdapterJumpToProduct(this));
 	}
 
-	private String[] getNames(Class<? extends Enum<?>> e) {
-		return Arrays.toString(e.getEnumConstants()).replaceAll("^.|.$", "").split(", ");
+	private String[] getNames() {
+		List<String> names = new ArrayList<String>(ALL_SOURCES.size());
+		for (PhotoSource ps : ALL_SOURCES) {
+			names.add(ps.getName(this));
+		}
+		return names.toArray(new String[names.size()]);
 	}
 
 	public void onClickAddPhotoSource(View v) {
@@ -145,11 +179,11 @@ public class MainActivity extends Activity {
 		DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
 
 			public void onClick(DialogInterface dialog, int which) {
-				photoSourcesTest.add(PhotoSource.values()[which]);
-				photoSourcesText.setText(photoSourcesText.getText() + "  |  " + PhotoSource.values()[which]);
+				photoSourcesTest.add(ALL_SOURCES.get(which));
+				photoSourcesText.setText(photoSourcesText.getText() + "  |  " + ALL_SOURCES.get(which).getName(MainActivity.this));
 			}
 		};
-		builder.setTitle("Pick source").setItems(getNames(PhotoSource.class), onClickListener);
+		builder.setTitle("Pick source").setItems(getNames(), onClickListener);
 		builder.show();
 	}
 
@@ -165,21 +199,22 @@ public class MainActivity extends Activity {
 
 	private void addDefaultPhotoSources() {
 		// Only up to 6
-		photoSourcesTest.add(PhotoSource.PHONE);
-		photoSourcesTest.add(PhotoSource.INSTAGRAM);
-		photoSourcesTest.add(PhotoSource.FACEBOOK);
-		photoSourcesTest.add(PhotoSource.FLICKR);
-		photoSourcesTest.add(PhotoSource.PHOTOBUCKET);
-		photoSourcesTest.add(PhotoSource.DROPBOX);
-		//photoSourcesTest.add(PhotoSource.PICASA);
-		//photoSourcesTest.add(PhotoSource.PRESELECTED);
+		photoSourcesTest.add(ALL_SOURCES.get(4));
+		photoSourcesTest.add(ALL_SOURCES.get(3));
+		photoSourcesTest.add(ALL_SOURCES.get(1));
+		photoSourcesTest.add(ALL_SOURCES.get(2));
+		photoSourcesTest.add(ALL_SOURCES.get(5));
+		photoSourcesTest.add(ALL_SOURCES.get(0));
+
+		photoSourcesTest.add(ALL_SOURCES.get(6));
+		photoSourcesTest.add(ALL_SOURCES.get(7));
 	}
 
 	private void addAlternatePhotoSources() {
 		// Only up to 6
-		photoSourcesTest.add(PhotoSource.PHONE);
-		photoSourcesTest.add(PhotoSource.INSTAGRAM);
-		photoSourcesTest.add(PhotoSource.PRESELECTED);
+		photoSourcesTest.add(ALL_SOURCES.get(2));
+		photoSourcesTest.add(ALL_SOURCES.get(3));
+		photoSourcesTest.add(ALL_SOURCES.get(7));
 	}
 
 	private void addAllSideMenuInfoButtons() {
