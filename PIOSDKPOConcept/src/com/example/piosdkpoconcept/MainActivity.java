@@ -44,9 +44,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.example.piosdkpoconcept.photosource.vlado.VladoPhotoSource;
+
 public class MainActivity extends Activity {
 
-	static private final List<PhotoSource> ALL_SOURCES;
+	private static final int DROPBOX_INDEX = 0;
+	private static final int FACEBOOK_INDEX = 1;
+	private static final int FLICKR_INDEX = 2;
+	private static final int INSTAGRAM_INDEX = 3;
+	private static final int PHONE_INDEX = 4;
+	private static final int PHOTOBUCKET_INDEX = 5;
+	private static final int PICASA_INDEX = 6;
+	private static final int PRESELECTED_INDEX = 7;
+	private static final int VLADO_PHOTO = 8;
+	private static final List<PhotoSource> ALL_SOURCES;
 	static {
 		DropboxPhotoSource dropboxPhotoSource = new DropboxPhotoSource();
 		dropboxPhotoSource.setConsumerKey(PIOConstants.Dropbox.CONSUMER_KEY);
@@ -72,7 +83,8 @@ public class MainActivity extends Activity {
 				new PhonePhotoSource(),
 				photobucketPhotoSource,
 				new PicasaPhotoSource(),
-				new PreselectedPhotoSource()));
+				new PreselectedPhotoSource(),
+				new VladoPhotoSource()));
 	}
 
 	private EditText editTextAddImageToSdk;
@@ -199,22 +211,15 @@ public class MainActivity extends Activity {
 
 	private void addDefaultPhotoSources() {
 		// Only up to 6
-		photoSourcesTest.add(ALL_SOURCES.get(4));
-		photoSourcesTest.add(ALL_SOURCES.get(3));
-		photoSourcesTest.add(ALL_SOURCES.get(1));
-		photoSourcesTest.add(ALL_SOURCES.get(2));
-		photoSourcesTest.add(ALL_SOURCES.get(5));
-		photoSourcesTest.add(ALL_SOURCES.get(0));
+		photoSourcesTest.add(ALL_SOURCES.get(PHONE_INDEX));
+		photoSourcesTest.add(ALL_SOURCES.get(INSTAGRAM_INDEX));
+		photoSourcesTest.add(ALL_SOURCES.get(FACEBOOK_INDEX));
+		//		photoSourcesTest.add(ALL_SOURCES.get(FLICKR_INDEX));
+		//		photoSourcesTest.add(ALL_SOURCES.get(PHOTOBUCKET_INDEX));
+		//		photoSourcesTest.add(ALL_SOURCES.get(DROPBOX_INDEX));
 
-		photoSourcesTest.add(ALL_SOURCES.get(6));
-		photoSourcesTest.add(ALL_SOURCES.get(7));
-	}
-
-	private void addAlternatePhotoSources() {
-		// Only up to 6
-		photoSourcesTest.add(ALL_SOURCES.get(2));
-		photoSourcesTest.add(ALL_SOURCES.get(3));
-		photoSourcesTest.add(ALL_SOURCES.get(7));
+		//		photoSourcesTest.add(ALL_SOURCES.get(PICASA_INDEX));
+		photoSourcesTest.add(ALL_SOURCES.get(PRESELECTED_INDEX));
 	}
 
 	private void addAllSideMenuInfoButtons() {
@@ -352,7 +357,6 @@ public class MainActivity extends Activity {
 
 		if (photoSourcesTest.size() == 0) {
 			addDefaultPhotoSources();
-			//addAlternatePhotoSources();
 		}
 		if (photoSourcesTest.size() != 0) {
 			config.setPhotoSources(photoSourcesTest);
