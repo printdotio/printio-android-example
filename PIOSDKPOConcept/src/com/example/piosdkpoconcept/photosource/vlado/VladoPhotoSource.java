@@ -11,7 +11,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentActivity;
 
-public class VladoPhotoSource extends PhotoSource {
+public class VladoPhotoSource implements PhotoSource {
 
 	private static final long serialVersionUID = -2804726157663465818L;
 
@@ -51,8 +51,8 @@ public class VladoPhotoSource extends PhotoSource {
 	}
 
 	@Override
-	public int getSelectImagesIcon() {
-		return R.drawable.icon_phone_60;
+	public Drawable getSelectImagesIcon(Context context) {
+		return context.getResources().getDrawable(R.drawable.icon_phone_60);
 	}
 
 	@Override
