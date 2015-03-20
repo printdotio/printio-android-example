@@ -176,7 +176,7 @@ public class MainActivity extends Activity {
 		spinnerJumpToProduct.setAdapter(new SpinnerAdapterJumpToProduct(this));
 	}
 
-	private String[] getNames() {
+	private String[] getPhotosourceNames() {
 		List<String> names = new ArrayList<String>(ALL_SOURCES.size());
 		for (PhotoSource ps : ALL_SOURCES) {
 			names.add(ps.getName(this));
@@ -195,7 +195,7 @@ public class MainActivity extends Activity {
 				photoSourcesText.setText(photoSourcesText.getText() + "  |  " + ALL_SOURCES.get(which).getName(MainActivity.this));
 			}
 		};
-		builder.setTitle("Pick source").setItems(getNames(), onClickListener);
+		builder.setTitle("Pick source").setItems(getPhotosourceNames(), onClickListener);
 		builder.show();
 	}
 
@@ -215,8 +215,8 @@ public class MainActivity extends Activity {
 		photoSourcesTest.add(ALL_SOURCES.get(INSTAGRAM_INDEX));
 		photoSourcesTest.add(ALL_SOURCES.get(FACEBOOK_INDEX));
 		//		photoSourcesTest.add(ALL_SOURCES.get(FLICKR_INDEX));
-		//		photoSourcesTest.add(ALL_SOURCES.get(PHOTOBUCKET_INDEX));
-		//		photoSourcesTest.add(ALL_SOURCES.get(DROPBOX_INDEX));
+		photoSourcesTest.add(ALL_SOURCES.get(PHOTOBUCKET_INDEX));
+		photoSourcesTest.add(ALL_SOURCES.get(DROPBOX_INDEX));
 
 		//		photoSourcesTest.add(ALL_SOURCES.get(PICASA_INDEX));
 		photoSourcesTest.add(ALL_SOURCES.get(PRESELECTED_INDEX));
@@ -318,7 +318,7 @@ public class MainActivity extends Activity {
 		config.closeWidgetFromShoppingCart(((Switch) findViewById(R.id.closeWidgetFromShoppingCart)).isChecked());
 
 		config.setStepByStep(((Switch) findViewById(R.id.switch_step_by_step)).isChecked());
-		config.setHostAppActivity(getComponentName().getClassName());//"com.example.piosdkpoconcept.ActivityTest"
+		config.setHostAppActivity(getComponentName().getClassName()); //"com.example.piosdkpoconcept.ActivityTest"
 
 		int jumpToScreenId = -1;
 		if (((Switch) findViewById(R.id.switch_jump_to_shopping_cart)).isChecked()) {
@@ -358,9 +358,7 @@ public class MainActivity extends Activity {
 		if (photoSourcesTest.size() == 0) {
 			addDefaultPhotoSources();
 		}
-		if (photoSourcesTest.size() != 0) {
-			config.setPhotoSources(photoSourcesTest);
-		}
+		config.setPhotoSources(photoSourcesTest);
 
 		if (sideMenuInfoButtons.size() == 0) {
 			addAllSideMenuInfoButtons();
@@ -392,7 +390,7 @@ public class MainActivity extends Activity {
 			config.setPromoCode(promoCode);
 		}
 
-		if (config.isPhotosourcesDisabled() && ((config.getImageUris() == null) || (config.getImageUris().isEmpty()))) {
+		if (config.isPhotosourcesDisabled() && (config.getImageUris() == null || config.getImageUris().isEmpty())) {
 			Toast.makeText(this, "Photosources are disabled and no images were passed to the SDK", Toast.LENGTH_LONG).show();
 			return;
 		}

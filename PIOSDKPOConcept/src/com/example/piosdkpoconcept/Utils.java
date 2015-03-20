@@ -2,6 +2,8 @@ package com.example.piosdkpoconcept;
 
 import java.util.List;
 
+import android.content.Context;
+import android.util.TypedValue;
 import print.io.beans.OrderInfo;
 import print.io.beans.cart.CartItem;
 import print.io.beans.cart.ShoppingCart;
@@ -31,4 +33,11 @@ public class Utils {
 		return stringBuilder.toString();
 	}
 
+	public static int dipToPx(Context context, int dip) {
+		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dip, context.getResources().getDisplayMetrics());
+	}
+
+	public static int getScreenWidthPixels(Context context) {
+		return context.getResources().getDisplayMetrics().widthPixels;
+	}
 }

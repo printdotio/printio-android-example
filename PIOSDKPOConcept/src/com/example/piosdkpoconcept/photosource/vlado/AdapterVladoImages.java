@@ -1,33 +1,44 @@
 package com.example.piosdkpoconcept.photosource.vlado;
 
-import java.util.AbstractMap;
+import java.io.InputStream;
 import java.util.List;
 
-import print.io.R;
 import print.io.beans.GenericPhoto;
-import print.io.imageloader.BitmapManager;
-import print.io.imageloader.MyImageView;
-import print.io.photosource.BaseAdapterImages;
-import print.io.utils.FileChooserFileUtils;
 import android.content.Context;
-import android.net.Uri;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView.ScaleType;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.piosdkpoconcept.R;
+import com.example.piosdkpoconcept.Utils;
 
-public class AdapterVladoImages extends BaseAdapterImages<VladoPhotoSource, VladoPhoto> {
+public class AdapterVladoImages extends BaseAdapter {
 
-	public AdapterVladoImages(Context context, VladoPhotoSource photoSource, List<VladoPhoto> items, AbstractMap<String, GenericPhoto> selectedPhotos) {
-		super(context, photoSource);
+	private LayoutInflater inflater;
+	private List<VladoPhoto> items;
+	private int minBitmapDim;
+
+	public AdapterVladoImages(Context context, List<VladoPhoto> items, List<GenericPhoto> selectedPhotos) {
+		this.items = items;
+		this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		this.minBitmapDim = (Utils.getScreenWidthPixels(context) / 2) - Utils.dipToPx(context, 20);
+		updateSelectedPhotos(selectedPhotos);
+	}
+
+	public void setItems(List<VladoPhoto> items, List<GenericPhoto> selectedPhotos) {
 		this.items = items;
 		updateSelectedPhotos(selectedPhotos);
 	}
 
-	public void setItems(List<VladoPhoto> items, AbstractMap<String, GenericPhoto> selectedPhotos) {
-		this.items = items;
-		updateSelectedPhotos(selectedPhotos);
+	public List<VladoPhoto> getItems() {
+		return items;
 	}
 
 	@Override
@@ -45,13 +56,25 @@ public class AdapterVladoImages extends BaseAdapterImages<VladoPhotoSource, Vlad
 		return 0;
 	}
 
+	protected void updateSelectedPhotos(List<GenericPhoto> selectedPhotos) {
+		if (items != null) {
+			for (VladoPhoto item : items) {
+				GenericPhoto photo = GenericPhoto.findByImageUrl(selectedPhotos, item.getImageUrl());
+				if (photo != null) {
+					item.setSelected(true);
+					item.setIndexOfPhoto(photo.getIndexOfPhoto());
+				}
+			}
+		}
+	}
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
 		if (convertView != null) {
 			holder = (ViewHolder) convertView.getTag();
 		} else {
-			convertView = inflater.inflate(R.layout.grid_item_image_upload, parent, false);
+			convertView = inflater.inflate(R.layout.vlado_image_item, parent, false);
 			holder = new ViewHolder(convertView);
 			convertView.setTag(holder);
 		}
@@ -61,27 +84,23 @@ public class AdapterVladoImages extends BaseAdapterImages<VladoPhotoSource, Vlad
 
 	private class ViewHolder {
 
-		private MyImageView imageViewImage;
+		private ImageView imageViewImage;
 		private View viewOverlay;
 		private TextView textViewImageIndex;
 
 		public ViewHolder(View convertView) {
-			imageViewImage = (MyImageView) convertView.findViewById(R.id.imageview_image);
+			imageViewImage = (ImageView) convertView.findViewById(R.id.imageview_image);
 			viewOverlay = (View) convertView.findViewById(R.id.overlay_translucent);
 			textViewImageIndex = (TextView) convertView.findViewById(R.id.textview_image_index);
+
+			imageViewImage.getLayoutParams().width = minBitmapDim;
+			imageViewImage.getLayoutParams().height = minBitmapDim;
 		}
 
 		public void update(int position) {
 			VladoPhoto item = (VladoPhoto) getItem(position);
 			if (item != null) {
-				if (FileChooserFileUtils.isLocal(item.getImageUrl())) {
-					String thumbnailUrl = FileChooserFileUtils.getPath(context, Uri.parse(item.getThumbnailUrl()));
-					BitmapManager.loadImageInBackgroundLocal(context, thumbnailUrl, imageViewImage, ScaleType.CENTER_CROP, R.drawable.placeholder_featured, ScaleType.CENTER_CROP, minBitmapDim, null);
-				} else {
-					BitmapManager.loadImageInBackground(context, item.getThumbnailUrl(), imageViewImage, ScaleType.CENTER_CROP, R.drawable.placeholder_featured, ScaleType.CENTER_CROP, minBitmapDim,
-							null);
-				}
-
+				new DownloadImageTask(imageViewImage).execute(item.getThumbnailUrl());
 				if (item.isSelected()) {
 					viewOverlay.setVisibility(View.VISIBLE);
 					textViewImageIndex.setVisibility(View.VISIBLE);
@@ -91,8 +110,34 @@ public class AdapterVladoImages extends BaseAdapterImages<VladoPhotoSource, Vlad
 					textViewImageIndex.setVisibility(View.INVISIBLE);
 				}
 			}
-
 		}
+	}
+
+	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+
+		ImageView bmImage;
+
+		public DownloadImageTask(ImageView bmImage) {
+			this.bmImage = bmImage;
+		}
+
+		protected Bitmap doInBackground(String... urls) {
+			String urldisplay = urls[0];
+			Bitmap mIcon11 = null;
+			try {
+				InputStream in = new java.net.URL(urldisplay).openStream();
+				mIcon11 = BitmapFactory.decodeStream(in);
+			} catch (Exception e) {
+				Log.e("VladoSource", "Error downloading image");
+				e.printStackTrace();
+			}
+			return mIcon11;
+		}
+
+		protected void onPostExecute(Bitmap result) {
+			bmImage.setImageBitmap(result);
+		}
+
 	}
 
 }

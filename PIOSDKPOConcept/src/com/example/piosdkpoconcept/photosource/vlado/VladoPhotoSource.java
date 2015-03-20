@@ -7,6 +7,7 @@ import print.io.imagedownloader.PhotoSourceImageDownloaderFactory;
 import print.io.imagedownloader.imagesource.UriImageDownloader;
 import print.io.photosource.PhotoSource;
 import print.io.photosource.PhotoSourceNavigator;
+import print.io.photosource.PhotoSourceNavigator.PhotoSourceNavigatorHolder;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentActivity;
@@ -56,8 +57,8 @@ public class VladoPhotoSource implements PhotoSource {
 	}
 
 	@Override
-	public PhotoSourceNavigator<VladoPhotoSource> createPhotoSourceNavigator() {
-		return new VladoPhotoSourceNavigator(this);
+	public PhotoSourceNavigator<VladoPhotoSource> createPhotoSourceNavigator(FragmentActivity activity, PhotoSourceNavigatorHolder holder) {
+		return new VladoPhotoSourceNavigator(activity, this, holder);
 	}
 
 	@Override
