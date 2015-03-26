@@ -1,10 +1,11 @@
 package com.example.piosdkpoconcept.photosource.vlado;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+
 import print.io.R;
-import print.io.beans.GenericPhoto;
-import print.io.imagedownloader.PhotoSourceImageDownloader;
-import print.io.imagedownloader.PhotoSourceImageDownloaderFactory;
-import print.io.imagedownloader.imagesource.UriImageDownloader;
 import print.io.photosource.PhotoSource;
 import print.io.photosource.PhotoSourceNavigator;
 import print.io.photosource.PhotoSourceNavigator.PhotoSourceNavigatorHolder;
@@ -62,13 +63,17 @@ public class VladoPhotoSource implements PhotoSource {
 	}
 
 	@Override
-	public PhotoSourceImageDownloaderFactory createPhotoSourceImageDownloaderFactory() {
-		return new PhotoSourceImageDownloaderFactory() {
-
-			@Override
-			public PhotoSourceImageDownloader create(GenericPhoto photo) {
-				return new UriImageDownloader(photo);
-			}
-		};
+	public URLConnection openConnectionForImageDownload(Context context, String path) {
+		URLConnection connection = null;
+		try {
+			URL url = new URL(path);
+			connection = url.openConnection();
+		} catch (MalformedURLException e) {
+			connection = null;
+		} catch (IOException e) {
+			connection = null;
+		}
+		return connection;
 	}
+
 }
