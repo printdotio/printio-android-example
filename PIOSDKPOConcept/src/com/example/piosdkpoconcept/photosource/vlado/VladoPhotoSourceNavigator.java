@@ -5,9 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import print.io.photosource.defaultgenericimpl.DefaultPhotoSourceNavigator;
-import print.io.photosource.defaultgenericimpl.Folder;
-import print.io.photosource.defaultgenericimpl.MediaItem;
-import print.io.photosource.defaultgenericimpl.Photo;
+import print.io.photosource.defaultgenericimpl.items.Folder;
+import print.io.photosource.defaultgenericimpl.items.Item;
+import print.io.photosource.defaultgenericimpl.items.Photo;
 import android.support.v4.app.FragmentActivity;
 
 public class VladoPhotoSourceNavigator extends DefaultPhotoSourceNavigator<VladoPhotoSource> {
@@ -22,7 +22,7 @@ public class VladoPhotoSourceNavigator extends DefaultPhotoSourceNavigator<Vlado
 
 	@Override
 	protected void onLoadMedia(Folder folder, int startOffset) {
-		ArrayList<MediaItem> photos = new ArrayList<MediaItem>();
+		ArrayList<Item> photos = new ArrayList<Item>();
 		for (String imageUrl : IAMGE_URL) {
 			photos.add(new Photo(imageUrl, imageUrl));
 		}

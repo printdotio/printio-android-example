@@ -1,19 +1,14 @@
 package com.example.piosdkpoconcept.photosource.vlado;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-
 import print.io.R;
-import print.io.photosource.PhotoSource;
 import print.io.photosource.PhotoSourceNavigator;
 import print.io.photosource.PhotoSourceNavigator.PhotoSourceNavigatorHolder;
+import print.io.photosource.defaultgenericimpl.DefaultPhotoSource;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentActivity;
 
-public class VladoPhotoSource implements PhotoSource {
+public class VladoPhotoSource extends DefaultPhotoSource {
 
 	private static final long serialVersionUID = -2804726157663465818L;
 
@@ -60,20 +55,6 @@ public class VladoPhotoSource implements PhotoSource {
 	@Override
 	public PhotoSourceNavigator<VladoPhotoSource> createPhotoSourceNavigator(FragmentActivity activity, PhotoSourceNavigatorHolder holder) {
 		return new VladoPhotoSourceNavigator(activity, this, holder);
-	}
-
-	@Override
-	public URLConnection openConnectionForImageDownload(Context context, String path) {
-		URLConnection connection = null;
-		try {
-			URL url = new URL(path);
-			connection = url.openConnection();
-		} catch (MalformedURLException e) {
-			connection = null;
-		} catch (IOException e) {
-			connection = null;
-		}
-		return connection;
 	}
 
 }
