@@ -23,27 +23,27 @@ public class VladoPhotoSourceNavigator extends DefaultPhotoSourceNavigator<Vlado
 		for (int i = 0; i < IMAGE_URL.size(); i++) {
 			albums.add(new VladoAlbum(IMAGE_URL.get(i), "Album " + (i + 1), 1, i));
 		}
+		albums.add(new VladoAlbum(null, "Empty album", 0, -1));
 	}
 
 	@Override
 	protected void onLoadMedia(Folder folder, int startOffset) {
-		ArrayList<Item> photos = new ArrayList<Item>();
+		ArrayList<Item> items = new ArrayList<Item>();
 		if (folder == null) {
-			for (String imageUrl : IMAGE_URL) {
-				photos.add(new Photo(imageUrl, imageUrl));
-			}
 			for (Album album : albums) {
-				photos.add(album);
+				items.add(album);
 			}
 		} else {
-			VladoAlbum album = (VladoAlbum) folder;
-			String img = IMAGE_URL.get(album.getIndex());
-			photos.add(new Photo(img, img));
+			int index = ((VladoAlbum) folder).getIndex();
+			if (index != -1) {
+				String img = IMAGE_URL.get(index);
+				items.add(new Photo(img, img));
+			}
 		}
-		loadMediaFinished(photos);
+		loadMediaFinished(items);
 	}
 
-	public class VladoAlbum extends Album {
+	class VladoAlbum extends Album {
 
 		private int index;
 
