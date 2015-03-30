@@ -4,8 +4,10 @@ import print.io.R;
 import print.io.photosource.PhotoSourceNavigator;
 import print.io.photosource.PhotoSourceNavigator.PhotoSourceNavigatorHolder;
 import print.io.photosource.defaultgenericimpl.DefaultPhotoSource;
+import print.io.photosource.defaultgenericimpl.DialogPhotoSourceLogin.DialogPhotoSourceLoginCallback;
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentActivity;
 
@@ -13,9 +15,13 @@ public class VladoPhotoSource extends DefaultPhotoSource {
 
 	private static final long serialVersionUID = -2804726157663465818L;
 
+	private static final int SERVICE_ID = 50;
+	private static final String VLADO_PREFS_NAME = "VLADO_PREFS";
+	private static final String PREFS_LOGGED = "LOGGED";
+
 	@Override
 	public int getServiceId() {
-		return 50;
+		return SERVICE_ID;
 	}
 
 	@Override
@@ -24,28 +30,53 @@ public class VladoPhotoSource extends DefaultPhotoSource {
 	}
 
 	@Override
-	public void login(Activity context, AuthorizationCompleteListener authorizationCompleteListener) {
-		// NOP
+	public void login(final Activity context, final AuthorizationCompleteCallback authorizationCompleteCallback) {
+		showLoginDialog((FragmentActivity) context, new DialogPhotoSourceLoginCallback() {
+
+			@Override
+			public boolean attemptLogin(String username, String password) {
+				boolean result = "pajo".equals(username) && "car".equals(password);
+				if (result) {
+					SharedPreferences.Editor editor = context.getSharedPreferences(VLADO_PREFS_NAME, 0).edit();
+					editor.putBoolean(PREFS_LOGGED, result);
+					editor.commit();
+				}
+				return result;
+			}
+
+			@Override
+			public void onLoginComplete(boolean success, String response) {
+				if (authorizationCompleteCallback != null) {
+					authorizationCompleteCallback.call(success, response);
+				}
+			}
+
+			@Override
+			public void onCancel() {
+				// NOP
+			}
+
+		});
 	}
 
 	@Override
 	public void logout(Activity context) {
-		// NOP
+		context.getSharedPreferences(VLADO_PREFS_NAME, 0).edit().putBoolean(PREFS_LOGGED, false);
 	}
 
 	@Override
 	public boolean isAuthorized(Context context) {
-		return true;
+		return context.getSharedPreferences(VLADO_PREFS_NAME, 0).getBoolean(PREFS_LOGGED, false);
 	}
 
 	@Override
 	public boolean isVisibleInSideMenu() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public Drawable getSideMenuIcon(Context context) {
-		return null;
+		return context.getResources().getDrawable(R.drawable.icon_phone_60);
 	}
 
 	@Override
