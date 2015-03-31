@@ -38,8 +38,7 @@ public class VladoPhotoSource extends DefaultPhotoSource {
 				boolean result = "pajo".equals(username) && "car".equals(password);
 				if (result) {
 					SharedPreferences.Editor editor = context.getSharedPreferences(VLADO_PREFS_NAME, 0).edit();
-					editor.putBoolean(PREFS_LOGGED, result);
-					editor.commit();
+					editor.putBoolean(PREFS_LOGGED, result).commit();
 				}
 				return result;
 			}
@@ -61,7 +60,8 @@ public class VladoPhotoSource extends DefaultPhotoSource {
 
 	@Override
 	public void logout(Activity context) {
-		context.getSharedPreferences(VLADO_PREFS_NAME, 0).edit().putBoolean(PREFS_LOGGED, false);
+		SharedPreferences.Editor editor = context.getSharedPreferences(VLADO_PREFS_NAME, 0).edit();
+		editor.putBoolean(PREFS_LOGGED, false).commit();
 	}
 
 	@Override
