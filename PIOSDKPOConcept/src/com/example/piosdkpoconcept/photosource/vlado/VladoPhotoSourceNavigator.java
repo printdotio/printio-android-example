@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import print.io.photosource.PhotoSourceNavigatorHolder;
 import print.io.photosource.defaultgenericimpl.DefaultPhotoSourceNavigator;
 import print.io.photosource.defaultgenericimpl.items.Album;
 import print.io.photosource.defaultgenericimpl.items.Folder;
 import print.io.photosource.defaultgenericimpl.items.Item;
 import print.io.photosource.defaultgenericimpl.items.Photo;
-import android.support.v4.app.FragmentActivity;
 
 public class VladoPhotoSourceNavigator extends DefaultPhotoSourceNavigator<VladoPhotoSource> {
 
@@ -18,8 +18,8 @@ public class VladoPhotoSourceNavigator extends DefaultPhotoSourceNavigator<Vlado
 					"https://scontent-ams.xx.fbcdn.net/hphotos-prn2/t31.0-8/1268224_10201569069964657_1243815332_o.jpg");
 	private List<Album> albums = new ArrayList<Album>();
 
-	public VladoPhotoSourceNavigator(FragmentActivity activity, VladoPhotoSource photoSource, print.io.photosource.PhotoSourceNavigator.PhotoSourceNavigatorHolder holder) {
-		super(activity, photoSource, holder);
+	public VladoPhotoSourceNavigator(VladoPhotoSource photoSource, PhotoSourceNavigatorHolder holder) {
+		super(photoSource, holder);
 		for (int i = 0; i < IMAGE_URL.size(); i++) {
 			albums.add(new VladoAlbum(IMAGE_URL.get(i), "Album " + (i + 1), 1, i));
 		}

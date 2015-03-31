@@ -2,7 +2,7 @@ package com.example.piosdkpoconcept.photosource.vlado;
 
 import print.io.R;
 import print.io.photosource.PhotoSourceNavigator;
-import print.io.photosource.PhotoSourceNavigator.PhotoSourceNavigatorHolder;
+import print.io.photosource.PhotoSourceNavigatorHolder;
 import print.io.photosource.defaultgenericimpl.DefaultPhotoSource;
 import print.io.photosource.defaultgenericimpl.DialogPhotoSourceLogin.DialogPhotoSourceLoginCallback;
 import android.app.Activity;
@@ -85,8 +85,8 @@ public class VladoPhotoSource extends DefaultPhotoSource {
 	}
 
 	@Override
-	public PhotoSourceNavigator<VladoPhotoSource> createPhotoSourceNavigator(FragmentActivity activity, PhotoSourceNavigatorHolder holder) {
-		return new VladoPhotoSourceNavigator(activity, this, holder);
+	public PhotoSourceNavigator<VladoPhotoSource> createPhotoSourceNavigator(PhotoSourceNavigatorHolder holder) {
+		return new VladoPhotoSourceNavigator(this, holder);
 	}
 
 }
