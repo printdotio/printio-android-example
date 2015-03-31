@@ -27,7 +27,7 @@ public class VladoPhotoSourceNavigator extends DefaultPhotoSourceNavigator<Vlado
 	}
 
 	@Override
-	protected void onLoadMedia(Folder folder, int startOffset) {
+	protected void onLoadMedia(Folder folder, int startOffset, int defaultPageSize) {
 		ArrayList<Item> items = new ArrayList<Item>();
 		if (folder == null) {
 			for (Album album : albums) {
