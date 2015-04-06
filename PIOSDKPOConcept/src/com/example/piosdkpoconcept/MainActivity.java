@@ -191,8 +191,11 @@ public class MainActivity extends Activity {
 		DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
 
 			public void onClick(DialogInterface dialog, int which) {
-				photoSourcesTest.add(ALL_SOURCES.get(which));
-				photoSourcesText.setText(photoSourcesText.getText() + "  |  " + ALL_SOURCES.get(which).getName(MainActivity.this));
+				PhotoSource source = ALL_SOURCES.get(which);
+				if (!photoSourcesTest.contains(source)) {
+					photoSourcesTest.add(ALL_SOURCES.get(which));
+					photoSourcesText.setText(photoSourcesText.getText() + "  |  " + ALL_SOURCES.get(which).getName(MainActivity.this));
+				}
 			}
 		};
 		builder.setTitle("Pick source").setItems(getPhotosourceNames(), onClickListener);
