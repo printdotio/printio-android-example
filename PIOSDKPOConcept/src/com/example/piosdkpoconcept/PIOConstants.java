@@ -48,7 +48,8 @@ public class PIOConstants {
 
 	public static class PayPal {
 
-		public static final String CLIENT_ID = "Abc28BC9ItxS1v1AEKfLON2VWvmzoKX-ICD6fj1A2DyQS3Y5_DBFPmfHrusQ";
+		public static final String CLIENT_ID_STAGING = "Abc28BC9ItxS1v1AEKfLON2VWvmzoKX-ICD6fj1A2DyQS3Y5_DBFPmfHrusQ";
+		public static final String CLIENT_ID_LIVE = "AXHKmxDEQUXfeKP2C5gBDqYcF6BA9r3_2hJNdm_MIfo7MQG5T8yt3Xvf1TAh";
 	}
 
 	public static class Parse {

@@ -102,7 +102,6 @@ public class MainActivity extends Activity {
 		config.setDropboxConsumerSecret(PIOConstants.Dropbox.CONSUMER_SECRET);
 		config.setPhotobucketClientId(PIOConstants.Photobucket.CLIENT_ID);
 		config.setPhotobucketClientSecret(PIOConstants.Photobucket.CLIENT_SECRET);
-		config.setPayPalClientId(PIOConstants.PayPal.CLIENT_ID);
 		config.setGoogleAnalyticsTrackId("UA-28619845-2");
 	}
 
@@ -111,15 +110,19 @@ public class MainActivity extends Activity {
 
 		String recipeId;
 		String braintreeEncryptionKey;
+		String payPalClientId;
 		if (isLive) {
 			recipeId = PIOConstants.RECIPE_ID_LIVE;
 			braintreeEncryptionKey = PIOConstants.Braintree.ENCRYPTION_KEY_LIVE;
+			payPalClientId = PIOConstants.PayPal.CLIENT_ID_LIVE;
 		} else {
 			recipeId = PIOConstants.RECIPE_ID_STAGING;
 			braintreeEncryptionKey = PIOConstants.Braintree.ENCRYPTION_KEY_STAGING;
+			payPalClientId = PIOConstants.PayPal.CLIENT_ID_STAGING;
 		}
 		config.setRecipeID(recipeId);
 		config.setBraintreeEncryptionKey(braintreeEncryptionKey);
+		config.setPayPalClientId(payPalClientId);
 
 		if (config.isLiveApplication() || config.isLiveTestingApplication()) {
 			config.setApiUrl(PublicConstants.API_URL_LIVE);
