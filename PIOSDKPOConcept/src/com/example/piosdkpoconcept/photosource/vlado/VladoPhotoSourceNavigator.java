@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import print.io.photosource.PhotoSourceNavigatorHolder;
+import print.io.photosource.defaultgenericimpl.DefaultLoadMediaResult;
 import print.io.photosource.defaultgenericimpl.DefaultPhotoSourceNavigator;
 import print.io.photosource.defaultgenericimpl.items.Album;
 import print.io.photosource.defaultgenericimpl.items.Folder;
@@ -27,7 +28,7 @@ public class VladoPhotoSourceNavigator extends DefaultPhotoSourceNavigator<Vlado
 	}
 
 	@Override
-	protected void onLoadMedia(Folder folder, int startOffset, int defaultPageSize) {
+	protected LoadMediaResult onLoadMedia(Folder folder, int startOffset, int defaultPageSize) {
 		ArrayList<Item> items = new ArrayList<Item>();
 		if (folder == null) {
 			for (Album album : albums) {
@@ -40,7 +41,7 @@ public class VladoPhotoSourceNavigator extends DefaultPhotoSourceNavigator<Vlado
 				items.add(new Photo(img, img));
 			}
 		}
-		loadMediaFinished(items);
+		return new DefaultLoadMediaResult(items);
 	}
 
 	class VladoAlbum extends Album {
