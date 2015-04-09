@@ -2,7 +2,7 @@ package com.example.piosdkpoconcept;
 
 import java.util.ArrayList;
 
-import print.io.PublicConstants;
+import print.io.PIOConfig.ProductIdType;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +16,11 @@ public class SpinnerAdapterJumpToProduct extends BaseAdapter implements SpinnerA
 	private class NameIdPair {
 
 		public String name;
-		public int id;
+		public ProductIdType productIdType;
 
-		public NameIdPair(String name, int id) {
+		public NameIdPair(String name, ProductIdType id) {
 			this.name = name;
-			this.id = id;
+			this.productIdType = id;
 		}
 	}
 
@@ -30,50 +30,50 @@ public class SpinnerAdapterJumpToProduct extends BaseAdapter implements SpinnerA
 	public SpinnerAdapterJumpToProduct(Context context) {
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		items = new ArrayList<NameIdPair>();
-		items.add(new NameIdPair("No product selected", SpinnerAdapter.NO_SELECTION));
+		items.add(new NameIdPair("No product selected", null));
 
-		items.add(new NameIdPair("Phone Cases", PublicConstants.ProductIds.PHONE_CASES));
-		items.add(new NameIdPair("Acrylic Blocks", PublicConstants.ProductIds.ACRYLIC_BLOCKS));
-		items.add(new NameIdPair("Acrylic Prints", PublicConstants.ProductIds.ACRYLIC_PRINTS));
-		items.add(new NameIdPair("Everything Bags", PublicConstants.ProductIds.EVERYTHING_BAGS));
-		items.add(new NameIdPair("Tote Bags", PublicConstants.ProductIds.TOTE_BAGS));
-		// items.add(new NameIdPair("Calendars", PublicConstants.ProductIds.CALENDARS)); // NOT AVALIABLE!
-		items.add(new NameIdPair("Canvas Minis", PublicConstants.ProductIds.CANVAS_MINIS));
-		items.add(new NameIdPair("Canvas Posters", PublicConstants.ProductIds.CANVAS_POSTERS));
-		items.add(new NameIdPair("Canvas Wraps", PublicConstants.ProductIds.CANVAS_WRAPS));
-		items.add(new NameIdPair("Coasters", PublicConstants.ProductIds.COASTERS));
-		items.add(new NameIdPair("Cube Decor", PublicConstants.ProductIds.CUBE_DECOR));
-		items.add(new NameIdPair("Duvet Cover", PublicConstants.ProductIds.DUVET_COVER));
-		items.add(new NameIdPair("Dog Beds", PublicConstants.ProductIds.DOG_BEDS));
-		items.add(new NameIdPair("Flat Cards", PublicConstants.ProductIds.FLAT_CARDS));
-		items.add(new NameIdPair("Fleece Blankets", PublicConstants.ProductIds.FLEECE_BLANKETS));
-		items.add(new NameIdPair("Folder Cards", PublicConstants.ProductIds.FOLDED_CARDS));
-		items.add(new NameIdPair("Framed Prints", PublicConstants.ProductIds.FRAMED_PRINTS));
-		items.add(new NameIdPair("Laptop Skins", PublicConstants.ProductIds.LAPTOP_SKINS));
-		items.add(new NameIdPair("Magnetgram", PublicConstants.ProductIds.MAGNETGRAM));
-		items.add(new NameIdPair("Metal Magnets", PublicConstants.ProductIds.METAL_MAGNETS));
-		items.add(new NameIdPair("Metal Prints", PublicConstants.ProductIds.METAL_PRINTS));
-		// items.add(new NameIdPair("Minibook Deluxe", PublicConstants.ProductIds.MINIBOOK_DELUXE)); // NOT AVALIABLE!
-		items.add(new NameIdPair("Minibooks", PublicConstants.ProductIds.MINIBOOKS));
-		items.add(new NameIdPair("Mousepads", PublicConstants.ProductIds.MOUSEPADS));
-		items.add(new NameIdPair("Mugs", PublicConstants.ProductIds.MUGS));
-		items.add(new NameIdPair("Playing Cards", PublicConstants.ProductIds.PLAYING_CARDS));
-		items.add(new NameIdPair("Postcards", PublicConstants.ProductIds.POSTCARDS));
-		// items.add(new NameIdPair("Posters", PublicConstants.ProductIds.POSTERS)); // NOT AVALIABLE!
-		items.add(new NameIdPair("Prints", PublicConstants.ProductIds.PRINTS));
-		items.add(new NameIdPair("Professional prints", PublicConstants.ProductIds.PROFESSIONAL_PRINTS));
-		items.add(new NameIdPair("Rugs", PublicConstants.ProductIds.RUGS));
-		items.add(new NameIdPair("Shower Curtains", PublicConstants.ProductIds.SHOWER_CURTAINS));
-		items.add(new NameIdPair("Stickerbooks", PublicConstants.ProductIds.STICKERBOOKS));
-		items.add(new NameIdPair("T-Shirts", PublicConstants.ProductIds.T_SHIRTS));
-		items.add(new NameIdPair("Tablet Cases", PublicConstants.ProductIds.TABLET_CASES));
-		items.add(new NameIdPair("Thick Prints", PublicConstants.ProductIds.THICK_PRINTS));
-		items.add(new NameIdPair("Throw Pillows", PublicConstants.ProductIds.THROW_PILLOWS));
-		items.add(new NameIdPair("Tinybooks", PublicConstants.ProductIds.TINYBOOKS));
-		items.add(new NameIdPair("Wall Calendars", PublicConstants.ProductIds.WALL_CALENDARS));
-		items.add(new NameIdPair("Wall Skin", PublicConstants.ProductIds.WALL_SKIN));
-		// items.add(new NameIdPair("Wood Prints", PublicConstants.ProductIds.WOOD_PRINTS)); // NOT AVALIABLE!
-		items.add(new NameIdPair("Woven Blankets", PublicConstants.ProductIds.WOVEN_BLANKETS));
+		items.add(new NameIdPair("Phone Cases", ProductIdType.PHONE_CASES));
+		items.add(new NameIdPair("Acrylic Blocks", ProductIdType.ACRYLIC_BLOCKS));
+		items.add(new NameIdPair("Acrylic Prints", ProductIdType.ACRYLIC_PRINTS));
+		items.add(new NameIdPair("Everything Bags", ProductIdType.EVERYTHING_BAGS));
+		items.add(new NameIdPair("Tote Bags", ProductIdType.TOTE_BAGS));
+		// items.add(new NameIdPair("Calendars", ProductIdType.CALENDARS)); // NOT AVALIABLE!
+		items.add(new NameIdPair("Canvas Minis", ProductIdType.CANVAS_MINIS));
+		items.add(new NameIdPair("Canvas Posters", ProductIdType.CANVAS_POSTERS));
+		items.add(new NameIdPair("Canvas Wraps", ProductIdType.CANVAS_WRAPS));
+		items.add(new NameIdPair("Coasters", ProductIdType.COASTERS));
+		items.add(new NameIdPair("Cube Decor", ProductIdType.CUBE_DECOR));
+		items.add(new NameIdPair("Duvet Cover", ProductIdType.DUVET_COVER));
+		items.add(new NameIdPair("Dog Beds", ProductIdType.DOG_BEDS));
+		items.add(new NameIdPair("Flat Cards", ProductIdType.FLAT_CARDS));
+		items.add(new NameIdPair("Fleece Blankets", ProductIdType.FLEECE_BLANKETS));
+		items.add(new NameIdPair("Folder Cards", ProductIdType.FOLDED_CARDS));
+		items.add(new NameIdPair("Framed Prints", ProductIdType.FRAMED_PRINTS));
+		items.add(new NameIdPair("Laptop Skins", ProductIdType.LAPTOP_SKINS));
+		items.add(new NameIdPair("Magnetgram", ProductIdType.MAGNETGRAM));
+		items.add(new NameIdPair("Metal Magnets", ProductIdType.METAL_MAGNETS));
+		items.add(new NameIdPair("Metal Prints", ProductIdType.METAL_PRINTS));
+		// items.add(new NameIdPair("Minibook Deluxe", ProductIdType.MINIBOOK_DELUXE)); // NOT AVALIABLE!
+		items.add(new NameIdPair("Minibooks", ProductIdType.MINIBOOKS));
+		items.add(new NameIdPair("Mousepads", ProductIdType.MOUSEPADS));
+		items.add(new NameIdPair("Mugs", ProductIdType.MUGS));
+		items.add(new NameIdPair("Playing Cards", ProductIdType.PLAYING_CARDS));
+		items.add(new NameIdPair("Postcards", ProductIdType.POSTCARDS));
+		// items.add(new NameIdPair("Posters", ProductIdType.POSTERS)); // NOT AVALIABLE!
+		items.add(new NameIdPair("Prints", ProductIdType.PRINTS));
+		items.add(new NameIdPair("Professional prints", ProductIdType.PROFESSIONAL_PRINTS));
+		items.add(new NameIdPair("Rugs", ProductIdType.RUGS));
+		items.add(new NameIdPair("Shower Curtains", ProductIdType.SHOWER_CURTAINS));
+		items.add(new NameIdPair("Stickerbooks", ProductIdType.STICKERBOOKS));
+		items.add(new NameIdPair("T-Shirts", ProductIdType.T_SHIRTS));
+		items.add(new NameIdPair("Tablet Cases", ProductIdType.TABLET_CASES));
+		items.add(new NameIdPair("Thick Prints", ProductIdType.THICK_PRINTS));
+		items.add(new NameIdPair("Throw Pillows", ProductIdType.THROW_PILLOWS));
+		items.add(new NameIdPair("Tinybooks", ProductIdType.TINYBOOKS));
+		items.add(new NameIdPair("Wall Calendars", ProductIdType.WALL_CALENDARS));
+		items.add(new NameIdPair("Wall Skin", ProductIdType.WALL_SKIN));
+		// items.add(new NameIdPair("Wood Prints", ProductIdType.WOOD_PRINTS)); // NOT AVALIABLE!
+		items.add(new NameIdPair("Woven Blankets", ProductIdType.WOVEN_BLANKETS));
 	}
 
 	@Override
@@ -88,7 +88,8 @@ public class SpinnerAdapterJumpToProduct extends BaseAdapter implements SpinnerA
 
 	@Override
 	public long getItemId(int position) {
-		return items.get(position).id;
+		ProductIdType idType = items.get(position).productIdType;
+		return idType == null ? SpinnerAdapter.NO_SELECTION : idType.ordinal();
 	}
 
 	private class ViewHolder {

@@ -7,6 +7,7 @@ import java.util.List;
 import print.io.PIO;
 import print.io.PIOConfig;
 import print.io.PIOConfig.PhotoSource;
+import print.io.PIOConfig.ProductIdType;
 import print.io.PIOConfig.SideMenuButton;
 import print.io.PIOConfig.SideMenuInfoButton;
 import print.io.PIOException;
@@ -330,14 +331,17 @@ public class MainActivity extends Activity {
 		config.setPaymentOptions((int) spinnerPaymentOptions.getSelectedItemId());
 
 		// Jump to product
-		int selectedProductId = (int) spinnerJumpToProduct.getSelectedItemId();
-		if (selectedProductId == SpinnerAdapter.NO_SELECTION) {
-			selectedProductId = -1;
+		ProductIdType selectedProductIdType;
+		int id = (int) spinnerJumpToProduct.getSelectedItemId();
+		if (id == SpinnerAdapter.NO_SELECTION) {
+			selectedProductIdType = null;
+		} else {
+			selectedProductIdType = ProductIdType.values()[id];
 		}
-		config.setProductIdFromApp(selectedProductId);
+		config.setProductFromApp(selectedProductIdType);
 		config.setSkipProductDetails(switchSkipProductDetailsScreen.isChecked());
 		config.setProductSkuFromApp(((EditText) findViewById(R.id.editSKU)).getText().toString());
-		if (StringUtils.isNotBlank(config.getProductSkuFromApp()) && selectedProductId == -1) {
+		if (StringUtils.isNotBlank(config.getProductSkuFromApp()) && selectedProductIdType == null) {
 			Toast.makeText(this, "Product must be specified when SKU is supplied", Toast.LENGTH_LONG).show();
 			return;
 		}
