@@ -2,16 +2,25 @@ package com.example.piosdkpoconcept;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import print.io.PIO;
 import print.io.PIOConfig;
 import print.io.PIOException;
 import print.io.PublicConstants;
-import print.io.piopublic.PhotoSource;
 import print.io.piopublic.ProductType;
 import print.io.piopublic.SideMenuButton;
 import print.io.piopublic.SideMenuInfoButton;
+import print.io.photosource.PhotoSource;
+import print.io.photosource.impl.dropbox.DropboxPhotoSource;
+import print.io.photosource.impl.facebook.FacebookPhotoSource;
+import print.io.photosource.impl.flickr.FlickrPhotoSource;
+import print.io.photosource.impl.instagram.InstagramPhotoSource;
+import print.io.photosource.impl.phone.PhonePhotoSource;
+import print.io.photosource.impl.photobucket.PhotobucketPhotoSource;
+import print.io.photosource.impl.picasa.PicasaPhotoSource;
+import print.io.photosource.impl.preselected.PreselectedPhotoSource;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -35,7 +44,48 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.example.piosdkpoconcept.photosource.vlado.VladoPhotoSource;
+
 public class MainActivity extends Activity {
+
+	private static final int DROPBOX_INDEX = 0;
+	private static final int FACEBOOK_INDEX = 1;
+	private static final int FLICKR_INDEX = 2;
+	private static final int INSTAGRAM_INDEX = 3;
+	private static final int PHONE_INDEX = 4;
+	private static final int PHOTOBUCKET_INDEX = 5;
+	private static final int PICASA_INDEX = 6;
+	private static final int PRESELECTED_INDEX = 7;
+	private static final int VLADO_PHOTO = 8;
+	private static final List<PhotoSource> ALL_SOURCES;
+	static {
+		DropboxPhotoSource dropboxPhotoSource = new DropboxPhotoSource();
+		dropboxPhotoSource.setConsumerKey(PIOConstants.Dropbox.CONSUMER_KEY);
+		dropboxPhotoSource.setConsumerSecret(PIOConstants.Dropbox.CONSUMER_SECRET);
+
+		InstagramPhotoSource instagramPhotoSource = new InstagramPhotoSource();
+		instagramPhotoSource.setClientId(PIOConstants.Instagram.CLIENT_ID);
+		instagramPhotoSource.setCallbackUri(PIOConstants.Instagram.CALLBACK_URI);
+
+		FlickrPhotoSource flickrPhotoSource = new FlickrPhotoSource();
+		flickrPhotoSource.setConsumerKey(PIOConstants.Flickr.CONSUMER_KEY);
+		flickrPhotoSource.setConsumerSecret(PIOConstants.Flickr.CONSUMER_SECRET);
+
+		PhotobucketPhotoSource photobucketPhotoSource = new PhotobucketPhotoSource();
+		photobucketPhotoSource.setClientId(PIOConstants.Photobucket.CLIENT_ID);
+		photobucketPhotoSource.setClientSecret(PIOConstants.Photobucket.CLIENT_SECRET);
+
+		ALL_SOURCES = Collections.unmodifiableList(Arrays.asList(
+				dropboxPhotoSource,
+				new FacebookPhotoSource(),
+				flickrPhotoSource,
+				instagramPhotoSource,
+				new PhonePhotoSource(),
+				photobucketPhotoSource,
+				new PicasaPhotoSource(),
+				new PreselectedPhotoSource(),
+				new VladoPhotoSource()));
+	}
 
 	private EditText editTextAddImageToSdk;
 	private Spinner spinnerPaymentOptions;
@@ -95,14 +145,6 @@ public class MainActivity extends Activity {
 		config.setGooglePlayRateUrl(PIOConstants.GOOGLE_PLAY_RATE_URL);
 		config.setFacebookPageUrl(PIOConstants.FACEBOOK_PAGE_URL);
 		config.setFacebookAppId(getString(R.string.facebook_app_id));
-		config.setInstagramClientId(PIOConstants.Instagram.CLIENT_ID);
-		config.setInstagramCallbackUri(PIOConstants.Instagram.CALLBACK_URI);
-		config.setFlickrConsumerKey(PIOConstants.Flickr.CONSUMER_KEY);
-		config.setFlickrConsumerSecret(PIOConstants.Flickr.CONSUMER_SECRET);
-		config.setDropboxConsumerKey(PIOConstants.Dropbox.CONSUMER_KEY);
-		config.setDropboxConsumerSecret(PIOConstants.Dropbox.CONSUMER_SECRET);
-		config.setPhotobucketClientId(PIOConstants.Photobucket.CLIENT_ID);
-		config.setPhotobucketClientSecret(PIOConstants.Photobucket.CLIENT_SECRET);
 		config.setGoogleAnalyticsTrackId("UA-28619845-2");
 	}
 
@@ -134,8 +176,12 @@ public class MainActivity extends Activity {
 		spinnerJumpToProduct.setAdapter(new SpinnerAdapterJumpToProduct(this));
 	}
 
-	private String[] getNames(Class<? extends Enum<?>> e) {
-		return Arrays.toString(e.getEnumConstants()).replaceAll("^.|.$", "").split(", ");
+	private String[] getPhotosourceNames() {
+		List<String> names = new ArrayList<String>(ALL_SOURCES.size());
+		for (PhotoSource ps : ALL_SOURCES) {
+			names.add(ps.getName(this));
+		}
+		return names.toArray(new String[names.size()]);
 	}
 
 	public void onClickAddPhotoSource(View v) {
@@ -145,11 +191,14 @@ public class MainActivity extends Activity {
 		DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
 
 			public void onClick(DialogInterface dialog, int which) {
-				photoSourcesTest.add(PhotoSource.values()[which]);
-				photoSourcesText.setText(photoSourcesText.getText() + "  |  " + PhotoSource.values()[which]);
+				PhotoSource source = ALL_SOURCES.get(which);
+				if (!photoSourcesTest.contains(source)) {
+					photoSourcesTest.add(ALL_SOURCES.get(which));
+					photoSourcesText.setText(photoSourcesText.getText() + "  |  " + ALL_SOURCES.get(which).getName(MainActivity.this));
+				}
 			}
 		};
-		builder.setTitle("Pick source").setItems(getNames(PhotoSource.class), onClickListener);
+		builder.setTitle("Pick source").setItems(getPhotosourceNames(), onClickListener);
 		builder.show();
 	}
 
@@ -165,21 +214,15 @@ public class MainActivity extends Activity {
 
 	private void addDefaultPhotoSources() {
 		// Only up to 6
-		photoSourcesTest.add(PhotoSource.PHONE);
-		photoSourcesTest.add(PhotoSource.INSTAGRAM);
-		photoSourcesTest.add(PhotoSource.FACEBOOK);
-		photoSourcesTest.add(PhotoSource.FLICKR);
-		photoSourcesTest.add(PhotoSource.PHOTOBUCKET);
-		photoSourcesTest.add(PhotoSource.DROPBOX);
-		//photoSourcesTest.add(PhotoSource.PICASA);
-		//photoSourcesTest.add(PhotoSource.PRESELECTED);
-	}
+		photoSourcesTest.add(ALL_SOURCES.get(PHONE_INDEX));
+		photoSourcesTest.add(ALL_SOURCES.get(INSTAGRAM_INDEX));
+		photoSourcesTest.add(ALL_SOURCES.get(FACEBOOK_INDEX));
+		//		photoSourcesTest.add(ALL_SOURCES.get(FLICKR_INDEX));
+		photoSourcesTest.add(ALL_SOURCES.get(PHOTOBUCKET_INDEX));
+		photoSourcesTest.add(ALL_SOURCES.get(DROPBOX_INDEX));
 
-	private void addAlternatePhotoSources() {
-		// Only up to 6
-		photoSourcesTest.add(PhotoSource.PHONE);
-		photoSourcesTest.add(PhotoSource.INSTAGRAM);
-		photoSourcesTest.add(PhotoSource.PRESELECTED);
+		//		photoSourcesTest.add(ALL_SOURCES.get(PICASA_INDEX));
+		photoSourcesTest.add(ALL_SOURCES.get(PRESELECTED_INDEX));
 	}
 
 	private void addAllSideMenuInfoButtons() {
@@ -278,7 +321,7 @@ public class MainActivity extends Activity {
 		config.closeWidgetFromShoppingCart(((Switch) findViewById(R.id.closeWidgetFromShoppingCart)).isChecked());
 
 		config.setStepByStep(((Switch) findViewById(R.id.switch_step_by_step)).isChecked());
-		config.setHostAppActivity(getComponentName().getClassName());//"com.example.piosdkpoconcept.ActivityTest"
+		config.setHostAppActivity(getComponentName().getClassName()); //"com.example.piosdkpoconcept.ActivityTest"
 
 		int jumpToScreenId = -1;
 		if (((Switch) findViewById(R.id.switch_jump_to_shopping_cart)).isChecked()) {
@@ -317,11 +360,8 @@ public class MainActivity extends Activity {
 
 		if (photoSourcesTest.size() == 0) {
 			addDefaultPhotoSources();
-			//addAlternatePhotoSources();
 		}
-		if (photoSourcesTest.size() != 0) {
-			config.setPhotoSources(photoSourcesTest);
-		}
+		config.setPhotoSources(photoSourcesTest);
 
 		if (sideMenuInfoButtons.size() == 0) {
 			addAllSideMenuInfoButtons();
@@ -353,7 +393,7 @@ public class MainActivity extends Activity {
 			config.setPromoCode(promoCode);
 		}
 
-		if (config.isPhotosourcesDisabled() && ((config.getImageUris() == null) || (config.getImageUris().isEmpty()))) {
+		if (config.isPhotosourcesDisabled() && (config.getImageUris() == null || config.getImageUris().isEmpty())) {
 			Toast.makeText(this, "Photosources are disabled and no images were passed to the SDK", Toast.LENGTH_LONG).show();
 			return;
 		}
