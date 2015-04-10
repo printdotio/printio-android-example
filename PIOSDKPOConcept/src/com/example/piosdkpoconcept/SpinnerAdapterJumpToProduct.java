@@ -2,7 +2,7 @@ package com.example.piosdkpoconcept;
 
 import java.util.ArrayList;
 
-import print.io.PIOConfig.ProductIdType;
+import print.io.beans.ProductType;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +16,9 @@ public class SpinnerAdapterJumpToProduct extends BaseAdapter implements SpinnerA
 	private class NameIdPair {
 
 		public String name;
-		public ProductIdType productIdType;
+		public ProductType productIdType;
 
-		public NameIdPair(String name, ProductIdType id) {
+		public NameIdPair(String name, ProductType id) {
 			this.name = name;
 			this.productIdType = id;
 		}
@@ -32,48 +32,48 @@ public class SpinnerAdapterJumpToProduct extends BaseAdapter implements SpinnerA
 		items = new ArrayList<NameIdPair>();
 		items.add(new NameIdPair("No product selected", null));
 
-		items.add(new NameIdPair("Phone Cases", ProductIdType.PHONE_CASES));
-		items.add(new NameIdPair("Acrylic Blocks", ProductIdType.ACRYLIC_BLOCKS));
-		items.add(new NameIdPair("Acrylic Prints", ProductIdType.ACRYLIC_PRINTS));
-		items.add(new NameIdPair("Everything Bags", ProductIdType.EVERYTHING_BAGS));
-		items.add(new NameIdPair("Tote Bags", ProductIdType.TOTE_BAGS));
-		// items.add(new NameIdPair("Calendars", ProductIdType.CALENDARS)); // NOT AVALIABLE!
-		items.add(new NameIdPair("Canvas Minis", ProductIdType.CANVAS_MINIS));
-		items.add(new NameIdPair("Canvas Posters", ProductIdType.CANVAS_POSTERS));
-		items.add(new NameIdPair("Canvas Wraps", ProductIdType.CANVAS_WRAPS));
-		items.add(new NameIdPair("Coasters", ProductIdType.COASTERS));
-		items.add(new NameIdPair("Cube Decor", ProductIdType.CUBE_DECOR));
-		items.add(new NameIdPair("Duvet Cover", ProductIdType.DUVET_COVER));
-		items.add(new NameIdPair("Dog Beds", ProductIdType.DOG_BEDS));
-		items.add(new NameIdPair("Flat Cards", ProductIdType.FLAT_CARDS));
-		items.add(new NameIdPair("Fleece Blankets", ProductIdType.FLEECE_BLANKETS));
-		items.add(new NameIdPair("Folder Cards", ProductIdType.FOLDED_CARDS));
-		items.add(new NameIdPair("Framed Prints", ProductIdType.FRAMED_PRINTS));
-		items.add(new NameIdPair("Laptop Skins", ProductIdType.LAPTOP_SKINS));
-		items.add(new NameIdPair("Magnetgram", ProductIdType.MAGNETGRAM));
-		items.add(new NameIdPair("Metal Magnets", ProductIdType.METAL_MAGNETS));
-		items.add(new NameIdPair("Metal Prints", ProductIdType.METAL_PRINTS));
-		// items.add(new NameIdPair("Minibook Deluxe", ProductIdType.MINIBOOK_DELUXE)); // NOT AVALIABLE!
-		items.add(new NameIdPair("Minibooks", ProductIdType.MINIBOOKS));
-		items.add(new NameIdPair("Mousepads", ProductIdType.MOUSEPADS));
-		items.add(new NameIdPair("Mugs", ProductIdType.MUGS));
-		items.add(new NameIdPair("Playing Cards", ProductIdType.PLAYING_CARDS));
-		items.add(new NameIdPair("Postcards", ProductIdType.POSTCARDS));
-		// items.add(new NameIdPair("Posters", ProductIdType.POSTERS)); // NOT AVALIABLE!
-		items.add(new NameIdPair("Prints", ProductIdType.PRINTS));
-		items.add(new NameIdPair("Professional prints", ProductIdType.PROFESSIONAL_PRINTS));
-		items.add(new NameIdPair("Rugs", ProductIdType.RUGS));
-		items.add(new NameIdPair("Shower Curtains", ProductIdType.SHOWER_CURTAINS));
-		items.add(new NameIdPair("Stickerbooks", ProductIdType.STICKERBOOKS));
-		items.add(new NameIdPair("T-Shirts", ProductIdType.T_SHIRTS));
-		items.add(new NameIdPair("Tablet Cases", ProductIdType.TABLET_CASES));
-		items.add(new NameIdPair("Thick Prints", ProductIdType.THICK_PRINTS));
-		items.add(new NameIdPair("Throw Pillows", ProductIdType.THROW_PILLOWS));
-		items.add(new NameIdPair("Tinybooks", ProductIdType.TINYBOOKS));
-		items.add(new NameIdPair("Wall Calendars", ProductIdType.WALL_CALENDARS));
-		items.add(new NameIdPair("Wall Skin", ProductIdType.WALL_SKIN));
-		// items.add(new NameIdPair("Wood Prints", ProductIdType.WOOD_PRINTS)); // NOT AVALIABLE!
-		items.add(new NameIdPair("Woven Blankets", ProductIdType.WOVEN_BLANKETS));
+		items.add(new NameIdPair("Phone Cases", ProductType.PHONE_CASES));
+		items.add(new NameIdPair("Acrylic Blocks", ProductType.ACRYLIC_BLOCKS));
+		items.add(new NameIdPair("Acrylic Prints", ProductType.ACRYLIC_PRINTS));
+		items.add(new NameIdPair("Everything Bags", ProductType.EVERYTHING_BAGS));
+		items.add(new NameIdPair("Tote Bags", ProductType.TOTE_BAGS));
+		// items.add(new NameIdPair("Calendars", ProductType.CALENDARS)); // NOT AVALIABLE!
+		items.add(new NameIdPair("Canvas Minis", ProductType.CANVAS_MINIS));
+		items.add(new NameIdPair("Canvas Posters", ProductType.CANVAS_POSTERS));
+		items.add(new NameIdPair("Canvas Wraps", ProductType.CANVAS_WRAPS));
+		items.add(new NameIdPair("Coasters", ProductType.COASTERS));
+		items.add(new NameIdPair("Cube Decor", ProductType.CUBE_DECOR));
+		items.add(new NameIdPair("Duvet Cover", ProductType.DUVET_COVER));
+		items.add(new NameIdPair("Dog Beds", ProductType.DOG_BEDS));
+		items.add(new NameIdPair("Flat Cards", ProductType.FLAT_CARDS));
+		items.add(new NameIdPair("Fleece Blankets", ProductType.FLEECE_BLANKETS));
+		items.add(new NameIdPair("Folder Cards", ProductType.FOLDED_CARDS));
+		items.add(new NameIdPair("Framed Prints", ProductType.FRAMED_PRINTS));
+		items.add(new NameIdPair("Laptop Skins", ProductType.LAPTOP_SKINS));
+		items.add(new NameIdPair("Magnetgram", ProductType.MAGNETGRAM));
+		items.add(new NameIdPair("Metal Magnets", ProductType.METAL_MAGNETS));
+		items.add(new NameIdPair("Metal Prints", ProductType.METAL_PRINTS));
+		// items.add(new NameIdPair("Minibook Deluxe", ProductType.MINIBOOK_DELUXE)); // NOT AVALIABLE!
+		items.add(new NameIdPair("Minibooks", ProductType.MINIBOOKS));
+		items.add(new NameIdPair("Mousepads", ProductType.MOUSEPADS));
+		items.add(new NameIdPair("Mugs", ProductType.MUGS));
+		items.add(new NameIdPair("Playing Cards", ProductType.PLAYING_CARDS));
+		items.add(new NameIdPair("Postcards", ProductType.POSTCARDS));
+		// items.add(new NameIdPair("Posters", ProductType.POSTERS)); // NOT AVALIABLE!
+		items.add(new NameIdPair("Prints", ProductType.PRINTS));
+		items.add(new NameIdPair("Professional prints", ProductType.PROFESSIONAL_PRINTS));
+		items.add(new NameIdPair("Rugs", ProductType.RUGS));
+		items.add(new NameIdPair("Shower Curtains", ProductType.SHOWER_CURTAINS));
+		items.add(new NameIdPair("Stickerbooks", ProductType.STICKERBOOKS));
+		items.add(new NameIdPair("T-Shirts", ProductType.T_SHIRTS));
+		items.add(new NameIdPair("Tablet Cases", ProductType.TABLET_CASES));
+		items.add(new NameIdPair("Thick Prints", ProductType.THICK_PRINTS));
+		items.add(new NameIdPair("Throw Pillows", ProductType.THROW_PILLOWS));
+		items.add(new NameIdPair("Tinybooks", ProductType.TINYBOOKS));
+		items.add(new NameIdPair("Wall Calendars", ProductType.WALL_CALENDARS));
+		items.add(new NameIdPair("Wall Skin", ProductType.WALL_SKIN));
+		// items.add(new NameIdPair("Wood Prints", ProductType.WOOD_PRINTS)); // NOT AVALIABLE!
+		items.add(new NameIdPair("Woven Blankets", ProductType.WOVEN_BLANKETS));
 	}
 
 	@Override
@@ -88,7 +88,7 @@ public class SpinnerAdapterJumpToProduct extends BaseAdapter implements SpinnerA
 
 	@Override
 	public long getItemId(int position) {
-		ProductIdType idType = items.get(position).productIdType;
+		ProductType idType = items.get(position).productIdType;
 		return idType == null ? SpinnerAdapter.NO_SELECTION : idType.ordinal();
 	}
 

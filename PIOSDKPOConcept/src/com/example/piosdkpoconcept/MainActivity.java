@@ -6,12 +6,12 @@ import java.util.List;
 
 import print.io.PIO;
 import print.io.PIOConfig;
-import print.io.PIOConfig.PhotoSource;
-import print.io.PIOConfig.ProductIdType;
-import print.io.PIOConfig.SideMenuButton;
-import print.io.PIOConfig.SideMenuInfoButton;
 import print.io.PIOException;
 import print.io.PublicConstants;
+import print.io.beans.PhotoSource;
+import print.io.beans.ProductType;
+import print.io.beans.SideMenuButton;
+import print.io.beans.SideMenuInfoButton;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -331,12 +331,12 @@ public class MainActivity extends Activity {
 		config.setPaymentOptions((int) spinnerPaymentOptions.getSelectedItemId());
 
 		// Jump to product
-		ProductIdType selectedProductIdType;
+		ProductType selectedProductIdType;
 		int id = (int) spinnerJumpToProduct.getSelectedItemId();
 		if (id == SpinnerAdapter.NO_SELECTION) {
 			selectedProductIdType = null;
 		} else {
-			selectedProductIdType = ProductIdType.values()[id];
+			selectedProductIdType = ProductType.values()[id];
 		}
 		config.setProductFromApp(selectedProductIdType);
 		config.setSkipProductDetails(switchSkipProductDetailsScreen.isChecked());
