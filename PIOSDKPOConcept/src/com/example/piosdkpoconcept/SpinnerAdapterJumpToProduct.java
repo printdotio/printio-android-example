@@ -2,7 +2,7 @@ package com.example.piosdkpoconcept;
 
 import java.util.ArrayList;
 
-import print.io.beans.ProductType;
+import print.io.piopublic.ProductType;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
