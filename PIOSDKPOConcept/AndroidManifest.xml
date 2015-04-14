@@ -158,7 +158,7 @@
             android:name="print.io.ActivityHelp"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.facebzook.LoginActivity"
+            android:name="com.facebook.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="print.io.photosource.impl.instagram.Instagram"
