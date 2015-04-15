@@ -46,13 +46,15 @@ public class VladoPhotoSource extends DefaultPhotoSource {
 			@Override
 			public void onLoginComplete(boolean success, String response) {
 				if (authorizationCompleteCallback != null) {
-					authorizationCompleteCallback.call(success, response);
+					authorizationCompleteCallback.call(false, success, response);
 				}
 			}
 
 			@Override
 			public void onCancel() {
-				// NOP
+				if (authorizationCompleteCallback != null) {
+					authorizationCompleteCallback.call(true, false, null);
+				}
 			}
 
 		});
