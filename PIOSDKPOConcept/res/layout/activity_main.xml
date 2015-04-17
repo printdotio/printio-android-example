@@ -22,22 +22,52 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dip"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dip"
+                android:layout_marginTop="10dip"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:text="Company Name:"
-                android:textSize="16dp" >
+                android:text="PIO SDK Example"
+                android:textSize="20dp" >
 
                 <requestFocus />
             </TextView>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
+            <ToggleButton
+                android:id="@+id/toggleButtonProduction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:textOff="Staging Mode."
+                android:textOn="Production Mode"
+                android:textSize="16dip" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="Recipe ID"
+                android:textSize="16dip" />
+
             <EditText
-                android:id="@+id/editTextName"
+                android:id="@+id/edittext_recipe_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
                 android:ems="10"
-                android:text="Breakout commerce" />
+                android:text="" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -350,6 +380,46 @@
                 android:layout_margin="5dp"
                 android:text="Remove logo" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="Payee name:"
+                android:textSize="16dp" />
+
+            <EditText
+                android:id="@+id/edittext_payee_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:ems="10"
+                android:text="Breakout commerce" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="Payment options:"
+                android:textSize="16dip" />
+
+            <Spinner
+                android:id="@+id/spinner_payment_options"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="Set promo coupon code:"
+                android:textSize="16dip" />
+
+            <EditText
+                android:id="@+id/edittext_promo_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
@@ -432,7 +502,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
-                android:text="Photo Sources Options:"
+                android:text="Photo Sources Options"
                 android:textSize="16dip"
                 android:textStyle="bold" />
 
@@ -500,7 +570,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
-                android:text="Jump to Product:"
+                android:text="Jump to Product"
                 android:textSize="16dip"
                 android:textStyle="bold" />
 
@@ -568,41 +638,6 @@
                 android:layout_height="1px"
                 android:layout_marginTop="5dp"
                 android:background="#000000" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dip"
-                android:text="Payment options:"
-                android:textSize="16dip"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/spinner_payment_options"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <ToggleButton
-                android:id="@+id/toggleButtonProduction"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dip"
-                android:textOff="Staging Mode."
-                android:textOn="Production Mode"
-                android:textSize="16dip" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dip"
-                android:text="Set promo coupon code:"
-                android:textSize="16dip" />
-
-            <EditText
-                android:id="@+id/edittext_promo_code"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10" />
 
             <Button
                 android:id="@+id/button_start_sdk"

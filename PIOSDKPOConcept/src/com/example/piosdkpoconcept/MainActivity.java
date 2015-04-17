@@ -98,7 +98,6 @@ public class MainActivity extends Activity {
 		config.setFacebookAppId(getString(R.string.facebook_app_id));
 		config.setGoogleAnalyticsTrackId("UA-28619845-2");
 
-
 		allSources = photoSourceFactory.getAll();
 	}
 
@@ -238,6 +237,10 @@ public class MainActivity extends Activity {
 	public void onClickStartSDK(View v) {
 		Log.d("Facebook", "ID:" + getString(R.string.facebook_app_id));
 
+		String recepiID = ((EditText) findViewById(R.id.edittext_recipe_id)).getText().toString();
+		if (StringUtils.isNotBlank(recepiID)) {
+			config.setRecipeID(recepiID);
+		}
 		config.setSideMenuEnabled(false);
 		config.setPhotoSourcesDisabled(((CheckBox) findViewById(R.id.checkboxDisablePhotosources)).isChecked());
 		config.setImageUris(imageUris);
@@ -246,7 +249,7 @@ public class MainActivity extends Activity {
 		config.setChangeableCountry(((Switch) findViewById(R.id.switch_changeable_country)).isChecked());
 		config.setCurrencyCode(((EditText) findViewById(R.id.editCurrency)).getText().toString());
 		config.setChangeableCurrency(((Switch) findViewById(R.id.switch_changeable_currency)).isChecked());
-		config.setPartnerName(((EditText) findViewById(R.id.editTextName)).getText().toString());
+		config.setPartnerName(((EditText) findViewById(R.id.edittext_payee_name)).getText().toString());
 		try {
 			String colorString = ((EditText) findViewById(R.id.editColorHex)).getText().toString();
 			config.setHeaderColor(Color.parseColor("#" + colorString));
