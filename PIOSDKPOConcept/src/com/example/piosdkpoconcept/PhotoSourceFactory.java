@@ -17,8 +17,6 @@ import com.example.piosdkpoconcept.photosource.vlado.VladoPhotoSource;
 
 /**
  * Encapsulates mechanism for creating photo sources used by Example app.
- * 
- * @author Vlado
  */
 public class PhotoSourceFactory {
 
