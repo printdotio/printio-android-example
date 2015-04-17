@@ -145,6 +145,7 @@
 -keep class print.io.photosource.impl.instagram.InstagramPhotoSource { *; }
 -keep class print.io.photosource.impl.phone.PhonePhotoSource { *; }
 -keep class print.io.photosource.impl.photobucket.PhotobucketPhotoSource { *; }
+-keep class print.io.photosource.impl.photobucket.PhotobucketAccess { *; }
 -keep class print.io.photosource.impl.picasa.PicasaPhotoSource { *; }
 -keep class print.io.photosource.impl.preselected.PreselectedPhotoSource { *; }
 
