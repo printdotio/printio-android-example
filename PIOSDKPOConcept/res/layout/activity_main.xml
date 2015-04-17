@@ -39,6 +39,20 @@
                 android:layout_marginTop="5dp"
                 android:background="#000000" />
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:onClick="onClickStartSDK"
+                android:text="Start PrintIO SDK"
+                android:textSize="16dip" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
             <ToggleButton
                 android:id="@+id/toggleButtonProduction"
                 android:layout_width="match_parent"
@@ -640,7 +654,6 @@
                 android:background="#000000" />
 
             <Button
-                android:id="@+id/button_start_sdk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
