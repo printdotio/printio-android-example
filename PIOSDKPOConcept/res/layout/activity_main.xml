@@ -29,7 +29,7 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:text="PIO SDK Example"
-                android:textSize="20dp" >
+                android:textSize="20dip" >
 
                 <requestFocus />
             </TextView>
@@ -213,9 +213,15 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="3px"
                 android:layout_marginTop="5dp"
                 android:background="#000000" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="1dp"
+                android:background="#101010" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -237,9 +243,15 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="3px"
                 android:layout_marginTop="5dp"
                 android:background="#000000" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="1dp"
+                android:background="#101010" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -276,9 +288,15 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="3px"
                 android:layout_marginTop="5dp"
                 android:background="#000000" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="1dp"
+                android:background="#101010" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -323,9 +341,15 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="3px"
                 android:layout_marginTop="5dp"
                 android:background="#000000" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="1dp"
+                android:background="#101010" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -366,11 +390,19 @@
                 android:layout_margin="5dp"
                 android:text="Enable adding more photos when photo sources are disabled" />
 
+            <!-- Payment screen -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:layout_marginBottom="5dp"
-                android:background="#000000" />
+                android:layout_marginTop="1dp"
+                android:background="#101010" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -427,11 +459,19 @@
                 android:layout_height="wrap_content"
                 android:ems="10" />
 
+            <!-- Edit image screen -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:layout_marginTop="5dp"
-                android:background="#000000" />
+                android:layout_marginTop="1dp"
+                android:background="#101010" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -499,11 +539,19 @@
                 android:layout_margin="5dp"
                 android:text="Step by step:" />
 
+            <!-- Photo sources -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:layout_marginTop="5dp"
-                android:background="#000000" />
+                android:layout_marginTop="1dp"
+                android:background="#101010" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -567,11 +615,19 @@
                 android:checked="false"
                 android:text="Hide photo sources in side menu" />
 
+            <!-- Jump to product -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:layout_marginTop="5dp"
-                android:background="#000000" />
+                android:layout_marginTop="1dp"
+                android:background="#101010" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -652,7 +708,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="5dip"
             android:background="#000000" />
 
         <Button
