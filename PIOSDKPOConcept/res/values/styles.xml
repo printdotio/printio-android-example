@@ -1,0 +1,12 @@
+<resources>
+
+    <style name="ExampleAppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <!-- Application theme. -->
+    <style name="ExampleAppTheme" parent="ExampleAppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+
+</resources>
