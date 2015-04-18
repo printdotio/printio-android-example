@@ -49,6 +49,7 @@
         android:name="com.example.piosdkpoconcept.AppExample"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:theme="@style/ExampleAppBaseTheme" >
