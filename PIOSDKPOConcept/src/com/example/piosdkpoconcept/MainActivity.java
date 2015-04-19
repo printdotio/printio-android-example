@@ -23,7 +23,6 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
@@ -242,7 +241,6 @@ public class MainActivity extends Activity {
 			config.setRecipeID(recepiID);
 		}
 		config.setSideMenuEnabled(false);
-		config.setPhotoSourcesDisabled(((CheckBox) findViewById(R.id.checkboxDisablePhotosources)).isChecked());
 		config.setImageUris(imageUris);
 		config.hidePhotoSourcesInSideMenu(((Switch) findViewById(R.id.switch_hide_photo_sources_side_menu)).isChecked());
 		config.setCountryCode(((EditText) findViewById(R.id.editCountry)).getText().toString());
@@ -257,11 +255,11 @@ public class MainActivity extends Activity {
 
 		config.useThreeButtonsBarStyle(((Switch) findViewById(R.id.switch_three_buttons_bar_style)).isChecked());
 
-		config.setSideMenuEnabled(((CheckBox) findViewById(R.id.checkbox_enable_side_menu)).isChecked());
+		config.setSideMenuEnabled(((Switch) findViewById(R.id.switch_enable_side_menu)).isChecked());
 		config.setRightSideMenu(((Switch) findViewById(R.id.switch_right_side_menu)).isChecked());
 		config.setMenuIconGear(((Switch) findViewById(R.id.switch_menu_icon_gear)).isChecked());
-		config.setHideStatusBar(((CheckBox) findViewById(R.id.full_Screen)).isChecked());
-		config.setAutoArrange(((CheckBox) findViewById(R.id.auto_arrange)).isChecked());
+		config.setHideStatusBar(((Switch) findViewById(R.id.full_Screen)).isChecked());
+		config.setAutoArrange(((Switch) findViewById(R.id.auto_arrange)).isChecked());
 		config.setSdkDemo(true);
 		config.setSdkAppearsFromRight(((Switch) findViewById(R.id.switch_appear_from_right)).isChecked());
 		//PIO.setMenuIconGear(((Switch) findViewById(R.id.switch_gear)).isChecked());
@@ -317,8 +315,11 @@ public class MainActivity extends Activity {
 		if (photoSourcesTest.size() == 0) {
 			addDefaultPhotoSources();
 		}
+		config.setPhotoSourcesDisabled(((Switch) findViewById(R.id.switch_disable_photosources)).isChecked());
 		config.setPhotoSources(photoSourcesTest);
-
+		if (((Switch) findViewById(R.id.switch_use_first_photosource_as_default)).isChecked() && config.getPhotoSources() != null && !config.getPhotoSources().isEmpty()) {
+			config.setDefaultPhotoSource(config.getPhotoSources().get(0));
+		}
 		if (sideMenuInfoButtons.size() == 0) {
 			addAllSideMenuInfoButtons();
 		}

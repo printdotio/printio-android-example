@@ -167,10 +167,11 @@
                 android:layout_margin="5dp"
                 android:text="Enable three buttons bar style" />
 
-            <CheckBox
-                android:id="@+id/checkbox_enable_side_menu"
-                android:layout_width="wrap_content"
+            <Switch
+                android:id="@+id/switch_enable_side_menu"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:checked="true"
                 android:text="Enable Side Menu" />
 
@@ -188,17 +189,19 @@
                 android:layout_margin="5dp"
                 android:text="Use gear icon as menu icon:" />
 
-            <CheckBox
+            <Switch
                 android:id="@+id/full_Screen"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:checked="false"
                 android:text="Hide Status Bar" />
 
-            <CheckBox
+            <Switch
                 android:id="@+id/auto_arrange"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:checked="false"
                 android:text="Auto-arrange photos in editor" />
 
@@ -584,10 +587,19 @@
                 android:layout_margin="5dp"
                 android:textSize="16dip" />
 
-            <CheckBox
-                android:id="@+id/checkboxDisablePhotosources"
-                android:layout_width="wrap_content"
+            <Switch
+                android:id="@+id/switch_use_first_photosource_as_default"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="true"
+                android:text="Use first photo source as default" />
+
+            <Switch
+                android:id="@+id/switch_disable_photosources"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:checked="false"
                 android:text="Disable Photo Sources" />
 
