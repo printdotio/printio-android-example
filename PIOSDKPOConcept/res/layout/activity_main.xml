@@ -198,14 +198,6 @@
                 android:text="Hide Status Bar" />
 
             <Switch
-                android:id="@+id/auto_arrange"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="false"
-                android:text="Auto-arrange photos in editor" />
-
-            <Switch
                 android:id="@+id/switch_appear_from_right"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -286,6 +278,14 @@
                 android:layout_margin="5dp"
                 android:checked="true"
                 android:text="Show featured products by default (switch off for all products):" />
+
+            <Switch
+                android:id="@+id/switch_hide_coming_soon_products"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="false"
+                android:text="Hide \&apos;Coming Soon\&apos; Products" />
 
             <!-- Shopping Cart screen -->
 
@@ -392,6 +392,14 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="Enable adding more photos when photo sources are disabled" />
+
+            <Switch
+                android:id="@+id/auto_arrange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="false"
+                android:text="Auto-arrange photos in editor" />
 
             <!-- Payment screen -->
 
@@ -693,20 +701,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="Back goes to Featured Products:" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="5dp"
-                android:background="#000000" />
-
-            <Switch
-                android:id="@+id/switch_hide_coming_soon_products"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="false"
-                android:text="Hide \&apos;Coming Soon\&apos; Products" />
         </LinearLayout>
     </ScrollView>
 
