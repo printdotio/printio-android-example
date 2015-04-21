@@ -15,19 +15,14 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,7 +67,6 @@ public class MainActivity extends Activity {
 
 		editTextAddImageToSdk = (EditText) findViewById(R.id.edittext_add_image_to_sdk);
 		spinnerJumpToProduct = (Spinner) findViewById(R.id.spinner_jump_to_product);
-		initSdkMode(false);
 		switchSkipProductDetailsScreen = (Switch) findViewById(R.id.switch_skip_product_details_screen);
 		switchHideComingSoonProducts = (Switch) findViewById(R.id.switch_hide_coming_soon_products);
 		spinnerPaymentOptions = (Spinner) findViewById(R.id.spinner_payment_options);
@@ -95,6 +89,7 @@ public class MainActivity extends Activity {
 		config.setGoogleAnalyticsTrackId("UA-28619845-2");
 
 		allSources = photoSourceFactory.getAll();
+		initSdkMode(false);
 	}
 
 	private void initSdkMode(boolean isLive) {
@@ -205,34 +200,7 @@ public class MainActivity extends Activity {
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
-	/**
-	 * helper to retrieve the path of an image URI
-	 */
-	@SuppressWarnings("deprecation")
-	public String getPath(Uri uri) {
-		// just some safety built in 
-		if (uri == null) {
-			// TODO perform some logging or show user feedback
-			return null;
-		}
-		// try to retrieve the image from the media store first
-		// this will only work for images selected from gallery
-		String[] projection = {
-				MediaStore.Images.Media.DATA
-		};
-		Cursor cursor = managedQuery(uri, projection, null, null, null);
-		if (cursor != null) {
-			int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-			cursor.moveToFirst();
-			return cursor.getString(column_index);
-		}
-		// this is our fallback here
-		return uri.getPath();
-	}
-
 	public void onClickStartSDK(View v) {
-		Log.d("Facebook", "ID:" + getString(R.string.facebook_app_id));
-
 		String recepiID = ((EditText) findViewById(R.id.edittext_recipe_id)).getText().toString();
 		if (StringUtils.isNotBlank(recepiID)) {
 			config.setRecipeID(recepiID);
@@ -333,17 +301,17 @@ public class MainActivity extends Activity {
 
 		// Jump to product
 		ProductType selectedProductIdType;
-		int id = (int) spinnerJumpToProduct.getSelectedItemId();
-		if (id == SpinnerAdapter.NO_SELECTION) {
+		Object item = spinnerJumpToProduct.getSelectedItem();
+		if (item == null) {
 			selectedProductIdType = null;
 		} else {
-			selectedProductIdType = ProductType.values()[id];
+			selectedProductIdType = (ProductType) item;
 		}
 		config.setProductFromApp(selectedProductIdType);
 		config.setSkipProductDetails(switchSkipProductDetailsScreen.isChecked());
 		config.setProductSkuFromApp(((EditText) findViewById(R.id.editSKU)).getText().toString());
 		if (StringUtils.isNotBlank(config.getProductSkuFromApp()) && selectedProductIdType == null) {
-			Toast.makeText(this, "Product must be specified when SKU is supplied", Toast.LENGTH_LONG).show();
+			showMessage("Product must be specified when SKU is supplied");
 			return;
 		}
 
@@ -355,7 +323,7 @@ public class MainActivity extends Activity {
 		}
 
 		if (config.isPhotosourcesDisabled() && (config.getImageUris() == null || config.getImageUris().isEmpty())) {
-			Toast.makeText(this, "Photosources are disabled and no images were passed to the SDK", Toast.LENGTH_LONG).show();
+			showMessage("Photosources are disabled and no images were passed to the SDK");
 			return;
 		}
 
@@ -363,8 +331,14 @@ public class MainActivity extends Activity {
 			PIO.setConfig(this, config);
 			PIO.start(this);
 		} catch (PIOException e) {
+			showMessage(e.getMessage());
 			e.printStackTrace();
 		}
+	}
+
+	private void showMessage(String msg) {
+		((TextView) findViewById(R.id.textview_feedback)).setText(msg);
+		findViewById(R.id.dialog_feedback).setVisibility(View.VISIBLE);
 	}
 
 	public void onClickOkFeedback(View v) {
