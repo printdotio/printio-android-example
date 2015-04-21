@@ -24,8 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dip"
-                android:layout_marginTop="10dip"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:text="PIO SDK Example"
@@ -37,7 +36,6 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="3px"
-                android:layout_marginTop="5dp"
                 android:background="#000000" />
 
             <View
@@ -708,12 +706,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="@color/blue_light"
         android:orientation="vertical" >
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:layout_marginTop="5dip"
             android:background="#000000" />
 
         <Button
