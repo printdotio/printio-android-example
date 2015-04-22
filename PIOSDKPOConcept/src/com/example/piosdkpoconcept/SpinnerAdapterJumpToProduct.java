@@ -26,7 +26,7 @@ public class SpinnerAdapterJumpToProduct extends BaseAdapter implements SpinnerA
 		items.add(new NameIdPair("Acrylic Prints", ProductType.ACRYLIC_PRINTS));
 		items.add(new NameIdPair("Acrylic Trays", ProductType.ACRYLIC_TRAYS));
 		items.add(new NameIdPair("Art Posters", ProductType.ART_POSTERS));
-		items.add(new NameIdPair("Beach Towel", ProductType.BEACH_TOWEL));
+		items.add(new NameIdPair("Beach Towels", ProductType.BEACH_TOWELS));
 		items.add(new NameIdPair("Canvas Minis", ProductType.CANVAS_MINIS));
 		items.add(new NameIdPair("Canvas Posters", ProductType.CANVAS_POSTERS));
 		items.add(new NameIdPair("Canvas Wraps", ProductType.CANVAS_WRAPS));
