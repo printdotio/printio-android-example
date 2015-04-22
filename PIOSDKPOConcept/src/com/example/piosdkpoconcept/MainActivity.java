@@ -86,9 +86,6 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		config.setFontPathInAssetsLight("HelveticaNeueLTStd-Lt.otf");
-		config.setFontPathInAssetsNormal("HelveticaNeueLTStd-Roman.otf");
-		config.setFontPathInAssetsBold("HelveticaNeueLTStd-Bd.otf");
 		config.setPartnerName(getResources().getString(R.string.hellopics));
 		config.setHelpUrl(PIOConstants.HELP_URL);
 		config.setSupportEmail(PIOConstants.SUPPORT_EMAIL);
@@ -252,6 +249,13 @@ public class MainActivity extends Activity {
 			String colorString = ((EditText) findViewById(R.id.editColorHex)).getText().toString();
 			config.setHeaderColor(Color.parseColor("#" + colorString));
 		} catch (NumberFormatException e) {}
+
+		boolean isCustomFontsEnabled = ((Switch) findViewById(R.id.switch_enable_custom_fonts)).isChecked();
+		if (isCustomFontsEnabled) {
+			config.setFontPathInAssetsLight("HelveticaNeueLTStd-Lt.otf");
+			config.setFontPathInAssetsNormal("HelveticaNeueLTStd-Roman.otf");
+			config.setFontPathInAssetsBold("HelveticaNeueLTStd-Bd.otf");
+		}
 
 		config.useThreeButtonsBarStyle(((Switch) findViewById(R.id.switch_three_buttons_bar_style)).isChecked());
 

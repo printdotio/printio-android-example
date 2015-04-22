@@ -159,6 +159,14 @@
                 android:maxLength="8" />
 
             <Switch
+                android:id="@+id/switch_enable_custom_fonts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="true"
+                android:text="Enable custom fonts" />
+
+            <Switch
                 android:id="@+id/switch_three_buttons_bar_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
