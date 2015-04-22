@@ -210,6 +210,40 @@
                 android:layout_margin="5dp"
                 android:text="SDK appears from right side:" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
+            <Switch
+                android:id="@+id/switch_passed_image_thumb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Use passed image as thumb for one photo template:" />
+
+            <Switch
+                android:id="@+id/switch_coasters_different"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Only coasters with 4 different photos:" />
+
+            <Switch
+                android:id="@+id/switch_coasters_duplicate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Only coasters with 1 duplicated photo:" />
+
+            <Switch
+                android:id="@+id/switch_step_by_step"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Step by step:" />
+
             <!-- All screens -->
 
             <View
@@ -407,6 +441,51 @@
                 android:checked="false"
                 android:text="Auto-arrange photos in editor" />
 
+            <!-- Edit image screen -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="1dp"
+                android:background="#101010" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="Edit Image screen"
+                android:textSize="16dip"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/switch_is_rotate_enabled_in_crop_screen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="true"
+                android:text="Rotate enabled" />
+
+            <Switch
+                android:id="@+id/switch_is_text_enabled_in_crop_screen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="true"
+                android:text="Text enabled" />
+
+            <Switch
+                android:id="@+id/switch_is_effects_enabled_in_crop_screen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="true"
+                android:text="Effects enabled" />
             <!-- Payment screen -->
 
             <View
@@ -475,86 +554,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10" />
-
-            <!-- Edit image screen -->
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="3px"
-                android:layout_marginTop="5dp"
-                android:background="#000000" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="1dp"
-                android:background="#101010" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dip"
-                android:text="Edit Image screen"
-                android:textSize="16dip"
-                android:textStyle="bold" />
-
-            <Switch
-                android:id="@+id/switch_is_rotate_enabled_in_crop_screen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="true"
-                android:text="Rotate enabled" />
-
-            <Switch
-                android:id="@+id/switch_is_text_enabled_in_crop_screen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="true"
-                android:text="Text enabled" />
-
-            <Switch
-                android:id="@+id/switch_is_effects_enabled_in_crop_screen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="true"
-                android:text="Effects enabled" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="5dp"
-                android:background="#000000" />
-
-            <Switch
-                android:id="@+id/switch_passed_image_thumb"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Use passed image as thumb for one photo template:" />
-
-            <Switch
-                android:id="@+id/switch_coasters_different"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Only coasters with 4 different photos:" />
-
-            <Switch
-                android:id="@+id/switch_coasters_duplicate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Only coasters with 1 duplicated photo:" />
-
-            <Switch
-                android:id="@+id/switch_step_by_step"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Step by step:" />
 
             <!-- Photo sources -->
 
