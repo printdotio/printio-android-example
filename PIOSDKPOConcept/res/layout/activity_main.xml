@@ -244,6 +244,13 @@
                 android:layout_margin="5dp"
                 android:text="Step by step:" />
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:onClick="onClickChangeAvailableProducts"
+                android:text="Change available products" />
+
             <!-- All screens -->
 
             <View
@@ -577,28 +584,12 @@
                 android:textSize="16dip"
                 android:textStyle="bold" />
 
-            <Switch
-                android:id="@+id/switch_photo_sources"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="false"
-                android:text="Change photo sources" />
-
             <Button
-                android:id="@+id/button_add_source"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:onClick="onClickAddPhotoSource"
-                android:text="Add photo source" />
-
-            <TextView
-                android:id="@+id/textView_photo_sources"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:textSize="16dip" />
+                android:onClick="onClickChangeAvailablePhotoSource"
+                android:text="Change available photo sources" />
 
             <Switch
                 android:id="@+id/switch_use_first_photosource_as_default"

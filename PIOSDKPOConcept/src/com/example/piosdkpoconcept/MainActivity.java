@@ -1,6 +1,7 @@
 package com.example.piosdkpoconcept;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import print.io.PIO;
@@ -18,7 +19,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
@@ -40,30 +40,17 @@ public class MainActivity extends Activity {
 
 	private List<String> imageUris = new ArrayList<String>();
 	private List<SideMenuButton> sideMenuButtonsTop = new ArrayList<SideMenuButton>();
-	private List<PhotoSource> photoSourcesTest = new ArrayList<PhotoSource>();
 	private List<SideMenuInfoButton> sideMenuInfoButtons = new ArrayList<SideMenuInfoButton>();
 	private PhotoSourceFactory photoSourceFactory = new PhotoSourceFactory();
-	private List<PhotoSource> allSources;
+	private List<PhotoSource> allSources = photoSourceFactory.getAll();
+	private List<PhotoSource> selectedPhotoSources = new ArrayList<PhotoSource>();
+	private List<ProductType> allProductTypes = Arrays.asList(ProductType.values());
+	private List<ProductType> selectedProductTypes = new ArrayList<ProductType>(config.getAvailableProducts());
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		Switch photoSourcesSwitch = (Switch) findViewById(R.id.switch_photo_sources);
-		final Button buttonAddSource = (Button) findViewById(R.id.button_add_source);
-		buttonAddSource.setEnabled(photoSourcesSwitch.isChecked());
-		photoSourcesSwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				photoSourcesTest.clear();
-				buttonAddSource.setEnabled(isChecked);
-				if (!isChecked) {
-					((TextView) findViewById(R.id.textView_photo_sources)).setText("");
-				}
-			}
-		});
 
 		editTextAddImageToSdk = (EditText) findViewById(R.id.edittext_add_image_to_sdk);
 		spinnerJumpToProduct = (Spinner) findViewById(R.id.spinner_jump_to_product);
@@ -88,7 +75,7 @@ public class MainActivity extends Activity {
 		config.setFacebookAppId(getString(R.string.facebook_app_id));
 		config.setGoogleAnalyticsTrackId("UA-28619845-2");
 
-		allSources = photoSourceFactory.getAll();
+		addDefaultPhotoSources();
 		initSdkMode(false);
 	}
 
@@ -120,29 +107,67 @@ public class MainActivity extends Activity {
 		spinnerJumpToProduct.setAdapter(new SpinnerAdapterJumpToProduct(this));
 	}
 
-	private String[] getPhotosourceNames() {
+	public void onClickChangeAvailablePhotoSource(View v) {
+		boolean[] isSelected = new boolean[allSources.size()];
+		for (int i = 0; i < isSelected.length; i++) {
+			isSelected[i] = selectedPhotoSources.contains(allSources.get(i));
+		}
 		List<String> names = new ArrayList<String>(allSources.size());
 		for (PhotoSource ps : allSources) {
 			names.add(ps.getName(this));
 		}
-		return names.toArray(new String[names.size()]);
-	}
-
-	public void onClickAddPhotoSource(View v) {
-		final TextView photoSourcesText = (TextView) findViewById(R.id.textView_photo_sources);
-
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
+		builder.setTitle("Select available photo sources");
+		builder.setMultiChoiceItems(names.toArray(new String[names.size()]), isSelected, new DialogInterface.OnMultiChoiceClickListener() {
 
-			public void onClick(DialogInterface dialog, int which) {
-				PhotoSource source = allSources.get(which);
-				if (!photoSourcesTest.contains(source)) {
-					photoSourcesTest.add(allSources.get(which));
-					photoSourcesText.setText(photoSourcesText.getText() + "  |  " + allSources.get(which).getName(MainActivity.this));
+			@Override
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				if (isChecked) {
+					selectedPhotoSources.add(allSources.get(which));
+				} else {
+					selectedPhotoSources.remove(allSources.get(which));
 				}
 			}
-		};
-		builder.setTitle("Pick source").setItems(getPhotosourceNames(), onClickListener);
+		});
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// NOP
+			}
+		});
+		builder.show();
+	}
+
+	public void onClickChangeAvailableProducts(View v) {
+		boolean[] isSelected = new boolean[allProductTypes.size()];
+		for (int i = 0; i < isSelected.length; i++) {
+			isSelected[i] = selectedProductTypes.contains(allProductTypes.get(i));
+		}
+		List<String> names = new ArrayList<String>(allProductTypes.size());
+		for (ProductType pt : allProductTypes) {
+			names.add(pt.name());
+		}
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Select available product types");
+		builder.setMultiChoiceItems(names.toArray(new String[names.size()]), isSelected, new DialogInterface.OnMultiChoiceClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				if (isChecked) {
+					selectedProductTypes.add(allProductTypes.get(which));
+				} else {
+					selectedProductTypes.remove(allProductTypes.get(which));
+				}
+			}
+		});
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// NOP
+			}
+		});
 		builder.show();
 	}
 
@@ -158,14 +183,14 @@ public class MainActivity extends Activity {
 
 	private void addDefaultPhotoSources() {
 		// Only up to 6
-		photoSourcesTest.add(photoSourceFactory.getPhonePS());
-		photoSourcesTest.add(photoSourceFactory.getInstagramPS());
-		photoSourcesTest.add(photoSourceFactory.getFacebookPS());
+		selectedPhotoSources.add(photoSourceFactory.getPhonePS());
+		selectedPhotoSources.add(photoSourceFactory.getInstagramPS());
+		selectedPhotoSources.add(photoSourceFactory.getFacebookPS());
 		//		photoSourcesTest.add(photoSourceFactory.getFlickrPS());
-		photoSourcesTest.add(photoSourceFactory.getPhotobucketPS());
-		photoSourcesTest.add(photoSourceFactory.getDropboxPS());
+		selectedPhotoSources.add(photoSourceFactory.getPhotobucketPS());
+		selectedPhotoSources.add(photoSourceFactory.getDropboxPS());
 		//		photoSourcesTest.add(photoSourceFactory.getPicasaPS());
-		photoSourcesTest.add(photoSourceFactory.getPreselectedPS());
+		selectedPhotoSources.add(photoSourceFactory.getPreselectedPS());
 	}
 
 	private void addAllSideMenuInfoButtons() {
@@ -249,6 +274,8 @@ public class MainActivity extends Activity {
 		config.setStepByStep(((Switch) findViewById(R.id.switch_step_by_step)).isChecked());
 		config.setHostAppActivity(getComponentName().getClassName()); //"com.example.piosdkpoconcept.ActivityTest"
 
+		config.setAvailableProducts(selectedProductTypes);
+
 		int jumpToScreenId = -1;
 		if (((Switch) findViewById(R.id.switch_jump_to_shopping_cart)).isChecked()) {
 			jumpToScreenId = PublicConstants.ScreenIds.SCREEN_SHOPPING_CART;
@@ -284,14 +311,13 @@ public class MainActivity extends Activity {
 		}
 		config.setSideMenuButtonsTop(sideMenuButtonsTop);
 
-		if (photoSourcesTest.size() == 0) {
-			addDefaultPhotoSources();
-		}
-		config.setPhotoSourcesDisabled(((Switch) findViewById(R.id.switch_disable_photosources)).isChecked());
-		config.setPhotoSources(photoSourcesTest);
+		// Photo sources
+		config.setPhotoSources(selectedPhotoSources);
 		if (((Switch) findViewById(R.id.switch_use_first_photosource_as_default)).isChecked() && config.getPhotoSources() != null && !config.getPhotoSources().isEmpty()) {
 			config.setDefaultPhotoSource(config.getPhotoSources().get(0));
 		}
+		config.setPhotoSourcesDisabled(((Switch) findViewById(R.id.switch_disable_photosources)).isChecked());
+
 		if (sideMenuInfoButtons.size() == 0) {
 			addAllSideMenuInfoButtons();
 		}
