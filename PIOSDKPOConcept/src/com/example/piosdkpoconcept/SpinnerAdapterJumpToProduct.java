@@ -30,7 +30,6 @@ public class SpinnerAdapterJumpToProduct extends BaseAdapter implements SpinnerA
 		items.add(new NameIdPair("Canvas Minis", ProductType.CANVAS_MINIS));
 		items.add(new NameIdPair("Canvas Posters", ProductType.CANVAS_POSTERS));
 		items.add(new NameIdPair("Canvas Wraps", ProductType.CANVAS_WRAPS));
-		items.add(new NameIdPair("Calendars", ProductType.CALENDARS));
 		items.add(new NameIdPair("Cloth Napkins", ProductType.CLOTH_NAPKINS));
 		items.add(new NameIdPair("Coasters", ProductType.COASTERS));
 		items.add(new NameIdPair("Cube Decor", ProductType.CUBE_DECOR));
@@ -46,7 +45,6 @@ public class SpinnerAdapterJumpToProduct extends BaseAdapter implements SpinnerA
 		items.add(new NameIdPair("Magnetgram", ProductType.MAGNETGRAM));
 		items.add(new NameIdPair("Metal Magnets", ProductType.METAL_MAGNETS));
 		items.add(new NameIdPair("Metal Prints", ProductType.METAL_PRINTS));
-		items.add(new NameIdPair("Minibook Deluxe", ProductType.MINIBOOK_DELUXE));
 		items.add(new NameIdPair("Minibooks", ProductType.MINIBOOKS));
 		items.add(new NameIdPair("Mousepads", ProductType.MOUSEPADS));
 		items.add(new NameIdPair("Mugs", ProductType.MUGS));
@@ -57,7 +55,6 @@ public class SpinnerAdapterJumpToProduct extends BaseAdapter implements SpinnerA
 		items.add(new NameIdPair("Placemats", ProductType.PLACEMATS));
 		items.add(new NameIdPair("Playing Cards", ProductType.PLAYING_CARDS));
 		items.add(new NameIdPair("Postcards", ProductType.POSTCARDS));
-		items.add(new NameIdPair("Posters", ProductType.POSTERS));
 		items.add(new NameIdPair("Prints", ProductType.PRINTS));
 		items.add(new NameIdPair("Professional prints", ProductType.PROFESSIONAL_PRINTS));
 		items.add(new NameIdPair("Rugs", ProductType.RUGS));
