@@ -25,7 +25,8 @@
 
     <!--
   IMPORTANT: Change "com.example.piosdkpoconcept.permission.C2D_MESSAGE" in the lines below
-  to match your app's package name + ".permission.C2D_MESSAGE". -->
+  to match your app's package name + ".permission.C2D_MESSAGE".
+    -->
 
     <permission
         android:name="com.example.piosdkpoconcept.permission.C2D_MESSAGE"
@@ -96,6 +97,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="print.io.ActivityCustomizeProduct"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="print.io.ActivityCustomSteps"
             android:screenOrientation="portrait" />
         <activity
             android:name="print.io.ActivityStickerBook"
