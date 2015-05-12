@@ -33,6 +33,7 @@ public class SpinnerAdapterJumpToProduct extends BaseAdapter implements SpinnerA
 		items.add(new NameIdPair("Cloth Napkins", ProductType.CLOTH_NAPKINS));
 		items.add(new NameIdPair("Coasters", ProductType.COASTERS));
 		items.add(new NameIdPair("Dog Beds", ProductType.DOG_BEDS));
+		items.add(new NameIdPair("Duvet Covers", ProductType.DUVET_COVERS));
 		items.add(new NameIdPair("Everything Bags", ProductType.EVERYTHING_BAGS));
 		items.add(new NameIdPair("Framed Prints", ProductType.FRAMED_PRINTS));
 		items.add(new NameIdPair("Flat Cards", ProductType.FLAT_CARDS));
