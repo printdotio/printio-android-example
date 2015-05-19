@@ -106,30 +106,6 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="print.io.ActivityStickerbooksType"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="print.io.ActivityPhoneCaseGrid"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="print.io.ActivityThickPrintGrid"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="print.io.ActivityCanvasWrapsGrid"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="print.io.ActivityCanvasWrapsNext"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="print.io.ActivityChooseGridLayout"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="print.io.ActivityThrowPillowGrid"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="print.io.ActivityStepsListView"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="print.io.ActivityShoppingCart"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
@@ -181,13 +157,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="print.io.ActivityHowItWorks"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="print.io.ActivityAcrylicBlocksGrid"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name="print.io.ActivityChooseGridLayoutTwoScollViews"
             android:screenOrientation="portrait" />
         <activity
             android:name="print.io.ActivityPreviewOnWall"
