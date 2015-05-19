@@ -271,7 +271,6 @@ public class MainActivity extends Activity {
 		config.hideEditButtonInShoppingCart(((Switch) findViewById(R.id.switch_hide_edit_button)).isChecked());
 		config.closeWidgetFromShoppingCart(((Switch) findViewById(R.id.closeWidgetFromShoppingCart)).isChecked());
 
-		config.setStepByStep(((Switch) findViewById(R.id.switch_step_by_step)).isChecked());
 		config.setHostAppActivity(getComponentName().getClassName()); //"com.example.piosdkpoconcept.ActivityTest"
 
 		config.setAvailableProducts(selectedProductTypes);
