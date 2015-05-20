@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="9"
+        android:minSdkVersion="12"
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -101,6 +101,9 @@
         <activity
             android:name="print.io.ActivityCustomizeProduct"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="print.io.ActivityCustomizePhotobooks"
+            android:screenOrientation="landscape" />
         <activity
             android:name="print.io.ActivityCustomSteps"
             android:screenOrientation="portrait" />
