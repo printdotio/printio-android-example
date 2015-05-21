@@ -530,17 +530,12 @@
                 android:ems="10"
                 android:text="Breakout commerce" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dip"
-                android:text="Payment options:"
-                android:textSize="16dip" />
-
-            <Spinner
-                android:id="@+id/spinner_payment_options"
+            <Button
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:onClick="onClickChangeAvailablePaymentOptions"
+                android:text="Change available payment options" />
 
             <TextView
                 android:layout_width="wrap_content"

@@ -9,6 +9,7 @@ import print.io.PIOConfig;
 import print.io.PIOException;
 import print.io.PublicConstants;
 import print.io.photosource.PhotoSource;
+import print.io.piopublic.PaymentOptionType;
 import print.io.piopublic.ProductType;
 import print.io.piopublic.SideMenuButton;
 import print.io.piopublic.SideMenuInfoButton;
@@ -31,7 +32,6 @@ import android.widget.ToggleButton;
 public class MainActivity extends Activity {
 
 	private EditText editTextAddImageToSdk;
-	private Spinner spinnerPaymentOptions;
 	private Spinner spinnerJumpToProduct;
 	private Switch switchSkipProductDetailsScreen;
 	private Switch switchHideComingSoonProducts;
@@ -46,6 +46,7 @@ public class MainActivity extends Activity {
 	private List<PhotoSource> selectedPhotoSources = new ArrayList<PhotoSource>();
 	private List<ProductType> allProductTypes = Arrays.asList(ProductType.values());
 	private List<ProductType> selectedProductTypes = new ArrayList<ProductType>(config.getAvailableProducts());
+	private List<PaymentOptionType> selectedPaymentOptions = new ArrayList<PaymentOptionType>(Arrays.asList(PaymentOptionType.values()));
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +57,6 @@ public class MainActivity extends Activity {
 		spinnerJumpToProduct = (Spinner) findViewById(R.id.spinner_jump_to_product);
 		switchSkipProductDetailsScreen = (Switch) findViewById(R.id.switch_skip_product_details_screen);
 		switchHideComingSoonProducts = (Switch) findViewById(R.id.switch_hide_coming_soon_products);
-		spinnerPaymentOptions = (Spinner) findViewById(R.id.spinner_payment_options);
-		spinnerPaymentOptions.setAdapter(new SpinnerAdapterPaymentOptions(MainActivity.this));
 
 		((ToggleButton) findViewById(R.id.toggleButtonProduction)).setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
@@ -105,6 +104,39 @@ public class MainActivity extends Activity {
 		}
 
 		spinnerJumpToProduct.setAdapter(new SpinnerAdapterJumpToProduct(this));
+	}
+
+	public void onClickChangeAvailablePaymentOptions(View v) {
+		PaymentOptionType[] allTypes = PaymentOptionType.values();
+		boolean[] isSelected = new boolean[allTypes.length];
+		for (int i = 0; i < isSelected.length; i++) {
+			isSelected[i] = selectedPaymentOptions.contains(allTypes[i]);
+		}
+		List<String> names = new ArrayList<String>(allTypes.length);
+		for (PaymentOptionType pType : allTypes) {
+			names.add(pType.name());
+		}
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Select available payment options");
+		builder.setMultiChoiceItems(names.toArray(new String[names.size()]), isSelected, new DialogInterface.OnMultiChoiceClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				if (isChecked) {
+					selectedPaymentOptions.add(PaymentOptionType.values()[which]);
+				} else {
+					selectedPaymentOptions.remove(PaymentOptionType.values()[which]);
+				}
+			}
+		});
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// NOP
+			}
+		});
+		builder.show();
 	}
 
 	public void onClickChangeAvailablePhotoSource(View v) {
@@ -322,7 +354,7 @@ public class MainActivity extends Activity {
 		}
 		config.setSideMenuInfoButtons(sideMenuInfoButtons);
 		config.setHideComingSoonProducts(switchHideComingSoonProducts.isChecked());
-		config.setPaymentOptions((int) spinnerPaymentOptions.getSelectedItemId());
+		config.setPaymentOptions(selectedPaymentOptions);
 
 		// Jump to product
 		ProductType selectedProductIdType;
