@@ -11,6 +11,7 @@ import print.io.PublicConstants;
 import print.io.photosource.PhotoSource;
 import print.io.piopublic.PaymentOptionType;
 import print.io.piopublic.ProductType;
+import print.io.piopublic.Screen;
 import print.io.piopublic.SideMenuButton;
 import print.io.piopublic.SideMenuInfoButton;
 import android.app.Activity;
@@ -307,15 +308,15 @@ public class MainActivity extends Activity {
 
 		config.setAvailableProducts(selectedProductTypes);
 
-		int jumpToScreenId = -1;
+		Screen jumpToScreen = null;
 		if (((Switch) findViewById(R.id.switch_jump_to_shopping_cart)).isChecked()) {
-			jumpToScreenId = PublicConstants.ScreenIds.SCREEN_SHOPPING_CART;
+			jumpToScreen = Screen.SHOPPING_CART;
 		}
 		int flags = 0;
 		if (((Switch) findViewById(R.id.switch_back_goes_to_featured_products)).isChecked()) {
 			flags |= PublicConstants.Flags.FLAG_GO_BACK_TO_FEATURED_PRODUCTS;
 		}
-		config.setJumpToScreen(jumpToScreenId, flags);
+		config.setJumpToScreen(jumpToScreen, flags);
 
 		boolean coastersDiff = ((Switch) findViewById(R.id.switch_coasters_different)).isChecked();
 		boolean coastersDuplicate = ((Switch) findViewById(R.id.switch_coasters_duplicate)).isChecked();
