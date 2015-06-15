@@ -134,6 +134,7 @@
 #-keep class print.io.PIOActivity { *; }
 -keep class print.io.PIOCallback { *; }
 -keep class print.io.PIOException { *; }
+-keep class print.io.BuildVersion { *; }
 -keep class print.io.piopublic.** { *; }
 -keep class print.io.beans.** { *; }
 -keep class print.io.photosource.* { *; }
