@@ -10,10 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottom_layout"
         android:clipToPadding="false"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin" >
+        android:padding="16dip" >
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -24,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginBottom="16dip"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:text="PIO SDK Example"
