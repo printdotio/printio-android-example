@@ -73,7 +73,6 @@ public class MainActivity extends Activity {
 		config.setGooglePlayRateUrl(PIOConstants.GOOGLE_PLAY_RATE_URL);
 		config.setFacebookPageUrl(PIOConstants.FACEBOOK_PAGE_URL);
 		config.setFacebookAppId(getString(R.string.facebook_app_id));
-		config.setGoogleAnalyticsTrackId("UA-28619845-2");
 
 		addDefaultPhotoSources();
 		initSdkMode(false);
