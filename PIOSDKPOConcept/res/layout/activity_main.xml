@@ -399,6 +399,13 @@
                 android:checked="false"
                 android:text="Close widget when tap on Back button" />
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:onClick="onClickRemoveAllItemsFromShoppingCart"
+                android:text="Remove all items from shopping cart" />
+
             <!-- Customize product screen -->
 
             <View

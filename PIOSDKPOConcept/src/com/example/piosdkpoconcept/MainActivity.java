@@ -8,6 +8,7 @@ import print.io.PIO;
 import print.io.PIOConfig;
 import print.io.PIOException;
 import print.io.PublicConstants;
+import print.io.beans.cart.ShoppingCart;
 import print.io.photosource.PhotoSource;
 import print.io.piopublic.PaymentOptionType;
 import print.io.piopublic.ProductType;
@@ -137,6 +138,12 @@ public class MainActivity extends Activity {
 			}
 		});
 		builder.show();
+	}
+
+	public void onClickRemoveAllItemsFromShoppingCart(View v) {
+		ShoppingCart cart = PIO.getShoppingCart(this);
+		cart.removeAllItems();
+		PIO.setShoppingCart(this, cart);
 	}
 
 	public void onClickChangeAvailablePhotoSource(View v) {
