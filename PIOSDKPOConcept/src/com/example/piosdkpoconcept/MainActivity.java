@@ -146,6 +146,10 @@ public class MainActivity extends Activity {
 		PIO.setShoppingCart(this, cart);
 	}
 
+	public void onClickClearShippingAddresses(View v) {
+		PIO.clearShippingAddresses(this);
+	}
+
 	public void onClickChangeAvailablePhotoSource(View v) {
 		boolean[] isSelected = new boolean[allSources.size()];
 		for (int i = 0; i < isSelected.length; i++) {
