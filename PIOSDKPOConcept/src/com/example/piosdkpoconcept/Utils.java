@@ -27,9 +27,11 @@ public class Utils {
 
 	public static String orderToString(OrderInfo order) {
 		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("\n").append("Order ID: ").append(order.getOrderId());
-		stringBuilder.append("\n").append("Total: ").append(order.getTotalPrice());
-		stringBuilder.append("\n").append("Items count: ").append(order.getItems().size());
+		stringBuilder.append("\nOrder ID: ").append(order.getOrderId());
+		stringBuilder.append("\nItems count: ").append(order.getItems().size());
+		stringBuilder.append("\nTotal: ").append(order.getTotalPrice());
+		stringBuilder.append("\nDiscount: ").append(order.getDiscountAmount());
+		stringBuilder.append("\nCoupon code: ").append(order.getCouponCode());
 		return stringBuilder.toString();
 	}
 
