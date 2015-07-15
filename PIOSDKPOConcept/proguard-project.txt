@@ -286,3 +286,4 @@
 
 #Parse
 -keep class com.parse.** { *; }
+-dontwarn com.parse.**
