@@ -79,9 +79,6 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="print.io.ActivityAnimatedHelp"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="print.io.ActivityCurrency"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
