@@ -271,6 +271,13 @@
                 android:checked="false"
                 android:text="Show Help" />
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:onClick="onClickSetScreensWithCountryBar"
+                android:text="Set screens with country choose bar" />
+
             <!-- Featured Products screen -->
 
             <View
@@ -292,14 +299,6 @@
                 android:text="Featured Products screen"
                 android:textSize="16dip"
                 android:textStyle="bold" />
-
-            <Switch
-                android:id="@+id/switch_country_drop_down"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="true"
-                android:text="Show country bar:" />
 
             <Switch
                 android:id="@+id/switch_hide_category_search_bar"

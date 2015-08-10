@@ -49,6 +49,7 @@ public class MainActivity extends Activity {
 	private List<ProductType> allProductTypes = Arrays.asList(ProductType.values());
 	private List<ProductType> selectedProductTypes = new ArrayList<ProductType>(config.getAvailableProducts());
 	private List<PaymentOptionType> selectedPaymentOptions = new ArrayList<PaymentOptionType>(Arrays.asList(PaymentOptionType.values()));
+	private List<Screen> screensWithCountryBar = new ArrayList<Screen>(Arrays.asList(Screen.FEATURED_PRODUCTS));
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -127,6 +128,39 @@ public class MainActivity extends Activity {
 					selectedPaymentOptions.add(PaymentOptionType.values()[which]);
 				} else {
 					selectedPaymentOptions.remove(PaymentOptionType.values()[which]);
+				}
+			}
+		});
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// NOP
+			}
+		});
+		builder.show();
+	}
+
+	public void onClickSetScreensWithCountryBar(View v) {
+		final Screen[] allScreens = (Screen[]) Arrays.asList(Screen.FEATURED_PRODUCTS, Screen.PRODUCT_DETAILS, Screen.OPTIONS).toArray();
+		boolean[] isSelected = new boolean[allScreens.length];
+		for (int i = 0; i < isSelected.length; i++) {
+			isSelected[i] = screensWithCountryBar.contains(allScreens[i]);
+		}
+		List<String> names = new ArrayList<String>(allScreens.length);
+		for (Screen screen : allScreens) {
+			names.add(screen.name());
+		}
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Select screens with country dropdown");
+		builder.setMultiChoiceItems(names.toArray(new String[names.size()]), isSelected, new DialogInterface.OnMultiChoiceClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				if (isChecked) {
+					screensWithCountryBar.add(allScreens[which]);
+				} else {
+					screensWithCountryBar.remove(allScreens[which]);
 				}
 			}
 		});
@@ -304,8 +338,8 @@ public class MainActivity extends Activity {
 		config.setSdkAppearsFromRight(((Switch) findViewById(R.id.switch_appear_from_right)).isChecked());
 		//PIO.setMenuIconGear(((Switch) findViewById(R.id.switch_gear)).isChecked());
 		config.setPassedImageThumb(((Switch) findViewById(R.id.switch_passed_image_thumb)).isChecked());
+		config.showCountrySelectionOnScreen(screensWithCountryBar);
 		// Featured products screen
-		config.setCountryOnFeaturedProducts(((Switch) findViewById(R.id.switch_country_drop_down)).isChecked());
 		config.setHideCategorySearchBar(((Switch) findViewById(R.id.switch_hide_category_search_bar)).isChecked());
 		config.setShowFeaturedProductsByDefault(((Switch) findViewById(R.id.default_products_screen_featured)).isChecked());
 		// Product details
