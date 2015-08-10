@@ -371,7 +371,6 @@ public class MainActivity extends Activity {
 		}
 
 		config.setShowHelp(((Switch) findViewById(R.id.switch_hide_help)).isChecked());
-		config.hideHelpButtonInCustomizeProduct(!((Switch) findViewById(R.id.switch_hide_help_customize_product)).isChecked());
 
 		config.removeLogoFromPaymentScreen(((Switch) findViewById(R.id.switch_remove_logo_on_payment)).isChecked());
 
