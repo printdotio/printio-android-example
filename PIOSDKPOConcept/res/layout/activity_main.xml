@@ -59,7 +59,7 @@
 
             <EditText
                 android:id="@+id/edittext_recipe_id"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
                 android:ems="10"
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:checked="true"
-                android:text="Changeable country:" />
+                android:text="Changeable country" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -113,13 +113,13 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:checked="true"
-                android:text="Changeable currency:" />
+                android:text="Changeable currency" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
-                android:text="Language code 2 chars, coming soon!"
+                android:text="Language code 2 chars: (coming soon)"
                 android:textSize="16dip" />
 
             <EditText
@@ -138,7 +138,7 @@
                 android:layout_margin="5dp"
                 android:checked="true"
                 android:enabled="false"
-                android:text="Changeable language (Coming soon!):" />
+                android:text="Changeable language (coming soon)" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -175,7 +175,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Use gear icon as menu icon:" />
+                android:text="Use gear icon as menu icon" />
 
             <Switch
                 android:id="@+id/full_Screen"
@@ -190,14 +190,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="SDK appears from right side:" />
+                android:text="SDK appears from right side" />
 
             <Switch
                 android:id="@+id/switch_passed_image_thumb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Use passed image as thumb for one photo template:" />
+                android:text="Use passed image as thumb for one photo template" />
 
             <!-- Products -->
 
@@ -226,14 +226,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Only coasters with 4 different photos:" />
+                android:text="Only coasters with 4 different photos" />
 
             <Switch
                 android:id="@+id/switch_coasters_duplicate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Only coasters with 1 duplicated photo:" />
+                android:text="Only coasters with 1 duplicated photo" />
 
             <Button
                 android:layout_width="match_parent"
@@ -357,7 +357,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Hide Categories(Search) bar:" />
+                android:text="Hide Categories(Search) bar" />
 
             <Switch
                 android:id="@+id/default_products_screen_featured"
@@ -365,7 +365,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:checked="true"
-                android:text="Show featured products by default (switch off for all products):" />
+                android:text="Show featured products by default (switch off for all products)" />
 
             <Switch
                 android:id="@+id/switch_hide_coming_soon_products"
@@ -623,7 +623,7 @@
 
             <EditText
                 android:id="@+id/edittext_payee_name"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
                 android:ems="10"
@@ -645,7 +645,7 @@
 
             <EditText
                 android:id="@+id/edittext_promo_code"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10" />
 
@@ -761,7 +761,7 @@
 
             <EditText
                 android:id="@+id/editSKU"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10" />
 
@@ -783,7 +783,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Back goes to Featured Products:" />
+                android:text="Back goes to Featured Products" />
         </LinearLayout>
     </ScrollView>
 
