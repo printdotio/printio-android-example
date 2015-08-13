@@ -171,21 +171,6 @@
                 android:text="Enable three buttons bar style" />
 
             <Switch
-                android:id="@+id/switch_enable_side_menu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="true"
-                android:text="Enable Side Menu" />
-
-            <Switch
-                android:id="@+id/switch_right_side_menu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Right Side Menu" />
-
-            <Switch
                 android:id="@+id/switch_menu_icon_gear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -207,18 +192,34 @@
                 android:layout_margin="5dp"
                 android:text="SDK appears from right side:" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="5dp"
-                android:background="#000000" />
-
             <Switch
                 android:id="@+id/switch_passed_image_thumb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="Use passed image as thumb for one photo template:" />
+
+            <!-- Products -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="1dp"
+                android:background="#101010" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="Products configuration"
+                android:textSize="16dip"
+                android:textStyle="bold" />
 
             <Switch
                 android:id="@+id/switch_coasters_different"
@@ -240,6 +241,57 @@
                 android:layout_margin="5dp"
                 android:onClick="onClickChangeAvailableProducts"
                 android:text="Change available products" />
+
+            <!-- Side menu -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="1dp"
+                android:background="#101010" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="Side menu"
+                android:textSize="16dip"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/switch_enable_side_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="true"
+                android:text="Enable Side Menu" />
+
+            <Switch
+                android:id="@+id/switch_right_side_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Right Side Menu" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:onClick="onClickSetSideMenuButtonsTop"
+                android:text="Set top side menu buttons" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:onClick="onClickSetSideMenuInfoButtons"
+                android:text="Set side menu info buttons" />
 
             <!-- All screens -->
 

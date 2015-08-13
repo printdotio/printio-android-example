@@ -41,12 +41,11 @@ public class MainActivity extends Activity {
 	private PIOConfig config = new PIOConfig();
 
 	private List<String> imageUris = new ArrayList<String>();
-	private List<SideMenuButton> sideMenuButtonsTop = new ArrayList<SideMenuButton>();
-	private List<SideMenuInfoButton> sideMenuInfoButtons = new ArrayList<SideMenuInfoButton>();
+	private List<SideMenuButton> sideMenuButtonsTop = new ArrayList<SideMenuButton>(Arrays.asList(SideMenuButton.values()));
+	private List<SideMenuInfoButton> sideMenuInfoButtons = new ArrayList<SideMenuInfoButton>(Arrays.asList(SideMenuInfoButton.values()));
 	private PhotoSourceFactory photoSourceFactory = new PhotoSourceFactory();
 	private List<PhotoSource> allSources = photoSourceFactory.getAll();
 	private List<PhotoSource> selectedPhotoSources = new ArrayList<PhotoSource>();
-	private List<ProductType> allProductTypes = Arrays.asList(ProductType.values());
 	private List<ProductType> selectedProductTypes = new ArrayList<ProductType>(config.getAvailableProducts());
 	private List<PaymentOptionType> selectedPaymentOptions = new ArrayList<PaymentOptionType>(Arrays.asList(PaymentOptionType.values()));
 	private List<Screen> screensWithCountryBar = new ArrayList<Screen>(Arrays.asList(Screen.FEATURED_PRODUCTS));
@@ -58,6 +57,7 @@ public class MainActivity extends Activity {
 
 		editTextAddImageToSdk = (EditText) findViewById(R.id.edittext_add_image_to_sdk);
 		spinnerJumpToProduct = (Spinner) findViewById(R.id.spinner_jump_to_product);
+		spinnerJumpToProduct.setAdapter(new SpinnerAdapterJumpToProduct(this));
 		switchSkipProductDetailsScreen = (Switch) findViewById(R.id.switch_skip_product_details_screen);
 		switchHideComingSoonProducts = (Switch) findViewById(R.id.switch_hide_coming_soon_products);
 
@@ -78,6 +78,18 @@ public class MainActivity extends Activity {
 
 		addDefaultPhotoSources();
 		initSdkMode(false);
+	}
+
+	private void addDefaultPhotoSources() {
+		// Only up to 6
+		selectedPhotoSources.add(photoSourceFactory.getPhonePS());
+		selectedPhotoSources.add(photoSourceFactory.getInstagramPS());
+		selectedPhotoSources.add(photoSourceFactory.getFacebookPS());
+		//		photoSourcesTest.add(photoSourceFactory.getFlickrPS());
+		selectedPhotoSources.add(photoSourceFactory.getPhotobucketPS());
+		selectedPhotoSources.add(photoSourceFactory.getDropboxPS());
+		//		photoSourcesTest.add(photoSourceFactory.getPicasaPS());
+		selectedPhotoSources.add(photoSourceFactory.getPreselectedPS());
 	}
 
 	private void initSdkMode(boolean isLive) {
@@ -104,8 +116,6 @@ public class MainActivity extends Activity {
 		} else {
 			config.setApiUrl(PublicConstants.API_URL_STAGING);
 		}
-
-		spinnerJumpToProduct.setAdapter(new SpinnerAdapterJumpToProduct(this));
 	}
 
 	public void onClickChangeAvailablePaymentOptions(View v) {
@@ -174,16 +184,6 @@ public class MainActivity extends Activity {
 		builder.show();
 	}
 
-	public void onClickRemoveAllItemsFromShoppingCart(View v) {
-		ShoppingCart cart = PIO.getShoppingCart(this);
-		cart.removeAllItems();
-		PIO.setShoppingCart(this, cart);
-	}
-
-	public void onClickClearShippingAddresses(View v) {
-		PIO.clearShippingAddresses(this);
-	}
-
 	public void onClickChangeAvailablePhotoSource(View v) {
 		boolean[] isSelected = new boolean[allSources.size()];
 		for (int i = 0; i < isSelected.length; i++) {
@@ -217,6 +217,7 @@ public class MainActivity extends Activity {
 	}
 
 	public void onClickChangeAvailableProducts(View v) {
+		final List<ProductType> allProductTypes = Arrays.asList(ProductType.values());
 		boolean[] isSelected = new boolean[allProductTypes.size()];
 		for (int i = 0; i < isSelected.length; i++) {
 			isSelected[i] = selectedProductTypes.contains(allProductTypes.get(i));
@@ -248,36 +249,80 @@ public class MainActivity extends Activity {
 		builder.show();
 	}
 
-	private void addAllSideMenuButtonsTop() {
-		sideMenuButtonsTop.add(SideMenuButton.SEARCH_BAR);
-		sideMenuButtonsTop.add(SideMenuButton.EXIT);
-		sideMenuButtonsTop.add(SideMenuButton.FEATURED_PRODUCTS);
-		sideMenuButtonsTop.add(SideMenuButton.PRODUCTS);
-		sideMenuButtonsTop.add(SideMenuButton.HELP);
-		sideMenuButtonsTop.add(SideMenuButton.VIEW_CART);
-		sideMenuButtonsTop.add(SideMenuButton.EMAIL_SUPPORT);
+	public void onClickSetSideMenuInfoButtons(View v) {
+		final List<SideMenuInfoButton> allButtons = Arrays.asList(SideMenuInfoButton.values());
+		boolean[] isSelected = new boolean[allButtons.size()];
+		for (int i = 0; i < isSelected.length; i++) {
+			isSelected[i] = sideMenuInfoButtons.contains(allButtons.get(i));
+		}
+		List<String> names = new ArrayList<String>(allButtons.size());
+		for (SideMenuInfoButton button : allButtons) {
+			names.add(button.name());
+		}
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Select side menu info buttons");
+		builder.setMultiChoiceItems(names.toArray(new String[names.size()]), isSelected, new DialogInterface.OnMultiChoiceClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				if (isChecked) {
+					sideMenuInfoButtons.add(allButtons.get(which));
+				} else {
+					sideMenuInfoButtons.remove(allButtons.get(which));
+				}
+			}
+		});
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// NOP
+			}
+		});
+		builder.show();
 	}
 
-	private void addDefaultPhotoSources() {
-		// Only up to 6
-		selectedPhotoSources.add(photoSourceFactory.getPhonePS());
-		selectedPhotoSources.add(photoSourceFactory.getInstagramPS());
-		selectedPhotoSources.add(photoSourceFactory.getFacebookPS());
-		//		photoSourcesTest.add(photoSourceFactory.getFlickrPS());
-		selectedPhotoSources.add(photoSourceFactory.getPhotobucketPS());
-		selectedPhotoSources.add(photoSourceFactory.getDropboxPS());
-		//		photoSourcesTest.add(photoSourceFactory.getPicasaPS());
-		selectedPhotoSources.add(photoSourceFactory.getPreselectedPS());
+	public void onClickSetSideMenuButtonsTop(View v) {
+		final List<SideMenuButton> allButtons = Arrays.asList(SideMenuButton.values());
+		boolean[] isSelected = new boolean[allButtons.size()];
+		for (int i = 0; i < isSelected.length; i++) {
+			isSelected[i] = sideMenuButtonsTop.contains(allButtons.get(i));
+		}
+		List<String> names = new ArrayList<String>(allButtons.size());
+		for (SideMenuButton button : allButtons) {
+			names.add(button.name());
+		}
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Select top side menu buttons");
+		builder.setMultiChoiceItems(names.toArray(new String[names.size()]), isSelected, new DialogInterface.OnMultiChoiceClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				if (isChecked) {
+					sideMenuButtonsTop.add(allButtons.get(which));
+				} else {
+					sideMenuButtonsTop.remove(allButtons.get(which));
+				}
+			}
+		});
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// NOP
+			}
+		});
+		builder.show();
 	}
 
-	private void addAllSideMenuInfoButtons() {
-		sideMenuInfoButtons.add(SideMenuInfoButton.PRICING_CHART);
-		sideMenuInfoButtons.add(SideMenuInfoButton.SHARE_APP);
-		sideMenuInfoButtons.add(SideMenuInfoButton.LIKE_US_FB);
-		sideMenuInfoButtons.add(SideMenuInfoButton.RATE_APP);
-		sideMenuInfoButtons.add(SideMenuInfoButton.ABOUT);
-		sideMenuInfoButtons.add(SideMenuInfoButton.HOW_IT_WORKS);
-		sideMenuInfoButtons.add(SideMenuInfoButton.PAST_ORDERS);
+	public void onClickRemoveAllItemsFromShoppingCart(View v) {
+		ShoppingCart cart = PIO.getShoppingCart(this);
+		cart.removeAllItems();
+		PIO.setShoppingCart(this, cart);
+	}
+
+	public void onClickClearShippingAddresses(View v) {
+		PIO.clearShippingAddresses(this);
 	}
 
 	public void onClickAddImageToSDK(View v) {
@@ -303,56 +348,111 @@ public class MainActivity extends Activity {
 	}
 
 	public void onClickStartSDK(View v) {
+		config.setSdkDemo(true);
+		config.setHostAppActivity(getComponentName().getClassName()); //"com.example.piosdkpoconcept.ActivityTest"
+
 		String recepiID = ((EditText) findViewById(R.id.edittext_recipe_id)).getText().toString();
 		if (StringUtils.isNotBlank(recepiID)) {
 			config.setRecipeID(recepiID);
 		}
-		config.setSideMenuEnabled(false);
-		config.setImageUris(imageUris);
-		config.hidePhotoSourcesInSideMenu(((Switch) findViewById(R.id.switch_hide_photo_sources_side_menu)).isChecked());
 		config.setCountryCode(((EditText) findViewById(R.id.editCountry)).getText().toString());
 		config.setChangeableCountry(((Switch) findViewById(R.id.switch_changeable_country)).isChecked());
 		config.setCurrencyCode(((EditText) findViewById(R.id.editCurrency)).getText().toString());
 		config.setChangeableCurrency(((Switch) findViewById(R.id.switch_changeable_currency)).isChecked());
-		config.setPartnerName(((EditText) findViewById(R.id.edittext_payee_name)).getText().toString());
 		try {
 			String colorString = ((EditText) findViewById(R.id.editColorHex)).getText().toString();
 			config.setHeaderColor(Color.parseColor("#" + colorString));
 		} catch (NumberFormatException e) {}
-
-		boolean isCustomFontsEnabled = ((Switch) findViewById(R.id.switch_enable_custom_fonts)).isChecked();
-		if (isCustomFontsEnabled) {
+		if (((Switch) findViewById(R.id.switch_enable_custom_fonts)).isChecked()) {
 			config.setFontPathInAssetsLight("HelveticaNeueLTStd-Lt.otf");
 			config.setFontPathInAssetsNormal("HelveticaNeueLTStd-Roman.otf");
 			config.setFontPathInAssetsBold("HelveticaNeueLTStd-Bd.otf");
 		}
-
 		config.useThreeButtonsBarStyle(((Switch) findViewById(R.id.switch_three_buttons_bar_style)).isChecked());
-
-		config.setSideMenuEnabled(((Switch) findViewById(R.id.switch_enable_side_menu)).isChecked());
-		config.setRightSideMenu(((Switch) findViewById(R.id.switch_right_side_menu)).isChecked());
 		config.setMenuIconGear(((Switch) findViewById(R.id.switch_menu_icon_gear)).isChecked());
 		config.setHideStatusBar(((Switch) findViewById(R.id.full_Screen)).isChecked());
-		config.setAutoArrange(((Switch) findViewById(R.id.auto_arrange)).isChecked());
-		config.setSdkDemo(true);
 		config.setSdkAppearsFromRight(((Switch) findViewById(R.id.switch_appear_from_right)).isChecked());
-		//PIO.setMenuIconGear(((Switch) findViewById(R.id.switch_gear)).isChecked());
 		config.setPassedImageThumb(((Switch) findViewById(R.id.switch_passed_image_thumb)).isChecked());
+
+		// Products configuration
+		boolean coastersDiff = ((Switch) findViewById(R.id.switch_coasters_different)).isChecked();
+		boolean coastersDuplicate = ((Switch) findViewById(R.id.switch_coasters_duplicate)).isChecked();
+		config.setCoastersType(-1); // Reset from previous launch
+		if (coastersDiff != coastersDuplicate) {
+			config.setCoastersType(coastersDiff ? PublicConstants.CoastersTypes.COASTERS_4_DIFFERENT : PublicConstants.CoastersTypes.COASTERS_1_DUPLICATED);
+		}
+		config.setAvailableProducts(selectedProductTypes);
+
+		// Side menu
+		config.setSideMenuEnabled(((Switch) findViewById(R.id.switch_enable_side_menu)).isChecked());
+		config.setRightSideMenu(((Switch) findViewById(R.id.switch_right_side_menu)).isChecked());
+		config.setSideMenuButtonsTop(sideMenuButtonsTop);
+		config.setSideMenuInfoButtons(sideMenuInfoButtons);
+
+		// All Screens
+		config.setShowHelp(((Switch) findViewById(R.id.switch_hide_help)).isChecked());
 		config.showCountrySelectionOnScreen(screensWithCountryBar);
+
 		// Featured products screen
 		config.setHideCategorySearchBar(((Switch) findViewById(R.id.switch_hide_category_search_bar)).isChecked());
 		config.setShowFeaturedProductsByDefault(((Switch) findViewById(R.id.default_products_screen_featured)).isChecked());
+		config.setHideComingSoonProducts(switchHideComingSoonProducts.isChecked());
+
 		// Product details
 		config.setPriceTitleHidden(((Switch) findViewById(R.id.switch_hide_price_title)).isChecked());
+
 		// Shopping cart screen
 		config.setShowAddMoreProductsInShoppingCart(((Switch) findViewById(R.id.switch_show_add_more_products)).isChecked());
 		config.hideEditButtonInShoppingCart(((Switch) findViewById(R.id.switch_hide_edit_button)).isChecked());
 		config.closeWidgetFromShoppingCart(((Switch) findViewById(R.id.closeWidgetFromShoppingCart)).isChecked());
 
-		config.setHostAppActivity(getComponentName().getClassName()); //"com.example.piosdkpoconcept.ActivityTest"
+		// Customize product screen
+		config.setShowPhotosInCustomize(((Switch) findViewById(R.id.switch_show_photos_customize)).isChecked());
+		config.setShowOptionsInCustomize(((Switch) findViewById(R.id.switch_show_options_customize)).isChecked());
+		config.enablePhotoSourcesInCustomizeProduct(((Switch) findViewById(R.id.switch_show_enable_photosource_when_disabled)).isChecked());
+		config.setAutoArrange(((Switch) findViewById(R.id.auto_arrange)).isChecked());
 
-		config.setAvailableProducts(selectedProductTypes);
+		// Edit image screen
+		boolean isRotateEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_rotate_enabled_in_crop_screen)).isChecked();
+		boolean isTextEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_text_enabled_in_crop_screen)).isChecked();
+		boolean isEffectsEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_effects_enabled_in_crop_screen)).isChecked();
+		config.setUpCropScreen(isRotateEnabledInCropScreen, isTextEnabledInCropScreen, isEffectsEnabledInCropScreen);
 
+		// Shipping addresses screen
+		// empty
+
+		// Payment screen
+		config.removeLogoFromPaymentScreen(((Switch) findViewById(R.id.switch_remove_logo_on_payment)).isChecked());
+		config.setPartnerName(((EditText) findViewById(R.id.edittext_payee_name)).getText().toString());
+		config.setPaymentOptions(selectedPaymentOptions);
+		String promoCode = ((EditText) findViewById(R.id.edittext_promo_code)).getText().toString();
+		config.setPromoCode(StringUtils.isBlank(promoCode) ? null : promoCode);
+
+		// Photo sources
+		config.setPhotoSources(selectedPhotoSources);
+		if (((Switch) findViewById(R.id.switch_use_first_photosource_as_default)).isChecked() && config.getPhotoSources() != null && !config.getPhotoSources().isEmpty()) {
+			config.setDefaultPhotoSource(config.getPhotoSources().get(0));
+		}
+		config.setPhotoSourcesDisabled(((Switch) findViewById(R.id.switch_disable_photosources)).isChecked());
+		config.hidePhotoSourcesInSideMenu(((Switch) findViewById(R.id.switch_hide_photo_sources_side_menu)).isChecked());
+		config.setImageUris(imageUris);
+		if (config.isPhotosourcesDisabled() && (config.getImageUris() == null || config.getImageUris().isEmpty())) {
+			showMessage("Photosources are disabled and no images were passed to the SDK");
+			return;
+		}
+
+		// Jump to product
+		Object item = spinnerJumpToProduct.getSelectedItem();
+		ProductType selectedProductType = item == null ? null : (ProductType) item;
+		config.setProductFromApp(selectedProductType);
+		config.setSkipProductDetails(switchSkipProductDetailsScreen.isChecked());
+		config.setProductSkuFromApp(((EditText) findViewById(R.id.editSKU)).getText().toString());
+		if (StringUtils.isNotBlank(config.getProductSkuFromApp()) && selectedProductType == null) {
+			showMessage("Product must be specified when SKU is supplied");
+			return;
+		}
+
+		// Jump to shopping cart
 		Screen jumpToScreen = null;
 		if (((Switch) findViewById(R.id.switch_jump_to_shopping_cart)).isChecked()) {
 			jumpToScreen = Screen.SHOPPING_CART;
@@ -363,72 +463,7 @@ public class MainActivity extends Activity {
 		}
 		config.setJumpToScreen(jumpToScreen, flags);
 
-		boolean coastersDiff = ((Switch) findViewById(R.id.switch_coasters_different)).isChecked();
-		boolean coastersDuplicate = ((Switch) findViewById(R.id.switch_coasters_duplicate)).isChecked();
-		config.setCoastersType(-1); // Reset from previous launch
-		if (coastersDiff != coastersDuplicate) {
-			config.setCoastersType(coastersDiff ? PublicConstants.CoastersTypes.COASTERS_4_DIFFERENT : PublicConstants.CoastersTypes.COASTERS_1_DUPLICATED);
-		}
-
-		config.setShowHelp(((Switch) findViewById(R.id.switch_hide_help)).isChecked());
-
-		config.removeLogoFromPaymentScreen(((Switch) findViewById(R.id.switch_remove_logo_on_payment)).isChecked());
-
-		config.enablePhotoSourcesInCustomizeProduct(((Switch) findViewById(R.id.switch_show_enable_photosource_when_disabled)).isChecked());
-		config.setShowPhotosInCustomize(((Switch) findViewById(R.id.switch_show_photos_customize)).isChecked());
-		config.setShowOptionsInCustomize(((Switch) findViewById(R.id.switch_show_options_customize)).isChecked());
-		boolean isRotateEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_rotate_enabled_in_crop_screen)).isChecked();
-		boolean isTextEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_text_enabled_in_crop_screen)).isChecked();
-		boolean isEffectsEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_effects_enabled_in_crop_screen)).isChecked();
-		config.setUpCropScreen(isRotateEnabledInCropScreen, isTextEnabledInCropScreen, isEffectsEnabledInCropScreen);
-
-		if (sideMenuButtonsTop.size() == 0) {
-			addAllSideMenuButtonsTop();
-		}
-		config.setSideMenuButtonsTop(sideMenuButtonsTop);
-
-		// Photo sources
-		config.setPhotoSources(selectedPhotoSources);
-		if (((Switch) findViewById(R.id.switch_use_first_photosource_as_default)).isChecked() && config.getPhotoSources() != null && !config.getPhotoSources().isEmpty()) {
-			config.setDefaultPhotoSource(config.getPhotoSources().get(0));
-		}
-		config.setPhotoSourcesDisabled(((Switch) findViewById(R.id.switch_disable_photosources)).isChecked());
-
-		if (sideMenuInfoButtons.size() == 0) {
-			addAllSideMenuInfoButtons();
-		}
-		config.setSideMenuInfoButtons(sideMenuInfoButtons);
-		config.setHideComingSoonProducts(switchHideComingSoonProducts.isChecked());
-		config.setPaymentOptions(selectedPaymentOptions);
-
-		// Jump to product
-		ProductType selectedProductIdType;
-		Object item = spinnerJumpToProduct.getSelectedItem();
-		if (item == null) {
-			selectedProductIdType = null;
-		} else {
-			selectedProductIdType = (ProductType) item;
-		}
-		config.setProductFromApp(selectedProductIdType);
-		config.setSkipProductDetails(switchSkipProductDetailsScreen.isChecked());
-		config.setProductSkuFromApp(((EditText) findViewById(R.id.editSKU)).getText().toString());
-		if (StringUtils.isNotBlank(config.getProductSkuFromApp()) && selectedProductIdType == null) {
-			showMessage("Product must be specified when SKU is supplied");
-			return;
-		}
-
-		String promoCode = ((EditText) findViewById(R.id.edittext_promo_code)).getText().toString();
-		if (StringUtils.isBlank(promoCode)) {
-			config.setPromoCode(null);
-		} else {
-			config.setPromoCode(promoCode);
-		}
-
-		if (config.isPhotosourcesDisabled() && (config.getImageUris() == null || config.getImageUris().isEmpty())) {
-			showMessage("Photosources are disabled and no images were passed to the SDK");
-			return;
-		}
-
+		// Launch SDK
 		try {
 			PIO.setConfig(this, config);
 			PIO.start(this);
