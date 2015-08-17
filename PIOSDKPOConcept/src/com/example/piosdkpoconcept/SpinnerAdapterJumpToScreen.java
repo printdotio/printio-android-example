@@ -71,7 +71,7 @@ public class SpinnerAdapterJumpToScreen extends BaseAdapter implements SpinnerAd
 
 		public NameScreenPair(Screen screen) {
 			this.screen = screen;
-			this.name = screen != null ? screen.toString() : "No screen selected";
+			this.name = screen != null ? screen.toString() : "Screen not selected";
 		}
 	}
 }
