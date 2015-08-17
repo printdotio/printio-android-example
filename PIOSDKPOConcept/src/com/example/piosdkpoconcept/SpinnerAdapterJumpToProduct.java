@@ -20,53 +20,11 @@ public class SpinnerAdapterJumpToProduct extends BaseAdapter implements SpinnerA
 	public SpinnerAdapterJumpToProduct(Context context) {
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		items = new ArrayList<NameIdPair>();
-		items.add(new NameIdPair("No product selected", null));
+		items.add(new NameIdPair(null));
 
-		items.add(new NameIdPair("Acrylic Blocks", ProductType.ACRYLIC_BLOCKS));
-		items.add(new NameIdPair("Acrylic Prints", ProductType.ACRYLIC_PRINTS));
-		items.add(new NameIdPair("Acrylic Trays", ProductType.ACRYLIC_TRAYS));
-		items.add(new NameIdPair("Art Posters", ProductType.ART_POSTERS));
-		items.add(new NameIdPair("Beach Towels", ProductType.BEACH_TOWELS));
-		items.add(new NameIdPair("Canvas Minis", ProductType.CANVAS_MINIS));
-		items.add(new NameIdPair("Canvas Posters", ProductType.CANVAS_POSTERS));
-		items.add(new NameIdPair("Canvas Wraps", ProductType.CANVAS_WRAPS));
-		items.add(new NameIdPair("Cloth Napkins", ProductType.CLOTH_NAPKINS));
-		items.add(new NameIdPair("Coasters", ProductType.COASTERS));
-		items.add(new NameIdPair("Dog Beds", ProductType.DOG_BEDS));
-		items.add(new NameIdPair("Duvet Covers", ProductType.DUVET_COVERS));
-		items.add(new NameIdPair("Everything Bags", ProductType.EVERYTHING_BAGS));
-		items.add(new NameIdPair("Framed Prints", ProductType.FRAMED_PRINTS));
-		items.add(new NameIdPair("Fleece Blankets", ProductType.FLEECE_BLANKETS));
-		items.add(new NameIdPair("Folder Cards", ProductType.FOLDED_CARDS));
-		items.add(new NameIdPair("Glass Cutting Boards", ProductType.GLASS_CUTTING_BOARDS));
-		items.add(new NameIdPair("Laptop Skins", ProductType.LAPTOP_SKINS));
-		items.add(new NameIdPair("Magnetgram", ProductType.MAGNETGRAM));
-		items.add(new NameIdPair("Metal Magnets", ProductType.METAL_MAGNETS));
-		items.add(new NameIdPair("Metal Prints", ProductType.METAL_PRINTS));
-		items.add(new NameIdPair("Minibooks", ProductType.MINIBOOKS));
-		items.add(new NameIdPair("Mousepads", ProductType.MOUSEPADS));
-		items.add(new NameIdPair("Mugs", ProductType.MUGS));
-		items.add(new NameIdPair("Ottomans", ProductType.OTTOMANS));
-		items.add(new NameIdPair("Pillow Shams", ProductType.PILLOW_SHAMS));
-		items.add(new NameIdPair("Puzzles", ProductType.PUZZLES));
-		items.add(new NameIdPair("Phone Cases", ProductType.PHONE_CASES));
-		items.add(new NameIdPair("Placemats", ProductType.PLACEMATS));
-		items.add(new NameIdPair("Postcards", ProductType.POSTCARDS));
-		items.add(new NameIdPair("Prints", ProductType.PRINTS));
-		items.add(new NameIdPair("Professional prints", ProductType.PROFESSIONAL_PRINTS));
-		items.add(new NameIdPair("Rugs", ProductType.RUGS));
-		items.add(new NameIdPair("Shower Curtains", ProductType.SHOWER_CURTAINS));
-		items.add(new NameIdPair("Stickerbooks", ProductType.STICKERBOOKS));
-		items.add(new NameIdPair("Stone Coasters", ProductType.STONE_COASTERS));
-		items.add(new NameIdPair("Tablet Cases", ProductType.TABLET_CASES));
-		items.add(new NameIdPair("Tabletop Canvases", ProductType.TABLETOP_CANVASES));
-		items.add(new NameIdPair("Tinybooks", ProductType.TINYBOOKS));
-		items.add(new NameIdPair("Tote Bags", ProductType.TOTE_BAGS));
-		items.add(new NameIdPair("Thick Prints", ProductType.THICK_PRINTS));
-		items.add(new NameIdPair("Throw Pillows", ProductType.THROW_PILLOWS));
-		items.add(new NameIdPair("Wall Calendars", ProductType.WALL_CALENDARS));
-		items.add(new NameIdPair("Woven Blankets", ProductType.WOVEN_BLANKETS));
-		items.add(new NameIdPair("Wood Prints", ProductType.WOOD_PRINTS));
+		for (ProductType type : ProductType.values()) {
+			items.add(new NameIdPair(type));
+		}
 	}
 
 	@Override
@@ -76,12 +34,12 @@ public class SpinnerAdapterJumpToProduct extends BaseAdapter implements SpinnerA
 
 	@Override
 	public Object getItem(int position) {
-		return items.get(position).productIdType;
+		return items.get(position).product;
 	}
 
 	@Override
 	public long getItemId(int position) {
-		ProductType idType = items.get(position).productIdType;
+		ProductType idType = items.get(position).product;
 		return idType == null ? SpinnerAdapter.NO_SELECTION : idType.ordinal();
 	}
 
@@ -109,11 +67,11 @@ public class SpinnerAdapterJumpToProduct extends BaseAdapter implements SpinnerA
 	private class NameIdPair {
 
 		public String name;
-		public ProductType productIdType;
+		public ProductType product;
 
-		public NameIdPair(String name, ProductType id) {
-			this.name = name;
-			this.productIdType = id;
+		public NameIdPair(ProductType product) {
+			this.name = product == null ? "Product not selected" : product.toString();
+			this.product = product;
 		}
 
 	}
