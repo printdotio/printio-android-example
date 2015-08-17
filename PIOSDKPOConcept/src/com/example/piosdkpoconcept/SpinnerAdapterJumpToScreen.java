@@ -23,8 +23,11 @@ public class SpinnerAdapterJumpToScreen extends BaseAdapter implements SpinnerAd
 		items = new ArrayList<NameScreenPair>();
 		items.add(new NameScreenPair(null));
 
-		items.add(new NameScreenPair(Screen.PRODUCT_DETAILS_V2));
-		items.add(new NameScreenPair(Screen.SHOPPING_CART));
+		for (Screen screen : Screen.values()) {
+			if (screen.jumpToScreenEnabled()) {
+				items.add(new NameScreenPair(screen));
+			}
+		}
 	}
 
 	@Override
