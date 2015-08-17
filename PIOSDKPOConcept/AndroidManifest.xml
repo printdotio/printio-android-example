@@ -25,7 +25,7 @@
 
     <!--
   IMPORTANT: Change "com.example.piosdkpoconcept.permission.C2D_MESSAGE" in the lines below
-  to match your app's package name + ".permission.C2D_MESSAGE".
+  to match your app's package name + ".permission.C2D_MESSAGE".
     -->
 
     <permission
@@ -88,6 +88,9 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="print.io.ActivityProductDetails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="print.io.ActivityProductDetailsV2"
             android:screenOrientation="portrait" />
         <activity
             android:name="print.io.ActivityProductPreview"

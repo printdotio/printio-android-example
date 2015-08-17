@@ -35,6 +35,7 @@ public class MainActivity extends Activity {
 
 	private EditText editTextAddImageToSdk;
 	private Spinner spinnerJumpToProduct;
+	private Spinner spinnerJumpToScreen;
 	private Switch switchSkipProductDetailsScreen;
 	private Switch switchHideComingSoonProducts;
 
@@ -58,6 +59,8 @@ public class MainActivity extends Activity {
 		editTextAddImageToSdk = (EditText) findViewById(R.id.edittext_add_image_to_sdk);
 		spinnerJumpToProduct = (Spinner) findViewById(R.id.spinner_jump_to_product);
 		spinnerJumpToProduct.setAdapter(new SpinnerAdapterJumpToProduct(this));
+		spinnerJumpToScreen = (Spinner) findViewById(R.id.spinner_jump_to_screen);
+		spinnerJumpToScreen.setAdapter(new SpinnerAdapterJumpToScreen(this));
 		switchSkipProductDetailsScreen = (Switch) findViewById(R.id.switch_skip_product_details_screen);
 		switchHideComingSoonProducts = (Switch) findViewById(R.id.switch_hide_coming_soon_products);
 
@@ -152,7 +155,7 @@ public class MainActivity extends Activity {
 	}
 
 	public void onClickSetScreensWithCountryBar(View v) {
-		final Screen[] allScreens = (Screen[]) Arrays.asList(Screen.FEATURED_PRODUCTS, Screen.PRODUCT_DETAILS, Screen.OPTIONS).toArray();
+		final Screen[] allScreens = (Screen[]) Arrays.asList(Screen.FEATURED_PRODUCTS, Screen.PRODUCT_DETAILS, Screen.PRODUCT_DETAILS_V2, Screen.OPTIONS).toArray();
 		boolean[] isSelected = new boolean[allScreens.length];
 		for (int i = 0; i < isSelected.length; i++) {
 			isSelected[i] = screensWithCountryBar.contains(allScreens[i]);
@@ -452,11 +455,10 @@ public class MainActivity extends Activity {
 			return;
 		}
 
-		// Jump to shopping cart
-		Screen jumpToScreen = null;
-		if (((Switch) findViewById(R.id.switch_jump_to_shopping_cart)).isChecked()) {
-			jumpToScreen = Screen.SHOPPING_CART;
-		}
+		// Jump to Screen
+		Object screen = spinnerJumpToScreen.getSelectedItem();
+		Screen jumpToScreen = screen == null ? null : (Screen) screen;
+
 		int flags = 0;
 		if (((Switch) findViewById(R.id.switch_back_goes_to_featured_products)).isChecked()) {
 			flags |= PublicConstants.Flags.FLAG_GO_BACK_TO_FEATURED_PRODUCTS;

@@ -765,18 +765,32 @@
                 android:layout_height="wrap_content"
                 android:ems="10" />
 
+            <!-- Jump to Screen -->
+
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="3px"
                 android:layout_marginTop="5dp"
                 android:background="#000000" />
 
-            <Switch
-                android:id="@+id/switch_jump_to_shopping_cart"
+            <View
                 android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="1dp"
+                android:background="#101010" />
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Jump to Shopping Cart" />
+                android:layout_margin="5dip"
+                android:text="Jump to Screen"
+                android:textSize="16dip"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_jump_to_screen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <Switch
                 android:id="@+id/switch_back_goes_to_featured_products"
