@@ -1,9 +1,9 @@
-package com.example.piosdkpoconcept;
+package com.example.piosdkpoconcept.adapters;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import print.io.piopublic.Screen;
+import print.io.piopublic.ScreenVersion;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,21 +12,19 @@ import android.widget.BaseAdapter;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
+import com.example.piosdkpoconcept.R;
 
-public class SpinnerAdapterJumpToScreen extends BaseAdapter implements SpinnerAdapter {
+public class SpinnerAdapterScreenVersion extends BaseAdapter implements SpinnerAdapter {
 
 	private LayoutInflater inflater;
 	private List<NameScreenPair> items;
 
-	public SpinnerAdapterJumpToScreen(Context context) {
+	public SpinnerAdapterScreenVersion(Context context) {
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		items = new ArrayList<NameScreenPair>();
-		items.add(new NameScreenPair(null));
 
-		for (Screen screen : Screen.values()) {
-			if (screen.jumpToScreenEnabled()) {
-				items.add(new NameScreenPair(screen));
-			}
+		for (ScreenVersion sv : ScreenVersion.values()) {
+			items.add(new NameScreenPair(sv));
 		}
 	}
 
@@ -37,12 +35,12 @@ public class SpinnerAdapterJumpToScreen extends BaseAdapter implements SpinnerAd
 
 	@Override
 	public Object getItem(int position) {
-		return items.get(position).screen;
+		return items.get(position).screenVersion;
 	}
 
 	@Override
 	public long getItemId(int position) {
-		Screen idType = items.get(position).screen;
+		ScreenVersion idType = items.get(position).screenVersion;
 		return idType == null ? SpinnerAdapter.NO_SELECTION : idType.ordinal();
 	}
 
@@ -70,11 +68,11 @@ public class SpinnerAdapterJumpToScreen extends BaseAdapter implements SpinnerAd
 	private class NameScreenPair {
 
 		public String name;
-		public Screen screen;
+		public ScreenVersion screenVersion;
 
-		public NameScreenPair(Screen screen) {
-			this.screen = screen;
-			this.name = screen != null ? screen.toString() : "Screen not selected";
+		public NameScreenPair(ScreenVersion screenVersion) {
+			this.screenVersion = screenVersion;
+			this.name = screenVersion != null ? screenVersion.toString() : "Screen version not selected";
 		}
 	}
 }

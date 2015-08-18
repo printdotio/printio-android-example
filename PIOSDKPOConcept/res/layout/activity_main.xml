@@ -686,14 +686,6 @@
                 android:checked="true"
                 android:text="Use first photo source as default" />
 
-            <Switch
-                android:id="@+id/switch_disable_photosources"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="false"
-                android:text="Disable Photo Sources" />
-
             <EditText
                 android:id="@+id/edittext_add_image_to_sdk"
                 android:layout_width="match_parent"
@@ -736,34 +728,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
-                android:text="Jump to Product"
+                android:text="Screens"
                 android:textSize="16dip"
                 android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_screen_version"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:onClick="onClickSetDisabledScreens"
+                android:text="Set disabled screens"
+                android:textSize="16dip" />
 
             <Spinner
                 android:id="@+id/spinner_jump_to_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <Switch
-                android:id="@+id/switch_skip_product_details_screen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Skip Product Details screen" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dip"
-                android:text="Skip Product Options screen, using SKU:"
-                android:textSize="16dip" />
-
             <EditText
                 android:id="@+id/editSKU"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10" />
+                android:ems="10"
+                android:hint="Use SKU for product" />
 
             <!-- Jump to Screen -->
 
@@ -797,7 +789,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Back goes to Featured Products" />
+                android:text="Back goes to Featured Products (when jump to SHOPPING_CART for V_1 screen version is selected)" />
         </LinearLayout>
     </ScrollView>
 

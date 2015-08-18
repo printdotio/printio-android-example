@@ -1,4 +1,4 @@
-package com.example.piosdkpoconcept;
+package com.example.piosdkpoconcept.adapters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+
+import com.example.piosdkpoconcept.R;
 
 public class SpinnerAdapterJumpToProduct extends BaseAdapter implements SpinnerAdapter {
 
