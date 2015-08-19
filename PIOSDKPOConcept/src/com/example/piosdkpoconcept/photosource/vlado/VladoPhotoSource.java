@@ -11,6 +11,11 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentActivity;
 
+/**
+ * Custom photo source example.
+ * 
+ * @author Vlado
+ */
 public class VladoPhotoSource extends DefaultPhotoSource {
 
 	private static final long serialVersionUID = -2804726157663465818L;
