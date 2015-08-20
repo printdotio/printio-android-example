@@ -330,7 +330,7 @@
                 android:onClick="onClickSetScreensWithCountryBar"
                 android:text="Set screens with country choose bar" />
 
-            <!-- Featured Products screen -->
+            <!-- Products screen -->
 
             <View
                 android:layout_width="match_parent"
@@ -348,7 +348,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
-                android:text="Featured Products screen"
+                android:text="Products screen"
                 android:textSize="16dip"
                 android:textStyle="bold" />
 

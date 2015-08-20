@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
 	private List<PhotoSource> selectedPhotoSources = new ArrayList<PhotoSource>();
 	private List<ProductType> selectedProductTypes = new ArrayList<ProductType>(config.getAvailableProducts());
 	private List<PaymentOptionType> selectedPaymentOptions = new ArrayList<PaymentOptionType>(Arrays.asList(PaymentOptionType.values()));
-	private List<Screen> screensWithCountryBar = new ArrayList<Screen>(Arrays.asList(Screen.FEATURED_PRODUCTS));
+	private List<Screen> screensWithCountryBar = new ArrayList<Screen>(Arrays.asList(Screen.PRODUCTS));
 	private List<Screen> availableScreens = Arrays.asList(Screen.values());
 	private ScreenVersion screenVersion;
 
@@ -178,7 +178,7 @@ public class MainActivity extends Activity {
 	}
 
 	public void onClickSetScreensWithCountryBar(View v) {
-		final Screen[] allScreens = (Screen[]) Arrays.asList(Screen.FEATURED_PRODUCTS, Screen.PRODUCT_DETAILS, Screen.OPTIONS).toArray();
+		final Screen[] allScreens = (Screen[]) Arrays.asList(Screen.PRODUCTS, Screen.PRODUCT_DETAILS, Screen.OPTIONS).toArray();
 		boolean[] isSelected = new boolean[allScreens.length];
 		for (int i = 0; i < isSelected.length; i++) {
 			isSelected[i] = screensWithCountryBar.contains(allScreens[i]);
@@ -522,7 +522,7 @@ public class MainActivity extends Activity {
 		Screen jumpToScreen = screen == null ? null : (Screen) screen;
 		Screen navigateBackScreen = null;
 		if (((Switch) findViewById(R.id.switch_back_goes_to_featured_products)).isChecked() && Screen.SHOPPING_CART == jumpToScreen && ScreenVersion.V_1 == screenVersion) {
-			navigateBackScreen = Screen.FEATURED_PRODUCTS;
+			navigateBackScreen = Screen.PRODUCTS;
 		}
 		config.setJumpToScreen(jumpToScreen, navigateBackScreen);
 

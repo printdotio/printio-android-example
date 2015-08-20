@@ -80,7 +80,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="print.io.ActivityFeaturedProducts"
+            android:name="print.io.ActivityProducts"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
