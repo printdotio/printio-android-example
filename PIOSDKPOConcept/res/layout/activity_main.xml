@@ -59,7 +59,7 @@
 
             <EditText
                 android:id="@+id/edittext_recipe_id"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
                 android:ems="10"
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:checked="true"
-                android:text="Changeable country:" />
+                android:text="Changeable country" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -113,13 +113,13 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:checked="true"
-                android:text="Changeable currency:" />
+                android:text="Changeable currency" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
-                android:text="Language code 2 chars, coming soon!"
+                android:text="Language code 2 chars: (coming soon)"
                 android:textSize="16dip" />
 
             <EditText
@@ -138,7 +138,7 @@
                 android:layout_margin="5dp"
                 android:checked="true"
                 android:enabled="false"
-                android:text="Changeable language (Coming soon!):" />
+                android:text="Changeable language (coming soon)" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -171,26 +171,11 @@
                 android:text="Enable three buttons bar style" />
 
             <Switch
-                android:id="@+id/switch_enable_side_menu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="true"
-                android:text="Enable Side Menu" />
-
-            <Switch
-                android:id="@+id/switch_right_side_menu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Right Side Menu" />
-
-            <Switch
                 android:id="@+id/switch_menu_icon_gear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Use gear icon as menu icon:" />
+                android:text="Use gear icon as menu icon" />
 
             <Switch
                 android:id="@+id/full_Screen"
@@ -205,34 +190,50 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="SDK appears from right side:" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="5dp"
-                android:background="#000000" />
+                android:text="SDK appears from right side" />
 
             <Switch
                 android:id="@+id/switch_passed_image_thumb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Use passed image as thumb for one photo template:" />
+                android:text="Use passed image as thumb for one photo template" />
+
+            <!-- Products -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="1dp"
+                android:background="#101010" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="Products configuration"
+                android:textSize="16dip"
+                android:textStyle="bold" />
 
             <Switch
                 android:id="@+id/switch_coasters_different"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Only coasters with 4 different photos:" />
+                android:text="Only coasters with 4 different photos" />
 
             <Switch
                 android:id="@+id/switch_coasters_duplicate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Only coasters with 1 duplicated photo:" />
+                android:text="Only coasters with 1 duplicated photo" />
 
             <Button
                 android:layout_width="match_parent"
@@ -240,6 +241,57 @@
                 android:layout_margin="5dp"
                 android:onClick="onClickChangeAvailableProducts"
                 android:text="Change available products" />
+
+            <!-- Side menu -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="1dp"
+                android:background="#101010" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="Side menu"
+                android:textSize="16dip"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/switch_enable_side_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="true"
+                android:text="Enable Side Menu" />
+
+            <Switch
+                android:id="@+id/switch_right_side_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Right Side Menu" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:onClick="onClickSetSideMenuButtonsTop"
+                android:text="Set top side menu buttons" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:onClick="onClickSetSideMenuInfoButtons"
+                android:text="Set side menu info buttons" />
 
             <!-- All screens -->
 
@@ -271,6 +323,13 @@
                 android:checked="false"
                 android:text="Show Help" />
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:onClick="onClickSetScreensWithCountryBar"
+                android:text="Set screens with country choose bar" />
+
             <!-- Featured Products screen -->
 
             <View
@@ -294,19 +353,11 @@
                 android:textStyle="bold" />
 
             <Switch
-                android:id="@+id/switch_country_drop_down"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="true"
-                android:text="Show country bar:" />
-
-            <Switch
                 android:id="@+id/switch_hide_category_search_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Hide Categories(Search) bar:" />
+                android:text="Hide Categories(Search) bar" />
 
             <Switch
                 android:id="@+id/default_products_screen_featured"
@@ -314,7 +365,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:checked="true"
-                android:text="Show featured products by default (switch off for all products):" />
+                android:text="Show featured products by default (switch off for all products)" />
 
             <Switch
                 android:id="@+id/switch_hide_coming_soon_products"
@@ -427,14 +478,6 @@
                 android:text="Customize Product screen"
                 android:textSize="16dip"
                 android:textStyle="bold" />
-
-            <Switch
-                android:id="@+id/switch_hide_help_customize_product"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="true"
-                android:text="Show Help" />
 
             <Switch
                 android:id="@+id/switch_show_photos_customize"
@@ -580,7 +623,7 @@
 
             <EditText
                 android:id="@+id/edittext_payee_name"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
                 android:ems="10"
@@ -602,7 +645,7 @@
 
             <EditText
                 android:id="@+id/edittext_promo_code"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10" />
 
@@ -718,7 +761,7 @@
 
             <EditText
                 android:id="@+id/editSKU"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10" />
 
@@ -740,7 +783,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Back goes to Featured Products:" />
+                android:text="Back goes to Featured Products" />
         </LinearLayout>
     </ScrollView>
 
