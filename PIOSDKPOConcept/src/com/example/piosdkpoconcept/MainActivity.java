@@ -56,7 +56,7 @@ public class MainActivity extends Activity {
 	private List<ProductType> selectedProductTypes = new ArrayList<ProductType>(config.getAvailableProducts());
 	private List<PaymentOptionType> selectedPaymentOptions = new ArrayList<PaymentOptionType>(Arrays.asList(PaymentOptionType.values()));
 	private List<Screen> screensWithCountryBar = new ArrayList<Screen>(Arrays.asList(Screen.FEATURED_PRODUCTS));
-	private List<Screen> availableScreens;
+	private List<Screen> availableScreens = Arrays.asList(Screen.values());
 	private ScreenVersion screenVersion;
 
 	@Override
@@ -70,6 +70,7 @@ public class MainActivity extends Activity {
 		spinnerJumpToProduct = (Spinner) findViewById(R.id.spinner_jump_to_product);
 		spinnerJumpToProduct.setAdapter(new SpinnerAdapterJumpToProduct(this));
 		spinnerJumpToScreen = (Spinner) findViewById(R.id.spinner_jump_to_screen);
+		spinnerJumpToScreen.setAdapter(new SpinnerAdapterJumpToScreen(this, availableScreens));
 		Spinner spinnerScreenVersion = ((Spinner) findViewById(R.id.spinner_screen_version));
 		spinnerScreenVersion.setAdapter(new SpinnerAdapterScreenVersion(this));
 		spinnerScreenVersion.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -77,15 +78,6 @@ public class MainActivity extends Activity {
 			@Override
 			public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 				screenVersion = ScreenVersion.values()[position];
-				config.getDisabledScreens().clear();
-				availableScreens = new ArrayList<Screen>();
-				for (Screen screen : Screen.values()) {
-					if (screen.isAvaliableForVersion(screenVersion)) {
-						availableScreens.add(screen);
-					}
-				}
-
-				spinnerJumpToScreen.setAdapter(new SpinnerAdapterJumpToScreen(MainActivity.this, availableScreens));
 			}
 
 			@Override
@@ -186,7 +178,7 @@ public class MainActivity extends Activity {
 	}
 
 	public void onClickSetScreensWithCountryBar(View v) {
-		final Screen[] allScreens = (Screen[]) Arrays.asList(Screen.FEATURED_PRODUCTS, Screen.PRODUCT_DETAILS, Screen.PRODUCT_DETAILS_V2, Screen.OPTIONS).toArray();
+		final Screen[] allScreens = (Screen[]) Arrays.asList(Screen.FEATURED_PRODUCTS, Screen.PRODUCT_DETAILS, Screen.OPTIONS).toArray();
 		boolean[] isSelected = new boolean[allScreens.length];
 		for (int i = 0; i < isSelected.length; i++) {
 			isSelected[i] = screensWithCountryBar.contains(allScreens[i]);
