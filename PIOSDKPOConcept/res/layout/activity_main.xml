@@ -789,7 +789,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Back goes to Featured Products (when jump to SHOPPING_CART is selected)" />
+                android:text="Back goes to Products (when jump to SHOPPING_CART is selected)" />
         </LinearLayout>
     </ScrollView>
 
