@@ -686,21 +686,28 @@
                 android:checked="true"
                 android:text="Use first photo source as default" />
 
-            <EditText
-                android:id="@+id/edittext_add_image_to_sdk"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dip"
-                android:hint="Image Uri" />
+                android:orientation="horizontal" >
 
-            <Button
-                android:id="@+id/buttonAdd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dip"
-                android:onClick="onClickAddImageToSDK"
-                android:text="Add image to SDK"
-                android:textSize="16dip" />
+                <EditText
+                    android:id="@+id/edittext_add_image_to_sdk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:layout_weight="1"
+                    android:hint="Passed in image Uri"
+                    android:singleLine="true" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:onClick="onClickAddImageToSDK"
+                    android:text="Add URI"
+                    android:textSize="16dip" />
+            </LinearLayout>
 
             <Switch
                 android:id="@+id/switch_hide_photo_sources_side_menu"
@@ -790,6 +797,51 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="Back goes to Products (when jump to SHOPPING_CART is selected)" />
+
+            <!-- V2 Screens specific -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="1dp"
+                android:background="#101010" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="V2 screens specific"
+                android:textSize="16dip"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/edittext_screen_product_image_uri"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:layout_weight="1"
+                    android:hint="Screen product image Uri"
+                    android:singleLine="true" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:onClick="onClickSetScreenProductImageUri"
+                    android:text="Set URI"
+                    android:textSize="16dip" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

@@ -41,6 +41,7 @@ import com.example.piosdkpoconcept.adapters.SpinnerAdapterScreenVersion;
 public class MainActivity extends Activity {
 
 	private EditText editTextAddImageToSdk;
+	private EditText editTextScreenProductImageUti;
 	private Spinner spinnerJumpToProduct;
 	private Spinner spinnerJumpToScreen;
 	private Switch switchHideComingSoonProducts;
@@ -67,6 +68,7 @@ public class MainActivity extends Activity {
 		config.setDisabledScreens(new ArrayList<Screen>());
 
 		editTextAddImageToSdk = (EditText) findViewById(R.id.edittext_add_image_to_sdk);
+		editTextScreenProductImageUti = (EditText) findViewById(R.id.edittext_screen_product_image_uri);
 		spinnerJumpToProduct = (Spinner) findViewById(R.id.spinner_jump_to_product);
 		spinnerJumpToProduct.setAdapter(new SpinnerAdapterJumpToProduct(this));
 		spinnerJumpToScreen = (Spinner) findViewById(R.id.spinner_jump_to_screen);
@@ -393,7 +395,7 @@ public class MainActivity extends Activity {
 		if (!editTextAddImageToSdk.getText().toString().isEmpty()) {
 			imageUris.add(editTextAddImageToSdk.getText().toString());
 			editTextAddImageToSdk.setText("");
-			Toast.makeText(this, "Image URL added", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "Image URL added. Count: " + imageUris.size(), Toast.LENGTH_SHORT).show();
 		} else {
 			Intent intent = new Intent();
 			intent.setType("image/*");
@@ -403,10 +405,29 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	public void onClickSetScreenProductImageUri(View v) {
+		if (!editTextScreenProductImageUti.getText().toString().isEmpty()) {
+			config.setScreenProductImageUrl(editTextScreenProductImageUti.getText().toString());
+			editTextScreenProductImageUti.setText("");
+			Toast.makeText(this, "Screen product image URL set", Toast.LENGTH_SHORT).show();
+		} else {
+			Intent intent = new Intent();
+			intent.setType("image/*");
+			intent.setAction(Intent.ACTION_GET_CONTENT);
+			intent.addCategory(Intent.CATEGORY_OPENABLE);
+			startActivityForResult(intent, 2);
+		}
+	}
+
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == 1 && resultCode == RESULT_OK) {
 			imageUris.add(data.getData().toString());
+			Toast.makeText(this, "Image URL added. Count: " + imageUris.size(), Toast.LENGTH_SHORT).show();
+		}
+		if (requestCode == 2 && resultCode == RESULT_OK) {
+			config.setScreenProductImageUrl(data.getData().toString());
+			Toast.makeText(this, "Screen product image URL set", Toast.LENGTH_SHORT).show();
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
