@@ -44,6 +44,7 @@ public class MainActivity extends Activity {
 	private EditText editTextScreenProductImageUti;
 	private Spinner spinnerJumpToProduct;
 	private Spinner spinnerJumpToScreen;
+	private Spinner spinnerNavigateBackToScreen;
 	private Switch switchHideComingSoonProducts;
 
 	private PIOConfig config = new PIOConfig();
@@ -73,6 +74,8 @@ public class MainActivity extends Activity {
 		spinnerJumpToProduct.setAdapter(new SpinnerAdapterJumpToProduct(this));
 		spinnerJumpToScreen = (Spinner) findViewById(R.id.spinner_jump_to_screen);
 		spinnerJumpToScreen.setAdapter(new SpinnerAdapterJumpToScreen(this, availableScreens));
+		spinnerNavigateBackToScreen = (Spinner) findViewById(R.id.spinner_navigate_back_to_screen);
+		spinnerNavigateBackToScreen.setAdapter(new SpinnerAdapterJumpToScreen(this, Arrays.asList(Screen.PRODUCTS)));
 		Spinner spinnerScreenVersion = ((Spinner) findViewById(R.id.spinner_screen_version));
 		spinnerScreenVersion.setAdapter(new SpinnerAdapterScreenVersion(this));
 		spinnerScreenVersion.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -541,10 +544,8 @@ public class MainActivity extends Activity {
 		// Jump to Screen
 		Object screen = spinnerJumpToScreen.getSelectedItem();
 		Screen jumpToScreen = screen == null ? null : (Screen) screen;
-		Screen navigateBackScreen = null;
-		if (((Switch) findViewById(R.id.switch_back_goes_to_featured_products)).isChecked() && Screen.SHOPPING_CART == jumpToScreen && ScreenVersion.V_1 == screenVersion) {
-			navigateBackScreen = Screen.PRODUCTS;
-		}
+		screen = spinnerNavigateBackToScreen.getSelectedItem();
+		Screen navigateBackScreen = screen == null ? null : (Screen) screen;
 		config.setJumpToScreen(jumpToScreen, navigateBackScreen);
 
 		// Launch SDK

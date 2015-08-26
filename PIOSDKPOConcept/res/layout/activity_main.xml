@@ -786,17 +786,22 @@
                 android:textSize="16dip"
                 android:textStyle="bold" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="jump to screen / navigate back to screen"
+                android:textSize="14dip" />
+
             <Spinner
                 android:id="@+id/spinner_jump_to_screen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <Switch
-                android:id="@+id/switch_back_goes_to_featured_products"
+            <Spinner
+                android:id="@+id/spinner_navigate_back_to_screen"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Back goes to Products (when jump to SHOPPING_CART is selected)" />
+                android:layout_height="wrap_content" />
 
             <!-- V2 Screens specific -->
 
