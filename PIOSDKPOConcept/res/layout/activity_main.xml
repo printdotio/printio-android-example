@@ -330,7 +330,7 @@
                 android:onClick="onClickSetScreensWithCountryBar"
                 android:text="Set screens with country choose bar" />
 
-            <!-- Featured Products screen -->
+            <!-- Products screen -->
 
             <View
                 android:layout_width="match_parent"
@@ -348,7 +348,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
-                android:text="Featured Products screen"
+                android:text="Products screen"
                 android:textSize="16dip"
                 android:textStyle="bold" />
 
@@ -686,29 +686,28 @@
                 android:checked="true"
                 android:text="Use first photo source as default" />
 
-            <Switch
-                android:id="@+id/switch_disable_photosources"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="false"
-                android:text="Disable Photo Sources" />
+                android:orientation="horizontal" >
 
-            <EditText
-                android:id="@+id/edittext_add_image_to_sdk"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dip"
-                android:hint="Image Uri" />
+                <EditText
+                    android:id="@+id/edittext_add_image_to_sdk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:layout_weight="1"
+                    android:hint="Passed in image Uri"
+                    android:singleLine="true" />
 
-            <Button
-                android:id="@+id/buttonAdd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dip"
-                android:onClick="onClickAddImageToSDK"
-                android:text="Add image to SDK"
-                android:textSize="16dip" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:onClick="onClickAddImageToSDK"
+                    android:text="Add URI"
+                    android:textSize="16dip" />
+            </LinearLayout>
 
             <Switch
                 android:id="@+id/switch_hide_photo_sources_side_menu"
@@ -736,54 +735,118 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
-                android:text="Jump to Product"
+                android:text="Screens"
                 android:textSize="16dip"
                 android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_screen_version"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:onClick="onClickSetDisabledScreens"
+                android:text="Set disabled screens"
+                android:textSize="16dip" />
 
             <Spinner
                 android:id="@+id/spinner_jump_to_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <Switch
-                android:id="@+id/switch_skip_product_details_screen"
+            <EditText
+                android:id="@+id/editSKU"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Skip Product Details screen" />
+                android:ems="10"
+                android:hint="Use SKU for product" />
+
+            <!-- Jump to Screen -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="1dp"
+                android:background="#101010" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
-                android:text="Skip Product Options screen, using SKU:"
-                android:textSize="16dip" />
+                android:text="Jump to Screen"
+                android:textSize="16dip"
+                android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/editSKU"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10" />
+                android:layout_margin="5dip"
+                android:text="jump to screen / navigate back to screen"
+                android:textSize="14dip" />
+
+            <Spinner
+                android:id="@+id/spinner_jump_to_screen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:id="@+id/spinner_navigate_back_to_screen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- V2 Screens specific -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:layout_marginTop="5dp"
-                android:background="#000000" />
+                android:layout_marginTop="1dp"
+                android:background="#101010" />
 
-            <Switch
-                android:id="@+id/switch_jump_to_shopping_cart"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="V2 screens specific"
+                android:textSize="16dip"
+                android:textStyle="bold" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Jump to Shopping Cart" />
+                android:orientation="horizontal" >
 
-            <Switch
-                android:id="@+id/switch_back_goes_to_featured_products"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Back goes to Featured Products" />
+                <EditText
+                    android:id="@+id/edittext_screen_product_image_uri"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:layout_weight="1"
+                    android:hint="Screen product image Uri"
+                    android:singleLine="true" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:onClick="onClickSetScreenProductImageUri"
+                    android:text="Set URI"
+                    android:textSize="16dip" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

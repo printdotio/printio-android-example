@@ -13,6 +13,7 @@ import print.io.photosource.PhotoSource;
 import print.io.piopublic.PaymentOptionType;
 import print.io.piopublic.ProductType;
 import print.io.piopublic.Screen;
+import print.io.piopublic.ScreenVersion;
 import print.io.piopublic.SideMenuButton;
 import print.io.piopublic.SideMenuInfoButton;
 import android.app.Activity;
@@ -22,6 +23,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
@@ -31,11 +34,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.example.piosdkpoconcept.adapters.SpinnerAdapterJumpToProduct;
+import com.example.piosdkpoconcept.adapters.SpinnerAdapterJumpToScreen;
+import com.example.piosdkpoconcept.adapters.SpinnerAdapterScreenVersion;
+
 public class MainActivity extends Activity {
 
 	private EditText editTextAddImageToSdk;
+	private EditText editTextScreenProductImageUti;
 	private Spinner spinnerJumpToProduct;
-	private Switch switchSkipProductDetailsScreen;
+	private Spinner spinnerJumpToScreen;
+	private Spinner spinnerNavigateBackToScreen;
 	private Switch switchHideComingSoonProducts;
 
 	private PIOConfig config = new PIOConfig();
@@ -48,17 +57,39 @@ public class MainActivity extends Activity {
 	private List<PhotoSource> selectedPhotoSources = new ArrayList<PhotoSource>();
 	private List<ProductType> selectedProductTypes = new ArrayList<ProductType>(config.getAvailableProducts());
 	private List<PaymentOptionType> selectedPaymentOptions = new ArrayList<PaymentOptionType>(Arrays.asList(PaymentOptionType.values()));
-	private List<Screen> screensWithCountryBar = new ArrayList<Screen>(Arrays.asList(Screen.FEATURED_PRODUCTS));
+	private List<Screen> screensWithCountryBar = new ArrayList<Screen>(Arrays.asList(Screen.PRODUCTS));
+	private List<Screen> availableScreens = Arrays.asList(Screen.values());
+	private ScreenVersion screenVersion;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		config.setDisabledScreens(new ArrayList<Screen>());
+
 		editTextAddImageToSdk = (EditText) findViewById(R.id.edittext_add_image_to_sdk);
+		editTextScreenProductImageUti = (EditText) findViewById(R.id.edittext_screen_product_image_uri);
 		spinnerJumpToProduct = (Spinner) findViewById(R.id.spinner_jump_to_product);
 		spinnerJumpToProduct.setAdapter(new SpinnerAdapterJumpToProduct(this));
-		switchSkipProductDetailsScreen = (Switch) findViewById(R.id.switch_skip_product_details_screen);
+		spinnerJumpToScreen = (Spinner) findViewById(R.id.spinner_jump_to_screen);
+		spinnerJumpToScreen.setAdapter(new SpinnerAdapterJumpToScreen(this, availableScreens));
+		spinnerNavigateBackToScreen = (Spinner) findViewById(R.id.spinner_navigate_back_to_screen);
+		spinnerNavigateBackToScreen.setAdapter(new SpinnerAdapterJumpToScreen(this, Arrays.asList(Screen.PRODUCTS)));
+		Spinner spinnerScreenVersion = ((Spinner) findViewById(R.id.spinner_screen_version));
+		spinnerScreenVersion.setAdapter(new SpinnerAdapterScreenVersion(this));
+		spinnerScreenVersion.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+				screenVersion = ScreenVersion.values()[position];
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parentView) {}
+
+		});
+		spinnerScreenVersion.setSelection(0);
 		switchHideComingSoonProducts = (Switch) findViewById(R.id.switch_hide_coming_soon_products);
 
 		((ToggleButton) findViewById(R.id.toggleButtonProduction)).setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -152,7 +183,7 @@ public class MainActivity extends Activity {
 	}
 
 	public void onClickSetScreensWithCountryBar(View v) {
-		final Screen[] allScreens = (Screen[]) Arrays.asList(Screen.FEATURED_PRODUCTS, Screen.PRODUCT_DETAILS, Screen.OPTIONS).toArray();
+		final Screen[] allScreens = (Screen[]) Arrays.asList(Screen.PRODUCTS, Screen.PRODUCT_DETAILS, Screen.OPTIONS).toArray();
 		boolean[] isSelected = new boolean[allScreens.length];
 		for (int i = 0; i < isSelected.length; i++) {
 			isSelected[i] = screensWithCountryBar.contains(allScreens[i]);
@@ -315,6 +346,44 @@ public class MainActivity extends Activity {
 		builder.show();
 	}
 
+	public void onClickSetDisabledScreens(View v) {
+		final List<Screen> screens = new ArrayList<Screen>();
+		for (Screen screen : availableScreens) {
+			if (screen.isDisableReady()) {
+				screens.add(screen);
+			}
+		}
+		boolean[] isSelected = new boolean[screens.size()];
+		for (int i = 0; i < isSelected.length; i++) {
+			isSelected[i] = config.getDisabledScreens().contains(screens.get(i));
+		}
+		List<String> names = new ArrayList<String>(screens.size());
+		for (Screen screen : screens) {
+			names.add(screen.name());
+		}
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Disable screens");
+		builder.setMultiChoiceItems(names.toArray(new String[names.size()]), isSelected, new DialogInterface.OnMultiChoiceClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				if (isChecked) {
+					config.getDisabledScreens().add(screens.get(which));
+				} else {
+					config.getDisabledScreens().remove(screens.get(which));
+				}
+			}
+		});
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// NOP
+			}
+		});
+		builder.show();
+	}
+
 	public void onClickRemoveAllItemsFromShoppingCart(View v) {
 		ShoppingCart cart = PIO.getShoppingCart(this);
 		cart.removeAllItems();
@@ -329,7 +398,7 @@ public class MainActivity extends Activity {
 		if (!editTextAddImageToSdk.getText().toString().isEmpty()) {
 			imageUris.add(editTextAddImageToSdk.getText().toString());
 			editTextAddImageToSdk.setText("");
-			Toast.makeText(this, "Image URL added", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "Image URL added. Count: " + imageUris.size(), Toast.LENGTH_SHORT).show();
 		} else {
 			Intent intent = new Intent();
 			intent.setType("image/*");
@@ -339,10 +408,29 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	public void onClickSetScreenProductImageUri(View v) {
+		if (!editTextScreenProductImageUti.getText().toString().isEmpty()) {
+			config.setScreenProductImageUrl(editTextScreenProductImageUti.getText().toString());
+			editTextScreenProductImageUti.setText("");
+			Toast.makeText(this, "Screen product image URL set", Toast.LENGTH_SHORT).show();
+		} else {
+			Intent intent = new Intent();
+			intent.setType("image/*");
+			intent.setAction(Intent.ACTION_GET_CONTENT);
+			intent.addCategory(Intent.CATEGORY_OPENABLE);
+			startActivityForResult(intent, 2);
+		}
+	}
+
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == 1 && resultCode == RESULT_OK) {
 			imageUris.add(data.getData().toString());
+			Toast.makeText(this, "Image URL added. Count: " + imageUris.size(), Toast.LENGTH_SHORT).show();
+		}
+		if (requestCode == 2 && resultCode == RESULT_OK) {
+			config.setScreenProductImageUrl(data.getData().toString());
+			Toast.makeText(this, "Screen product image URL set", Toast.LENGTH_SHORT).show();
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
@@ -433,7 +521,6 @@ public class MainActivity extends Activity {
 		if (((Switch) findViewById(R.id.switch_use_first_photosource_as_default)).isChecked() && config.getPhotoSources() != null && !config.getPhotoSources().isEmpty()) {
 			config.setDefaultPhotoSource(config.getPhotoSources().get(0));
 		}
-		config.setPhotoSourcesDisabled(((Switch) findViewById(R.id.switch_disable_photosources)).isChecked());
 		config.hidePhotoSourcesInSideMenu(((Switch) findViewById(R.id.switch_hide_photo_sources_side_menu)).isChecked());
 		config.setImageUris(imageUris);
 		if (config.isPhotosourcesDisabled() && (config.getImageUris() == null || config.getImageUris().isEmpty())) {
@@ -441,27 +528,25 @@ public class MainActivity extends Activity {
 			return;
 		}
 
+		// Screens
+		config.setScreenVersion(screenVersion);
+
 		// Jump to product
 		Object item = spinnerJumpToProduct.getSelectedItem();
 		ProductType selectedProductType = item == null ? null : (ProductType) item;
 		config.setProductFromApp(selectedProductType);
-		config.setSkipProductDetails(switchSkipProductDetailsScreen.isChecked());
 		config.setProductSkuFromApp(((EditText) findViewById(R.id.editSKU)).getText().toString());
 		if (StringUtils.isNotBlank(config.getProductSkuFromApp()) && selectedProductType == null) {
 			showMessage("Product must be specified when SKU is supplied");
 			return;
 		}
 
-		// Jump to shopping cart
-		Screen jumpToScreen = null;
-		if (((Switch) findViewById(R.id.switch_jump_to_shopping_cart)).isChecked()) {
-			jumpToScreen = Screen.SHOPPING_CART;
-		}
-		int flags = 0;
-		if (((Switch) findViewById(R.id.switch_back_goes_to_featured_products)).isChecked()) {
-			flags |= PublicConstants.Flags.FLAG_GO_BACK_TO_FEATURED_PRODUCTS;
-		}
-		config.setJumpToScreen(jumpToScreen, flags);
+		// Jump to Screen
+		Object screen = spinnerJumpToScreen.getSelectedItem();
+		Screen jumpToScreen = screen == null ? null : (Screen) screen;
+		screen = spinnerNavigateBackToScreen.getSelectedItem();
+		Screen navigateBackScreen = screen == null ? null : (Screen) screen;
+		config.setJumpToScreen(jumpToScreen, navigateBackScreen);
 
 		// Launch SDK
 		try {
