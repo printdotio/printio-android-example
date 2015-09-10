@@ -22,6 +22,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -431,6 +432,7 @@ public class MainActivity extends Activity {
 		if (requestCode == 2 && resultCode == RESULT_OK) {
 			config.setScreenProductImageUrl(data.getData().toString());
 			Toast.makeText(this, "Screen product image URL set", Toast.LENGTH_SHORT).show();
+			Log.d("PIO_SDK_EXAMPLE", "Screen product image URL: " + config.getScreenProductImageUrl());
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
