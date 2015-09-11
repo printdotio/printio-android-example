@@ -16,6 +16,7 @@ import print.io.piopublic.Screen;
 import print.io.piopublic.ScreenVersion;
 import print.io.piopublic.SideMenuButton;
 import print.io.piopublic.SideMenuInfoButton;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -512,11 +513,22 @@ public class MainActivity extends Activity {
 		// empty
 
 		// Payment screen
-		config.removeLogoFromPaymentScreen(((Switch) findViewById(R.id.switch_remove_logo_on_payment)).isChecked());
+		if (((Switch) findViewById(R.id.switch_show_logo_on_payment)).isChecked()) {
+			config.setVendorLogoOnScreen(Screen.PAYMENT, R.drawable.icon_logo_payment_screen);
+		} else {
+			config.setVendorLogoOnScreen(Screen.PAYMENT, null);
+		}
 		config.setPartnerName(((EditText) findViewById(R.id.edittext_payee_name)).getText().toString());
 		config.setPaymentOptions(selectedPaymentOptions);
 		String promoCode = ((EditText) findViewById(R.id.edittext_promo_code)).getText().toString();
 		config.setPromoCode(StringUtils.isBlank(promoCode) ? null : promoCode);
+
+		// Order Completed screen
+		if (((Switch) findViewById(R.id.switch_show_logo_on_order_completed)).isChecked()) {
+			config.setVendorLogoOnScreen(Screen.ORDER_COMPLETED, R.drawable.icon_logo);
+		} else {
+			config.setVendorLogoOnScreen(Screen.ORDER_COMPLETED, null);
+		}
 
 		// Photo sources
 		config.setPhotoSources(selectedPhotoSources);
@@ -549,6 +561,13 @@ public class MainActivity extends Activity {
 		screen = spinnerNavigateBackToScreen.getSelectedItem();
 		Screen navigateBackScreen = screen == null ? null : (Screen) screen;
 		config.setJumpToScreen(jumpToScreen, navigateBackScreen);
+
+		// V2 Screens specific
+		if (((Switch) findViewById(R.id.switch_show_logo_on_product_details_v2_screen)).isChecked()) {
+			config.setVendorLogoOnScreen(Screen.PRODUCT_DETAILS, R.drawable.icon_braintree_large);
+		} else {
+			config.setVendorLogoOnScreen(Screen.PRODUCT_DETAILS, null);
+		}
 
 		// Launch SDK
 		try {

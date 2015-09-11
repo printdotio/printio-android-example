@@ -608,11 +608,11 @@
                 android:textStyle="bold" />
 
             <Switch
-                android:id="@+id/switch_remove_logo_on_payment"
+                android:id="@+id/switch_show_logo_on_payment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Remove logo" />
+                android:text="Show vendor logo" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -648,6 +648,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10" />
+
+            <!-- Payment screen -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="1dp"
+                android:background="#101010" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="Order Completed screen"
+                android:textSize="16dip"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/switch_show_logo_on_order_completed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Show vendor logo" />
 
             <!-- Photo sources -->
 
@@ -824,6 +853,13 @@
                 android:text="V2 screens specific"
                 android:textSize="16dip"
                 android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/switch_show_logo_on_product_details_v2_screen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Show vendor logo" />
 
             <LinearLayout
                 android:layout_width="match_parent"
