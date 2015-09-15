@@ -61,6 +61,7 @@ public class MainActivity extends Activity {
 	private List<PaymentOptionType> selectedPaymentOptions = new ArrayList<PaymentOptionType>(Arrays.asList(PaymentOptionType.values()));
 	private List<Screen> screensWithCountryBar = new ArrayList<Screen>(Arrays.asList(Screen.PRODUCTS));
 	private List<Screen> availableScreens = Arrays.asList(Screen.values());
+	private List<ProductType> productsWithSpecailOfferBanner = new ArrayList<ProductType>();
 	private ScreenVersion screenVersion;
 
 	@Override
@@ -386,6 +387,39 @@ public class MainActivity extends Activity {
 		builder.show();
 	}
 
+	public void onClickSetProductsWithSpecailOfferBanner(View v) {
+		final List<ProductType> allProductTypes = Arrays.asList(ProductType.values());
+		boolean[] isSelected = new boolean[allProductTypes.size()];
+		for (int i = 0; i < isSelected.length; i++) {
+			isSelected[i] = productsWithSpecailOfferBanner.contains(allProductTypes.get(i));
+		}
+		List<String> names = new ArrayList<String>(allProductTypes.size());
+		for (ProductType pt : allProductTypes) {
+			names.add(pt.name());
+		}
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Select products with special offer banner");
+		builder.setMultiChoiceItems(names.toArray(new String[names.size()]), isSelected, new DialogInterface.OnMultiChoiceClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				if (isChecked) {
+					productsWithSpecailOfferBanner.add(allProductTypes.get(which));
+				} else {
+					productsWithSpecailOfferBanner.remove(allProductTypes.get(which));
+				}
+			}
+		});
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// NOP
+			}
+		});
+		builder.show();
+	}
+
 	public void onClickRemoveAllItemsFromShoppingCart(View v) {
 		ShoppingCart cart = PIO.getShoppingCart(this);
 		cart.removeAllItems();
@@ -568,6 +602,7 @@ public class MainActivity extends Activity {
 		} else {
 			config.setVendorLogoOnScreen(Screen.PRODUCT_DETAILS, null);
 		}
+		config.setProductsWithSpecialOfferBanner(productsWithSpecailOfferBanner);
 
 		// Launch SDK
 		try {

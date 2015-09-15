@@ -859,7 +859,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Show vendor logo" />
+                android:text="Show vendor logo for Product Details screen" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:onClick="onClickSetProductsWithSpecailOfferBanner"
+                android:text="Set products with special offer banner" />
 
             <LinearLayout
                 android:layout_width="match_parent"
