@@ -598,7 +598,7 @@ public class MainActivity extends Activity {
 
 		// V2 Screens specific
 		if (((Switch) findViewById(R.id.switch_show_logo_on_product_details_v2_screen)).isChecked()) {
-			config.setVendorLogoOnScreen(Screen.PRODUCT_DETAILS, R.drawable.icon_braintree_large);
+			config.setVendorLogoOnScreen(Screen.PRODUCT_DETAILS, R.drawable.samsung_logo);
 		} else {
 			config.setVendorLogoOnScreen(Screen.PRODUCT_DETAILS, null);
 		}
