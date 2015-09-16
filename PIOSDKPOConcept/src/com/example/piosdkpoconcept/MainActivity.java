@@ -16,12 +16,14 @@ import print.io.piopublic.Screen;
 import print.io.piopublic.ScreenVersion;
 import print.io.piopublic.SideMenuButton;
 import print.io.piopublic.SideMenuInfoButton;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -59,6 +61,7 @@ public class MainActivity extends Activity {
 	private List<PaymentOptionType> selectedPaymentOptions = new ArrayList<PaymentOptionType>(Arrays.asList(PaymentOptionType.values()));
 	private List<Screen> screensWithCountryBar = new ArrayList<Screen>(Arrays.asList(Screen.PRODUCTS));
 	private List<Screen> availableScreens = Arrays.asList(Screen.values());
+	private List<ProductType> productsWithSpecailOfferBanner = new ArrayList<ProductType>();
 	private ScreenVersion screenVersion;
 
 	@Override
@@ -384,14 +387,49 @@ public class MainActivity extends Activity {
 		builder.show();
 	}
 
+	public void onClickSetProductsWithSpecailOfferBanner(View v) {
+		final List<ProductType> allProductTypes = Arrays.asList(ProductType.values());
+		boolean[] isSelected = new boolean[allProductTypes.size()];
+		for (int i = 0; i < isSelected.length; i++) {
+			isSelected[i] = productsWithSpecailOfferBanner.contains(allProductTypes.get(i));
+		}
+		List<String> names = new ArrayList<String>(allProductTypes.size());
+		for (ProductType pt : allProductTypes) {
+			names.add(pt.name());
+		}
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Select products with special offer banner");
+		builder.setMultiChoiceItems(names.toArray(new String[names.size()]), isSelected, new DialogInterface.OnMultiChoiceClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				if (isChecked) {
+					productsWithSpecailOfferBanner.add(allProductTypes.get(which));
+				} else {
+					productsWithSpecailOfferBanner.remove(allProductTypes.get(which));
+				}
+			}
+		});
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// NOP
+			}
+		});
+		builder.show();
+	}
+
 	public void onClickRemoveAllItemsFromShoppingCart(View v) {
 		ShoppingCart cart = PIO.getShoppingCart(this);
 		cart.removeAllItems();
 		PIO.setShoppingCart(this, cart);
+		Toast.makeText(this, "Cart cleared", Toast.LENGTH_SHORT).show();
 	}
 
 	public void onClickClearShippingAddresses(View v) {
 		PIO.clearShippingAddresses(this);
+		Toast.makeText(this, "Shipping addresses cleared", Toast.LENGTH_SHORT).show();
 	}
 
 	public void onClickAddImageToSDK(View v) {
@@ -431,6 +469,7 @@ public class MainActivity extends Activity {
 		if (requestCode == 2 && resultCode == RESULT_OK) {
 			config.setScreenProductImageUrl(data.getData().toString());
 			Toast.makeText(this, "Screen product image URL set", Toast.LENGTH_SHORT).show();
+			Log.d("PIO_SDK_EXAMPLE", "Screen product image URL: " + config.getScreenProductImageUrl());
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
@@ -510,11 +549,22 @@ public class MainActivity extends Activity {
 		// empty
 
 		// Payment screen
-		config.removeLogoFromPaymentScreen(((Switch) findViewById(R.id.switch_remove_logo_on_payment)).isChecked());
+		if (((Switch) findViewById(R.id.switch_show_logo_on_payment)).isChecked()) {
+			config.setVendorLogoOnScreen(Screen.PAYMENT, R.drawable.icon_logo_payment_screen);
+		} else {
+			config.setVendorLogoOnScreen(Screen.PAYMENT, null);
+		}
 		config.setPartnerName(((EditText) findViewById(R.id.edittext_payee_name)).getText().toString());
 		config.setPaymentOptions(selectedPaymentOptions);
 		String promoCode = ((EditText) findViewById(R.id.edittext_promo_code)).getText().toString();
 		config.setPromoCode(StringUtils.isBlank(promoCode) ? null : promoCode);
+
+		// Order Completed screen
+		if (((Switch) findViewById(R.id.switch_show_logo_on_order_completed)).isChecked()) {
+			config.setVendorLogoOnScreen(Screen.ORDER_COMPLETED, R.drawable.icon_logo);
+		} else {
+			config.setVendorLogoOnScreen(Screen.ORDER_COMPLETED, null);
+		}
 
 		// Photo sources
 		config.setPhotoSources(selectedPhotoSources);
@@ -547,6 +597,14 @@ public class MainActivity extends Activity {
 		screen = spinnerNavigateBackToScreen.getSelectedItem();
 		Screen navigateBackScreen = screen == null ? null : (Screen) screen;
 		config.setJumpToScreen(jumpToScreen, navigateBackScreen);
+
+		// V2 Screens specific
+		if (((Switch) findViewById(R.id.switch_show_logo_on_product_details_v2_screen)).isChecked()) {
+			config.setVendorLogoOnScreen(Screen.PRODUCT_DETAILS, R.drawable.samsung_logo);
+		} else {
+			config.setVendorLogoOnScreen(Screen.PRODUCT_DETAILS, null);
+		}
+		config.setProductsWithSpecialOfferBanner(productsWithSpecailOfferBanner);
 
 		// Launch SDK
 		try {
