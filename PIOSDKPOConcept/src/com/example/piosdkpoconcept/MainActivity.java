@@ -424,10 +424,12 @@ public class MainActivity extends Activity {
 		ShoppingCart cart = PIO.getShoppingCart(this);
 		cart.removeAllItems();
 		PIO.setShoppingCart(this, cart);
+		Toast.makeText(this, "Cart cleared", Toast.LENGTH_SHORT).show();
 	}
 
 	public void onClickClearShippingAddresses(View v) {
 		PIO.clearShippingAddresses(this);
+		Toast.makeText(this, "Shipping addresses cleared", Toast.LENGTH_SHORT).show();
 	}
 
 	public void onClickAddImageToSDK(View v) {
