@@ -460,6 +460,32 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	public void toggleAdvancedArea(View v) {
+		View holder = findViewById(R.id.advanced_area_holder);
+		holder.setVisibility(holder.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+	}
+
+	public void onClickCopyShoppingCartJSON(View v) {
+		ShoppingCart cart = PIO.getShoppingCart(this);
+		String json = cart != null ? cart.toJson() : "";
+		Utils.copyToClipboard(this, json, "Shopping cart copied to clipboard!");
+	}
+
+	public void onClickSetShoppingCart(View v) {
+		String json = Utils.getTextFromClipboard(this);
+		if (json != null && json.length() > 0) {
+			try {
+				ShoppingCart cart = new ShoppingCart(json);
+				PIO.setShoppingCart(this, cart);
+				Toast.makeText(this, "Shopping cart loaded from successfully!", Toast.LENGTH_SHORT).show();
+			} catch (Exception e) {
+				Toast.makeText(this, "Failed to set cart from clipboard!", Toast.LENGTH_SHORT).show();
+			}
+		} else {
+			Toast.makeText(this, "No data in clipboard!", Toast.LENGTH_SHORT).show();
+		}
+	}
+
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == 1 && resultCode == RESULT_OK) {
