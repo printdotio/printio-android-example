@@ -106,7 +106,7 @@
             android:name="print.io.ActivityCustomizePhotobook"
             android:screenOrientation="landscape" />
         <activity
-            android:name="print.io.ActivityCustomSteps"
+            android:name="print.io.ActivityProductOptions"
             android:screenOrientation="portrait" />
         <activity
             android:name="print.io.ActivityStickerBook"
