@@ -434,6 +434,13 @@
                 android:checked="true"
                 android:text="Show &apos;Add More Products&apos; button" />
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:onClick="onClickSetAddMoreProductsButtonStrategy"
+                android:text="Set &apos;Add More Products&apos; button strategy" />
+
             <Switch
                 android:id="@+id/switch_hide_edit_button"
                 android:layout_width="match_parent"

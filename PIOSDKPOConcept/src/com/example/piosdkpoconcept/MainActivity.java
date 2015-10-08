@@ -10,6 +10,7 @@ import print.io.PIOException;
 import print.io.PublicConstants;
 import print.io.beans.cart.ShoppingCart;
 import print.io.photosource.PhotoSource;
+import print.io.piopublic.AddMoreProductsButtonStrategy;
 import print.io.piopublic.PaymentOptionType;
 import print.io.piopublic.ProductType;
 import print.io.piopublic.Screen;
@@ -69,8 +70,6 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		config.setDisabledScreens(new ArrayList<Screen>());
-
 		editTextAddImageToSdk = (EditText) findViewById(R.id.edittext_add_image_to_sdk);
 		editTextScreenProductImageUti = (EditText) findViewById(R.id.edittext_screen_product_image_uri);
 		spinnerJumpToProduct = (Spinner) findViewById(R.id.spinner_jump_to_product);
@@ -103,6 +102,7 @@ public class MainActivity extends Activity {
 			}
 		});
 
+		config.setDisabledScreens(new ArrayList<Screen>());
 		config.setPartnerName(getResources().getString(R.string.hellopics));
 		config.setHelpUrl(PIOConstants.HELP_URL);
 		config.setSupportEmail(PIOConstants.SUPPORT_EMAIL);
@@ -425,6 +425,37 @@ public class MainActivity extends Activity {
 		cart.removeAllItems();
 		PIO.setShoppingCart(this, cart);
 		Toast.makeText(this, "Cart cleared", Toast.LENGTH_SHORT).show();
+	}
+
+	public void onClickSetAddMoreProductsButtonStrategy(View v) {
+		final AddMoreProductsButtonStrategy[] allStrategies = AddMoreProductsButtonStrategy.values();
+		int selectedItem = 0;
+		for (int i = 0; i < allStrategies.length; i++) {
+			if (config.getAddMoreProductsButtonStrategy() == allStrategies[i]) {
+				selectedItem = i;
+			}
+		}
+		List<String> names = new ArrayList<String>(allStrategies.length);
+		for (AddMoreProductsButtonStrategy button : allStrategies) {
+			names.add(button.name());
+		}
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Choose strategy");
+		builder.setSingleChoiceItems(names.toArray(new String[names.size()]), selectedItem, new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				config.setAddMoreProductsButtonStrategy(allStrategies[which]);
+			}
+		});
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// NOP
+			}
+		});
+		builder.show();
 	}
 
 	public void onClickClearShippingAddresses(View v) {
