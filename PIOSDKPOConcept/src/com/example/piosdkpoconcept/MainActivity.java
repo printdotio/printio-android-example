@@ -15,6 +15,7 @@ import print.io.piopublic.PaymentOptionType;
 import print.io.piopublic.ProductType;
 import print.io.piopublic.Screen;
 import print.io.piopublic.ScreenVersion;
+import print.io.piopublic.ShowLayoutStepStrategy;
 import print.io.piopublic.SideMenuButton;
 import print.io.piopublic.SideMenuInfoButton;
 
@@ -428,24 +429,55 @@ public class MainActivity extends Activity {
 	}
 
 	public void onClickSetAddMoreProductsButtonStrategy(View v) {
-		final AddMoreProductsButtonStrategy[] allStrategies = AddMoreProductsButtonStrategy.values();
+		AddMoreProductsButtonStrategy[] allStrategies = AddMoreProductsButtonStrategy.values();
 		int selectedItem = 0;
 		for (int i = 0; i < allStrategies.length; i++) {
 			if (config.getAddMoreProductsButtonStrategy() == allStrategies[i]) {
 				selectedItem = i;
 			}
 		}
-		List<String> names = new ArrayList<String>(allStrategies.length);
-		for (AddMoreProductsButtonStrategy button : allStrategies) {
-			names.add(button.name());
+		String[] names = new String[allStrategies.length];
+		for (int i = 0; i < names.length; i++) {
+			names[i] = allStrategies[i].name();
 		}
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Choose strategy");
-		builder.setSingleChoiceItems(names.toArray(new String[names.size()]), selectedItem, new DialogInterface.OnClickListener() {
+		builder.setSingleChoiceItems(names, selectedItem, new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				config.setAddMoreProductsButtonStrategy(allStrategies[which]);
+				config.setAddMoreProductsButtonStrategy(AddMoreProductsButtonStrategy.values()[which]);
+			}
+		});
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// NOP
+			}
+		});
+		builder.show();
+	}
+
+	public void onClickStepShowLayoutStepStrategy(View v) {
+		ShowLayoutStepStrategy[] allStrategies = ShowLayoutStepStrategy.values();
+		int selectedItem = 0;
+		for (int i = 0; i < allStrategies.length; i++) {
+			if (config.getShowLayoutStepStrategy() == allStrategies[i]) {
+				selectedItem = i;
+			}
+		}
+		String[] names = new String[allStrategies.length];
+		for (int i = 0; i < names.length; i++) {
+			names[i] = allStrategies[i].name();
+		}
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Choose strategy");
+		builder.setSingleChoiceItems(names, selectedItem, new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				config.setShowLayoutStepStrategy(ShowLayoutStepStrategy.values()[which]);
 			}
 		});
 		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {

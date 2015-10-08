@@ -375,7 +375,7 @@
                 android:checked="false"
                 android:text="Hide \&apos;Coming Soon\&apos; Products" />
 
-            <!-- Product details -->
+            <!-- Product Details screen -->
 
             <View
                 android:layout_width="match_parent"
@@ -393,7 +393,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
-                android:text="Product details screen"
+                android:text="Product Details screen"
                 android:textSize="16dip"
                 android:textStyle="bold" />
 
@@ -403,6 +403,35 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="Hide price" />
+
+            <!-- Product Options screen -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="1dp"
+                android:background="#101010" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="Product Options screen"
+                android:textSize="16dip"
+                android:textStyle="bold" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:onClick="onClickStepShowLayoutStepStrategy"
+                android:text="Set show layout step strategy" />
 
             <!-- Shopping Cart screen -->
 
