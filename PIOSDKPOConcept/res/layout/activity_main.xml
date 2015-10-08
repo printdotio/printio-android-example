@@ -430,8 +430,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:onClick="onClickStepShowLayoutStepStrategy"
-                android:text="Set show layout step strategy" />
+                android:onClick="onClickStepLayoutStepStrategy"
+                android:text="Set layout step strategy" />
 
             <!-- Shopping Cart screen -->
 

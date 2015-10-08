@@ -11,11 +11,11 @@ import print.io.PublicConstants;
 import print.io.beans.cart.ShoppingCart;
 import print.io.photosource.PhotoSource;
 import print.io.piopublic.AddMoreProductsButtonStrategy;
+import print.io.piopublic.LayoutStepStrategy;
 import print.io.piopublic.PaymentOptionType;
 import print.io.piopublic.ProductType;
 import print.io.piopublic.Screen;
 import print.io.piopublic.ScreenVersion;
-import print.io.piopublic.ShowLayoutStepStrategy;
 import print.io.piopublic.SideMenuButton;
 import print.io.piopublic.SideMenuInfoButton;
 
@@ -459,11 +459,11 @@ public class MainActivity extends Activity {
 		builder.show();
 	}
 
-	public void onClickStepShowLayoutStepStrategy(View v) {
-		ShowLayoutStepStrategy[] allStrategies = ShowLayoutStepStrategy.values();
+	public void onClickStepLayoutStepStrategy(View v) {
+		LayoutStepStrategy[] allStrategies = LayoutStepStrategy.values();
 		int selectedItem = 0;
 		for (int i = 0; i < allStrategies.length; i++) {
-			if (config.getShowLayoutStepStrategy() == allStrategies[i]) {
+			if (config.getLayoutStepStrategy() == allStrategies[i]) {
 				selectedItem = i;
 			}
 		}
@@ -477,7 +477,7 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				config.setShowLayoutStepStrategy(ShowLayoutStepStrategy.values()[which]);
+				config.setLayoutStepStrategy(LayoutStepStrategy.values()[which]);
 			}
 		});
 		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
