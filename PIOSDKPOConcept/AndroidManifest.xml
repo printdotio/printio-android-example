@@ -167,10 +167,10 @@
             android:name="com.paypal.android.sdk.payments.PayPalService"
             android:exported="false" />
 
-        <activity android:name="com.paypal.android.sdk.payments.PaymentActivity" />
-        <activity android:name="com.paypal.android.sdk.payments.LoginActivity" />
-        <activity android:name="com.paypal.android.sdk.payments.PaymentMethodActivity" />
-        <activity android:name="com.paypal.android.sdk.payments.PaymentConfirmActivity" />
+        <activity android:name="com.paypal.android.sdk.payments.PaymentActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.paypal.android.sdk.payments.LoginActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.paypal.android.sdk.payments.PaymentMethodActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.paypal.android.sdk.payments.PaymentConfirmActivity" android:screenOrientation="portrait" />
         <activity
             android:name="io.card.payment.CardIOActivity"
             android:configChanges="keyboardHidden|orientation" />
