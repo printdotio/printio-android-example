@@ -567,32 +567,32 @@ public class MainActivity extends Activity {
 		config.setSdkDemo(true);
 		config.setHostAppActivity(getComponentName().getClassName()); //"com.example.piosdkpoconcept.ActivityTest"
 
-		String recepiID = ((EditText) findViewById(R.id.edittext_recipe_id)).getText().toString();
+		String recepiID = getEditText(R.id.edittext_recipe_id);
 		if (StringUtils.isNotBlank(recepiID)) {
 			config.setRecipeID(recepiID);
 		}
-		config.setCountryCode(((EditText) findViewById(R.id.editCountry)).getText().toString());
-		config.setChangeableCountry(((Switch) findViewById(R.id.switch_changeable_country)).isChecked());
-		config.setCurrencyCode(((EditText) findViewById(R.id.editCurrency)).getText().toString());
-		config.setChangeableCurrency(((Switch) findViewById(R.id.switch_changeable_currency)).isChecked());
+		config.setCountryCode(getEditText(R.id.editCountry));
+		config.setChangeableCountry(isChecked(R.id.switch_changeable_country));
+		config.setCurrencyCode(getEditText(R.id.editCurrency));
+		config.setChangeableCurrency(isChecked(R.id.switch_changeable_currency));
 		try {
-			String colorString = ((EditText) findViewById(R.id.editColorHex)).getText().toString();
+			String colorString = getEditText(R.id.editColorHex);
 			config.setHeaderColor(Color.parseColor("#" + colorString));
 		} catch (NumberFormatException e) {}
-		if (((Switch) findViewById(R.id.switch_enable_custom_fonts)).isChecked()) {
+		if (isChecked(R.id.switch_enable_custom_fonts)) {
 			config.setFontPathInAssetsLight("HelveticaNeueLTStd-Lt.otf");
 			config.setFontPathInAssetsNormal("HelveticaNeueLTStd-Roman.otf");
 			config.setFontPathInAssetsBold("HelveticaNeueLTStd-Bd.otf");
 		}
-		config.useThreeButtonsBarStyle(((Switch) findViewById(R.id.switch_three_buttons_bar_style)).isChecked());
-		config.setMenuIconGear(((Switch) findViewById(R.id.switch_menu_icon_gear)).isChecked());
-		config.setHideStatusBar(((Switch) findViewById(R.id.full_Screen)).isChecked());
-		config.setSdkAppearsFromRight(((Switch) findViewById(R.id.switch_appear_from_right)).isChecked());
-		config.setPassedImageThumb(((Switch) findViewById(R.id.switch_passed_image_thumb)).isChecked());
+		config.useThreeButtonsBarStyle(isChecked(R.id.switch_three_buttons_bar_style));
+		config.setMenuIconGear(isChecked(R.id.switch_menu_icon_gear));
+		config.setHideStatusBar(isChecked(R.id.full_Screen));
+		config.setSdkAppearsFromRight(isChecked(R.id.switch_appear_from_right));
+		config.setPassedImageThumb(isChecked(R.id.switch_passed_image_thumb));
 
 		// Products configuration
-		boolean coastersDiff = ((Switch) findViewById(R.id.switch_coasters_different)).isChecked();
-		boolean coastersDuplicate = ((Switch) findViewById(R.id.switch_coasters_duplicate)).isChecked();
+		boolean coastersDiff = isChecked(R.id.switch_coasters_different);
+		boolean coastersDuplicate = isChecked(R.id.switch_coasters_duplicate);
 		config.setCoastersType(-1); // Reset from previous launch
 		if (coastersDiff != coastersDuplicate) {
 			config.setCoastersType(coastersDiff ? PublicConstants.CoastersTypes.COASTERS_4_DIFFERENT : PublicConstants.CoastersTypes.COASTERS_1_DUPLICATED);
@@ -600,59 +600,59 @@ public class MainActivity extends Activity {
 		config.setAvailableProducts(selectedProductTypes);
 
 		// Side menu
-		config.setSideMenuEnabled(((Switch) findViewById(R.id.switch_enable_side_menu)).isChecked());
-		config.setRightSideMenu(((Switch) findViewById(R.id.switch_right_side_menu)).isChecked());
+		config.setSideMenuEnabled(isChecked(R.id.switch_enable_side_menu));
+		config.setRightSideMenu(isChecked(R.id.switch_right_side_menu));
 		config.setSideMenuButtonsTop(sideMenuButtonsTop);
 		config.setSideMenuInfoButtons(sideMenuInfoButtons);
 
 		// All screens
-		config.setShowHelp(((Switch) findViewById(R.id.switch_hide_help)).isChecked());
+		config.setShowHelp(isChecked(R.id.switch_hide_help));
 		config.showCountrySelectionOnScreen(screensWithCountryBar);
 
 		// Products screen
-		config.setHideCategorySearchBar(((Switch) findViewById(R.id.switch_hide_category_search_bar)).isChecked());
-		config.setShowFeaturedProductsByDefault(((Switch) findViewById(R.id.default_products_screen_featured)).isChecked());
+		config.setHideCategorySearchBar(isChecked(R.id.switch_hide_category_search_bar));
+		config.setShowFeaturedProductsByDefault(isChecked(R.id.default_products_screen_featured));
 		config.setHideComingSoonProducts(switchHideComingSoonProducts.isChecked());
 
 		// Product Details screen
-		config.setPriceTitleHidden(((Switch) findViewById(R.id.switch_hide_price_title)).isChecked());
+		config.setPriceTitleHidden(isChecked(R.id.switch_hide_price_title));
 
 		// Product Options screen
-		config.setCancelOptionsButtonVisibility(((Switch) findViewById(R.id.switch_show_cancel_options_button)).isChecked());
-		
+		config.setCancelOptionsButtonVisibility(isChecked(R.id.switch_show_cancel_options_button));
+
 		// Shopping Cart screen
-		config.setShowAddMoreProductsInShoppingCart(((Switch) findViewById(R.id.switch_show_add_more_products)).isChecked());
-		config.hideEditButtonInShoppingCart(((Switch) findViewById(R.id.switch_hide_edit_button)).isChecked());
-		config.closeWidgetFromShoppingCart(((Switch) findViewById(R.id.closeWidgetFromShoppingCart)).isChecked());
+		config.setShowAddMoreProductsInShoppingCart(isChecked(R.id.switch_show_add_more_products));
+		config.hideEditButtonInShoppingCart(isChecked(R.id.switch_hide_edit_button));
+		config.closeWidgetFromShoppingCart(isChecked(R.id.closeWidgetFromShoppingCart));
 
 		// Customize Product screen
-		config.setShowPhotosInCustomize(((Switch) findViewById(R.id.switch_show_photos_customize)).isChecked());
-		config.setShowOptionsInCustomize(((Switch) findViewById(R.id.switch_show_options_customize)).isChecked());
-		config.enablePhotoSourcesInCustomizeProduct(((Switch) findViewById(R.id.switch_show_enable_photosource_when_disabled)).isChecked());
-		config.setAutoArrange(((Switch) findViewById(R.id.auto_arrange)).isChecked());
+		config.setShowPhotosInCustomize(isChecked(R.id.switch_show_photos_customize));
+		config.setShowOptionsInCustomize(isChecked(R.id.switch_show_options_customize));
+		config.enablePhotoSourcesInCustomizeProduct(isChecked(R.id.switch_show_enable_photosource_when_disabled));
+		config.setAutoArrange(isChecked(R.id.auto_arrange));
 
 		// Edit Image screen
-		boolean isRotateEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_rotate_enabled_in_crop_screen)).isChecked();
-		boolean isTextEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_text_enabled_in_crop_screen)).isChecked();
-		boolean isEffectsEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_effects_enabled_in_crop_screen)).isChecked();
+		boolean isRotateEnabledInCropScreen = isChecked(R.id.switch_is_rotate_enabled_in_crop_screen);
+		boolean isTextEnabledInCropScreen = isChecked(R.id.switch_is_text_enabled_in_crop_screen);
+		boolean isEffectsEnabledInCropScreen = isChecked(R.id.switch_is_effects_enabled_in_crop_screen);
 		config.setUpCropScreen(isRotateEnabledInCropScreen, isTextEnabledInCropScreen, isEffectsEnabledInCropScreen);
 
 		// Shipping Addresses screen
 		// empty
 
 		// Payment screen
-		if (((Switch) findViewById(R.id.switch_show_logo_on_payment)).isChecked()) {
+		if (isChecked(R.id.switch_show_logo_on_payment)) {
 			config.setVendorLogoOnScreen(Screen.PAYMENT, R.drawable.icon_logo_payment_screen);
 		} else {
 			config.setVendorLogoOnScreen(Screen.PAYMENT, null);
 		}
-		config.setPartnerName(((EditText) findViewById(R.id.edittext_payee_name)).getText().toString());
+		config.setPartnerName(getEditText(R.id.edittext_payee_name));
 		config.setPaymentOptions(selectedPaymentOptions);
-		String promoCode = ((EditText) findViewById(R.id.edittext_promo_code)).getText().toString();
+		String promoCode = getEditText(R.id.edittext_promo_code);
 		config.setPromoCode(StringUtils.isBlank(promoCode) ? null : promoCode);
 
 		// Order Completed screen
-		if (((Switch) findViewById(R.id.switch_show_logo_on_order_completed)).isChecked()) {
+		if (isChecked(R.id.switch_show_logo_on_order_completed)) {
 			config.setVendorLogoOnScreen(Screen.ORDER_COMPLETED, R.drawable.icon_logo);
 		} else {
 			config.setVendorLogoOnScreen(Screen.ORDER_COMPLETED, null);
@@ -660,10 +660,10 @@ public class MainActivity extends Activity {
 
 		// Photo sources
 		config.setPhotoSources(selectedPhotoSources);
-		if (((Switch) findViewById(R.id.switch_use_first_photosource_as_default)).isChecked() && config.getPhotoSources() != null && !config.getPhotoSources().isEmpty()) {
+		if (isChecked(R.id.switch_use_first_photosource_as_default) && config.getPhotoSources() != null && !config.getPhotoSources().isEmpty()) {
 			config.setDefaultPhotoSource(config.getPhotoSources().get(0));
 		}
-		config.hidePhotoSourcesInSideMenu(((Switch) findViewById(R.id.switch_hide_photo_sources_side_menu)).isChecked());
+		config.hidePhotoSourcesInSideMenu(isChecked(R.id.switch_hide_photo_sources_side_menu));
 		config.setImageUris(imageUris);
 		if (config.isPhotosourcesDisabled() && (config.getImageUris() == null || config.getImageUris().isEmpty())) {
 			showMessage("Photosources are disabled and no images were passed to the SDK");
@@ -677,7 +677,7 @@ public class MainActivity extends Activity {
 		Object item = spinnerJumpToProduct.getSelectedItem();
 		ProductType selectedProductType = item == null ? null : (ProductType) item;
 		config.setProductFromApp(selectedProductType);
-		config.setProductSkuFromApp(((EditText) findViewById(R.id.editSKU)).getText().toString());
+		config.setProductSkuFromApp(getEditText(R.id.editSKU));
 		if (StringUtils.isNotBlank(config.getProductSkuFromApp()) && selectedProductType == null) {
 			showMessage("Product must be specified when SKU is supplied");
 			return;
@@ -691,7 +691,7 @@ public class MainActivity extends Activity {
 		config.setJumpToScreen(jumpToScreen, navigateBackScreen);
 
 		// V2 screens specific
-		if (((Switch) findViewById(R.id.switch_show_logo_on_product_details_v2_screen)).isChecked()) {
+		if (isChecked(R.id.switch_show_logo_on_product_details_v2_screen)) {
 			config.setVendorLogoOnScreen(Screen.PRODUCT_DETAILS, R.drawable.samsung_logo);
 		} else {
 			config.setVendorLogoOnScreen(Screen.PRODUCT_DETAILS, null);
@@ -717,4 +717,12 @@ public class MainActivity extends Activity {
 		findViewById(R.id.dialog_feedback).setVisibility(View.GONE);
 	}
 
+	private boolean isChecked(int switchResId) {
+		return ((Switch) findViewById(switchResId)).isChecked();
+	}
+
+	private String getEditText(int editTextResId) {
+		return ((EditText) findViewById(editTextResId)).getText().toString();
+	}
+	
 }
