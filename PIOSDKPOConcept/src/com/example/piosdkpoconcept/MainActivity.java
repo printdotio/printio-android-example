@@ -49,7 +49,6 @@ public class MainActivity extends Activity {
 	private Spinner spinnerJumpToProduct;
 	private Spinner spinnerJumpToScreen;
 	private Spinner spinnerNavigateBackToScreen;
-	private Switch switchHideComingSoonProducts;
 
 	private PIOConfig config = new PIOConfig();
 
@@ -93,7 +92,6 @@ public class MainActivity extends Activity {
 
 		});
 		spinnerScreenVersion.setSelection(0);
-		switchHideComingSoonProducts = (Switch) findViewById(R.id.switch_hide_coming_soon_products);
 
 		((ToggleButton) findViewById(R.id.toggleButtonProduction)).setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
@@ -612,7 +610,7 @@ public class MainActivity extends Activity {
 		// Products screen
 		config.setHideCategorySearchBar(isChecked(R.id.switch_hide_category_search_bar));
 		config.setShowFeaturedProductsByDefault(isChecked(R.id.default_products_screen_featured));
-		config.setHideComingSoonProducts(switchHideComingSoonProducts.isChecked());
+		config.setHideComingSoonProducts(isChecked(R.id.switch_hide_coming_soon_products));
 
 		// Product Details screen
 		config.setPriceTitleHidden(isChecked(R.id.switch_hide_price_title));
