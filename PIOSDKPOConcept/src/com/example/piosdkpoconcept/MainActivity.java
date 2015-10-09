@@ -605,36 +605,39 @@ public class MainActivity extends Activity {
 		config.setSideMenuButtonsTop(sideMenuButtonsTop);
 		config.setSideMenuInfoButtons(sideMenuInfoButtons);
 
-		// All Screens
+		// All screens
 		config.setShowHelp(((Switch) findViewById(R.id.switch_hide_help)).isChecked());
 		config.showCountrySelectionOnScreen(screensWithCountryBar);
 
-		// Featured products screen
+		// Products screen
 		config.setHideCategorySearchBar(((Switch) findViewById(R.id.switch_hide_category_search_bar)).isChecked());
 		config.setShowFeaturedProductsByDefault(((Switch) findViewById(R.id.default_products_screen_featured)).isChecked());
 		config.setHideComingSoonProducts(switchHideComingSoonProducts.isChecked());
 
-		// Product details
+		// Product Details screen
 		config.setPriceTitleHidden(((Switch) findViewById(R.id.switch_hide_price_title)).isChecked());
 
-		// Shopping cart screen
+		// Product Options screen
+		config.setCancelOptionsButtonVisibility(((Switch) findViewById(R.id.switch_show_cancel_options_button)).isChecked());
+		
+		// Shopping Cart screen
 		config.setShowAddMoreProductsInShoppingCart(((Switch) findViewById(R.id.switch_show_add_more_products)).isChecked());
 		config.hideEditButtonInShoppingCart(((Switch) findViewById(R.id.switch_hide_edit_button)).isChecked());
 		config.closeWidgetFromShoppingCart(((Switch) findViewById(R.id.closeWidgetFromShoppingCart)).isChecked());
 
-		// Customize product screen
+		// Customize Product screen
 		config.setShowPhotosInCustomize(((Switch) findViewById(R.id.switch_show_photos_customize)).isChecked());
 		config.setShowOptionsInCustomize(((Switch) findViewById(R.id.switch_show_options_customize)).isChecked());
 		config.enablePhotoSourcesInCustomizeProduct(((Switch) findViewById(R.id.switch_show_enable_photosource_when_disabled)).isChecked());
 		config.setAutoArrange(((Switch) findViewById(R.id.auto_arrange)).isChecked());
 
-		// Edit image screen
+		// Edit Image screen
 		boolean isRotateEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_rotate_enabled_in_crop_screen)).isChecked();
 		boolean isTextEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_text_enabled_in_crop_screen)).isChecked();
 		boolean isEffectsEnabledInCropScreen = ((Switch) findViewById(R.id.switch_is_effects_enabled_in_crop_screen)).isChecked();
 		config.setUpCropScreen(isRotateEnabledInCropScreen, isTextEnabledInCropScreen, isEffectsEnabledInCropScreen);
 
-		// Shipping addresses screen
+		// Shipping Addresses screen
 		// empty
 
 		// Payment screen
@@ -680,14 +683,14 @@ public class MainActivity extends Activity {
 			return;
 		}
 
-		// Jump to Screen
+		// Jump to screen
 		Object screen = spinnerJumpToScreen.getSelectedItem();
 		Screen jumpToScreen = screen == null ? null : (Screen) screen;
 		screen = spinnerNavigateBackToScreen.getSelectedItem();
 		Screen navigateBackScreen = screen == null ? null : (Screen) screen;
 		config.setJumpToScreen(jumpToScreen, navigateBackScreen);
 
-		// V2 Screens specific
+		// V2 screens specific
 		if (((Switch) findViewById(R.id.switch_show_logo_on_product_details_v2_screen)).isChecked()) {
 			config.setVendorLogoOnScreen(Screen.PRODUCT_DETAILS, R.drawable.samsung_logo);
 		} else {
