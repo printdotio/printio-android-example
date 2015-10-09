@@ -565,7 +565,7 @@ public class MainActivity extends Activity {
 
 	public void onClickStartSDK(View v) {
 		config.setSdkDemo(true);
-		config.setHostAppActivity(getComponentName().getClassName()); //"com.example.piosdkpoconcept.ActivityTest"
+		config.setHostAppActivity(getComponentName().getClassName());
 
 		String recepiID = getEditText(R.id.edittext_recipe_id);
 		if (StringUtils.isNotBlank(recepiID)) {
@@ -724,5 +724,5 @@ public class MainActivity extends Activity {
 	private String getEditText(int editTextResId) {
 		return ((EditText) findViewById(editTextResId)).getText().toString();
 	}
-	
+
 }
