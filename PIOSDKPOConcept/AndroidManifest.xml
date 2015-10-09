@@ -94,9 +94,6 @@
             android:name="print.io.ActivityProductDetailsV2"
             android:screenOrientation="portrait" />
         <activity
-            android:name="print.io.ActivityProductPreview"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="print.io.ActivitySelectPhotos"
             android:screenOrientation="portrait" />
         <activity
