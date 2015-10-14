@@ -614,6 +614,9 @@ public class MainActivity extends Activity {
 
 		// Product Details screen
 		config.setPriceTitleHidden(isChecked(R.id.switch_hide_price_title));
+		try {
+			config.setRetailDiscountPercent(Float.parseFloat(getEditText(R.id.edittext_retail_price_discount_percentage)));
+		} catch (Exception e) {}
 
 		// Product Options screen
 		config.setCancelOptionsButtonVisibility(isChecked(R.id.switch_show_cancel_options_button));

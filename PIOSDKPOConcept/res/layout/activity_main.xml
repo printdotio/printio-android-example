@@ -404,6 +404,15 @@
                 android:layout_margin="5dp"
                 android:text="Hide price" />
 
+            <EditText
+                android:id="@+id/edittext_retail_price_discount_percentage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:layout_weight="1"
+                android:hint="Set retail price discount percentage"
+                android:singleLine="true" />
+
             <!-- Product Options screen -->
 
             <View
