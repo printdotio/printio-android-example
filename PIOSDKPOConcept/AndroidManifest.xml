@@ -68,7 +68,7 @@
             android:name="print.io.PIOActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="print.io.ActivityCaseColorStyle"
+            android:name="print.io.ActivityOptionBackground"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
