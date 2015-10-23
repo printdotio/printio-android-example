@@ -161,7 +161,16 @@
         <activity
             android:name="com.facebook.FacebookActivity"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name="print.io.ActivityOrderDetails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="print.io.ActivityOrderStatus"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="print.io.ActivityPastOrders"
+            android:screenOrientation="portrait" />
+        
         <!-- Activities needed for new PayPal functionalities -->
         <service
             android:name="com.paypal.android.sdk.payments.PayPalService"
