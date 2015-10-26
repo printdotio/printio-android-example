@@ -623,7 +623,6 @@ public class MainActivity extends Activity {
 
 		// Shopping Cart screen
 		config.setShowAddMoreProductsInShoppingCart(isChecked(R.id.switch_show_add_more_products));
-		config.hideEditButtonInShoppingCart(isChecked(R.id.switch_hide_edit_button));
 		config.closeWidgetFromShoppingCart(isChecked(R.id.closeWidgetFromShoppingCart));
 
 		// Customize Product screen

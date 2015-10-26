@@ -488,14 +488,6 @@
                 android:text="Set &apos;Add More Products&apos; button strategy" />
 
             <Switch
-                android:id="@+id/switch_hide_edit_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="false"
-                android:text="Hide Edit button from cart item" />
-
-            <Switch
                 android:id="@+id/closeWidgetFromShoppingCart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
