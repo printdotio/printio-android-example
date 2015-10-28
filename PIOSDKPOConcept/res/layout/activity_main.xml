@@ -672,7 +672,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
                 android:ems="10"
-                android:text="Breakout commerce" />
+                android:text="Makeable" />
 
             <Button
                 android:layout_width="match_parent"
