@@ -2,11 +2,13 @@ package com.example.piosdkpoconcept;
 
 import java.util.List;
 
-import android.content.Context;
-import android.util.TypedValue;
 import print.io.beans.OrderInfo;
 import print.io.beans.cart.CartItem;
 import print.io.beans.cart.ShoppingCart;
+
+import android.content.Context;
+import android.util.TypedValue;
+import android.widget.Toast;
 
 public class Utils {
 
@@ -41,5 +43,32 @@ public class Utils {
 
 	public static int getScreenWidthPixels(Context context) {
 		return context.getResources().getDisplayMetrics().widthPixels;
+	}
+
+	@SuppressWarnings("deprecation")
+	public static void copyToClipboard(Context context, String text, String feedbackMsg) {
+		if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
+			android.text.ClipboardManager clipboard = (android.text.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+			clipboard.setText(text);
+			Toast.makeText(context, feedbackMsg, Toast.LENGTH_SHORT).show();
+		} else {
+			android.content.ClipboardManager clipboard = (android.content.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+			android.content.ClipData clip = android.content.ClipData.newPlainText("Text Label", text);
+			clipboard.setPrimaryClip(clip);
+			Toast.makeText(context, feedbackMsg, Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	public static String getTextFromClipboard(Context context) {
+		if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
+			android.text.ClipboardManager clipboard = (android.text.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+			return clipboard.getText().toString();
+		} else {
+			android.content.ClipboardManager clipboard = (android.content.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+			if (clipboard.getPrimaryClip().getItemCount() == 0)
+				return null;
+			return clipboard.getPrimaryClip().getItemAt(0).getText().toString();
+		}
 	}
 }

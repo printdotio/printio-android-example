@@ -375,7 +375,7 @@
                 android:checked="false"
                 android:text="Hide \&apos;Coming Soon\&apos; Products" />
 
-            <!-- Product details -->
+            <!-- Product Details screen -->
 
             <View
                 android:layout_width="match_parent"
@@ -393,7 +393,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
-                android:text="Product details screen"
+                android:text="Product Details screen"
                 android:textSize="16dip"
                 android:textStyle="bold" />
 
@@ -403,6 +403,52 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="Hide price" />
+
+            <EditText
+                android:id="@+id/edittext_retail_price_discount_percentage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:layout_weight="1"
+                android:hint="Set retail price discount percentage"
+                android:singleLine="true" />
+
+            <!-- Product Options screen -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="1dp"
+                android:background="#101010" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="Product Options screen"
+                android:textSize="16dip"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/switch_show_cancel_options_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="false"
+                android:text="Show cancel button" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:onClick="onClickStepLayoutStepStrategy"
+                android:text="Set layout step strategy" />
 
             <!-- Shopping Cart screen -->
 
@@ -434,13 +480,12 @@
                 android:checked="true"
                 android:text="Show &apos;Add More Products&apos; button" />
 
-            <Switch
-                android:id="@+id/switch_hide_edit_button"
+            <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:checked="false"
-                android:text="Hide Edit button from cart item" />
+                android:onClick="onClickSetAddMoreProductsButtonStrategy"
+                android:text="Set &apos;Add More Products&apos; button strategy" />
 
             <Switch
                 android:id="@+id/closeWidgetFromShoppingCart"
@@ -627,7 +672,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
                 android:ems="10"
-                android:text="Breakout commerce" />
+                android:text="Makeable" />
 
             <Button
                 android:layout_width="match_parent"
@@ -889,6 +934,91 @@
                     android:onClick="onClickSetScreenProductImageUri"
                     android:text="Set URI"
                     android:textSize="16dip" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3px"
+                    android:layout_marginTop="5dp"
+                    android:background="#000000" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="1dp"
+                    android:background="#101010" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="toggleAdvancedArea"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dip"
+                        android:text="Advanced"
+                        android:textSize="20dip"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dip"
+                        android:text="(click to toggle visibility)"
+                        android:textSize="16dip"
+                        android:textStyle="italic" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/advanced_area_holder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dip"
+                        android:text="This area holds set of utilities that should only be used by Makeable Devs &amp; QA"
+                        android:textSize="16dip"
+                        android:textStyle="italic" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_marginTop="1dp"
+                        android:background="#101010" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dip"
+                            android:onClick="onClickCopyShoppingCartJSON"
+                            android:text="Copy shopping cart"
+                            android:textSize="16dip" />
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dip"
+                            android:onClick="onClickSetShoppingCart"
+                            android:text="Set shopping cart"
+                            android:textSize="16dip" />
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
