@@ -376,7 +376,7 @@
                 android:text="Hide \&apos;Coming Soon\&apos; Products" />
 
             <Switch
-                android:id="@+id/switch_hide_bottom_bar"
+                android:id="@+id/switch_show_bottom_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
