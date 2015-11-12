@@ -651,6 +651,7 @@ public class MainActivity extends Activity {
 		config.setPaymentOptions(selectedPaymentOptions);
 		String promoCode = getEditText(R.id.edittext_promo_code);
 		config.setPromoCode(StringUtils.isBlank(promoCode) ? null : promoCode);
+		config.setDisablePayPalForZeroTotal(isChecked(R.id.switch_disable_paypal_for_zero_total));
 
 		// Order Completed screen
 		if (isChecked(R.id.switch_show_logo_on_order_completed)) {
