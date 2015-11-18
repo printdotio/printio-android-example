@@ -118,10 +118,10 @@ public class MainActivity extends Activity {
 		selectedPhotoSources.add(photoSourceFactory.getPhonePS());
 		selectedPhotoSources.add(photoSourceFactory.getInstagramPS());
 		selectedPhotoSources.add(photoSourceFactory.getFacebookPS());
-		//		photoSourcesTest.add(photoSourceFactory.getFlickrPS());
+		//selectedPhotoSources.add(photoSourceFactory.getFlickrPS());
 		selectedPhotoSources.add(photoSourceFactory.getPhotobucketPS());
 		selectedPhotoSources.add(photoSourceFactory.getDropboxPS());
-		//		photoSourcesTest.add(photoSourceFactory.getPicasaPS());
+		//selectedPhotoSources.add(photoSourceFactory.getPicasaPS());
 		selectedPhotoSources.add(photoSourceFactory.getPreselectedPS());
 	}
 
@@ -581,6 +581,11 @@ public class MainActivity extends Activity {
 			config.setFontPathInAssetsLight("HelveticaNeueLTStd-Lt.otf");
 			config.setFontPathInAssetsNormal("HelveticaNeueLTStd-Roman.otf");
 			config.setFontPathInAssetsBold("HelveticaNeueLTStd-Bd.otf");
+		} else {
+			config.setFontPathInAssetsLight(null);
+			config.setFontPathInAssetsNormal(null);
+			config.setFontPathInAssetsBold(null);
+			config.setFontPathInAssetsTitle(null);
 		}
 		config.useThreeButtonsBarStyle(isChecked(R.id.switch_three_buttons_bar_style));
 		config.setMenuIconGear(isChecked(R.id.switch_menu_icon_gear));
