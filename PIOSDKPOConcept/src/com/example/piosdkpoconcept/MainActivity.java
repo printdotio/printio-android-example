@@ -521,6 +521,12 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	public void onClickClearScreenProductImageUri(View v) {
+		config.setScreenProductImageUrl(null);
+		editTextScreenProductImageUti.setText("");
+		Toast.makeText(this, "Screen product image URL cleared", Toast.LENGTH_SHORT).show();
+	}
+
 	public void toggleAdvancedArea(View v) {
 		View holder = findViewById(R.id.advanced_area_holder);
 		holder.setVisibility(holder.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
