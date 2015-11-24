@@ -18,6 +18,7 @@ import print.io.piopublic.Screen;
 import print.io.piopublic.ScreenVersion;
 import print.io.piopublic.SideMenuButton;
 import print.io.piopublic.SideMenuInfoButton;
+import print.io.piopublic.SingleOptionStepStrategy;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -476,6 +477,37 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				config.setLayoutStepStrategy(LayoutStepStrategy.values()[which]);
+			}
+		});
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// NOP
+			}
+		});
+		builder.show();
+	}
+	
+	public void onClickSingleOptionStepStrategy(View v) {
+		SingleOptionStepStrategy[] allStrategies = SingleOptionStepStrategy.values();
+		int selectedItem = 0;
+		for (int i = 0; i < allStrategies.length; i++) {
+			if (config.getSingleOptionStepStrategy() == allStrategies[i]) {
+				selectedItem = i;
+			}
+		}
+		String[] names = new String[allStrategies.length];
+		for (int i = 0; i < names.length; i++) {
+			names[i] = allStrategies[i].name();
+		}
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Choose strategy");
+		builder.setSingleChoiceItems(names, selectedItem, new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				config.setSingleOptionStepStrategy(SingleOptionStepStrategy.values()[which]);
 			}
 		});
 		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
