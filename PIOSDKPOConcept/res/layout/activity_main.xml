@@ -928,26 +928,35 @@
                 android:onClick="onClickSetProductsWithSpecailOfferBanner"
                 android:text="Set products with special offer banner" />
 
+            <EditText
+                android:id="@+id/edittext_screen_product_image_uri"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:hint="Screen product image Uri"
+                android:singleLine="true" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <EditText
-                    android:id="@+id/edittext_screen_product_image_uri"
-                    android:layout_width="match_parent"
+                <Button
+                    android:layout_width="0px"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dip"
                     android:layout_weight="1"
-                    android:hint="Screen product image Uri"
-                    android:singleLine="true" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dip"
                     android:onClick="onClickSetScreenProductImageUri"
                     android:text="Set URI"
+                    android:textSize="16dip" />
+
+                <Button
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:layout_weight="1"
+                    android:onClick="onClickClearScreenProductImageUri"
+                    android:text="Clear URI"
                     android:textSize="16dip" />
             </LinearLayout>
 

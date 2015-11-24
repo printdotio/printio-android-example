@@ -119,10 +119,10 @@ public class MainActivity extends Activity {
 		selectedPhotoSources.add(photoSourceFactory.getPhonePS());
 		selectedPhotoSources.add(photoSourceFactory.getInstagramPS());
 		selectedPhotoSources.add(photoSourceFactory.getFacebookPS());
-		//		photoSourcesTest.add(photoSourceFactory.getFlickrPS());
+		//selectedPhotoSources.add(photoSourceFactory.getFlickrPS());
 		selectedPhotoSources.add(photoSourceFactory.getPhotobucketPS());
 		selectedPhotoSources.add(photoSourceFactory.getDropboxPS());
-		//		photoSourcesTest.add(photoSourceFactory.getPicasaPS());
+		//selectedPhotoSources.add(photoSourceFactory.getPicasaPS());
 		selectedPhotoSources.add(photoSourceFactory.getPreselectedPS());
 	}
 
@@ -553,6 +553,12 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	public void onClickClearScreenProductImageUri(View v) {
+		config.setScreenProductImageUrl(null);
+		editTextScreenProductImageUti.setText("");
+		Toast.makeText(this, "Screen product image URL cleared", Toast.LENGTH_SHORT).show();
+	}
+
 	public void toggleAdvancedArea(View v) {
 		View holder = findViewById(R.id.advanced_area_holder);
 		holder.setVisibility(holder.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
@@ -613,6 +619,11 @@ public class MainActivity extends Activity {
 			config.setFontPathInAssetsLight("HelveticaNeueLTStd-Lt.otf");
 			config.setFontPathInAssetsNormal("HelveticaNeueLTStd-Roman.otf");
 			config.setFontPathInAssetsBold("HelveticaNeueLTStd-Bd.otf");
+		} else {
+			config.setFontPathInAssetsLight(null);
+			config.setFontPathInAssetsNormal(null);
+			config.setFontPathInAssetsBold(null);
+			config.setFontPathInAssetsTitle(null);
 		}
 		config.useThreeButtonsBarStyle(isChecked(R.id.switch_three_buttons_bar_style));
 		config.setMenuIconGear(isChecked(R.id.switch_menu_icon_gear));
