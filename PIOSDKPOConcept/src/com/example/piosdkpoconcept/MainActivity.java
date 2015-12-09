@@ -18,6 +18,7 @@ import print.io.piopublic.Screen;
 import print.io.piopublic.ScreenVersion;
 import print.io.piopublic.SideMenuButton;
 import print.io.piopublic.SideMenuInfoButton;
+import print.io.piopublic.SingleOptionStepStrategy;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -118,10 +119,10 @@ public class MainActivity extends Activity {
 		selectedPhotoSources.add(photoSourceFactory.getPhonePS());
 		selectedPhotoSources.add(photoSourceFactory.getInstagramPS());
 		selectedPhotoSources.add(photoSourceFactory.getFacebookPS());
-		//		photoSourcesTest.add(photoSourceFactory.getFlickrPS());
+		//selectedPhotoSources.add(photoSourceFactory.getFlickrPS());
 		selectedPhotoSources.add(photoSourceFactory.getPhotobucketPS());
 		selectedPhotoSources.add(photoSourceFactory.getDropboxPS());
-		//		photoSourcesTest.add(photoSourceFactory.getPicasaPS());
+		//selectedPhotoSources.add(photoSourceFactory.getPicasaPS());
 		selectedPhotoSources.add(photoSourceFactory.getPreselectedPS());
 	}
 
@@ -487,6 +488,37 @@ public class MainActivity extends Activity {
 		});
 		builder.show();
 	}
+	
+	public void onClickSingleOptionStepStrategy(View v) {
+		SingleOptionStepStrategy[] allStrategies = SingleOptionStepStrategy.values();
+		int selectedItem = 0;
+		for (int i = 0; i < allStrategies.length; i++) {
+			if (config.getSingleOptionStepStrategy() == allStrategies[i]) {
+				selectedItem = i;
+			}
+		}
+		String[] names = new String[allStrategies.length];
+		for (int i = 0; i < names.length; i++) {
+			names[i] = allStrategies[i].name();
+		}
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Choose strategy");
+		builder.setSingleChoiceItems(names, selectedItem, new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				config.setSingleOptionStepStrategy(SingleOptionStepStrategy.values()[which]);
+			}
+		});
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// NOP
+			}
+		});
+		builder.show();
+	}
 
 	public void onClickClearShippingAddresses(View v) {
 		PIO.clearShippingAddresses(this);
@@ -519,6 +551,12 @@ public class MainActivity extends Activity {
 			intent.addCategory(Intent.CATEGORY_OPENABLE);
 			startActivityForResult(intent, 2);
 		}
+	}
+
+	public void onClickClearScreenProductImageUri(View v) {
+		config.setScreenProductImageUrl(null);
+		editTextScreenProductImageUti.setText("");
+		Toast.makeText(this, "Screen product image URL cleared", Toast.LENGTH_SHORT).show();
 	}
 
 	public void toggleAdvancedArea(View v) {
@@ -581,6 +619,11 @@ public class MainActivity extends Activity {
 			config.setFontPathInAssetsLight("HelveticaNeueLTStd-Lt.otf");
 			config.setFontPathInAssetsNormal("HelveticaNeueLTStd-Roman.otf");
 			config.setFontPathInAssetsBold("HelveticaNeueLTStd-Bd.otf");
+		} else {
+			config.setFontPathInAssetsLight(null);
+			config.setFontPathInAssetsNormal(null);
+			config.setFontPathInAssetsBold(null);
+			config.setFontPathInAssetsTitle(null);
 		}
 		config.useThreeButtonsBarStyle(isChecked(R.id.switch_three_buttons_bar_style));
 		config.setMenuIconGear(isChecked(R.id.switch_menu_icon_gear));
