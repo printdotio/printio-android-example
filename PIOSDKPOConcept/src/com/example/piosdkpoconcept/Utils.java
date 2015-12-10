@@ -1,12 +1,15 @@
 package com.example.piosdkpoconcept;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import print.io.beans.OrderInfo;
 import print.io.beans.cart.CartItem;
 import print.io.beans.cart.ShoppingCart;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.TypedValue;
 import android.widget.Toast;
 
@@ -71,4 +74,58 @@ public class Utils {
 			return clipboard.getPrimaryClip().getItemAt(0).getText().toString();
 		}
 	}
+
+	public interface ChooseDialogoOnItemSelected<T> {
+
+		void onSelected(T val, boolean isChecked);
+
+	}
+
+	public static <T extends Enum<?>> void showChooseDialogEnum(Context context, boolean isMultichoice, final T[] values, List<T> selectedVals, String title, final ChooseDialogoOnItemSelected<T> chooseDialogoOnItemSelected) {
+		List<String> names = new ArrayList<String>(values.length);
+		for (T pType : values) {
+			names.add(pType.name());
+		}
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setTitle(title);
+		if (isMultichoice) {
+			boolean[] isSelected = new boolean[values.length];
+			for (int i = 0; i < isSelected.length; i++) {
+				isSelected[i] = selectedVals.contains(values[i]);
+			}
+
+			builder.setMultiChoiceItems(names.toArray(new String[names.size()]), isSelected, new DialogInterface.OnMultiChoiceClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+					chooseDialogoOnItemSelected.onSelected(values[which], isChecked);
+				}
+			});
+		} else {
+			int selectedItemIndex = 0;
+			T selectedItem = selectedVals.get(0);
+			for (int i = 0; i < values.length; i++) {
+				if (values[i].equals(selectedItem)) {
+					selectedItemIndex = i;
+					break;
+				}
+			}
+			builder.setSingleChoiceItems(names.toArray(new String[names.size()]), selectedItemIndex, new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					chooseDialogoOnItemSelected.onSelected(values[which], true);
+				}
+			});
+		}
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// NOP
+			}
+		});
+		builder.show();
+	}
+
 }
