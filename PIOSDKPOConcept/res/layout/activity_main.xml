@@ -506,6 +506,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:onClick="onClickSetShoppingCartDeleteMode"
+                android:text="Set delete mode" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:onClick="onClickRemoveAllItemsFromShoppingCart"
                 android:text="Remove all items from shopping cart" />
 

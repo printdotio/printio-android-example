@@ -16,10 +16,10 @@ import print.io.piopublic.PaymentOptionType;
 import print.io.piopublic.ProductType;
 import print.io.piopublic.Screen;
 import print.io.piopublic.ScreenVersion;
+import print.io.piopublic.ShoppingCartDeleteMode;
 import print.io.piopublic.SideMenuButton;
 import print.io.piopublic.SideMenuInfoButton;
 import print.io.piopublic.SingleOptionStepStrategy;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -313,6 +313,20 @@ public class MainActivity extends Activity {
 			@Override
 			public void onSelected(AddMoreProductsButtonStrategy val, boolean isChecked) {
 				config.setAddMoreProductsButtonStrategy(val);
+			}
+
+		});
+	}
+
+	public void onClickSetShoppingCartDeleteMode(View v) {
+		String title = "Choose delete mode";
+		List<ShoppingCartDeleteMode> selected = new ArrayList<ShoppingCartDeleteMode>(1);
+		selected.add(config.getShoppingCartDeleteMode());
+		Utils.<ShoppingCartDeleteMode> showChooseDialogEnum(this, false, ShoppingCartDeleteMode.values(), selected, title, new ChooseDialogoOnItemSelected<ShoppingCartDeleteMode>() {
+
+			@Override
+			public void onSelected(ShoppingCartDeleteMode val, boolean isChecked) {
+				config.setShoppingCartDeleteMode(val);
 			}
 
 		});
