@@ -485,7 +485,6 @@ public class MainActivity extends Activity {
 
 		// Products screen
 		config.setHideCategorySearchBar(isChecked(R.id.switch_hide_category_search_bar));
-		config.setShowFeaturedProductsByDefault(isChecked(R.id.default_products_screen_featured));
 		config.setHideComingSoonProducts(isChecked(R.id.switch_hide_coming_soon_products));
 		config.setProductsBottomBarVisibility(isChecked(R.id.switch_show_bottom_bar));
 

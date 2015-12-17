@@ -360,14 +360,6 @@
                 android:text="Hide Categories(Search) bar" />
 
             <Switch
-                android:id="@+id/default_products_screen_featured"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="true"
-                android:text="Show featured products by default (switch off for all products)" />
-
-            <Switch
                 android:id="@+id/switch_hide_coming_soon_products"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
