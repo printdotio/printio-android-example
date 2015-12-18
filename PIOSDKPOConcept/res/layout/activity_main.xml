@@ -480,6 +480,14 @@
                 android:textStyle="bold" />
 
             <Switch
+                android:id="@+id/switch_show_checkout_progress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="false"
+                android:text="Show checkout progress below the title bar" />
+
+            <Switch
                 android:id="@+id/switch_show_add_more_products"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -495,7 +503,7 @@
                 android:text="Set &apos;Add More Products&apos; button strategy" />
 
             <Switch
-                android:id="@+id/closeWidgetFromShoppingCart"
+                android:id="@+id/switch_close_widget_from_shopping_cart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"

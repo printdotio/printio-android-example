@@ -512,8 +512,9 @@ public class MainActivity extends Activity {
 		config.setCancelOptionsButtonVisibility(isChecked(R.id.switch_show_cancel_options_button));
 
 		// Shopping Cart screen
+		config.setShowCheckoutProgress(isChecked(R.id.switch_show_checkout_progress));
 		config.setShowAddMoreProductsInShoppingCart(isChecked(R.id.switch_show_add_more_products));
-		config.closeWidgetFromShoppingCart(isChecked(R.id.closeWidgetFromShoppingCart));
+		config.closeWidgetFromShoppingCart(isChecked(R.id.switch_close_widget_from_shopping_cart));
 
 		// Customize Product screen
 		config.setShowPhotosInCustomize(isChecked(R.id.switch_show_photos_customize));
