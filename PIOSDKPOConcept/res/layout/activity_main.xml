@@ -360,14 +360,6 @@
                 android:text="Hide Categories(Search) bar" />
 
             <Switch
-                android:id="@+id/default_products_screen_featured"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="true"
-                android:text="Show featured products by default (switch off for all products)" />
-
-            <Switch
                 android:id="@+id/switch_hide_coming_soon_products"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -488,6 +480,14 @@
                 android:textStyle="bold" />
 
             <Switch
+                android:id="@+id/switch_show_checkout_progress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="false"
+                android:text="Show checkout progress below the title bar" />
+
+            <Switch
                 android:id="@+id/switch_show_add_more_products"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -503,12 +503,19 @@
                 android:text="Set &apos;Add More Products&apos; button strategy" />
 
             <Switch
-                android:id="@+id/closeWidgetFromShoppingCart"
+                android:id="@+id/switch_close_widget_from_shopping_cart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:checked="false"
                 android:text="Close widget when tap on Back button" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:onClick="onClickSetShoppingCartDeleteMode"
+                android:text="Set delete mode" />
 
             <Button
                 android:layout_width="match_parent"

@@ -16,10 +16,10 @@ import print.io.piopublic.PaymentOptionType;
 import print.io.piopublic.ProductType;
 import print.io.piopublic.Screen;
 import print.io.piopublic.ScreenVersion;
+import print.io.piopublic.ShoppingCartDeleteMode;
 import print.io.piopublic.SideMenuButton;
 import print.io.piopublic.SideMenuInfoButton;
 import print.io.piopublic.SingleOptionStepStrategy;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -39,6 +39,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.example.piosdkpoconcept.Utils.ChooseDialogoOnItemSelected;
 import com.example.piosdkpoconcept.adapters.SpinnerAdapterJumpToProduct;
 import com.example.piosdkpoconcept.adapters.SpinnerAdapterJumpToScreen;
 import com.example.piosdkpoconcept.adapters.SpinnerAdapterScreenVersion;
@@ -152,72 +153,6 @@ public class MainActivity extends Activity {
 		}
 	}
 
-	public void onClickChangeAvailablePaymentOptions(View v) {
-		PaymentOptionType[] allTypes = PaymentOptionType.values();
-		boolean[] isSelected = new boolean[allTypes.length];
-		for (int i = 0; i < isSelected.length; i++) {
-			isSelected[i] = selectedPaymentOptions.contains(allTypes[i]);
-		}
-		List<String> names = new ArrayList<String>(allTypes.length);
-		for (PaymentOptionType pType : allTypes) {
-			names.add(pType.name());
-		}
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Select available payment options");
-		builder.setMultiChoiceItems(names.toArray(new String[names.size()]), isSelected, new DialogInterface.OnMultiChoiceClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-				if (isChecked) {
-					selectedPaymentOptions.add(PaymentOptionType.values()[which]);
-				} else {
-					selectedPaymentOptions.remove(PaymentOptionType.values()[which]);
-				}
-			}
-		});
-		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// NOP
-			}
-		});
-		builder.show();
-	}
-
-	public void onClickSetScreensWithCountryBar(View v) {
-		final Screen[] allScreens = (Screen[]) Arrays.asList(Screen.PRODUCTS, Screen.PRODUCT_DETAILS, Screen.OPTIONS).toArray();
-		boolean[] isSelected = new boolean[allScreens.length];
-		for (int i = 0; i < isSelected.length; i++) {
-			isSelected[i] = screensWithCountryBar.contains(allScreens[i]);
-		}
-		List<String> names = new ArrayList<String>(allScreens.length);
-		for (Screen screen : allScreens) {
-			names.add(screen.name());
-		}
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Select screens with country dropdown");
-		builder.setMultiChoiceItems(names.toArray(new String[names.size()]), isSelected, new DialogInterface.OnMultiChoiceClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-				if (isChecked) {
-					screensWithCountryBar.add(allScreens[which]);
-				} else {
-					screensWithCountryBar.remove(allScreens[which]);
-				}
-			}
-		});
-		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// NOP
-			}
-		});
-		builder.show();
-	}
-
 	public void onClickChangeAvailablePhotoSource(View v) {
 		boolean[] isSelected = new boolean[allSources.size()];
 		for (int i = 0; i < isSelected.length; i++) {
@@ -250,103 +185,85 @@ public class MainActivity extends Activity {
 		builder.show();
 	}
 
-	public void onClickChangeAvailableProducts(View v) {
-		final List<ProductType> allProductTypes = Arrays.asList(ProductType.values());
-		boolean[] isSelected = new boolean[allProductTypes.size()];
-		for (int i = 0; i < isSelected.length; i++) {
-			isSelected[i] = selectedProductTypes.contains(allProductTypes.get(i));
-		}
-		List<String> names = new ArrayList<String>(allProductTypes.size());
-		for (ProductType pt : allProductTypes) {
-			names.add(pt.name());
-		}
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Select available product types");
-		builder.setMultiChoiceItems(names.toArray(new String[names.size()]), isSelected, new DialogInterface.OnMultiChoiceClickListener() {
+	public void onClickChangeAvailablePaymentOptions(View v) {
+		String title = "Select available payment options";
+		Utils.<PaymentOptionType> showChooseDialogEnum(this, true, PaymentOptionType.values(), selectedPaymentOptions, title, new ChooseDialogoOnItemSelected<PaymentOptionType>() {
 
 			@Override
-			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+			public void onSelected(PaymentOptionType val, boolean isChecked) {
 				if (isChecked) {
-					selectedProductTypes.add(allProductTypes.get(which));
+					selectedPaymentOptions.add(val);
 				} else {
-					selectedProductTypes.remove(allProductTypes.get(which));
+					selectedPaymentOptions.remove(val);
 				}
 			}
+
 		});
-		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+	}
+
+	public void onClickSetScreensWithCountryBar(View v) {
+		Screen[] allScreens = (Screen[]) Arrays.asList(Screen.PRODUCTS, Screen.PRODUCT_DETAILS, Screen.OPTIONS).toArray();
+		String title = "Select screens with country dropdown";
+		Utils.<Screen> showChooseDialogEnum(this, true, allScreens, screensWithCountryBar, title, new ChooseDialogoOnItemSelected<Screen>() {
 
 			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// NOP
+			public void onSelected(Screen val, boolean isChecked) {
+				if (isChecked) {
+					screensWithCountryBar.add(val);
+				} else {
+					screensWithCountryBar.remove(val);
+				}
 			}
+
 		});
-		builder.show();
+	}
+
+	public void onClickChangeAvailableProducts(View v) {
+		String title = "Select available product types";
+		Utils.<ProductType> showChooseDialogEnum(this, true, ProductType.values(), selectedProductTypes, title, new ChooseDialogoOnItemSelected<ProductType>() {
+
+			@Override
+			public void onSelected(ProductType val, boolean isChecked) {
+				if (isChecked) {
+					selectedProductTypes.add(val);
+				} else {
+					selectedProductTypes.remove(val);
+				}
+			}
+
+		});
 	}
 
 	public void onClickSetSideMenuInfoButtons(View v) {
-		final List<SideMenuInfoButton> allButtons = Arrays.asList(SideMenuInfoButton.values());
-		boolean[] isSelected = new boolean[allButtons.size()];
-		for (int i = 0; i < isSelected.length; i++) {
-			isSelected[i] = sideMenuInfoButtons.contains(allButtons.get(i));
-		}
-		List<String> names = new ArrayList<String>(allButtons.size());
-		for (SideMenuInfoButton button : allButtons) {
-			names.add(button.name());
-		}
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Select side menu info buttons");
-		builder.setMultiChoiceItems(names.toArray(new String[names.size()]), isSelected, new DialogInterface.OnMultiChoiceClickListener() {
+		String title = "Select side menu info buttons";
+		Utils.<SideMenuInfoButton> showChooseDialogEnum(this, true, SideMenuInfoButton.values(), sideMenuInfoButtons, title, new ChooseDialogoOnItemSelected<SideMenuInfoButton>() {
 
 			@Override
-			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+			public void onSelected(SideMenuInfoButton val, boolean isChecked) {
 				if (isChecked) {
-					sideMenuInfoButtons.add(allButtons.get(which));
+					sideMenuInfoButtons.add(val);
 				} else {
-					sideMenuInfoButtons.remove(allButtons.get(which));
+					sideMenuInfoButtons.remove(val);
 				}
 			}
-		});
-		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// NOP
-			}
 		});
-		builder.show();
 	}
 
 	public void onClickSetSideMenuButtonsTop(View v) {
-		final List<SideMenuButton> allButtons = Arrays.asList(SideMenuButton.values());
-		boolean[] isSelected = new boolean[allButtons.size()];
-		for (int i = 0; i < isSelected.length; i++) {
-			isSelected[i] = sideMenuButtonsTop.contains(allButtons.get(i));
-		}
-		List<String> names = new ArrayList<String>(allButtons.size());
-		for (SideMenuButton button : allButtons) {
-			names.add(button.name());
-		}
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Select top side menu buttons");
-		builder.setMultiChoiceItems(names.toArray(new String[names.size()]), isSelected, new DialogInterface.OnMultiChoiceClickListener() {
+		String title = "Select top side menu buttons";
+		Utils.<SideMenuButton> showChooseDialogEnum(this, true, SideMenuButton.values(), sideMenuButtonsTop, title, new ChooseDialogoOnItemSelected<SideMenuButton>() {
 
 			@Override
-			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+			public void onSelected(SideMenuButton val, boolean isChecked) {
 				if (isChecked) {
-					sideMenuButtonsTop.add(allButtons.get(which));
+					sideMenuButtonsTop.add(val);
 				} else {
-					sideMenuButtonsTop.remove(allButtons.get(which));
+					sideMenuButtonsTop.remove(val);
 				}
 			}
-		});
-		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// NOP
-			}
 		});
-		builder.show();
 	}
 
 	public void onClickSetDisabledScreens(View v) {
@@ -356,68 +273,91 @@ public class MainActivity extends Activity {
 				screens.add(screen);
 			}
 		}
-		boolean[] isSelected = new boolean[screens.size()];
-		for (int i = 0; i < isSelected.length; i++) {
-			isSelected[i] = config.getDisabledScreens().contains(screens.get(i));
-		}
-		List<String> names = new ArrayList<String>(screens.size());
-		for (Screen screen : screens) {
-			names.add(screen.name());
-		}
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Disable screens");
-		builder.setMultiChoiceItems(names.toArray(new String[names.size()]), isSelected, new DialogInterface.OnMultiChoiceClickListener() {
+		Screen[] vals = screens.toArray(new Screen[screens.size()]);
+		Utils.<Screen> showChooseDialogEnum(this, true, vals, config.getDisabledScreens(), "Disable screens", new ChooseDialogoOnItemSelected<Screen>() {
 
 			@Override
-			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+			public void onSelected(Screen val, boolean isChecked) {
 				if (isChecked) {
-					config.getDisabledScreens().add(screens.get(which));
+					config.getDisabledScreens().add(val);
 				} else {
-					config.getDisabledScreens().remove(screens.get(which));
+					config.getDisabledScreens().remove(val);
 				}
 			}
-		});
-		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// NOP
-			}
 		});
-		builder.show();
 	}
 
 	public void onClickSetProductsWithSpecailOfferBanner(View v) {
-		final List<ProductType> allProductTypes = Arrays.asList(ProductType.values());
-		boolean[] isSelected = new boolean[allProductTypes.size()];
-		for (int i = 0; i < isSelected.length; i++) {
-			isSelected[i] = productsWithSpecailOfferBanner.contains(allProductTypes.get(i));
-		}
-		List<String> names = new ArrayList<String>(allProductTypes.size());
-		for (ProductType pt : allProductTypes) {
-			names.add(pt.name());
-		}
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Select products with special offer banner");
-		builder.setMultiChoiceItems(names.toArray(new String[names.size()]), isSelected, new DialogInterface.OnMultiChoiceClickListener() {
+		String title = "Select products with special offer banner";
+		Utils.<ProductType> showChooseDialogEnum(this, true, ProductType.values(), productsWithSpecailOfferBanner, title, new ChooseDialogoOnItemSelected<ProductType>() {
 
 			@Override
-			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+			public void onSelected(ProductType val, boolean isChecked) {
 				if (isChecked) {
-					productsWithSpecailOfferBanner.add(allProductTypes.get(which));
+					productsWithSpecailOfferBanner.add(val);
 				} else {
-					productsWithSpecailOfferBanner.remove(allProductTypes.get(which));
+					productsWithSpecailOfferBanner.remove(val);
 				}
 			}
+
 		});
-		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+	}
+
+	public void onClickSetAddMoreProductsButtonStrategy(View v) {
+		String title = "Choose strategy";
+		List<AddMoreProductsButtonStrategy> selected = new ArrayList<AddMoreProductsButtonStrategy>(1);
+		selected.add(config.getAddMoreProductsButtonStrategy());
+		Utils.<AddMoreProductsButtonStrategy> showChooseDialogEnum(this, false, AddMoreProductsButtonStrategy.values(), selected, title, new ChooseDialogoOnItemSelected<AddMoreProductsButtonStrategy>() {
 
 			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// NOP
+			public void onSelected(AddMoreProductsButtonStrategy val, boolean isChecked) {
+				config.setAddMoreProductsButtonStrategy(val);
 			}
+
 		});
-		builder.show();
+	}
+
+	public void onClickSetShoppingCartDeleteMode(View v) {
+		String title = "Choose delete mode";
+		List<ShoppingCartDeleteMode> selected = new ArrayList<ShoppingCartDeleteMode>(1);
+		selected.add(config.getShoppingCartDeleteMode());
+		Utils.<ShoppingCartDeleteMode> showChooseDialogEnum(this, false, ShoppingCartDeleteMode.values(), selected, title, new ChooseDialogoOnItemSelected<ShoppingCartDeleteMode>() {
+
+			@Override
+			public void onSelected(ShoppingCartDeleteMode val, boolean isChecked) {
+				config.setShoppingCartDeleteMode(val);
+			}
+
+		});
+	}
+
+	public void onClickStepLayoutStepStrategy(View v) {
+		String title = "Choose strategy";
+		List<LayoutStepStrategy> selected = new ArrayList<LayoutStepStrategy>(1);
+		selected.add(config.getLayoutStepStrategy());
+		Utils.<LayoutStepStrategy> showChooseDialogEnum(this, false, LayoutStepStrategy.values(), selected, title, new ChooseDialogoOnItemSelected<LayoutStepStrategy>() {
+
+			@Override
+			public void onSelected(LayoutStepStrategy val, boolean isChecked) {
+				config.setLayoutStepStrategy(val);
+			}
+
+		});
+	}
+
+	public void onClickSingleOptionStepStrategy(View v) {
+		String title = "Choose strategy";
+		List<SingleOptionStepStrategy> selected = new ArrayList<SingleOptionStepStrategy>(1);
+		selected.add(config.getSingleOptionStepStrategy());
+		Utils.<SingleOptionStepStrategy> showChooseDialogEnum(this, false, SingleOptionStepStrategy.values(), selected, title, new ChooseDialogoOnItemSelected<SingleOptionStepStrategy>() {
+
+			@Override
+			public void onSelected(SingleOptionStepStrategy val, boolean isChecked) {
+				config.setSingleOptionStepStrategy(val);
+			}
+
+		});
 	}
 
 	public void onClickRemoveAllItemsFromShoppingCart(View v) {
@@ -425,99 +365,6 @@ public class MainActivity extends Activity {
 		cart.removeAllItems();
 		PIO.setShoppingCart(this, cart);
 		Toast.makeText(this, "Cart cleared", Toast.LENGTH_SHORT).show();
-	}
-
-	public void onClickSetAddMoreProductsButtonStrategy(View v) {
-		AddMoreProductsButtonStrategy[] allStrategies = AddMoreProductsButtonStrategy.values();
-		int selectedItem = 0;
-		for (int i = 0; i < allStrategies.length; i++) {
-			if (config.getAddMoreProductsButtonStrategy() == allStrategies[i]) {
-				selectedItem = i;
-			}
-		}
-		String[] names = new String[allStrategies.length];
-		for (int i = 0; i < names.length; i++) {
-			names[i] = allStrategies[i].name();
-		}
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Choose strategy");
-		builder.setSingleChoiceItems(names, selectedItem, new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				config.setAddMoreProductsButtonStrategy(AddMoreProductsButtonStrategy.values()[which]);
-			}
-		});
-		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// NOP
-			}
-		});
-		builder.show();
-	}
-
-	public void onClickStepLayoutStepStrategy(View v) {
-		LayoutStepStrategy[] allStrategies = LayoutStepStrategy.values();
-		int selectedItem = 0;
-		for (int i = 0; i < allStrategies.length; i++) {
-			if (config.getLayoutStepStrategy() == allStrategies[i]) {
-				selectedItem = i;
-			}
-		}
-		String[] names = new String[allStrategies.length];
-		for (int i = 0; i < names.length; i++) {
-			names[i] = allStrategies[i].name();
-		}
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Choose strategy");
-		builder.setSingleChoiceItems(names, selectedItem, new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				config.setLayoutStepStrategy(LayoutStepStrategy.values()[which]);
-			}
-		});
-		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// NOP
-			}
-		});
-		builder.show();
-	}
-	
-	public void onClickSingleOptionStepStrategy(View v) {
-		SingleOptionStepStrategy[] allStrategies = SingleOptionStepStrategy.values();
-		int selectedItem = 0;
-		for (int i = 0; i < allStrategies.length; i++) {
-			if (config.getSingleOptionStepStrategy() == allStrategies[i]) {
-				selectedItem = i;
-			}
-		}
-		String[] names = new String[allStrategies.length];
-		for (int i = 0; i < names.length; i++) {
-			names[i] = allStrategies[i].name();
-		}
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Choose strategy");
-		builder.setSingleChoiceItems(names, selectedItem, new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				config.setSingleOptionStepStrategy(SingleOptionStepStrategy.values()[which]);
-			}
-		});
-		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// NOP
-			}
-		});
-		builder.show();
 	}
 
 	public void onClickClearShippingAddresses(View v) {
@@ -652,7 +499,6 @@ public class MainActivity extends Activity {
 
 		// Products screen
 		config.setHideCategorySearchBar(isChecked(R.id.switch_hide_category_search_bar));
-		config.setShowFeaturedProductsByDefault(isChecked(R.id.default_products_screen_featured));
 		config.setHideComingSoonProducts(isChecked(R.id.switch_hide_coming_soon_products));
 		config.setProductsBottomBarVisibility(isChecked(R.id.switch_show_bottom_bar));
 
@@ -666,8 +512,9 @@ public class MainActivity extends Activity {
 		config.setCancelOptionsButtonVisibility(isChecked(R.id.switch_show_cancel_options_button));
 
 		// Shopping Cart screen
+		config.setShowCheckoutProgress(isChecked(R.id.switch_show_checkout_progress));
 		config.setShowAddMoreProductsInShoppingCart(isChecked(R.id.switch_show_add_more_products));
-		config.closeWidgetFromShoppingCart(isChecked(R.id.closeWidgetFromShoppingCart));
+		config.closeWidgetFromShoppingCart(isChecked(R.id.switch_close_widget_from_shopping_cart));
 
 		// Customize Product screen
 		config.setShowPhotosInCustomize(isChecked(R.id.switch_show_photos_customize));
