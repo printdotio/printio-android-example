@@ -515,6 +515,7 @@ public class MainActivity extends Activity {
 
 		// Product Options screen
 		config.setCancelOptionsButtonVisibility(isChecked(R.id.switch_show_cancel_options_button));
+		config.setShowCouchHintOverlay(isChecked(R.id.switch_show_couch_hint_overlay));
 
 		// Shopping Cart screen
 		config.setShowCheckoutProgress(isChecked(R.id.switch_show_checkout_progress));

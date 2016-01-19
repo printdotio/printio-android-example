@@ -451,6 +451,14 @@
                 android:checked="false"
                 android:text="Show cancel button" />
 
+            <Switch
+                android:id="@+id/switch_show_couch_hint_overlay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="false"
+                android:text="Show &apos;Swipe to see more&apos; in Couch step" />
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
