@@ -501,6 +501,11 @@ public class MainActivity extends Activity {
 		config.setHideCategorySearchBar(isChecked(R.id.switch_hide_category_search_bar));
 		config.setHideComingSoonProducts(isChecked(R.id.switch_hide_coming_soon_products));
 		config.setProductsBottomBarVisibility(isChecked(R.id.switch_show_bottom_bar));
+		if (isChecked(R.id.switch_show_logo_in_products_screen)) {
+			config.setTitleBarVendorLogoOnScreen(Screen.PRODUCTS, R.drawable.icon_logo);
+		} else {
+			config.setTitleBarVendorLogoOnScreen(Screen.PRODUCTS, null);
+		}
 
 		// Product Details screen
 		config.setPriceTitleHidden(isChecked(R.id.switch_hide_price_title));
@@ -515,6 +520,11 @@ public class MainActivity extends Activity {
 		config.setShowCheckoutProgress(isChecked(R.id.switch_show_checkout_progress));
 		config.setShowAddMoreProductsInShoppingCart(isChecked(R.id.switch_show_add_more_products));
 		config.closeWidgetFromShoppingCart(isChecked(R.id.switch_close_widget_from_shopping_cart));
+		if (isChecked(R.id.switch_show_logo_in_shopping_cart)) {
+			config.setTitleBarVendorLogoOnScreen(Screen.SHOPPING_CART, R.drawable.icon_logo);
+		} else {
+			config.setTitleBarVendorLogoOnScreen(Screen.SHOPPING_CART, null);
+		}
 
 		// Customize Product screen
 		config.setShowPhotosInCustomize(isChecked(R.id.switch_show_photos_customize));

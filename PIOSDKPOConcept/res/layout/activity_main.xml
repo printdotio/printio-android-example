@@ -353,6 +353,14 @@
                 android:textStyle="bold" />
 
             <Switch
+                android:id="@+id/switch_show_logo_in_products_screen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="false"
+                android:text="Show logo in title bar" />
+
+            <Switch
                 android:id="@+id/switch_hide_category_search_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -478,6 +486,14 @@
                 android:text="Shopping cart screen"
                 android:textSize="16dip"
                 android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/switch_show_logo_in_shopping_cart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="false"
+                android:text="Show logo in title bar" />
 
             <Switch
                 android:id="@+id/switch_show_checkout_progress"
