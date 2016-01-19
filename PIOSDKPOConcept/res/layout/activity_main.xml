@@ -119,31 +119,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
-                android:text="Language code 2 chars: (coming soon)"
-                android:textSize="16dip" />
-
-            <EditText
-                android:id="@+id/editLanguage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="7dp"
-                android:ems="10"
-                android:enabled="false"
-                android:text="EN" />
-
-            <Switch
-                android:id="@+id/switch_changeable_language"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:checked="true"
-                android:enabled="false"
-                android:text="Changeable language (coming soon)" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dip"
                 android:text="Color hex 8 digit hex code for Header bar, MUST BE HEX 6 or 8 digit. Example FF00FF00 for green or 00FF00"
                 android:textSize="16dip" />
 
@@ -283,15 +258,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:onClick="onClickSetSideMenuButtonsTop"
-                android:text="Set top side menu buttons" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:onClick="onClickSetSideMenuInfoButtons"
-                android:text="Set side menu info buttons" />
+                android:onClick="onClickSetSideMenuButtons"
+                android:text="Set visible side menu buttons" />
 
             <!-- All screens -->
 

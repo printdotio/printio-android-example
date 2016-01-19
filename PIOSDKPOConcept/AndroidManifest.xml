@@ -135,9 +135,6 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="print.io.ActivityHelp"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="print.io.photosource.impl.facebook.Facebook"
             android:screenOrientation="portrait" />
         <activity
@@ -154,6 +151,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="print.io.ActivityHowItWorks"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="print.io.ActivityQualityGuarantee"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.facebook.FacebookActivity"

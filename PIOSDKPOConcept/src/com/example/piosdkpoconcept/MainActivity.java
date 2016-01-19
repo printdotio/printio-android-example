@@ -18,8 +18,8 @@ import print.io.piopublic.Screen;
 import print.io.piopublic.ScreenVersion;
 import print.io.piopublic.ShoppingCartDeleteMode;
 import print.io.piopublic.SideMenuButton;
-import print.io.piopublic.SideMenuInfoButton;
 import print.io.piopublic.SingleOptionStepStrategy;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -55,8 +55,7 @@ public class MainActivity extends Activity {
 	private PIOConfig config = new PIOConfig();
 
 	private List<String> imageUris = new ArrayList<String>();
-	private List<SideMenuButton> sideMenuButtonsTop = new ArrayList<SideMenuButton>(Arrays.asList(SideMenuButton.values()));
-	private List<SideMenuInfoButton> sideMenuInfoButtons = new ArrayList<SideMenuInfoButton>(Arrays.asList(SideMenuInfoButton.values()));
+	private List<SideMenuButton> sideMenuButtons = new ArrayList<SideMenuButton>(Arrays.asList(SideMenuButton.values()));
 	private PhotoSourceFactory photoSourceFactory = new PhotoSourceFactory();
 	private List<PhotoSource> allSources = photoSourceFactory.getAll();
 	private List<PhotoSource> selectedPhotoSources = new ArrayList<PhotoSource>();
@@ -105,7 +104,6 @@ public class MainActivity extends Activity {
 
 		config.setDisabledScreens(new ArrayList<Screen>());
 		config.setPartnerName(getResources().getString(R.string.hellopics));
-		config.setHelpUrl(PIOConstants.HELP_URL);
 		config.setSupportEmail(PIOConstants.SUPPORT_EMAIL);
 		config.setGooglePlayRateUrl(PIOConstants.GOOGLE_PLAY_RATE_URL);
 		config.setFacebookPageUrl(PIOConstants.FACEBOOK_PAGE_URL);
@@ -185,6 +183,22 @@ public class MainActivity extends Activity {
 		builder.show();
 	}
 
+	public void onClickSetSideMenuButtons(View v) {
+		String title = "Select visible side menu buttons";
+		Utils.<SideMenuButton> showChooseDialogEnum(this, true, SideMenuButton.values(), sideMenuButtons, title, new ChooseDialogoOnItemSelected<SideMenuButton>() {
+
+			@Override
+			public void onSelected(SideMenuButton val, boolean isChecked) {
+				if (isChecked) {
+					sideMenuButtons.add(val);
+				} else {
+					sideMenuButtons.remove(val);
+				}
+			}
+
+		});
+	}
+
 	public void onClickChangeAvailablePaymentOptions(View v) {
 		String title = "Select available payment options";
 		Utils.<PaymentOptionType> showChooseDialogEnum(this, true, PaymentOptionType.values(), selectedPaymentOptions, title, new ChooseDialogoOnItemSelected<PaymentOptionType>() {
@@ -228,38 +242,6 @@ public class MainActivity extends Activity {
 					selectedProductTypes.add(val);
 				} else {
 					selectedProductTypes.remove(val);
-				}
-			}
-
-		});
-	}
-
-	public void onClickSetSideMenuInfoButtons(View v) {
-		String title = "Select side menu info buttons";
-		Utils.<SideMenuInfoButton> showChooseDialogEnum(this, true, SideMenuInfoButton.values(), sideMenuInfoButtons, title, new ChooseDialogoOnItemSelected<SideMenuInfoButton>() {
-
-			@Override
-			public void onSelected(SideMenuInfoButton val, boolean isChecked) {
-				if (isChecked) {
-					sideMenuInfoButtons.add(val);
-				} else {
-					sideMenuInfoButtons.remove(val);
-				}
-			}
-
-		});
-	}
-
-	public void onClickSetSideMenuButtonsTop(View v) {
-		String title = "Select top side menu buttons";
-		Utils.<SideMenuButton> showChooseDialogEnum(this, true, SideMenuButton.values(), sideMenuButtonsTop, title, new ChooseDialogoOnItemSelected<SideMenuButton>() {
-
-			@Override
-			public void onSelected(SideMenuButton val, boolean isChecked) {
-				if (isChecked) {
-					sideMenuButtonsTop.add(val);
-				} else {
-					sideMenuButtonsTop.remove(val);
 				}
 			}
 
@@ -490,8 +472,7 @@ public class MainActivity extends Activity {
 		// Side menu
 		config.setSideMenuEnabled(isChecked(R.id.switch_enable_side_menu));
 		config.setRightSideMenu(isChecked(R.id.switch_right_side_menu));
-		config.setSideMenuButtonsTop(sideMenuButtonsTop);
-		config.setSideMenuInfoButtons(sideMenuInfoButtons);
+		config.setVisibleSideMenuButtons(sideMenuButtons);
 
 		// All screens
 		config.setShowHelp(isChecked(R.id.switch_hide_help));
