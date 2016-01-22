@@ -25,7 +25,7 @@
 
     <!--
   IMPORTANT: Change "com.example.piosdkpoconcept.permission.C2D_MESSAGE" in the lines below
-  to match your app's package name + ".permission.C2D_MESSAGE".
+  to match your app's package name + ".permission.C2D_MESSAGE".
     -->
 
     <permission
@@ -167,16 +167,24 @@
         <activity
             android:name="print.io.ActivityPastOrders"
             android:screenOrientation="portrait" />
-        
+
         <!-- Activities needed for new PayPal functionalities -->
         <service
             android:name="com.paypal.android.sdk.payments.PayPalService"
             android:exported="false" />
 
-        <activity android:name="com.paypal.android.sdk.payments.PaymentActivity" android:screenOrientation="portrait" />
-        <activity android:name="com.paypal.android.sdk.payments.LoginActivity" android:screenOrientation="portrait" />
-        <activity android:name="com.paypal.android.sdk.payments.PaymentMethodActivity" android:screenOrientation="portrait" />
-        <activity android:name="com.paypal.android.sdk.payments.PaymentConfirmActivity" android:screenOrientation="portrait" />
+        <activity
+            android:name="com.paypal.android.sdk.payments.PaymentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.paypal.android.sdk.payments.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.paypal.android.sdk.payments.PaymentMethodActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.paypal.android.sdk.payments.PaymentConfirmActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="io.card.payment.CardIOActivity"
             android:configChanges="keyboardHidden|orientation" />
@@ -188,35 +196,6 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-
-        <service android:name="com.parse.PushService" />
-
-        <receiver android:name="com.parse.ParseBroadcastReceiver" >
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.USER_PRESENT" />
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name="com.parse.GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND" >
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-
-                <!-- IMPORTANT: Change "com.example.piosdkpoconcept" to match your app's package name. -->
-                <category android:name="com.example.piosdkpoconcept" />
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name="print.io.PushNotificationsReceiver"
-            android:exported="false" >
-            <intent-filter>
-
-                <!-- IMPORTANT: Change "com.example.piosdkpoconcept" to match your app's package name. -->
-                <action android:name="com.example.piosdkpoconcept.PUSH_NOTIFICATION" />
-            </intent-filter>
-        </receiver>
     </application>
 
 </manifest>
