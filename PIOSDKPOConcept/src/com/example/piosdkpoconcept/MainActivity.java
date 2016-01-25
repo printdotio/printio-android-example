@@ -60,6 +60,7 @@ public class MainActivity extends Activity {
 	private List<PhotoSource> allSources = photoSourceFactory.getAll();
 	private List<PhotoSource> selectedPhotoSources = new ArrayList<PhotoSource>();
 	private List<ProductType> selectedProductTypes = new ArrayList<ProductType>(config.getAvailableProducts());
+	private List<ProductType> featuredProductTypes = new ArrayList<ProductType>();
 	private List<PaymentOptionType> selectedPaymentOptions = new ArrayList<PaymentOptionType>(Arrays.asList(PaymentOptionType.values()));
 	private List<Screen> screensWithCountryBar = new ArrayList<Screen>(Arrays.asList(Screen.PRODUCTS));
 	private List<Screen> availableScreens = Arrays.asList(Screen.values());
@@ -242,6 +243,22 @@ public class MainActivity extends Activity {
 					selectedProductTypes.add(val);
 				} else {
 					selectedProductTypes.remove(val);
+				}
+			}
+
+		});
+	}
+	
+	public void onClickChangeFeaturedProducts(View v) {
+		String title = "Select featured product types";
+		Utils.<ProductType> showChooseDialogEnum(this, true, ProductType.values(), featuredProductTypes, title, new ChooseDialogoOnItemSelected<ProductType>() {
+
+			@Override
+			public void onSelected(ProductType val, boolean isChecked) {
+				if (isChecked) {
+					featuredProductTypes.add(val);
+				} else {
+					featuredProductTypes.remove(val);
 				}
 			}
 
@@ -468,7 +485,7 @@ public class MainActivity extends Activity {
 			config.setCoastersType(coastersDiff ? PublicConstants.CoastersTypes.COASTERS_4_DIFFERENT : PublicConstants.CoastersTypes.COASTERS_1_DUPLICATED);
 		}
 		config.setAvailableProducts(selectedProductTypes);
-
+		
 		// Side menu
 		config.setSideMenuEnabled(isChecked(R.id.switch_enable_side_menu));
 		config.setRightSideMenu(isChecked(R.id.switch_right_side_menu));
@@ -487,7 +504,8 @@ public class MainActivity extends Activity {
 		} else {
 			config.setTitleBarVendorLogoOnScreen(Screen.PRODUCTS, null);
 		}
-
+		config.setFeaturedProducts(featuredProductTypes);
+		
 		// Product Details screen
 		config.setPriceTitleHidden(isChecked(R.id.switch_hide_price_title));
 		try {

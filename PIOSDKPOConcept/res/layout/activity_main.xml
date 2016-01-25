@@ -351,6 +351,13 @@
                 android:checked="true"
                 android:text="Show bottom bar" />
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:onClick="onClickChangeFeaturedProducts"
+                android:text="Change featured products" />
+
             <!-- Product Details screen -->
 
             <View
