@@ -190,11 +190,6 @@
 #BrainTree
 #OK
 
-#BugSense
--keep class com.bugsense.** { *; }
--libraryjars libs/bugsense-3.5.jar
--printmapping out.map
-
 #GSON
 # Gson uses generic type information stored in a class file when working with fields. Proguard
 # removes such information by default, so configure it to keep all of it.
