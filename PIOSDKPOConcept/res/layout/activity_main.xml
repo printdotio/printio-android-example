@@ -358,6 +358,64 @@
                 android:onClick="onClickChangeFeaturedProducts"
                 android:text="Change featured products" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="5dp"
+                android:background="#000000" />
+                
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="toggleHeroArea"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:text="Custom Hero item" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:text="(click to toggle visibility)"
+                    android:textStyle="italic" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/hero_item_holder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone" >
+
+                <EditText
+                    android:id="@+id/edittext_hero_item_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:hint="Image Url"
+                    android:singleLine="true" />
+
+                <EditText
+                    android:id="@+id/edittext_hero_item_link"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:hint="Link to..."
+                    android:singleLine="true" />
+
+                <EditText
+                    android:id="@+id/edittext_hero_item_position"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:hint="Position in Hero"
+                    android:singleLine="true" />
+            </LinearLayout>
+            
             <!-- Product Details screen -->
 
             <View
