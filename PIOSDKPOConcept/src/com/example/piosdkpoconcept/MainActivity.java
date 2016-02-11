@@ -11,6 +11,7 @@ import print.io.PublicConstants;
 import print.io.beans.cart.ShoppingCart;
 import print.io.photosource.PhotoSource;
 import print.io.piopublic.AddMoreProductsButtonStrategy;
+import print.io.piopublic.HeroItem;
 import print.io.piopublic.LayoutStepStrategy;
 import print.io.piopublic.PaymentOptionType;
 import print.io.piopublic.ProductType;
@@ -405,6 +406,11 @@ public class MainActivity extends Activity {
 		Toast.makeText(this, "Screen product image URL cleared", Toast.LENGTH_SHORT).show();
 	}
 
+	public void toggleHeroArea(View v) {
+		View holder = findViewById(R.id.hero_item_holder);
+		holder.setVisibility(holder.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+	}
+
 	public void toggleAdvancedArea(View v) {
 		View holder = findViewById(R.id.advanced_area_holder);
 		holder.setVisibility(holder.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
@@ -505,7 +511,21 @@ public class MainActivity extends Activity {
 			config.setTitleBarVendorLogoOnScreen(Screen.PRODUCTS, null);
 		}
 		config.setFeaturedProducts(featuredProductTypes);
-		
+
+		// Custom hero item
+		String image = getEditText(R.id.edittext_hero_item_image);
+		if (StringUtils.isBlank(image)) {
+			config.setHeroItem(null);
+		} else {
+			String url = getEditText(R.id.edittext_hero_item_link);
+			int pos = -1;
+			try {
+				pos = Integer.parseInt(getEditText(R.id.edittext_hero_item_position));
+			} catch (Exception e) {}
+			config.setHeroItem(new HeroItem(pos, image, url));
+		}
+
+
 		// Product Details screen
 		config.setPriceTitleHidden(isChecked(R.id.switch_hide_price_title));
 		try {
