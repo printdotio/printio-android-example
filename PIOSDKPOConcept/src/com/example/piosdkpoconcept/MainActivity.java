@@ -471,6 +471,7 @@ public class MainActivity extends Activity {
 			config.setFontPathInAssetsLight("HelveticaNeueLTStd-Lt.otf");
 			config.setFontPathInAssetsNormal("HelveticaNeueLTStd-Roman.otf");
 			config.setFontPathInAssetsBold("HelveticaNeueLTStd-Bd.otf");
+			config.setFontPathInAssetsTitle("HelveticaNeueLTStd-Md.otf");
 		} else {
 			config.setFontPathInAssetsLight(null);
 			config.setFontPathInAssetsNormal(null);
