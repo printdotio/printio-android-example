@@ -426,7 +426,7 @@ public class MainActivity extends Activity {
 		String json = Utils.getTextFromClipboard(this);
 		if (json != null && json.length() > 0) {
 			try {
-				ShoppingCart cart = new ShoppingCart(json);
+				ShoppingCart cart = ShoppingCart.fromJson(json);
 				PIO.setShoppingCart(this, cart);
 				Toast.makeText(this, "Shopping cart loaded from successfully!", Toast.LENGTH_SHORT).show();
 			} catch (Exception e) {
