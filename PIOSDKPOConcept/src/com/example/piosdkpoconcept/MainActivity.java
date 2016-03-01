@@ -218,7 +218,7 @@ public class MainActivity extends Activity {
 	}
 
 	public void onClickSetScreensWithCountryBar(View v) {
-		Screen[] allScreens = (Screen[]) Arrays.asList(Screen.PRODUCTS, Screen.PRODUCT_DETAILS, Screen.OPTIONS).toArray();
+		Screen[] allScreens = (Screen[]) Arrays.asList(Screen.PRODUCTS, Screen.PRODUCT_DETAILS, Screen.PRODUCT_OPTIONS).toArray();
 		String title = "Select screens with country dropdown";
 		Utils.<Screen> showChooseDialogEnum(this, true, allScreens, screensWithCountryBar, title, new ChooseDialogoOnItemSelected<Screen>() {
 
