@@ -2,6 +2,7 @@ package com.example.piosdkpoconcept;
 
 public class PIOConstants {
 
+	public static final String HELP_URL = "http://www.gooten.com";
 	public static final String SUPPORT_EMAIL = "support@print.io";
 	public static final String GOOGLE_PLAY_APP_URL = "https://play.google.com/store/apps/details?id=com.hellopics";
 	public static final String GOOGLE_PLAY_RATE_URL = "market://details?id=com.hellopics";

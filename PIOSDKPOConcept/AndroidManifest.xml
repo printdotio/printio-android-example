@@ -167,6 +167,9 @@
         <activity
             android:name="print.io.ActivityPastOrders"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="print.io.ActivityHelp"
+            android:screenOrientation="portrait" />
 
         <!-- Activities needed for new PayPal functionalities -->
         <service

@@ -455,6 +455,7 @@ public class MainActivity extends Activity {
 		config.setSdkDemo(true);
 		config.setHostAppActivity(getComponentName().getClassName());
 
+		config.setHelpUrl(PIOConstants.HELP_URL);
 		String recepiID = getEditText(R.id.edittext_recipe_id);
 		if (StringUtils.isNotBlank(recepiID)) {
 			config.setRecipeID(recepiID);
