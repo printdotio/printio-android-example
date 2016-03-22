@@ -129,23 +129,7 @@ public class MainActivity extends Activity {
 
 	private void initSdkMode(boolean isLive) {
 		config.setLiveApplication(isLive);
-
-		String recipeId;
-		String braintreeEncryptionKey;
-		String payPalClientId;
-		if (isLive) {
-			recipeId = PIOConstants.RECIPE_ID_LIVE;
-			braintreeEncryptionKey = PIOConstants.Braintree.ENCRYPTION_KEY_LIVE;
-			payPalClientId = PIOConstants.PayPal.CLIENT_ID_LIVE;
-		} else {
-			recipeId = PIOConstants.RECIPE_ID_STAGING;
-			braintreeEncryptionKey = PIOConstants.Braintree.ENCRYPTION_KEY_STAGING;
-			payPalClientId = PIOConstants.PayPal.CLIENT_ID_STAGING;
-		}
-		config.setRecipeID(recipeId);
-		config.setBraintreeEncryptionKey(braintreeEncryptionKey);
-		config.setPayPalClientId(payPalClientId);
-
+		config.setRecipeID(isLive ? PIOConstants.RECIPE_ID_LIVE : PIOConstants.RECIPE_ID_STAGING);
 		if (config.isLiveApplication() || config.isLiveTestingApplication()) {
 			config.setApiUrl(PublicConstants.API_URL_LIVE);
 		} else {
@@ -249,7 +233,7 @@ public class MainActivity extends Activity {
 
 		});
 	}
-	
+
 	public void onClickChangeFeaturedProducts(View v) {
 		String title = "Select featured product types";
 		Utils.<ProductType> showChooseDialogEnum(this, true, ProductType.values(), featuredProductTypes, title, new ChooseDialogoOnItemSelected<ProductType>() {
@@ -493,7 +477,7 @@ public class MainActivity extends Activity {
 			config.setCoastersType(coastersDiff ? PublicConstants.CoastersTypes.COASTERS_4_DIFFERENT : PublicConstants.CoastersTypes.COASTERS_1_DUPLICATED);
 		}
 		config.setAvailableProducts(selectedProductTypes);
-		
+
 		// Side menu
 		config.setSideMenuEnabled(isChecked(R.id.switch_enable_side_menu));
 		config.setRightSideMenu(isChecked(R.id.switch_right_side_menu));
