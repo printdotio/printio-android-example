@@ -52,10 +52,4 @@ public class PIOConstants {
 		public static final String CLIENT_ID_LIVE = "AXHKmxDEQUXfeKP2C5gBDqYcF6BA9r3_2hJNdm_MIfo7MQG5T8yt3Xvf1TAh";
 	}
 
-	public static class Parse {
-
-		public static final String APPLICATION_ID = "X4Wgk4EVJqLD7VeMfajKWcfjIHNq9UDaDBnXC0iF";
-		public static final String CLIENT_KEY = "up6KceVp9Tkg9wMWuTMAvtCnD0kEwzq42LEUvkuD";
-	}
-
 }
