@@ -32,13 +32,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.example.piosdkpoconcept.Utils.ChooseDialogoOnItemSelected;
 import com.example.piosdkpoconcept.adapters.SpinnerAdapterJumpToProduct;
@@ -96,27 +93,10 @@ public class MainActivity extends Activity {
 		});
 		spinnerScreenVersion.setSelection(0);
 
-		((ToggleButton) findViewById(R.id.toggleButtonProduction)).setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				initSdkMode(isChecked);
-			}
-		});
-
-		config.setDisabledScreens(new ArrayList<Screen>());
-		config.setPartnerName(getResources().getString(R.string.hellopics));
-		config.setSupportEmail(PIOConstants.SUPPORT_EMAIL);
-		config.setGooglePlayRateUrl(PIOConstants.GOOGLE_PLAY_RATE_URL);
-		config.setFacebookPageUrl(PIOConstants.FACEBOOK_PAGE_URL);
-		config.setFacebookAppId(getString(R.string.facebook_app_id));
-
 		addDefaultPhotoSources();
-		initSdkMode(false);
 	}
 
 	private void addDefaultPhotoSources() {
-		// Only up to 6
 		selectedPhotoSources.add(photoSourceFactory.getPhonePS());
 		selectedPhotoSources.add(photoSourceFactory.getInstagramPS());
 		selectedPhotoSources.add(photoSourceFactory.getFacebookPS());
@@ -125,16 +105,6 @@ public class MainActivity extends Activity {
 		selectedPhotoSources.add(photoSourceFactory.getDropboxPS());
 		//selectedPhotoSources.add(photoSourceFactory.getPicasaPS());
 		selectedPhotoSources.add(photoSourceFactory.getPreselectedPS());
-	}
-
-	private void initSdkMode(boolean isLive) {
-		config.setLiveApplication(isLive);
-		config.setRecipeID(isLive ? PIOConstants.RECIPE_ID_LIVE : PIOConstants.RECIPE_ID_STAGING);
-		if (config.isLiveApplication() || config.isLiveTestingApplication()) {
-			config.setApiUrl(PublicConstants.API_URL_LIVE);
-		} else {
-			config.setApiUrl(PublicConstants.API_URL_STAGING);
-		}
 	}
 
 	public void onClickChangeAvailablePhotoSource(View v) {
@@ -258,6 +228,9 @@ public class MainActivity extends Activity {
 			}
 		}
 		Screen[] vals = screens.toArray(new Screen[screens.size()]);
+		if (config.getDisabledScreens() == null) {
+			config.setDisabledScreens(new ArrayList<Screen>());
+		}
 		Utils.<Screen> showChooseDialogEnum(this, true, vals, config.getDisabledScreens(), "Disable screens", new ChooseDialogoOnItemSelected<Screen>() {
 
 			@Override
@@ -436,33 +409,50 @@ public class MainActivity extends Activity {
 	}
 
 	public void onClickStartSDK(View v) {
-		config.setSdkDemo(true);
-		config.setHostAppActivity(getComponentName().getClassName());
+		config.setLiveApplication(isChecked(R.id.toggleButtonProduction));
 
-		config.setHelpUrl(PIOConstants.HELP_URL);
+		// Set recipe IDs
+		String liveRecipe = PIOConstants.RECIPE_ID_LIVE;
+		String stagingRecipe = PIOConstants.RECIPE_ID_STAGING;
+		config.setRecipeIDs(liveRecipe, stagingRecipe);
+		// Override recipe ID
 		String recepiID = getEditText(R.id.edittext_recipe_id);
 		if (StringUtils.isNotBlank(recepiID)) {
-			config.setRecipeID(recepiID);
+			if (config.isLiveApplication()) {
+				liveRecipe = recepiID;
+			} else {
+				stagingRecipe = recepiID;
+			}
+			config.setRecipeIDs(liveRecipe, stagingRecipe);
 		}
+
+		// Call this only if this is PIOExample app
+		config.setSdkDemo(true);
+
+		config.setPartnerName(getResources().getString(R.string.hellopics));
+		config.setSupportEmail(PIOConstants.SUPPORT_EMAIL);
+		config.setGooglePlayRateUrl(PIOConstants.GOOGLE_PLAY_RATE_URL);
+		config.setFacebookPageUrl(PIOConstants.FACEBOOK_PAGE_URL);
+		config.setFacebookAppId(getString(R.string.facebook_app_id));
+		config.setHelpUrl(PIOConstants.HELP_URL);
+		config.setHostAppActivity(getComponentName().getClassName());
 		config.setCountryCode(getEditText(R.id.editCountry));
 		config.setChangeableCountry(isChecked(R.id.switch_changeable_country));
 		config.setCurrencyCode(getEditText(R.id.editCurrency));
 		config.setChangeableCurrency(isChecked(R.id.switch_changeable_currency));
+		
+		// General app design
 		try {
 			String colorString = getEditText(R.id.editColorHex);
 			config.setHeaderColor(Color.parseColor("#" + colorString));
 		} catch (NumberFormatException e) {}
-		if (isChecked(R.id.switch_enable_custom_fonts)) {
-			config.setFontPathInAssetsLight("HelveticaNeueLTStd-Lt.otf");
-			config.setFontPathInAssetsNormal("HelveticaNeueLTStd-Roman.otf");
-			config.setFontPathInAssetsBold("HelveticaNeueLTStd-Bd.otf");
-			config.setFontPathInAssetsTitle("HelveticaNeueLTStd-Md.otf");
-		} else {
-			config.setFontPathInAssetsLight(null);
-			config.setFontPathInAssetsNormal(null);
-			config.setFontPathInAssetsBold(null);
-			config.setFontPathInAssetsTitle(null);
-		}
+
+		boolean isCustomFonts = isChecked(R.id.switch_enable_custom_fonts);
+		config.setFontPathInAssetsLight(isCustomFonts ? "HelveticaNeueLTStd-Lt.otf" : null);
+		config.setFontPathInAssetsNormal(isCustomFonts ? "HelveticaNeueLTStd-Roman.otf" : null);
+		config.setFontPathInAssetsBold(isCustomFonts ? "HelveticaNeueLTStd-Bd.otf" : null);
+		config.setFontPathInAssetsTitle(isCustomFonts ? "HelveticaNeueLTStd-Md.otf" : null);
+		
 		config.useThreeButtonsBarStyle(isChecked(R.id.switch_three_buttons_bar_style));
 		config.setMenuIconGear(isChecked(R.id.switch_menu_icon_gear));
 		config.setHideStatusBar(isChecked(R.id.full_Screen));
@@ -510,7 +500,6 @@ public class MainActivity extends Activity {
 			} catch (Exception e) {}
 			config.setHeroItem(new HeroItem(pos, image, url));
 		}
-
 
 		// Product Details screen
 		config.setPriceTitleHidden(isChecked(R.id.switch_hide_price_title));
@@ -625,7 +614,7 @@ public class MainActivity extends Activity {
 	}
 
 	private boolean isChecked(int switchResId) {
-		return ((Switch) findViewById(switchResId)).isChecked();
+		return ((CompoundButton) findViewById(switchResId)).isChecked();
 	}
 
 	private String getEditText(int editTextResId) {
