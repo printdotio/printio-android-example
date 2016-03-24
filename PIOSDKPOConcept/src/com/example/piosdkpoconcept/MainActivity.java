@@ -553,6 +553,9 @@ public class MainActivity extends Activity {
 		} else {
 			config.setVendorLogoOnScreen(Screen.ORDER_COMPLETED, null);
 		}
+		
+		// Choose Country scree
+		config.setShoppingCartButtonVisibilityOnCountryScreen(isChecked(R.id.switch_show_shopping_cart_button_country_screen));
 
 		// Photo sources
 		config.setPhotoSources(selectedPhotoSources);
