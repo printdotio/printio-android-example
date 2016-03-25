@@ -12,8 +12,6 @@
     <string name="about_partner">About HelloPics</string>
     <string name="hellopics">HelloPics</string>
 
-    <string name="choose_from_contacts"><u>PICK FROM CONTACTS</u></string>
-    
     <string-array name="spinner_country_array">
         <item>None</item>
         <item>US</item>
