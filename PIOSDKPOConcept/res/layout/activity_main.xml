@@ -802,35 +802,6 @@
                 android:layout_margin="5dp"
                 android:text="Show vendor logo" />
 
-            <!-- Country screen -->
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="3px"
-                android:layout_marginTop="5dp"
-                android:background="#000000" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="1dp"
-                android:background="#101010" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dip"
-                android:text="Country screen"
-                android:textSize="16dip"
-                android:textStyle="bold" />
-
-            <Switch
-                android:id="@+id/switch_show_shopping_cart_button_country_screen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Show shopping cart button" />
-
             <!-- Photo sources -->
 
             <View
