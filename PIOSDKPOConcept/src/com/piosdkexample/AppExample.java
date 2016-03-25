@@ -9,7 +9,7 @@ public class AppExample extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		// Register event listener sent by PIO SDK
+		// Register event listener for events sent by SDK
 		LocalBroadcastManager.getInstance(this).registerReceiver(new PIOSDKEventListener(), new IntentFilter(PIOConstants.PIO_SDK_EVENTS));
 	}
 
