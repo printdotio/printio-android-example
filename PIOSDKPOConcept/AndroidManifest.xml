@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.piosdkpoconcept"
+    package="com.piosdkexample"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -24,15 +24,15 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <!--
-  IMPORTANT: Change "com.example.piosdkpoconcept.permission.C2D_MESSAGE" in the lines below
+  IMPORTANT: Change "com.piosdkexample.permission.C2D_MESSAGE" in the lines below
   to match your app's package name + ".permission.C2D_MESSAGE".
     -->
 
     <permission
-        android:name="com.example.piosdkpoconcept.permission.C2D_MESSAGE"
+        android:name="com.piosdkexample.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.example.piosdkpoconcept.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.piosdkexample.permission.C2D_MESSAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
@@ -47,7 +47,7 @@
         android:required="false" />
 
     <application
-        android:name="com.example.piosdkpoconcept.AppExample"
+        android:name="com.piosdkexample.AppExample"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@drawable/ic_launcher"
@@ -55,7 +55,7 @@
         android:largeHeap="true"
         android:theme="@style/ExampleAppBaseTheme" >
         <activity
-            android:name="com.example.piosdkpoconcept.MainActivity"
+            android:name="com.piosdkexample.MainActivity"
             android:label="Using PrintIO SDK example"
             android:screenOrientation="portrait" >
             <intent-filter>

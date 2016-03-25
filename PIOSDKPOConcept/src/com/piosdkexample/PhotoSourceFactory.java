@@ -1,4 +1,4 @@
-package com.example.piosdkpoconcept;
+package com.piosdkexample;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +13,7 @@ import print.io.photosource.impl.photobucket.PhotobucketPhotoSource;
 import print.io.photosource.impl.picasa.PicasaPhotoSource;
 import print.io.photosource.impl.preselected.PreselectedPhotoSource;
 
-import com.example.piosdkpoconcept.photosource.vlado.VladoPhotoSource;
+import com.piosdkexample.photosource.vlado.VladoPhotoSource;
 
 /**
  * Encapsulates mechanism for creating photo sources used by Example app.
@@ -98,6 +98,9 @@ public class PhotoSourceFactory {
 		return preselectedPS;
 	}
 
+	/**
+	 * This is custom photo source {@link VladoPhotoSource}.
+	 */
 	public PhotoSource getVladoPS() {
 		if (vladoPS == null) {
 			vladoPS = new VladoPhotoSource();
@@ -106,15 +109,15 @@ public class PhotoSourceFactory {
 	}
 
 	public List<PhotoSource> getAll() {
-		return Arrays.asList(getDropboxPS(),
+		return Arrays.asList(getPhonePS(),
 				getFacebookPS(),
-				getFlickrPS(),
 				getInstagramPS(),
-				getPhonePS(),
-				getPhotobucketPS(),
 				getPicasaPS(),
-				getPreselectedPS(),
-				getVladoPS());
+				getFlickrPS(),
+				getVladoPS(),
+				getDropboxPS(),
+				getPhotobucketPS(),
+				getPreselectedPS());
 	}
 
 }
