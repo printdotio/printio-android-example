@@ -1,6 +1,6 @@
-This project shows how to set up and use PrintIO android SDK.
+This project shows how to set up and use Gooten Android SDK.
 
-You can download PrintIO SDK from https://github.com/printdotio/printio-android-sdk.
+You can download Gooten SDK from https://github.com/printdotio/printio-android-sdk.
 
 
 ----------
