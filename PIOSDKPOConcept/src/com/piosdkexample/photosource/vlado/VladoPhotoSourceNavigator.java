@@ -1,4 +1,4 @@
-package com.example.piosdkpoconcept.photosource.vlado;
+package com.piosdkexample.photosource.vlado;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package com.example.piosdkpoconcept.photosource.vlado;
+package com.piosdkexample.photosource.vlado;
 
 import print.io.R;
 import print.io.photosource.PhotoSourceNavigator;
