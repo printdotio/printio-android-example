@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
 
 		// --------------------------- Optional configuration --------------------------- //
 		// Here we are going to show you some optional configuration options for SDK.
-		// You can fit this configuration to your needs.
+		// You can fit these configuration to your needs.
 
 		
 		// Tell the SDK which server to use (Live or Staging) server.
@@ -61,8 +61,8 @@ public class MainActivity extends Activity {
 			PIO.setConfig(this, config);
 			PIO.start(this);
 		} catch (PIOException e) {
-			// Exception could throw if configuration is invalid.
-			// You can look at log to see warnings regarding configuration (if any).
+			// Exception could be thrown if configuration is invalid.
+			// You can look at log to see warning messages about configuration (if any).
 			e.printStackTrace();
 		}
 	}
