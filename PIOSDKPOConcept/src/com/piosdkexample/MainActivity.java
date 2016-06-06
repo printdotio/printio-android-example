@@ -26,16 +26,17 @@ public class MainActivity extends Activity {
 		// This is mandatory configuration. Please set valid keys.
 		config.setRecipeIDs(PIOConstants.RECIPE_ID_LIVE, PIOConstants.RECIPE_ID_STAGING);
 
+		// Tell SDK to use Live environment (purchase process will use real money).
+		config.setLiveApplication(true);
 
 		// --------------------------- Optional configuration --------------------------- //
 		// Here we are going to show you some optional configuration options for SDK.
 		// You can fit these configuration to your needs.
 
-		
-		// Tell the SDK which server to use (Live or Staging) server.
-		// In Staging mode, you can test purchase process without using real money.
-		// Let's just launch SDK in staging mode for now.
-		config.setLiveApplication(false);
+
+		// If you would like to test order purchase process without charging you 
+		// real money you can enable "order testing" like so:
+		config.setOrderTesting(true);
 
 		// Set available photo sources.
 		// In this example we use PhotoSourceFactory to encapsulate photo source creation.
