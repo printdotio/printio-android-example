@@ -1,5 +1,6 @@
 package com.piosdkexample;
 
+import java.util.Arrays;
 import java.util.List;
 
 import print.io.PIO;
@@ -54,7 +55,7 @@ public class PIOSDKEventListener extends BroadcastReceiver {
 		stringBuilder.append("\nItems count: ").append(order.getItems().size());
 		stringBuilder.append("\nTotal: ").append(order.getTotalPrice());
 		stringBuilder.append("\nDiscount: ").append(order.getDiscountAmount());
-		stringBuilder.append("\nCoupon code: ").append(order.getCouponCode());
+		stringBuilder.append("\nCoupon code: ").append(Arrays.toString(order.getCouponCodes().toArray()));
 		return stringBuilder.toString();
 	}
 
