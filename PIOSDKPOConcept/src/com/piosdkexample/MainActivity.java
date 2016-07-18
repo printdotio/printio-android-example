@@ -22,12 +22,9 @@ public class MainActivity extends Activity {
 		// Create PIOConfig object (with default configuration) which will be used to configure SDK
 		PIOConfig config = new PIOConfig();
 
-		// Set your recipe ID keys (they are unique and provided for every partner after sign up)
-		// This is mandatory configuration. Please set valid keys.
-		config.setRecipeIDs(PIOConstants.RECIPE_ID_LIVE, PIOConstants.RECIPE_ID_STAGING);
-
-		// Tell SDK to use Live environment (purchase process will use real money).
-		config.setLiveApplication(true);
+		// Set your Gooten Recipe ID key (provided for every partner after sign up)
+		// This is mandatory configuration. Please set valid key.
+		config.setRecipeID(PIOConstants.RECIPE_ID_LIVE);
 
 		// --------------------------- Optional configuration --------------------------- //
 		// Here we are going to show you some optional configuration options for SDK.
